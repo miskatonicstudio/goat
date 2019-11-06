@@ -78,7 +78,12 @@ func select_environment_item():
 					"oat_environment_item_selected", collider.unique_name
 				)
 			selected_environment_item = collider
-	elif selected_environment_item:
+		elif selected_environment_item:
+			oat_interaction_signals.emit_signal(
+				"oat_environment_item_deselected", selected_environment_item.unique_name
+			)
+			selected_environment_item = null
+	elif selected_environment_item and selected_environment_item.is_in_group("oat_environment_item"):
 		oat_interaction_signals.emit_signal(
 			"oat_environment_item_deselected", selected_environment_item.unique_name
 		)
