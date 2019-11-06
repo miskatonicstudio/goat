@@ -26,9 +26,8 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
-	
 	update_movement_direction()
-	# TODO: implement activating the collider
+	activate_environment_item()
 
 
 func rotate_camera(relative_movement):
@@ -84,3 +83,14 @@ func select_environment_item():
 			"oat_environment_item_deselected", selected_environment_item.unique_name
 		)
 		selected_environment_item = null
+
+
+func activate_environment_item():
+	if Input.is_action_just_pressed("oat_environment_item_activation") and selected_environment_item:
+		# TODO: consider replacing this logic with another signal
+		if selected_environment_item.is_in_group("oat_environment_item"):
+			oat_interaction_signals.emit_signal(
+				"oat_environment_item_activated", selected_environment_item.unique_name
+			)
+		else:
+			selected_environment_item = null

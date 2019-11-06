@@ -2,6 +2,7 @@ tool
 extends StaticBody
 
 export (String) var unique_name
+export (bool) var single_use = false
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 onready var model = get_node("Model")
 
@@ -15,6 +16,7 @@ func _ready():
 	
 	oat_interaction_signals.connect("oat_environment_item_selected", self, "select")
 	oat_interaction_signals.connect("oat_environment_item_deselected", self, "deselect")
+	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
 
 
 func set_collision_shape(new_shape):
@@ -31,3 +33,10 @@ func select(item_name):
 func deselect(item_name):
 	if item_name == unique_name:
 		model.material_override.emission_energy = 0.0
+
+
+func activate(item_name):
+	if item_name == unique_name:
+		if single_use:
+			deselect(item_name)
+			remove_from_group("oat_environment_item")
