@@ -68,6 +68,10 @@ func update_movement_direction():
 
 
 func select_environment_item():
+	# TODO: consider replacing this logic with another signal
+	# Clear single use collider
+	if selected_environment_item and not selected_environment_item.is_in_group("oat_environment_item"):
+		selected_environment_item = null
 	if camera_ray.is_colliding():
 		var collider = camera_ray.get_collider()
 		if collider == selected_environment_item:
@@ -83,7 +87,7 @@ func select_environment_item():
 				"oat_environment_item_deselected", selected_environment_item.unique_name
 			)
 			selected_environment_item = null
-	elif selected_environment_item and selected_environment_item.is_in_group("oat_environment_item"):
+	elif selected_environment_item:
 		oat_interaction_signals.emit_signal(
 			"oat_environment_item_deselected", selected_environment_item.unique_name
 		)
@@ -92,10 +96,6 @@ func select_environment_item():
 
 func activate_environment_item():
 	if Input.is_action_just_pressed("oat_environment_item_activation") and selected_environment_item:
-		# TODO: consider replacing this logic with another signal
-		if selected_environment_item.is_in_group("oat_environment_item"):
-			oat_interaction_signals.emit_signal(
-				"oat_environment_item_activated", selected_environment_item.unique_name
-			)
-		else:
-			selected_environment_item = null
+		oat_interaction_signals.emit_signal(
+			"oat_environment_item_activated", selected_environment_item.unique_name
+		)
