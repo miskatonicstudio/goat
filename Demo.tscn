@@ -1,11 +1,20 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Demo.gd" type="Script" id=1]
 [ext_resource path="res://oat/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://oat/EnvironmentItem.tscn" type="PackedScene" id=3]
 
 [sub_resource type="PlaneMesh" id=1]
-size = Vector2( 20, 20 )
+size = Vector2( 40, 40 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.819608, 1, 0.427451, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 1, 1.2, 0.2 )
+
+[sub_resource type="ConvexPolygonShape" id=7]
+points = PoolVector3Array( -0.5, 0.5, 0.1, 0.5, 0.5, -0.1, 0.5, 0.5, 0.1, -0.5, 0.5, -0.1, -0.5, -0.5, 0.1, 0.5, -0.5, -0.1, 0.5, -0.5, 0.1, -0.5, -0.5, -0.1, 0.5, 0.5, 0.1, -0.5, 0.5, -0.1, 0.5, 0.5, -0.1, -0.5, 0.5, 0.1, 0.5, -0.5, 0.1, -0.5, -0.5, -0.1, 0.5, -0.5, -0.1, -0.5, -0.5, 0.1, 0.5, 0.5, 0.1, -0.5, -0.5, 0.1, -0.5, 0.5, 0.1, 0.5, -0.5, 0.1, 0.5, 0.5, -0.1, -0.5, -0.5, -0.1, -0.5, 0.5, -0.1, 0.5, -0.5, -0.1 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.301961, 0.298039, 0.298039, 1 )
@@ -29,36 +38,73 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
+[sub_resource type="Animation" id=19]
+resource_name = "drop_crate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("DropItemDemo/Crate:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 2, 3, 0 ), Vector3( 2, 0.5, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "open_door"
+tracks/0/type = "value"
+tracks/0/path = NodePath("OpeningDoorDemo/Hinge:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 60, 0 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 1, 0.576471, 0.576471, 1 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 2, 2, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 1, 0.929412, 0.596078, 1 )
+
+[sub_resource type="CubeMesh" id=14]
+size = Vector3( 1.5, 2, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_color = Color( 0.67451, 0.545098, 0.32549, 1 )
+
+[sub_resource type="CubeMesh" id=16]
+size = Vector3( 0.2, 4, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 0.972549, 0.729412, 0.466667, 1 )
+
+[sub_resource type="CubeMesh" id=18]
+size = Vector3( 1, 1, 1 )
+
 [node name="Demo" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Light" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
+light_energy = 0.4
 
 [node name="Floor" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-
-[node name="EnvItem1" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46778, -2.96344 )
-unique_name = "item001"
-
-[node name="Model" type="MeshInstance" parent="EnvItem1"]
-material_override = SubResource( 2 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="EnvItem2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16245, 1.46778, -2.96344 )
-unique_name = "item002"
-collision_shape = SubResource( 4 )
-
-[node name="Model" type="MeshInstance" parent="EnvItem2"]
-material_override = SubResource( 5 )
-mesh = SubResource( 3 )
-material/0 = null
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -67,5 +113,95 @@ one_shot = true
 [node name="Notification" type="Label" parent="."]
 anchor_right = 1.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 0, 0, 1 )
+custom_constants/shadow_as_outline = 6
 align = 1
+
+[node name="Buttons" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.684699, 0.603889, -3.23314 )
+material_override = SubResource( 8 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Buttons"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Buttons/StaticBody"]
+shape = SubResource( 7 )
+
+[node name="EnvItem1" parent="Buttons" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.317859, 0.4, 0.07 )
+unique_name = "button_1"
+single_use = true
+
+[node name="Model" type="MeshInstance" parent="Buttons/EnvItem1"]
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="EnvItem2" parent="Buttons" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310117, 0.4, 0.07 )
+unique_name = "button_2"
+collision_shape = SubResource( 4 )
+
+[node name="Model" type="MeshInstance" parent="Buttons/EnvItem2"]
+material_override = SubResource( 5 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/drop_crate = SubResource( 19 )
+anims/open_door = SubResource( 13 )
+
+[node name="OpeningDoorDemo" type="Spatial" parent="."]
+editor/display_folded = true
+
+[node name="Wall01" type="MeshInstance" parent="OpeningDoorDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4.5 )
+material_override = SubResource( 9 )
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="Wall02" type="MeshInstance" parent="OpeningDoorDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, -4.5 )
+material_override = SubResource( 9 )
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="Hinge" type="Spatial" parent="OpeningDoorDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.5 )
+
+[node name="Door" type="MeshInstance" parent="OpeningDoorDemo/Hinge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1, 0 )
+material_override = SubResource( 11 )
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="DropItemDemo" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61749, 0, -5.9365 )
+
+[node name="Beam1" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+material_override = SubResource( 15 )
+mesh = SubResource( 16 )
+material/0 = null
+
+[node name="Beam2" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( -4.37114e-08, -0.55, 0, 1, -2.40413e-08, 0, 0, 0, 1, 1, 4, 0 )
+material_override = SubResource( 15 )
+mesh = SubResource( 16 )
+material/0 = null
+
+[node name="Beam3" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 2, 3.7, 0 )
+material_override = SubResource( 15 )
+mesh = SubResource( 16 )
+material/0 = null
+
+[node name="Crate" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
+material_override = SubResource( 17 )
+mesh = SubResource( 18 )
+material/0 = null
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
