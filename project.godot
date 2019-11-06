@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="OAT"
 run/main_scene="res://Demo.tscn"
 
+[autoload]
+
+oat_interaction_signals="*res://oat/signals/oat_interaction_signals.gd"
+
 [input]
 
 oat_movement_forward={
