@@ -8,6 +8,7 @@ onready var camera = $Camera
 onready var camera_ray = $Camera/Ray
 
 var movement_direction = Vector3()
+var selected_environment_item = null
 
 
 func _ready():
@@ -19,7 +20,7 @@ func _physics_process(delta):
 		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
 	# Make sure that collisions didn't accidentally move the Player up or down 
 	translation.y = 0
-	find_collider()
+	select_environment_item()
 
 
 func _input(event):
@@ -27,7 +28,6 @@ func _input(event):
 		rotate_camera(event.relative)
 	
 	update_movement_direction()
-	
 	# TODO: implement activating the collider
 
 
@@ -41,7 +41,7 @@ func rotate_camera(relative_movement):
 	camera_rot.x = clamp(camera_rot.x, -80, 80)
 	camera.rotation_degrees = camera_rot
 	
-	find_collider()
+	select_environment_item()
 
 
 func update_movement_direction():
@@ -68,6 +68,19 @@ func update_movement_direction():
 	movement_direction = movement_direction.normalized()
 
 
-func find_collider():
-	# TODO: implement detecting a collider (check group or method or script or signal)
-	pass
+func select_environment_item():
+	if camera_ray.is_colliding():
+		var collider = camera_ray.get_collider()
+		if collider == selected_environment_item:
+			return
+		if collider.is_in_group("oat_environment_item"):
+			if selected_environment_item == null:
+				oat_interaction_signals.emit_signal(
+					"oat_environment_item_selected", collider.unique_name
+				)
+			selected_environment_item = collider
+	elif selected_environment_item:
+		oat_interaction_signals.emit_signal(
+			"oat_environment_item_deselected", selected_environment_item.unique_name
+		)
+		selected_environment_item = null
