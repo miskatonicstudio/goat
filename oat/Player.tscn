@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://oat/Player.gd" type="Script" id=1]
+[ext_resource path="res://oat/Inventory.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.3
@@ -14,13 +15,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
 
 [node name="Ray" type="RayCast" parent="Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Scope" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -30,3 +32,5 @@ margin_top = -7.0
 margin_right = 2.0
 margin_bottom = 7.0
 text = "·"
+
+[node name="Inventory" parent="." instance=ExtResource( 2 )]

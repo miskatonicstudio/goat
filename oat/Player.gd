@@ -8,14 +8,19 @@ onready var camera = $Camera
 onready var camera_ray = $Camera/Ray
 
 var movement_direction = Vector3()
+# TODO: extract selecting items
+# TODO: for 3D items with a touch screen, keep also the point of collision
 var selected_environment_item = null
 
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle_inventory")
 
 
 func _physics_process(delta):
+	if oat_interaction_signals.game_mode != oat_interaction_signals.GameMode.EXPLORING:
+		return
 	if movement_direction:
 		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
 	# Make sure that collisions didn't accidentally move the Player up or down 
@@ -24,10 +29,16 @@ func _physics_process(delta):
 
 
 func _input(event):
+	if oat_interaction_signals.game_mode != oat_interaction_signals.GameMode.EXPLORING:
+		return
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
 	update_movement_direction()
 	activate_environment_item()
+
+
+func toggle_inventory(inventory_open):
+	$Scope.visible = not inventory_open
 
 
 func rotate_camera(relative_movement):

@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://oat/Inventory.gd" type="Script" id=1]
+
+[sub_resource type="CylinderMesh" id=1]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+radial_segments = 6
+
+[node name="Inventory" type="CenterContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_left = 212.0
+margin_right = 812.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 600, 600 )
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 600, 600 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Inventory3D" type="Spatial" parent="ViewportContainer/Viewport"]
+
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D"]
+current = true
+
+[node name="OmniLight" type="OmniLight" parent="ViewportContainer/Viewport/Inventory3D"]
+
+[node name="RayCast" type="RayCast" parent="ViewportContainer/Viewport/Inventory3D"]
+
+[node name="Rotator" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+
+[node name="DEMO_INVENTORY_ITEM" type="MeshInstance" parent="ViewportContainer/Viewport/Inventory3D/Rotator"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="InactiveItems" type="Spatial" parent="ViewportContainer/Viewport"]
+visible = false
+
+[node name="ActiveItems" type="Spatial" parent="ViewportContainer/Viewport"]
+visible = false
