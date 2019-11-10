@@ -3,6 +3,7 @@ extends StaticBody
 
 export (String) var unique_name
 export (bool) var single_use = false
+export (bool) var inventory_item = false
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 onready var model = get_node("Model")
 
@@ -40,3 +41,7 @@ func activate(item_name):
 		if single_use:
 			deselect(item_name)
 			remove_from_group("oat_environment_item")
+		if inventory_item:
+			oat_interaction_signals.emit_signal("oat_environment_item_obtained", unique_name)
+			get_parent().remove_child(self)
+			queue_free()

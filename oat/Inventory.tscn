@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://oat/Inventory.gd" type="Script" id=1]
-
-[sub_resource type="CylinderMesh" id=1]
-top_radius = 0.2
-bottom_radius = 0.2
-height = 1.0
-radial_segments = 6
 
 [node name="Inventory" type="CenterContainer"]
 visible = false
@@ -37,13 +31,3 @@ current = true
 
 [node name="Rotator" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
-
-[node name="DEMO_INVENTORY_ITEM" type="MeshInstance" parent="ViewportContainer/Viewport/Inventory3D/Rotator"]
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="InactiveItems" type="Spatial" parent="ViewportContainer/Viewport"]
-visible = false
-
-[node name="ActiveItems" type="Spatial" parent="ViewportContainer/Viewport"]
-visible = false

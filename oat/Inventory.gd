@@ -6,6 +6,7 @@ export var ROTATION_SENSITIVITY_Y = 1.0
 
 const MAX_VERTICAL_ANGLE = 80
 onready var rotator = $ViewportContainer/Viewport/Inventory3D/Rotator
+# TODO: keep rotation value separately for each item?
 var current_angle_vertical = 0
 
 
@@ -13,6 +14,7 @@ func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
 	$ViewportContainer/Viewport.own_world = true
 	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle")
+	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
 
 
 func _input(event):
@@ -43,3 +45,11 @@ func toggle(inventory_open):
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		hide()
+
+
+func item_obtained(item_name):
+	var obtained_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name)
+	if not obtained_item.empty():
+		obtained_item = obtained_item.pop_back()
+		obtained_item.get_parent().remove_child(obtained_item)
+		rotator.add_child(obtained_item)
