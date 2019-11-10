@@ -9,6 +9,10 @@ func _ready():
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "notify", ["Activated: "])
 	
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
+	
+	# TODO: put it in a custom global file
+	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/pen.png")
+	oat_interaction_signals.inventory_items_textures["ball"] = load("res://demo/ball.png")
 
 
 func notify(item_name, text):

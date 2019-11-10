@@ -1,6 +1,6 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=35 format=2]
 
-[ext_resource path="res://Demo.gd" type="Script" id=1]
+[ext_resource path="res://demo/Demo.gd" type="Script" id=1]
 [ext_resource path="res://oat/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://oat/EnvironmentItem.tscn" type="PackedScene" id=3]
 
@@ -93,29 +93,39 @@ albedo_color = Color( 0.972549, 0.729412, 0.466667, 1 )
 [sub_resource type="CubeMesh" id=18]
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=25]
+[sub_resource type="SpatialMaterial" id=19]
 albedo_color = Color( 0.454902, 0.94902, 1, 1 )
 
-[sub_resource type="CylinderMesh" id=19]
+[sub_resource type="CylinderMesh" id=20]
 top_radius = 0.2
 bottom_radius = 0.2
-height = 1.0
 radial_segments = 6
 
-[sub_resource type="SpatialMaterial" id=26]
+[sub_resource type="SpatialMaterial" id=21]
+albedo_color = Color( 0.929412, 0.760784, 0.352941, 1 )
+metallic = 0.4
+roughness = 0.4
+
+[sub_resource type="SphereMesh" id=22]
+radius = 0.8
+height = 1.6
+radial_segments = 8
+rings = 8
+
+[sub_resource type="SpatialMaterial" id=23]
 albedo_color = Color( 0.913725, 0.666667, 1, 1 )
 
-[sub_resource type="CubeMesh" id=20]
+[sub_resource type="CubeMesh" id=24]
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ConvexPolygonShape" id=21]
+[sub_resource type="ConvexPolygonShape" id=25]
 points = PoolVector3Array( -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5 )
 
-[sub_resource type="BoxShape" id=24]
+[sub_resource type="BoxShape" id=26]
 margin = 0.001
 extents = Vector3( 0.04, 0.08, 0.04 )
 
-[sub_resource type="SpatialMaterial" id=22]
+[sub_resource type="SpatialMaterial" id=27]
 albedo_color = Color( 0.454902, 0.94902, 1, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -123,9 +133,25 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CylinderMesh" id=23]
+[sub_resource type="CylinderMesh" id=28]
 top_radius = 0.01
 bottom_radius = 0.01
+height = 0.1
+
+[sub_resource type="SphereShape" id=29]
+margin = 0.001
+radius = 0.09
+
+[sub_resource type="SpatialMaterial" id=30]
+albedo_color = Color( 0.929412, 0.760784, 0.352941, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=31]
+radius = 0.05
 height = 0.1
 
 [node name="Demo" type="Spatial"]
@@ -248,29 +274,49 @@ visible = false
 ]]
 
 [node name="MeshInstance" type="MeshInstance" parent="InactiveItems/InventoryItemPen"]
-material_override = SubResource( 25 )
-mesh = SubResource( 19 )
+material_override = SubResource( 19 )
+mesh = SubResource( 20 )
+material/0 = null
+
+[node name="InventoryItemBall" type="Spatial" parent="InactiveItems" groups=[
+"oat_inventory_item_ball",
+]]
+
+[node name="MeshInstance" type="MeshInstance" parent="InactiveItems/InventoryItemBall"]
+material_override = SubResource( 21 )
+mesh = SubResource( 22 )
 material/0 = null
 
 [node name="Table" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, -1.5 )
-material_override = SubResource( 26 )
-mesh = SubResource( 20 )
+material_override = SubResource( 23 )
+mesh = SubResource( 24 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Table"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Table/StaticBody"]
-shape = SubResource( 21 )
+shape = SubResource( 25 )
 
-[node name="EnvironmentItem" parent="Table" instance=ExtResource( 3 )]
+[node name="EnvironmentItemPen" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 0.734248, 0.678882, 2.96749e-08, 0, -4.37114e-08, 1, 0.678882, -0.734248, -3.2095e-08, 0.228648, 0.510065, 0 )
 unique_name = "pen"
 inventory_item = true
-collision_shape = SubResource( 24 )
+collision_shape = SubResource( 26 )
 
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItem"]
-material_override = SubResource( 22 )
-mesh = SubResource( 23 )
+[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemPen"]
+material_override = SubResource( 27 )
+mesh = SubResource( 28 )
+material/0 = null
+
+[node name="EnvironmentItemBall" parent="Table" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544935, 0.338758 )
+unique_name = "ball"
+inventory_item = true
+collision_shape = SubResource( 29 )
+
+[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemBall"]
+material_override = SubResource( 30 )
+mesh = SubResource( 31 )
 material/0 = null
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
