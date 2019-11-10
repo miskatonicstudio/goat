@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Demo.gd" type="Script" id=1]
 [ext_resource path="res://oat/Player.tscn" type="PackedScene" id=2]
@@ -102,6 +102,9 @@ bottom_radius = 0.2
 height = 1.0
 radial_segments = 6
 
+[sub_resource type="SpatialMaterial" id=26]
+albedo_color = Color( 0.913725, 0.666667, 1, 1 )
+
 [sub_resource type="CubeMesh" id=20]
 size = Vector3( 1, 1, 1 )
 
@@ -114,6 +117,11 @@ extents = Vector3( 0.04, 0.08, 0.04 )
 
 [sub_resource type="SpatialMaterial" id=22]
 albedo_color = Color( 0.454902, 0.94902, 1, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [sub_resource type="CylinderMesh" id=23]
 top_radius = 0.01
@@ -246,6 +254,7 @@ material/0 = null
 
 [node name="Table" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, -1.5 )
+material_override = SubResource( 26 )
 mesh = SubResource( 20 )
 material/0 = null
 
