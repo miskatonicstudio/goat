@@ -39,6 +39,7 @@ func _input(event):
 
 func toggle_inventory(inventory_open):
 	$Scope.visible = not inventory_open
+	$Camera.environment.dof_blur_far_enabled = inventory_open
 
 
 func rotate_camera(relative_movement):
