@@ -13,7 +13,9 @@ enum GameMode {
 	INVENTORY
 }
 
+# TODO: rename to oat_game_mode?
 export (GameMode) var game_mode = GameMode.EXPLORING
+export (Dictionary) var inventory_items_textures = {}
 
 
 # TODO: extract this to oat_event_handling.gd?
