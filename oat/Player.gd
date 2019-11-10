@@ -6,6 +6,7 @@ export (float) var SPEED = 3.0
 
 onready var camera = $Camera
 onready var camera_ray = $Camera/Ray
+onready var inventory = $Inventory
 
 var movement_direction = Vector3()
 # TODO: extract selecting items
@@ -14,6 +15,7 @@ var selected_environment_item = null
 
 
 func _ready():
+	inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle_inventory")
 
