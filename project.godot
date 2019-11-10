@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OAT"
-run/main_scene="res://Demo.tscn"
+run/main_scene="res://demo/Demo.tscn"
 
 [autoload]
 
