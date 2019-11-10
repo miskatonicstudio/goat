@@ -13,6 +13,9 @@ func _ready():
 	# TODO: put it in a custom global file
 	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/pen.png")
 	oat_interaction_signals.inventory_items_textures["ball"] = load("res://demo/ball.png")
+	
+	oat_interaction_signals.inventory_items_models["pen"] = load("res://demo/InventoryItemPen.tscn")
+	oat_interaction_signals.inventory_items_models["ball"] = load("res://demo/InventoryItemBall.tscn")
 
 
 func notify(item_name, text):
