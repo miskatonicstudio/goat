@@ -1,11 +1,20 @@
 extends Node
 
 signal oat_environment_item_selected (item_name)
+# TODO: do not send "deselected" when obtained
 signal oat_environment_item_deselected (item_name)
 signal oat_environment_item_activated (item_name)
 # TODO: signal for permanent deactivation?
-signal oat_environment_item_obtained (item_name)
 
+# TODO: rename this to "inventory_item" added or obtained
+signal oat_environment_item_obtained (item_name)
+signal oat_inventory_item_selected (item_name)
+signal oat_inventory_item_used (item_name)
+signal oat_inventory_item_removed (item_name)
+signal oat_inventory_item_used_on_inventory (item_name, inventory_item_name)
+signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
+
+# TODO: replace with "oat_game_mode_changed (mode)"
 signal oat_toggle_inventory (inventory_open)
 
 enum GameMode {

@@ -7,11 +7,8 @@ export var ROTATION_SENSITIVITY_Y = 1.0
 const MAX_VERTICAL_ANGLE = 80
 onready var viewport = $CenterContainer/ViewportContainer/Viewport
 onready var rotator = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Rotator
-onready var item_list = $ItemList
 # TODO: keep rotation value separately for each item?
 var current_angle_vertical = 0
-var currently_selected_item_index = -1
-var item_names = []
 
 
 func _ready():
@@ -19,6 +16,7 @@ func _ready():
 	viewport.own_world = true
 	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle")
 	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
+	oat_interaction_signals.connect("oat_inventory_item_selected", self, "item_selected")
 
 
 func _input(event):
@@ -52,20 +50,14 @@ func toggle(inventory_open):
 
 
 func item_obtained(item_name):
-	for item in get_tree().get_nodes_in_group("oat_inventory_item"):
-		item.hide()
 	var obtained_item = oat_interaction_signals.inventory_items_models[item_name].instance()
 	obtained_item.add_to_group("oat_inventory_item")
 	obtained_item.add_to_group("oat_inventory_item_" + item_name)
+	obtained_item.hide()
 	rotator.add_child(obtained_item)
-	
-	item_list.add_icon_item(oat_interaction_signals.inventory_items_textures[item_name])
-	currently_selected_item_index = item_list.get_item_count() - 1
-	item_names.append(item_name)
 
 
-func _on_ItemList_item_selected(index):
-	var item_name = item_names[index]
+func item_selected(item_name):
 	for item in get_tree().get_nodes_in_group("oat_inventory_item"):
 		item.hide()
 	get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front().show()
