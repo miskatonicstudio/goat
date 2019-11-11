@@ -7,6 +7,9 @@ func _ready():
 	oat_interaction_signals.connect("oat_environment_item_selected", self, "notify", ["Selected: "])
 	oat_interaction_signals.connect("oat_environment_item_deselected", self, "notify", ["Deselected: "])
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "notify", ["Activated: "])
+	oat_interaction_signals.connect("oat_environment_item_obtained", self, "notify", ["Obtained: "])
+	oat_interaction_signals.connect("oat_inventory_item_selected", self, "notify", ["Selected: "])
+	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "notify2", ["Used: "])
 	
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
 	
@@ -20,6 +23,11 @@ func _ready():
 
 func notify(item_name, text):
 	$Notification.text = text + item_name
+	$Timer.start()
+
+
+func notify2(item_name1, item_name2, text):
+	$Notification.text = text + item_name1 + " => " + item_name2
 	$Timer.start()
 
 
