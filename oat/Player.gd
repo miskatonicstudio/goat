@@ -11,13 +11,14 @@ onready var inventory = $Inventory
 var movement_direction = Vector3()
 # TODO: extract selecting items
 # TODO: for 3D items with a touch screen, keep also the point of collision
+# TODO: put selected_environment_item in globals?
 var selected_environment_item = null
 
 
 func _ready():
 	inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle_inventory")
+	oat_interaction_signals.connect("oat_game_mode_changed", self, "game_mode_changed")
 
 
 func _physics_process(delta):
@@ -36,12 +37,12 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
 	update_movement_direction()
-	activate_environment_item()
+	interact_with_environment()
 
 
-func toggle_inventory(inventory_open):
-	$Scope.visible = not inventory_open
-	$Camera.environment.dof_blur_far_enabled = inventory_open
+func game_mode_changed(new_game_mode):
+	$Scope.visible = new_game_mode == oat_interaction_signals.GameMode.EXPLORING
+	$Camera.environment.dof_blur_far_enabled = new_game_mode == oat_interaction_signals.GameMode.INVENTORY
 
 
 func rotate_camera(relative_movement):
@@ -108,8 +109,9 @@ func select_environment_item():
 		selected_environment_item = null
 
 
-func activate_environment_item():
-	if Input.is_action_just_pressed("oat_environment_item_activation") and selected_environment_item:
-		oat_interaction_signals.emit_signal(
-			"oat_environment_item_activated", selected_environment_item.unique_name
-		)
+func interact_with_environment():
+	if selected_environment_item:
+		if Input.is_action_just_pressed("oat_environment_item_activation"):
+			oat_interaction_signals.emit_signal(
+				"oat_environment_item_activated", selected_environment_item.unique_name
+			)

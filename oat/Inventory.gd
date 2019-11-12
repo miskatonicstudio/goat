@@ -16,7 +16,7 @@ var selected_inventory_item = null
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
 	viewport.own_world = true
-	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle")
+	oat_interaction_signals.connect("oat_game_mode_changed", self, "game_mode_changed")
 	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
 	oat_interaction_signals.connect("oat_inventory_item_selected", self, "item_selected")
 	oat_interaction_signals.connect("oat_inventory_item_removed", self, "item_removed")
@@ -43,9 +43,9 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
-func toggle(inventory_open):
+func game_mode_changed(new_game_mode):
 	# TODO: move this logic to oat global?
-	if inventory_open:
+	if new_game_mode == oat_interaction_signals.GameMode.INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		show()
 	else:

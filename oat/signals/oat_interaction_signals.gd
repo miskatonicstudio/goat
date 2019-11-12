@@ -16,15 +16,15 @@ signal oat_inventory_item_replaced (item_name_replaced, item_name_replacing)
 signal oat_inventory_item_used_on_inventory (item_name, inventory_item_name)
 signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
 
-# TODO: replace with "oat_game_mode_changed (mode)"
-signal oat_toggle_inventory (inventory_open)
+# TODO: send also old game mode, move all logic to global
+signal oat_game_mode_changed (new_game_mode)
 
 enum GameMode {
 	EXPLORING,
-	INVENTORY
+	INVENTORY,
+	CONTEXT_INVENTORY
 }
 
-# TODO: rename to oat_game_mode?
 export (GameMode) var game_mode = GameMode.EXPLORING
 export (Dictionary) var inventory_items_textures = {}
 export (Dictionary) var inventory_items_models = {}
@@ -35,7 +35,8 @@ func _input(event):
 	if Input.is_action_just_pressed("oat_toggle_inventory"):
 		if game_mode == GameMode.EXPLORING:
 			game_mode = GameMode.INVENTORY
+			emit_signal("oat_game_mode_changed", game_mode)
 		elif game_mode == GameMode.INVENTORY:
 			game_mode = GameMode.EXPLORING
-		# TODO: send this signal also when inventory is open and Esc is pressed
-		emit_signal("oat_toggle_inventory", game_mode == GameMode.INVENTORY)
+			# TODO: send this signal also when inventory is open and Esc is pressed
+			emit_signal("oat_game_mode_changed", game_mode)
