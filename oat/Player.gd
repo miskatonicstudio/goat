@@ -107,10 +107,12 @@ func select_environment_item():
 				oat_interaction_signals.emit_signal(
 					"oat_environment_item_deselected", oat_interaction_signals.selected_environment_item_name
 				)
-	elif oat_interaction_signals.selected_environment_item_name:
-		oat_interaction_signals.emit_signal(
-			"oat_environment_item_deselected", oat_interaction_signals.selected_environment_item_name
-		)
+	else:
+		if oat_interaction_signals.selected_environment_item_name:
+			oat_interaction_signals.emit_signal(
+				"oat_environment_item_deselected", oat_interaction_signals.selected_environment_item_name
+			)
+		previous_collider = null
 
 
 func interact_with_environment():
