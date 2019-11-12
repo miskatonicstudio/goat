@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://demo/InventoryItemRemote.gd" type="Script" id=1]
+[ext_resource path="res://oat/EnvironmentItem.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.513726, 0.407843, 0.270588, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.8, 1, 0.4 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -0.4, 0.5, 0.2, 0.4, 0.5, -0.2, 0.4, 0.5, 0.2, -0.4, 0.5, -0.2, -0.4, -0.5, 0.2, 0.4, -0.5, -0.2, 0.4, -0.5, 0.2, -0.4, -0.5, -0.2, 0.4, 0.5, 0.2, -0.4, 0.5, -0.2, 0.4, 0.5, -0.2, -0.4, 0.5, 0.2, 0.4, -0.5, 0.2, -0.4, -0.5, -0.2, 0.4, -0.5, -0.2, -0.4, -0.5, 0.2, 0.4, 0.5, 0.2, -0.4, -0.5, 0.2, -0.4, 0.5, 0.2, 0.4, -0.5, 0.2, 0.4, 0.5, -0.2, -0.4, -0.5, -0.2, -0.4, 0.5, -0.2, 0.4, -0.5, -0.2 )
+
+[sub_resource type="SphereShape" id=4]
+radius = 0.3
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 0.231373, 0.231373, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CylinderMesh" id=6]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.2
+radial_segments = 12
+rings = 1
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.339536 ), Vector3( 0, 0, 0.171674 ), Vector3( 0, 0, 0.339536 ) ]
+}
+
+[node name="InventoryItemRemote" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Button" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.339536 )
+unique_name = "remote_button"
+collision_shape = SubResource( 4 )
+
+[node name="Model" type="MeshInstance" parent="Button"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0464 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/press_button = SubResource( 7 )
