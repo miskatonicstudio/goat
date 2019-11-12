@@ -11,7 +11,8 @@ func _ready():
 	oat_interaction_signals.connect("oat_inventory_item_selected", self, "notify", ["Selected: "])
 	oat_interaction_signals.connect("oat_inventory_item_removed", self, "notify", ["Removed: "])
 	oat_interaction_signals.connect("oat_inventory_item_used", self, "notify", ["Used: "])
-	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "notify2", ["Used: "])
+	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "notify2", ["Used inventory: "])
+	oat_interaction_signals.connect("oat_inventory_item_used_on_environment", self, "notify2", ["Used environment: "])
 	oat_interaction_signals.connect("oat_inventory_item_replaced", self, "notify2", ["Replaced: "])
 	
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
@@ -28,9 +29,7 @@ func _ready():
 	
 	oat_interaction_signals.inventory_items_models["pen"] = load("res://demo/InventoryItemPen.tscn")
 	oat_interaction_signals.inventory_items_models["ball"] = load("res://demo/InventoryItemBall.tscn")
-	oat_interaction_signals.inventory_items_models["ball_on_a_stick"] = load(
-		"res://demo/InventoryItemBallOnAStick.tscn"
-	)
+	oat_interaction_signals.inventory_items_models["ball_on_a_stick"] = load("res://demo/InventoryItemBallOnAStick.tscn")
 	oat_interaction_signals.inventory_items_models["cube"] = load("res://demo/InventoryItemCube.tscn")
 	oat_interaction_signals.inventory_items_models["square"] = load("res://demo/InventoryItemSquare.tscn")
 	oat_interaction_signals.inventory_items_models["remote"] = load("res://demo/InventoryItemRemote.tscn")
