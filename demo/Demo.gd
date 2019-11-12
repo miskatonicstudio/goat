@@ -9,26 +9,44 @@ func _ready():
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "notify", ["Activated: "])
 	oat_interaction_signals.connect("oat_environment_item_obtained", self, "notify", ["Obtained: "])
 	oat_interaction_signals.connect("oat_inventory_item_selected", self, "notify", ["Selected: "])
+	oat_interaction_signals.connect("oat_inventory_item_removed", self, "notify", ["Removed: "])
 	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "notify2", ["Used: "])
+	oat_interaction_signals.connect("oat_inventory_item_replaced", self, "notify2", ["Replaced: "])
 	
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
 	
 	# TODO: put it in a custom global file
 	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/pen.png")
 	oat_interaction_signals.inventory_items_textures["ball"] = load("res://demo/ball.png")
+	oat_interaction_signals.inventory_items_textures["ball_on_a_stick"] = load("res://demo/ball_on_a_stick.png")
+	oat_interaction_signals.inventory_items_textures["cube"] = load("res://demo/cube.png")
 	
 	oat_interaction_signals.inventory_items_models["pen"] = load("res://demo/InventoryItemPen.tscn")
 	oat_interaction_signals.inventory_items_models["ball"] = load("res://demo/InventoryItemBall.tscn")
+	oat_interaction_signals.inventory_items_models["ball_on_a_stick"] = load(
+		"res://demo/InventoryItemBallOnAStick.tscn"
+	)
+	oat_interaction_signals.inventory_items_models["cube"] = load("res://demo/InventoryItemCube.tscn")
+	
+	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "use_item_on_inventory")
 
 
 func notify(item_name, text):
 	$Notification.text = text + item_name
+	print($Notification.text)
 	$Timer.start()
 
 
 func notify2(item_name1, item_name2, text):
 	$Notification.text = text + item_name1 + " => " + item_name2
+	print($Notification.text)
 	$Timer.start()
+
+
+func use_item_on_inventory(item_name1, item_name2):
+	if item_name1 == "pen" and item_name2 == "ball" or item_name1 == "ball" and item_name2 == "pen":
+		oat_interaction_signals.emit_signal("oat_inventory_item_replaced", item_name2, "ball_on_a_stick")
+		oat_interaction_signals.emit_signal("oat_inventory_item_removed", item_name1)
 
 
 func _on_Timer_timeout():
