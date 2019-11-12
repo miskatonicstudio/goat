@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://demo/Demo.gd" type="Script" id=1]
 [ext_resource path="res://oat/Player.tscn" type="PackedScene" id=2]
@@ -90,6 +90,17 @@ emission_on_uv2 = false
 
 [sub_resource type="CubeMesh" id=19]
 size = Vector3( 0.1, 0.1, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=30]
+albedo_color = Color( 0.513726, 0.407843, 0.270588, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CubeMesh" id=31]
+size = Vector3( 0.08, 0.1, 0.05 )
 
 [sub_resource type="Animation" id=20]
 length = 0.5
@@ -202,7 +213,6 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="Table" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, -1.5 )
 material_override = SubResource( 9 )
 mesh = SubResource( 10 )
@@ -245,6 +255,17 @@ inventory_item = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0407691, 0 )
 material_override = SubResource( 18 )
 mesh = SubResource( 19 )
+material/0 = null
+
+[node name="EnvironmentItem" parent="Table" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321357, 0.558039, 0.296909 )
+unique_name = "remote"
+inventory_item = true
+
+[node name="Model" type="MeshInstance" parent="Table/EnvironmentItem"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0347357, 0 )
+material_override = SubResource( 30 )
+mesh = SubResource( 31 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
