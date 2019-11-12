@@ -4,6 +4,7 @@ var door_open = false
 
 
 func _ready():
+	oat_interaction_signals.connect("oat_game_mode_changed", self, "notify", ["Game mode changed: "])
 	oat_interaction_signals.connect("oat_environment_item_selected", self, "notify", ["Selected: "])
 	oat_interaction_signals.connect("oat_environment_item_deselected", self, "notify", ["Deselected: "])
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "notify", ["Activated: "])
@@ -36,7 +37,7 @@ func _ready():
 
 
 func notify(item_name, text):
-	$Notification.text = text + item_name
+	$Notification.text = text + str(item_name)
 	print($Notification.text)
 	$Timer.start()
 
