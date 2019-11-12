@@ -57,6 +57,8 @@ func item_obtained(item_name, insert_after=null):
 	var obtained_item = oat_interaction_signals.inventory_items_models[item_name].instance()
 	obtained_item.add_to_group("oat_inventory_item")
 	obtained_item.add_to_group("oat_inventory_item_" + item_name)
+	# TODO: find a better way to disable picking on non-selected items (hiding doesn't work)
+	obtained_item.translation.z = 999
 	obtained_item.hide()
 	# TODO: is this necessary for 3D?
 	if insert_after:
@@ -67,8 +69,11 @@ func item_obtained(item_name, insert_after=null):
 
 func item_selected(item_name):
 	for item in get_tree().get_nodes_in_group("oat_inventory_item"):
+		item.translation.z = 999
 		item.hide()
-	get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front().show()
+	var selected_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front()
+	selected_item.translation.z = 0
+	selected_item.show()
 
 
 func item_removed(item_name):
@@ -83,6 +88,11 @@ func item_replaced(item_name_replaced, item_name_replacing):
 
 
 func _on_ViewportContainer_gui_input(event):
+	if oat_interaction_signals.game_mode != oat_interaction_signals.GameMode.INVENTORY:
+		return
+	# We are currently rotating the item
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		return
 	if event is InputEventMouseMotion:
 		var ray_vector = camera.project_ray_normal(event.position)
 		ray.cast_to = ray_vector * 4

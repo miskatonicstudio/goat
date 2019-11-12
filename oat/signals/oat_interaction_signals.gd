@@ -5,6 +5,7 @@ signal oat_environment_item_selected (item_name)
 signal oat_environment_item_deselected (item_name)
 signal oat_environment_item_activated (item_name)
 # TODO: signal for permanent deactivation?
+# TODO: signal for reactivation (single use => deactivated => reactivated, or disabled => enabled)
 
 # TODO: rename this to "inventory_item" added or obtained
 signal oat_environment_item_obtained (item_name)

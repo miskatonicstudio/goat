@@ -30,6 +30,7 @@ render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
 current = true
+far = 5.0
 
 [node name="OmniLight" type="OmniLight" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
 
