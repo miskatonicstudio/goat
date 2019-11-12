@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://oat/Player.gd" type="Script" id=1]
 [ext_resource path="res://oat/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://oat/ContextInventory.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.3
@@ -40,3 +41,5 @@ margin_bottom = 7.0
 text = "·"
 
 [node name="Inventory" parent="." instance=ExtResource( 2 )]
+
+[node name="ContextInventory" parent="." instance=ExtResource( 3 )]

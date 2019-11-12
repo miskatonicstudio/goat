@@ -43,6 +43,7 @@ func activate(item_name):
 		if single_use:
 			deselect(item_name)
 			remove_from_group("oat_interactive_item")
+			oat_interaction_signals.emit_signal("oat_environment_item_deselected", item_name)
 		if inventory_item:
 			oat_interaction_signals.emit_signal("oat_environment_item_obtained", unique_name)
 			get_parent().remove_child(self)

@@ -7,16 +7,17 @@ export (float) var SPEED = 3.0
 onready var camera = $Camera
 onready var camera_ray = $Camera/Ray
 onready var inventory = $Inventory
+onready var context_inventory = $ContextInventory
 
 var movement_direction = Vector3()
-# TODO: extract selecting items
+# TODO: extract selecting items (raycast)
 # TODO: for 3D items with a touch screen, keep also the point of collision
-# TODO: put selected_environment_item in globals?
-var selected_environment_item = null
+var previous_collider = null
 
 
 func _ready():
 	inventory.hide()
+	context_inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	oat_interaction_signals.connect("oat_game_mode_changed", self, "game_mode_changed")
 
@@ -41,6 +42,8 @@ func _input(event):
 
 
 func game_mode_changed(new_game_mode):
+	if new_game_mode == oat_interaction_signals.GameMode.EXPLORING:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$Scope.visible = new_game_mode == oat_interaction_signals.GameMode.EXPLORING
 	$Camera.environment.dof_blur_far_enabled = new_game_mode == oat_interaction_signals.GameMode.INVENTORY
 
@@ -83,35 +86,37 @@ func update_movement_direction():
 
 
 func select_environment_item():
-	# TODO: consider replacing this logic with another signal
-	# Clear single use collider
-	if selected_environment_item and not selected_environment_item.is_in_group("oat_interactive_item"):
-		selected_environment_item = null
+	# TODO: consider moving this logic to globals, maybe using methods
 	if camera_ray.is_colliding():
 		var collider = camera_ray.get_collider()
-		if collider == selected_environment_item:
+		if collider == previous_collider:
 			return
+		previous_collider = collider
+		
 		if collider.is_in_group("oat_interactive_item"):
-			if selected_environment_item == null:
+			# Collision with a new item
+			if oat_interaction_signals.selected_environment_item_name != null:
 				oat_interaction_signals.emit_signal(
-					"oat_environment_item_selected", collider.unique_name
+					"oat_environment_item_deselected", oat_interaction_signals.selected_environment_item_name
 				)
-			selected_environment_item = collider
-		elif selected_environment_item:
 			oat_interaction_signals.emit_signal(
-				"oat_environment_item_deselected", selected_environment_item.unique_name
+				"oat_environment_item_selected", collider.unique_name
 			)
-			selected_environment_item = null
-	elif selected_environment_item:
+		elif oat_interaction_signals.selected_environment_item_name:
+			if oat_interaction_signals.selected_environment_item_name != null:
+				oat_interaction_signals.emit_signal(
+					"oat_environment_item_deselected", oat_interaction_signals.selected_environment_item_name
+				)
+	elif oat_interaction_signals.selected_environment_item_name:
 		oat_interaction_signals.emit_signal(
-			"oat_environment_item_deselected", selected_environment_item.unique_name
+			"oat_environment_item_deselected", oat_interaction_signals.selected_environment_item_name
 		)
-		selected_environment_item = null
 
 
 func interact_with_environment():
-	if selected_environment_item:
+	# TODO: consider moving this to global
+	if oat_interaction_signals.selected_environment_item_name:
 		if Input.is_action_just_pressed("oat_environment_item_activation"):
 			oat_interaction_signals.emit_signal(
-				"oat_environment_item_activated", selected_environment_item.unique_name
+				"oat_environment_item_activated", oat_interaction_signals.selected_environment_item_name
 			)

@@ -49,7 +49,6 @@ func game_mode_changed(new_game_mode):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		show()
 	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		hide()
 
 
