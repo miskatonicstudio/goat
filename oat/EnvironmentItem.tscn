@@ -6,7 +6,7 @@
 extents = Vector3( 0.1, 0.1, 0.1 )
 
 [node name="EnvironmentItem" type="StaticBody" groups=[
-"oat_environment_item",
+"oat_interactive_item",
 ]]
 script = ExtResource( 1 )
 collision_shape = SubResource( 1 )

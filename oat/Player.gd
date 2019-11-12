@@ -84,13 +84,13 @@ func update_movement_direction():
 func select_environment_item():
 	# TODO: consider replacing this logic with another signal
 	# Clear single use collider
-	if selected_environment_item and not selected_environment_item.is_in_group("oat_environment_item"):
+	if selected_environment_item and not selected_environment_item.is_in_group("oat_interactive_item"):
 		selected_environment_item = null
 	if camera_ray.is_colliding():
 		var collider = camera_ray.get_collider()
 		if collider == selected_environment_item:
 			return
-		if collider.is_in_group("oat_environment_item"):
+		if collider.is_in_group("oat_interactive_item"):
 			if selected_environment_item == null:
 				oat_interaction_signals.emit_signal(
 					"oat_environment_item_selected", collider.unique_name

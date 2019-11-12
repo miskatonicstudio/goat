@@ -6,12 +6,13 @@
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 script = ExtResource( 1 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 
 [node name="ViewportContainer" type="ViewportContainer" parent="CenterContainer"]
 margin_left = 212.0
@@ -33,8 +34,11 @@ current = true
 [node name="OmniLight" type="OmniLight" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
 
 [node name="RayCast" type="RayCast" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
+enabled = true
 
 [node name="Rotator" type="Spatial" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 
 [node name="InventoryItems" parent="." instance=ExtResource( 2 )]
+mouse_filter = 2
+[connection signal="gui_input" from="CenterContainer/ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]

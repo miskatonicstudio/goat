@@ -2,12 +2,14 @@ tool
 extends StaticBody
 
 export (String) var unique_name
+# TODO: replace all flags with an enum?
 export (bool) var single_use = false
 export (bool) var inventory_item = false
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 onready var model = get_node("Model")
 
 
+# TODO: rename this scene to "InteractiveItem"
 func _ready():
 	$CollisionShape.shape = collision_shape
 	# TODO: this will probably not work for objects with emission
@@ -40,7 +42,7 @@ func activate(item_name):
 	if item_name == unique_name:
 		if single_use:
 			deselect(item_name)
-			remove_from_group("oat_environment_item")
+			remove_from_group("oat_interactive_item")
 		if inventory_item:
 			oat_interaction_signals.emit_signal("oat_environment_item_obtained", unique_name)
 			get_parent().remove_child(self)
