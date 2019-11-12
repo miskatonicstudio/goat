@@ -11,6 +11,7 @@ signal oat_environment_item_obtained (item_name)
 signal oat_inventory_item_selected (item_name)
 signal oat_inventory_item_used (item_name)
 signal oat_inventory_item_removed (item_name)
+signal oat_inventory_item_replaced (item_name_replaced, item_name_replacing)
 signal oat_inventory_item_used_on_inventory (item_name, inventory_item_name)
 signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
 
