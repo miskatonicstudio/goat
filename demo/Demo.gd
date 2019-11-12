@@ -19,6 +19,7 @@ func _ready():
 	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
 	oat_interaction_signals.connect("oat_inventory_item_used", self, "use_item")
 	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "use_item_on_inventory")
+	oat_interaction_signals.connect("oat_inventory_item_used_on_environment", self, "use_item_on_environment")
 	
 	# TODO: put it in a custom global file
 	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/pen.png")
@@ -49,10 +50,17 @@ func notify2(item_name1, item_name2, text):
 
 
 func use_item_on_inventory(item_name1, item_name2):
-	# TODO: move this logic to global singleton?
+	# TODO: extract logic of joining objects?
 	if item_name1 == "pen" and item_name2 == "ball" or item_name1 == "ball" and item_name2 == "pen":
 		oat_interaction_signals.emit_signal("oat_inventory_item_replaced", item_name2, "ball_on_a_stick")
 		oat_interaction_signals.emit_signal("oat_inventory_item_removed", item_name1)
+
+
+func use_item_on_environment(inventory_item_name, environment_item_name):
+	if inventory_item_name == "ball_on_a_stick" and environment_item_name == "prism":
+		oat_interaction_signals.emit_signal("oat_inventory_item_removed", "ball_on_a_stick")
+		$UseItemOnEnvDemo/BallOnAStick.show()
+		$UseItemOnEnvDemo/AnimationPlayer.play("pulse_light")
 
 
 func use_item(item_name):

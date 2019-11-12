@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://demo/Demo.gd" type="Script" id=1]
 [ext_resource path="res://oat/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://oat/EnvironmentItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://demo/InventoryItemBallOnAStick.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 40, 40 )
@@ -49,7 +50,7 @@ points = PoolVector3Array( -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 
 
 [sub_resource type="BoxShape" id=12]
 margin = 0.001
-extents = Vector3( 0.04, 0.08, 0.04 )
+extents = Vector3( 0.08, 0.16, 0.08 )
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 0.454902, 0.94902, 1, 1 )
@@ -154,6 +155,57 @@ albedo_color = Color( 0.972549, 0.729412, 0.466667, 1 )
 
 [sub_resource type="CubeMesh" id=29]
 size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=35]
+albedo_color = Color( 0.415686, 0.407843, 0.407843, 1 )
+metallic = 0.6
+
+[sub_resource type="CylinderMesh" id=32]
+top_radius = 0.1
+bottom_radius = 0.6
+height = 0.95
+radial_segments = 12
+rings = 2
+
+[sub_resource type="SpatialMaterial" id=34]
+albedo_color = Color( 0.572549, 0.564706, 0.564706, 1 )
+emission_enabled = true
+emission = Color( 0.619608, 0.917647, 0.890196, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CapsuleMesh" id=36]
+radius = 0.05
+mid_height = 0.5
+
+[sub_resource type="Animation" id=37]
+resource_name = "pulse_light"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Balls/Ball1:material_override:emission_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+
+[sub_resource type="SpatialMaterial" id=39]
+albedo_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="PrismMesh" id=38]
+size = Vector3( 0.05, 0.05, 0.05 )
 
 [node name="Demo" type="Spatial"]
 script = ExtResource( 1 )
@@ -323,4 +375,58 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
 material_override = SubResource( 28 )
 mesh = SubResource( 29 )
 material/0 = null
+
+[node name="UseItemOnEnvDemo" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21016, 0, 0 )
+
+[node name="Stand" type="MeshInstance" parent="UseItemOnEnvDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.445, 0 )
+material_override = SubResource( 35 )
+mesh = SubResource( 32 )
+material/0 = null
+
+[node name="Balls" type="Spatial" parent="UseItemOnEnvDemo"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202794, 0 )
+
+[node name="Ball1" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
+transform = Transform( 0.866025, 2.18557e-08, 0.5, 0.5, -3.78552e-08, -0.866025, 0, 1, -4.37114e-08, 0.304985, 0.325881, 0 )
+material_override = SubResource( 34 )
+mesh = SubResource( 36 )
+material/0 = null
+
+[node name="Ball2" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
+transform = Transform( -3.78552e-08, 1, -6.55671e-08, 0.5, -3.78552e-08, -0.866025, -0.866025, -6.55671e-08, -0.5, 0, 0.326, -0.305 )
+material_override = SubResource( 34 )
+mesh = SubResource( 36 )
+material/0 = null
+
+[node name="Ball3" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
+transform = Transform( -0.866025, 8.15666e-08, -0.5, 0.5, -2.18557e-08, -0.866025, -8.15666e-08, -1, -2.18557e-08, -0.305, 0.326, 0 )
+material_override = SubResource( 34 )
+mesh = SubResource( 36 )
+material/0 = null
+
+[node name="Ball4" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
+transform = Transform( -4.37114e-08, -1, 0, 0.5, -2.18557e-08, -0.866025, 0.866025, -3.78552e-08, 0.5, 0, 0.326, 0.305 )
+material_override = SubResource( 34 )
+mesh = SubResource( 36 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UseItemOnEnvDemo"]
+anims/pulse_light = SubResource( 37 )
+
+[node name="EnvironmentItem" parent="UseItemOnEnvDemo" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952203, 0 )
+unique_name = "prism"
+
+[node name="Model" type="MeshInstance" parent="UseItemOnEnvDemo/EnvironmentItem"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.016634, 0 )
+material_override = SubResource( 39 )
+mesh = SubResource( 38 )
+material/0 = null
+
+[node name="BallOnAStick" parent="UseItemOnEnvDemo" instance=ExtResource( 4 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.03457, -0.00655839 )
+visible = false
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
