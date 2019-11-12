@@ -54,11 +54,11 @@ func item_removed(item_name):
 	if item_name == currently_selected_item:
 		var index = removed_item.get_index()
 		# TODO: handle empty inventory case!
-		if item_container.get_child_count() < index + 1:
+		if index + 1 < item_container.get_child_count():
 			index = index + 1
 		else:
 			index = index - 1
-		item_container.get_children()[index].emit_signal("button_pressed")
+		item_container.get_children()[index].emit_signal("pressed")
 	removed_item.queue_free()
 
 
@@ -80,3 +80,7 @@ func item_button_down(item_name):
 	# TODO: read texture size from config
 	# TODO: use settings signals for setting cursor?
 	Input.set_custom_mouse_cursor(texture, Input.CURSOR_ARROW, Vector2(32, 32))
+
+
+func _on_UseButton_pressed():
+	oat_interaction_signals.emit_signal("oat_inventory_item_used", currently_selected_item)

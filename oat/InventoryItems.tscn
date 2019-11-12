@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://oat/InventoryItems.gd" type="Script" id=1]
+[ext_resource path="res://oat/button_style.tres" type="StyleBox" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -50,3 +51,18 @@ margin_left = 320.0
 margin_right = 320.0
 custom_constants/separation = 0
 alignment = 1
+
+[node name="UseButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.5
+margin_top = -30.0
+margin_right = 20.5
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Use"
+[connection signal="pressed" from="UseButton" to="." method="_on_UseButton_pressed"]
