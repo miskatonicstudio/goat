@@ -17,6 +17,8 @@ func _ready():
 	oat_interaction_signals.connect("oat_toggle_inventory", self, "toggle")
 	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
 	oat_interaction_signals.connect("oat_inventory_item_selected", self, "item_selected")
+	oat_interaction_signals.connect("oat_inventory_item_removed", self, "item_removed")
+	oat_interaction_signals.connect("oat_inventory_item_replaced", self, "item_replaced")
 
 
 func _input(event):
@@ -49,15 +51,30 @@ func toggle(inventory_open):
 		hide()
 
 
-func item_obtained(item_name):
+func item_obtained(item_name, insert_after=null):
 	var obtained_item = oat_interaction_signals.inventory_items_models[item_name].instance()
 	obtained_item.add_to_group("oat_inventory_item")
 	obtained_item.add_to_group("oat_inventory_item_" + item_name)
 	obtained_item.hide()
-	rotator.add_child(obtained_item)
+	# TODO: is this necessary for 3D?
+	if insert_after:
+		rotator.add_child_below_node(insert_after, obtained_item)
+	else:
+		rotator.add_child(obtained_item)
 
 
 func item_selected(item_name):
 	for item in get_tree().get_nodes_in_group("oat_inventory_item"):
 		item.hide()
 	get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front().show()
+
+
+func item_removed(item_name):
+	var removed_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front()
+	removed_item.queue_free()
+
+
+func item_replaced(item_name_replaced, item_name_replacing):
+	var replaced_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name_replaced).pop_front()
+	item_obtained(item_name_replacing, replaced_item)
+	replaced_item.queue_free()

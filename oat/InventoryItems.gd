@@ -10,6 +10,8 @@ var currently_dragged_item = null
 func _ready():
 	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
 	oat_interaction_signals.connect("oat_inventory_item_selected", self, "item_selected")
+	oat_interaction_signals.connect("oat_inventory_item_removed", self, "item_removed")
+	oat_interaction_signals.connect("oat_inventory_item_replaced", self, "item_replaced")
 
 
 func _input(event):
@@ -26,12 +28,17 @@ func _input(event):
 		currently_dragged_item = null
 
 
-func item_obtained(item_name):
+func item_obtained(item_name, insert_after=null):
 	var item_button = TextureButton.new()
 	item_button.texture_normal = oat_interaction_signals.inventory_items_textures[item_name]
 	item_button.connect("pressed", self, "item_button_pressed", [item_name, ])
 	item_button.connect("button_down", self, "item_button_down", [item_name, ])
-	item_container.add_child(item_button)
+	item_button.add_to_group("oat_inventory_item_icon_" + item_name)
+	
+	if insert_after:
+		item_container.add_child_below_node(insert_after, item_button)
+	else:
+		item_container.add_child(item_button)
 	
 	if not currently_selected_item:
 		oat_interaction_signals.emit_signal("oat_inventory_item_selected", item_name)
@@ -41,8 +48,30 @@ func item_selected(item_name):
 	currently_selected_item = item_name
 
 
+func item_removed(item_name):
+	var removed_item = get_tree().get_nodes_in_group("oat_inventory_item_icon_" + item_name).pop_front()
+	
+	if item_name == currently_selected_item:
+		var index = removed_item.get_index()
+		# TODO: handle empty inventory case!
+		if item_container.get_child_count() < index + 1:
+			index = index + 1
+		else:
+			index = index - 1
+		item_container.get_children()[index].emit_signal("button_pressed")
+	removed_item.queue_free()
+
+
+func item_replaced(item_name_replaced, item_name_replacing):
+	var replaced_item = get_tree().get_nodes_in_group("oat_inventory_item_icon_" + item_name_replaced).pop_front()
+	item_obtained(item_name_replacing, replaced_item)
+	replaced_item.queue_free()
+	oat_interaction_signals.emit_signal("oat_inventory_item_selected", item_name_replacing)
+
+
 func item_button_pressed(item_name):
-	oat_interaction_signals.emit_signal("oat_inventory_item_selected", item_name)
+	if item_name != currently_selected_item:
+		oat_interaction_signals.emit_signal("oat_inventory_item_selected", item_name)
 
 
 func item_button_down(item_name):
