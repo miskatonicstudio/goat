@@ -4,6 +4,7 @@
 albedo_color = Color( 1, 0.4, 0.4, 1 )
 
 [sub_resource type="CubeMesh" id=2]
+size = Vector3( 1, 1, 1 )
 
 [node name="InventoryItemCube" type="Spatial"]
 

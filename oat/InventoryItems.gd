@@ -23,7 +23,7 @@ func _input(event):
 			currently_dragged_item != currently_selected_item
 		):
 			oat_interaction_signals.emit_signal(
-				"oat_inventory_item_used_on_inventory", currently_selected_item, currently_dragged_item
+				"oat_inventory_item_used_on_inventory", currently_dragged_item, currently_selected_item
 			)
 		currently_dragged_item = null
 
