@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://oat/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://oat/InventoryItems.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://goat/InventoryItems.tscn" type="PackedScene" id=2]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0

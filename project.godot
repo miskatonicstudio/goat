@@ -15,12 +15,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="OAT"
+config/name="GOAT"
 run/main_scene="res://demo/Demo.tscn"
 
 [autoload]
 
-oat_interaction_signals="*res://oat/signals/oat_interaction_signals.gd"
+oat_interaction_signals="*res://goat/signals/oat_interaction_signals.gd"
 
 [input]
 
