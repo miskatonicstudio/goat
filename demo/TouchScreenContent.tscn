@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://demo/TouchScreenContent.gd" type="Script" id=1]
+
+[node name="TouchScreenContent" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -624.0
+margin_bottom = -200.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.501961, 0.988235, 1, 1 )
+
+[node name="ButtonDown" type="Button" parent="."]
+margin_left = 80.9134
+margin_top = 332.875
+margin_right = 130.913
+margin_bottom = 382.875
+rect_min_size = Vector2( 50, 50 )
+text = "Down"
+
+[node name="ButtonRight" type="Button" parent="."]
+margin_left = 146.871
+margin_top = 332.506
+margin_right = 196.871
+margin_bottom = 382.506
+rect_min_size = Vector2( 50, 50 )
+text = "Right"
+
+[node name="ButtonLeft" type="Button" parent="."]
+margin_left = 15.9557
+margin_top = 333.506
+margin_right = 65.9557
+margin_bottom = 383.506
+rect_min_size = Vector2( 50, 50 )
+text = "Left"
+
+[node name="ButtonUp" type="Button" parent="."]
+margin_left = 80.9134
+margin_top = 267.96
+margin_right = 130.913
+margin_bottom = 317.96
+rect_min_size = Vector2( 50, 50 )
+text = "Up"
+
+[node name="Dot" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+color = Color( 0.968627, 1, 0.00784314, 1 )
+[connection signal="pressed" from="ButtonDown" to="." method="_on_ButtonDown_pressed"]
+[connection signal="pressed" from="ButtonRight" to="." method="_on_ButtonRight_pressed"]
+[connection signal="pressed" from="ButtonLeft" to="." method="_on_ButtonLeft_pressed"]
+[connection signal="pressed" from="ButtonUp" to="." method="_on_ButtonUp_pressed"]
