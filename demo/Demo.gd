@@ -26,21 +26,21 @@ func _ready():
 	oat_interaction_signals.connect_monologue("oat_inventory_item_used", load("res://demo/sounds/long.ogg"))
 	
 	# TODO: put it in a custom global file
-	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/pen.png")
-	oat_interaction_signals.inventory_items_textures["ball"] = load("res://demo/ball.png")
-	oat_interaction_signals.inventory_items_textures["ball_on_a_stick"] = load("res://demo/ball_on_a_stick.png")
-	oat_interaction_signals.inventory_items_textures["cube"] = load("res://demo/cube.png")
-	oat_interaction_signals.inventory_items_textures["square"] = load("res://demo/square.png")
-	oat_interaction_signals.inventory_items_textures["remote"] = load("res://demo/remote.png")
-	oat_interaction_signals.inventory_items_textures["console"] = load("res://demo/console.png")
+	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/inventory_items/icons/pen.png")
+	oat_interaction_signals.inventory_items_textures["ball"] = load("res://demo/inventory_items/icons/ball.png")
+	oat_interaction_signals.inventory_items_textures["ball_on_a_stick"] = load("res://demo/inventory_items/icons/ball_on_a_stick.png")
+	oat_interaction_signals.inventory_items_textures["cube"] = load("res://demo/inventory_items/icons/cube.png")
+	oat_interaction_signals.inventory_items_textures["square"] = load("res://demo/inventory_items/icons/square.png")
+	oat_interaction_signals.inventory_items_textures["remote"] = load("res://demo/inventory_items/icons/remote.png")
+	oat_interaction_signals.inventory_items_textures["console"] = load("res://demo/inventory_items/icons/console.png")
 	
-	oat_interaction_signals.inventory_items_models["pen"] = load("res://demo/InventoryItemPen.tscn")
-	oat_interaction_signals.inventory_items_models["ball"] = load("res://demo/InventoryItemBall.tscn")
-	oat_interaction_signals.inventory_items_models["ball_on_a_stick"] = load("res://demo/InventoryItemBallOnAStick.tscn")
-	oat_interaction_signals.inventory_items_models["cube"] = load("res://demo/InventoryItemCube.tscn")
-	oat_interaction_signals.inventory_items_models["square"] = load("res://demo/InventoryItemSquare.tscn")
-	oat_interaction_signals.inventory_items_models["remote"] = load("res://demo/InventoryItemRemote.tscn")
-	oat_interaction_signals.inventory_items_models["console"] = load("res://demo/InventoryItemConsole.tscn")
+	oat_interaction_signals.inventory_items_models["pen"] = load("res://demo/inventory_items/models/Pen.tscn")
+	oat_interaction_signals.inventory_items_models["ball"] = load("res://demo/inventory_items/models/Ball.tscn")
+	oat_interaction_signals.inventory_items_models["ball_on_a_stick"] = load("res://demo/inventory_items/models/BallOnAStick.tscn")
+	oat_interaction_signals.inventory_items_models["cube"] = load("res://demo/inventory_items/models/Cube.tscn")
+	oat_interaction_signals.inventory_items_models["square"] = load("res://demo/inventory_items/models/Square.tscn")
+	oat_interaction_signals.inventory_items_models["remote"] = load("res://demo/inventory_items/models/Remote.tscn")
+	oat_interaction_signals.inventory_items_models["console"] = load("res://demo/inventory_items/models/Console.tscn")
 
 
 func notify(item_name, text):

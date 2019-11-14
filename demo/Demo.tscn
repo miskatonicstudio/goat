@@ -3,7 +3,7 @@
 [ext_resource path="res://demo/Demo.gd" type="Script" id=1]
 [ext_resource path="res://goat/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/EnvironmentItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://demo/InventoryItemBallOnAStick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demo/inventory_items/models/BallOnAStick.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 40, 40 )

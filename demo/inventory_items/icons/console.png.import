@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ball_on_a_stick.png-ef6d31c5cc22e690e7252ee7b5bdbbad.stex"
+path="res://.import/console.png-fd297935f50d6069a589f3c811ab786c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://demo/ball_on_a_stick.png"
-dest_files=[ "res://.import/ball_on_a_stick.png-ef6d31c5cc22e690e7252ee7b5bdbbad.stex" ]
+source_file="res://demo/inventory_items/icons/console.png"
+dest_files=[ "res://.import/console.png-fd297935f50d6069a589f3c811ab786c.stex" ]
 
 [params]
 
