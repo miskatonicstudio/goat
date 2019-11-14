@@ -34,8 +34,14 @@ export (String) var selected_environment_item_name = null
 # TODO: this will always be null, so just a setter will do
 export (String) var context_inventory_item_name setget set_context_inventory_item_name
 
+var monologue_player = null
+
 
 func _ready():
+	# TODO: send detailed signals and allow monologue player to easily connect to them
+	monologue_player = AudioStreamPlayer.new()
+	add_child(monologue_player)
+	
 	connect("oat_environment_item_selected", self, "environment_item_selected")
 	connect("oat_environment_item_deselected", self, "environment_item_deselected")
 
@@ -76,3 +82,16 @@ func environment_item_selected(item_name):
 
 func environment_item_deselected(item_name):
 	selected_environment_item_name = null
+
+
+func connect_monologue(signal_name, sound):
+	connect(signal_name, self, "play_monologue", [sound])
+
+
+# TODO: send individual signals for every event, with no args, and remove arg1
+func play_monologue(arg1, sound):
+	if monologue_player.playing:
+		monologue_player.stop()
+	monologue_player.stream = sound
+	monologue_player.stream.loop = false
+	monologue_player.play()
