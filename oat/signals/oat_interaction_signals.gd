@@ -16,6 +16,8 @@ signal oat_inventory_item_replaced (item_name_replaced, item_name_replacing)
 signal oat_inventory_item_used_on_inventory (item_name, inventory_item_name)
 signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
 
+signal oat_interactive_screen_activated (screen_name, position)
+
 # TODO: send also old game mode, move all logic to global
 signal oat_game_mode_changed (new_game_mode)
 
@@ -28,6 +30,7 @@ enum GameMode {
 
 # TODO: use setget for game_mode, raise exception when setting manually?
 export (GameMode) var game_mode = GameMode.EXPLORING
+# TODO: add a nice method to add inventory items here
 export (Dictionary) var inventory_items_textures = {}
 export (Dictionary) var inventory_items_models = {}
 export (String) var selected_environment_item_name = null
