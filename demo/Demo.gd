@@ -32,6 +32,7 @@ func _ready():
 	oat_interaction_signals.inventory_items_textures["cube"] = load("res://demo/cube.png")
 	oat_interaction_signals.inventory_items_textures["square"] = load("res://demo/square.png")
 	oat_interaction_signals.inventory_items_textures["remote"] = load("res://demo/remote.png")
+	oat_interaction_signals.inventory_items_textures["console"] = load("res://demo/console.png")
 	
 	oat_interaction_signals.inventory_items_models["pen"] = load("res://demo/InventoryItemPen.tscn")
 	oat_interaction_signals.inventory_items_models["ball"] = load("res://demo/InventoryItemBall.tscn")
@@ -39,6 +40,7 @@ func _ready():
 	oat_interaction_signals.inventory_items_models["cube"] = load("res://demo/InventoryItemCube.tscn")
 	oat_interaction_signals.inventory_items_models["square"] = load("res://demo/InventoryItemSquare.tscn")
 	oat_interaction_signals.inventory_items_models["remote"] = load("res://demo/InventoryItemRemote.tscn")
+	oat_interaction_signals.inventory_items_models["console"] = load("res://demo/InventoryItemConsole.tscn")
 
 
 func notify(item_name, text):

@@ -45,11 +45,11 @@ tracks/0/keys = {
 "values": [ Vector3( 0, -0.208633, 0.339536 ), Vector3( 0, -0.208633, 0.258738 ), Vector3( 0, -0.208633, 0.339536 ) ]
 }
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=8]
 metallic = 0.2
 roughness = 0.3
 
-[sub_resource type="QuadMesh" id=8]
+[sub_resource type="QuadMesh" id=9]
 size = Vector2( 0.64, 0.36 )
 
 [node name="InventoryItemRemote" type="Spatial"]
@@ -91,7 +91,7 @@ stream = ExtResource( 3 )
 
 [node name="Screen" type="MeshInstance" parent="."]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.215235, 0.202023 )
-material_override = SubResource( 9 )
-mesh = SubResource( 8 )
+material_override = SubResource( 8 )
+mesh = SubResource( 9 )
 material/0 = null
 [connection signal="finished" from="Viewport/VideoPlayer" to="." method="_on_VideoPlayer_finished"]

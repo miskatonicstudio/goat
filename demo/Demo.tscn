@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://demo/Demo.gd" type="Script" id=1]
 [ext_resource path="res://oat/Player.tscn" type="PackedScene" id=2]
@@ -92,7 +92,7 @@ emission_on_uv2 = false
 [sub_resource type="CubeMesh" id=19]
 size = Vector3( 0.1, 0.1, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=30]
+[sub_resource type="SpatialMaterial" id=20]
 albedo_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -100,10 +100,21 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=31]
+[sub_resource type="CubeMesh" id=21]
 size = Vector3( 0.08, 0.1, 0.05 )
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="SpatialMaterial" id=40]
+albedo_color = Color( 1, 1, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CubeMesh" id=39]
+size = Vector3( 0.2, 0.02, 0.2 )
+
+[sub_resource type="Animation" id=22]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("DropItemDemo/Crate:translation")
@@ -118,7 +129,7 @@ tracks/0/keys = {
 "values": [ Vector3( 2, 3, 0 ), Vector3( 2, 0.5, 0 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=23]
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpeningDoorDemo/Hinge:rotation_degrees")
 tracks/0/interp = 1
@@ -132,35 +143,35 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 60, 0 ) ]
 }
 
-[sub_resource type="SpatialMaterial" id=22]
+[sub_resource type="SpatialMaterial" id=24]
 albedo_color = Color( 1, 0.576471, 0.576471, 1 )
 
-[sub_resource type="CubeMesh" id=23]
+[sub_resource type="CubeMesh" id=25]
 size = Vector3( 2, 2, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=24]
+[sub_resource type="SpatialMaterial" id=26]
 albedo_color = Color( 1, 0.929412, 0.596078, 1 )
 
-[sub_resource type="CubeMesh" id=25]
+[sub_resource type="CubeMesh" id=27]
 size = Vector3( 1.5, 2, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=26]
+[sub_resource type="SpatialMaterial" id=28]
 albedo_color = Color( 0.67451, 0.545098, 0.32549, 1 )
 
-[sub_resource type="CubeMesh" id=27]
+[sub_resource type="CubeMesh" id=29]
 size = Vector3( 0.2, 4, 0.2 )
 
-[sub_resource type="SpatialMaterial" id=28]
+[sub_resource type="SpatialMaterial" id=30]
 albedo_color = Color( 0.972549, 0.729412, 0.466667, 1 )
 
-[sub_resource type="CubeMesh" id=29]
+[sub_resource type="CubeMesh" id=31]
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=35]
+[sub_resource type="SpatialMaterial" id=32]
 albedo_color = Color( 0.415686, 0.407843, 0.407843, 1 )
 metallic = 0.6
 
-[sub_resource type="CylinderMesh" id=32]
+[sub_resource type="CylinderMesh" id=33]
 top_radius = 0.1
 bottom_radius = 0.6
 height = 0.95
@@ -175,11 +186,11 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CapsuleMesh" id=36]
+[sub_resource type="CapsuleMesh" id=35]
 radius = 0.05
 mid_height = 0.5
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=36]
 resource_name = "pulse_light"
 length = 2.0
 loop = true
@@ -196,7 +207,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="SpatialMaterial" id=39]
+[sub_resource type="SpatialMaterial" id=37]
 albedo_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -277,7 +288,7 @@ editor/display_folded = true
 shape = SubResource( 11 )
 
 [node name="EnvironmentItemPen" parent="Table" instance=ExtResource( 3 )]
-transform = Transform( 0.734248, 0.678882, 2.96749e-08, 0, -4.37114e-08, 1, 0.678882, -0.734248, -3.2095e-08, 0.228648, 0.510065, 0 )
+transform = Transform( 0.734248, 0.678882, 2.96749e-08, 0, -4.37114e-08, 1, 0.678882, -0.734248, -3.2095e-08, 0.339202, 0.510065, 0.110681 )
 unique_name = "pen"
 inventory_item = true
 collision_shape = SubResource( 12 )
@@ -309,34 +320,44 @@ material_override = SubResource( 18 )
 mesh = SubResource( 19 )
 material/0 = null
 
-[node name="EnvironmentItem" parent="Table" instance=ExtResource( 3 )]
+[node name="EnvironmentItemRemote" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321357, 0.558039, 0.296909 )
 unique_name = "remote"
 inventory_item = true
 
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItem"]
+[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemRemote"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0347357, 0 )
-material_override = SubResource( 30 )
-mesh = SubResource( 31 )
+material_override = SubResource( 20 )
+mesh = SubResource( 21 )
+material/0 = null
+
+[node name="EnvironmentItemConsole" parent="Table" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.142401, 0.50627, -0.224718 )
+unique_name = "console"
+inventory_item = true
+
+[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemConsole"]
+material_override = SubResource( 40 )
+mesh = SubResource( 39 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/drop_crate = SubResource( 20 )
-anims/open_door = SubResource( 21 )
+anims/drop_crate = SubResource( 22 )
+anims/open_door = SubResource( 23 )
 
 [node name="OpeningDoorDemo" type="Spatial" parent="."]
 editor/display_folded = true
 
 [node name="Wall01" type="MeshInstance" parent="OpeningDoorDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4.5 )
-material_override = SubResource( 22 )
-mesh = SubResource( 23 )
+material_override = SubResource( 24 )
+mesh = SubResource( 25 )
 material/0 = null
 
 [node name="Wall02" type="MeshInstance" parent="OpeningDoorDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, -4.5 )
-material_override = SubResource( 22 )
-mesh = SubResource( 23 )
+material_override = SubResource( 24 )
+mesh = SubResource( 25 )
 material/0 = null
 
 [node name="Hinge" type="Spatial" parent="OpeningDoorDemo"]
@@ -344,8 +365,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.5 )
 
 [node name="Door" type="MeshInstance" parent="OpeningDoorDemo/Hinge"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1, 0 )
-material_override = SubResource( 24 )
-mesh = SubResource( 25 )
+material_override = SubResource( 26 )
+mesh = SubResource( 27 )
 material/0 = null
 
 [node name="DropItemDemo" type="Spatial" parent="."]
@@ -354,35 +375,36 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61749, 0, -5.9365 )
 
 [node name="Beam1" type="MeshInstance" parent="DropItemDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-material_override = SubResource( 26 )
-mesh = SubResource( 27 )
-material/0 = null
-
-[node name="Beam2" type="MeshInstance" parent="DropItemDemo"]
-transform = Transform( -4.37114e-08, -0.55, 0, 1, -2.40413e-08, 0, 0, 0, 1, 1, 4, 0 )
-material_override = SubResource( 26 )
-mesh = SubResource( 27 )
-material/0 = null
-
-[node name="Beam3" type="MeshInstance" parent="DropItemDemo"]
-transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 2, 3.7, 0 )
-material_override = SubResource( 26 )
-mesh = SubResource( 27 )
-material/0 = null
-
-[node name="Crate" type="MeshInstance" parent="DropItemDemo"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
 material_override = SubResource( 28 )
 mesh = SubResource( 29 )
 material/0 = null
 
+[node name="Beam2" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( -4.37114e-08, -0.55, 0, 1, -2.40413e-08, 0, 0, 0, 1, 1, 4, 0 )
+material_override = SubResource( 28 )
+mesh = SubResource( 29 )
+material/0 = null
+
+[node name="Beam3" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 2, 3.7, 0 )
+material_override = SubResource( 28 )
+mesh = SubResource( 29 )
+material/0 = null
+
+[node name="Crate" type="MeshInstance" parent="DropItemDemo"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
+material_override = SubResource( 30 )
+mesh = SubResource( 31 )
+material/0 = null
+
 [node name="UseItemOnEnvDemo" type="Spatial" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21016, 0, 0 )
 
 [node name="Stand" type="MeshInstance" parent="UseItemOnEnvDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.445, 0 )
-material_override = SubResource( 35 )
-mesh = SubResource( 32 )
+material_override = SubResource( 32 )
+mesh = SubResource( 33 )
 material/0 = null
 
 [node name="Balls" type="Spatial" parent="UseItemOnEnvDemo"]
@@ -392,29 +414,29 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202794, 0 )
 [node name="Ball1" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( 0.866025, 2.18557e-08, 0.5, 0.5, -3.78552e-08, -0.866025, 0, 1, -4.37114e-08, 0.304985, 0.325881, 0 )
 material_override = SubResource( 34 )
-mesh = SubResource( 36 )
+mesh = SubResource( 35 )
 material/0 = null
 
 [node name="Ball2" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( -3.78552e-08, 1, -6.55671e-08, 0.5, -3.78552e-08, -0.866025, -0.866025, -6.55671e-08, -0.5, 0, 0.326, -0.305 )
 material_override = SubResource( 34 )
-mesh = SubResource( 36 )
+mesh = SubResource( 35 )
 material/0 = null
 
 [node name="Ball3" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( -0.866025, 8.15666e-08, -0.5, 0.5, -2.18557e-08, -0.866025, -8.15666e-08, -1, -2.18557e-08, -0.305, 0.326, 0 )
 material_override = SubResource( 34 )
-mesh = SubResource( 36 )
+mesh = SubResource( 35 )
 material/0 = null
 
 [node name="Ball4" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( -4.37114e-08, -1, 0, 0.5, -2.18557e-08, -0.866025, 0.866025, -3.78552e-08, 0.5, 0, 0.326, 0.305 )
 material_override = SubResource( 34 )
-mesh = SubResource( 36 )
+mesh = SubResource( 35 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UseItemOnEnvDemo"]
-anims/pulse_light = SubResource( 37 )
+anims/pulse_light = SubResource( 36 )
 
 [node name="EnvironmentItem" parent="UseItemOnEnvDemo" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952203, 0 )
@@ -422,11 +444,10 @@ unique_name = "prism"
 
 [node name="Model" type="MeshInstance" parent="UseItemOnEnvDemo/EnvironmentItem"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.016634, 0 )
-material_override = SubResource( 39 )
+material_override = SubResource( 37 )
 mesh = SubResource( 38 )
 material/0 = null
 
 [node name="BallOnAStick" parent="UseItemOnEnvDemo" instance=ExtResource( 4 )]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.03457, -0.00655839 )
-visible = false
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
