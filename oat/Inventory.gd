@@ -12,6 +12,8 @@ onready var rotator = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Ro
 # TODO: keep rotation value separately for each item?
 var current_angle_vertical = 0
 var selected_inventory_item = null
+var collision_position = null
+
 
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
@@ -101,11 +103,16 @@ func _on_ViewportContainer_gui_input(event):
 		oat_interaction_signals.emit_signal(
 			"oat_environment_item_activated", selected_inventory_item.unique_name
 		)
+	if Input.is_action_just_pressed("oat_environment_item_activation") and collision_position:
+		oat_interaction_signals.emit_signal(
+			"oat_interactive_screen_activated", selected_inventory_item.unique_name, collision_position
+		)
 
 
 func select_inventory_item():
 	# TODO: join this logic with item detection in Player?
 	# TODO: consider replacing this logic with another signal
+	collision_position = null
 	# Clear single use collider
 	if selected_inventory_item and not selected_inventory_item.is_in_group("oat_interactive_item"):
 		selected_inventory_item = null
@@ -123,6 +130,11 @@ func select_inventory_item():
 			oat_interaction_signals.emit_signal(
 				"oat_environment_item_deselected", selected_inventory_item.unique_name
 			)
+			selected_inventory_item = null
+		if collider.is_in_group("oat_interactive_screen"):
+			collision_position = ray.get_collision_point()
+			selected_inventory_item = collider
+		elif selected_inventory_item:
 			selected_inventory_item = null
 	elif selected_inventory_item:
 		oat_interaction_signals.emit_signal(
