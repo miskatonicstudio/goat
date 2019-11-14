@@ -21,6 +21,10 @@ func _ready():
 	oat_interaction_signals.connect("oat_inventory_item_used_on_inventory", self, "use_item_on_inventory")
 	oat_interaction_signals.connect("oat_inventory_item_used_on_environment", self, "use_item_on_environment")
 	
+	# TODO: do not send item selected signal when item is first added, instead send it when inventory is open?
+	oat_interaction_signals.connect_monologue("oat_inventory_item_selected", load("res://demo/sounds/short.ogg"))
+	oat_interaction_signals.connect_monologue("oat_inventory_item_used", load("res://demo/sounds/long.ogg"))
+	
 	# TODO: put it in a custom global file
 	oat_interaction_signals.inventory_items_textures["pen"] = load("res://demo/pen.png")
 	oat_interaction_signals.inventory_items_textures["ball"] = load("res://demo/ball.png")
