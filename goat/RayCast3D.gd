@@ -25,6 +25,7 @@ func _input(event):
 func _process(delta):
 	if not enabled:
 		return
+	collision_point = null
 	var new_item_name = null
 	
 	if is_colliding():
