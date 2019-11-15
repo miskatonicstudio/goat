@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://goat/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://goat/InventoryItems.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/RayCast3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/InventoryItems.tscn" type="PackedScene" id=3]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -32,14 +33,13 @@ render_target_update_mode = 3
 current = true
 far = 5.0
 
-[node name="OmniLight" type="OmniLight" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
+[node name="RayCast3D" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera" instance=ExtResource( 2 )]
 
-[node name="RayCast" type="RayCast" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
-enabled = true
+[node name="OmniLight" type="OmniLight" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
 
 [node name="Rotator" type="Spatial" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 
-[node name="InventoryItems" parent="." instance=ExtResource( 2 )]
+[node name="InventoryItems" parent="." instance=ExtResource( 3 )]
 mouse_filter = 2
 [connection signal="gui_input" from="CenterContainer/ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]

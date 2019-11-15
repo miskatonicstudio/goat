@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://goat/Player.gd" type="Script" id=1]
-[ext_resource path="res://goat/Inventory.tscn" type="PackedScene" id=2]
-[ext_resource path="res://goat/ContextInventory.tscn" type="PackedScene" id=3]
-
+[ext_resource path="res://goat/RayCast3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/ContextInventory.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.3
@@ -26,7 +26,7 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
 environment = SubResource( 2 )
 
-[node name="Ray" type="RayCast" parent="Camera"]
+[node name="RayCast3D" parent="Camera" instance=ExtResource( 2 )]
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
 
@@ -41,6 +41,6 @@ margin_right = 2.0
 margin_bottom = 7.0
 text = "·"
 
-[node name="Inventory" parent="." instance=ExtResource( 2 )]
+[node name="Inventory" parent="." instance=ExtResource( 3 )]
 
-[node name="ContextInventory" parent="." instance=ExtResource( 3 )]
+[node name="ContextInventory" parent="." instance=ExtResource( 4 )]

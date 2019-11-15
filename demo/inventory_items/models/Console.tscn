@@ -3,8 +3,6 @@
 [ext_resource path="res://goat/InteractiveScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demo/inventory_items/models/TouchScreenContent.tscn" type="PackedScene" id=2]
 
-
-
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 1, 0, 1 )
 

@@ -6,13 +6,11 @@ export var ROTATION_SENSITIVITY_Y = 1.0
 
 const MAX_VERTICAL_ANGLE = 80
 onready var viewport = $CenterContainer/ViewportContainer/Viewport
-onready var ray = $CenterContainer/ViewportContainer/Viewport/Inventory3D/RayCast
+onready var ray_cast = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
 onready var camera = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera
 onready var rotator = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Rotator
 # TODO: keep rotation value separately for each item?
 var current_angle_vertical = 0
-var selected_inventory_item = null
-var collision_position = null
 
 
 func _ready():
@@ -47,7 +45,9 @@ func _input(event):
 
 func game_mode_changed(new_game_mode):
 	# TODO: move this logic to oat global?
-	if new_game_mode == oat_interaction_signals.GameMode.INVENTORY:
+	var inventory_mode = new_game_mode == oat_interaction_signals.GameMode.INVENTORY
+	ray_cast.enabled = inventory_mode
+	if inventory_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		show()
 	else:
@@ -96,48 +96,4 @@ func _on_ViewportContainer_gui_input(event):
 		return
 	if event is InputEventMouseMotion:
 		var ray_vector = camera.project_ray_normal(event.position)
-		ray.cast_to = ray_vector * 4
-		select_inventory_item()
-	# TODO: join this logic with item detection in Player?
-	if Input.is_action_just_pressed("oat_environment_item_activation") and selected_inventory_item:
-		oat_interaction_signals.emit_signal(
-			"oat_environment_item_activated", selected_inventory_item.unique_name
-		)
-	if Input.is_action_just_pressed("oat_environment_item_activation") and collision_position:
-		oat_interaction_signals.emit_signal(
-			"oat_interactive_screen_activated", selected_inventory_item.unique_name, collision_position
-		)
-
-
-func select_inventory_item():
-	# TODO: join this logic with item detection in Player?
-	# TODO: consider replacing this logic with another signal
-	collision_position = null
-	# Clear single use collider
-	if selected_inventory_item and not selected_inventory_item.is_in_group("oat_interactive_item"):
-		selected_inventory_item = null
-	if ray.is_colliding():
-		var collider = ray.get_collider()
-		if collider == selected_inventory_item:
-			return
-		if collider.is_in_group("oat_interactive_item"):
-			if selected_inventory_item == null:
-				oat_interaction_signals.emit_signal(
-					"oat_environment_item_selected", collider.unique_name
-				)
-			selected_inventory_item = collider
-		elif selected_inventory_item:
-			oat_interaction_signals.emit_signal(
-				"oat_environment_item_deselected", selected_inventory_item.unique_name
-			)
-			selected_inventory_item = null
-		if collider.is_in_group("oat_interactive_screen"):
-			collision_position = ray.get_collision_point()
-			selected_inventory_item = collider
-		elif selected_inventory_item:
-			selected_inventory_item = null
-	elif selected_inventory_item:
-		oat_interaction_signals.emit_signal(
-			"oat_environment_item_deselected", selected_inventory_item.unique_name
-		)
-		selected_inventory_item = null
+		ray_cast.cast_to = ray_vector * 4

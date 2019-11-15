@@ -243,7 +243,6 @@ custom_constants/shadow_as_outline = 6
 align = 1
 
 [node name="Buttons" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.684699, 0.603889, -3.23314 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
@@ -258,7 +257,6 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.317859, 0.4, 0.07 )
 unique_name = "button_1"
 single_use = true
-inventory_item = false
 
 [node name="Model" type="MeshInstance" parent="Buttons/EnvItem1"]
 material_override = SubResource( 5 )
@@ -268,8 +266,6 @@ material/0 = null
 [node name="EnvItem2" parent="Buttons" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310117, 0.4, 0.07 )
 unique_name = "button_2"
-single_use = false
-inventory_item = false
 collision_shape = SubResource( 7 )
 
 [node name="Model" type="MeshInstance" parent="Buttons/EnvItem2"]
@@ -292,7 +288,6 @@ shape = SubResource( 11 )
 [node name="EnvironmentItemPen" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 0.734248, 0.678882, 2.96749e-08, 0, -4.37114e-08, 1, 0.678882, -0.734248, -3.2095e-08, 0.339202, 0.510065, 0.110681 )
 unique_name = "pen"
-single_use = false
 inventory_item = true
 collision_shape = SubResource( 12 )
 
@@ -304,7 +299,6 @@ material/0 = null
 [node name="EnvironmentItemBall" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544935, 0.338758 )
 unique_name = "ball"
-single_use = false
 inventory_item = true
 collision_shape = SubResource( 15 )
 
@@ -316,7 +310,6 @@ material/0 = null
 [node name="EnvironmentItemCube" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21538, 0.592958, -0.134755 )
 unique_name = "cube"
-single_use = false
 inventory_item = true
 
 [node name="Model" type="MeshInstance" parent="Table/EnvironmentItemCube"]
@@ -328,7 +321,6 @@ material/0 = null
 [node name="EnvironmentItemRemote" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321357, 0.558039, 0.296909 )
 unique_name = "remote"
-single_use = false
 inventory_item = true
 
 [node name="Model" type="MeshInstance" parent="Table/EnvironmentItemRemote"]
@@ -340,7 +332,6 @@ material/0 = null
 [node name="EnvironmentItemConsole" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.142401, 0.50627, -0.224718 )
 unique_name = "console"
-single_use = false
 inventory_item = true
 
 [node name="Model" type="MeshInstance" parent="Table/EnvironmentItemConsole"]
@@ -447,8 +438,6 @@ anims/pulse_light = SubResource( 38 )
 [node name="EnvironmentItem" parent="UseItemOnEnvDemo" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952203, 0 )
 unique_name = "prism"
-single_use = false
-inventory_item = false
 
 [node name="Model" type="MeshInstance" parent="UseItemOnEnvDemo/EnvironmentItem"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.016634, 0 )

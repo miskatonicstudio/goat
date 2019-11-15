@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://goat/RayCast3D.gd" type="Script" id=1]
+
+[node name="RayCast3D" type="RayCast"]
+cast_to = Vector3( 0, 0, -1 )
+script = ExtResource( 1 )
