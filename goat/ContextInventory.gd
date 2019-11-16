@@ -2,9 +2,13 @@ extends Control
 
 onready var item_container = $ScrollContainer/CenterContainer/HBoxContainer
 
+var environment_item_name = null
+
 
 func _ready():
 	oat_interaction_signals.connect("oat_game_mode_changed", self, "game_mode_changed")
+	oat_interaction_signals.connect("oat_environment_item_selected", self, "environment_item_selected")
+	oat_interaction_signals.connect("oat_environment_item_deselected", self, "environment_item_deselected")
 	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
 	oat_interaction_signals.connect("oat_inventory_item_removed", self, "item_removed")
 	oat_interaction_signals.connect("oat_inventory_item_replaced", self, "item_replaced")
@@ -16,6 +20,17 @@ func game_mode_changed(new_game_mode):
 		show()
 	else:
 		hide()
+
+
+func environment_item_selected(item_name):
+	if oat_interaction_signals.game_mode == oat_interaction_signals.GameMode.EXPLORING:
+		environment_item_name = item_name
+
+
+func environment_item_deselected(item_name):
+	if oat_interaction_signals.game_mode == oat_interaction_signals.GameMode.EXPLORING:
+		if item_name == environment_item_name:
+			environment_item_name = null
 
 
 func item_obtained(item_name, insert_after=null):
@@ -43,9 +58,10 @@ func item_replaced(item_name_replaced, item_name_replacing):
 
 
 func item_button_pressed(item_name):
-	oat_interaction_signals.set_context_inventory_item_name(item_name)
+	oat_interaction_signals.emit_signal("oat_inventory_item_used_on_environment", item_name, environment_item_name)
+	oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.EXPLORING)
 
 
 func _on_ExitButton_pressed():
 	# TODO: react also on Esc
-	oat_interaction_signals.set_context_inventory_item_name(null)
+	oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.EXPLORING)

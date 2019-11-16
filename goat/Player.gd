@@ -10,6 +10,7 @@ onready var inventory = $Inventory
 onready var context_inventory = $ContextInventory
 
 var movement_direction = Vector3()
+var environment_item_name = null
 
 
 func _ready():
@@ -17,6 +18,8 @@ func _ready():
 	context_inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	oat_interaction_signals.connect("oat_game_mode_changed", self, "game_mode_changed")
+	oat_interaction_signals.connect("oat_environment_item_selected", self, "environment_item_selected")
+	oat_interaction_signals.connect("oat_environment_item_deselected", self, "environment_item_deselected")
 
 
 func _physics_process(delta):
@@ -31,6 +34,12 @@ func _physics_process(delta):
 func _input(event):
 	if oat_interaction_signals.game_mode != oat_interaction_signals.GameMode.EXPLORING:
 		return
+	if Input.is_action_just_pressed("oat_toggle_inventory"):
+		oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.INVENTORY)
+		get_tree().set_input_as_handled()
+	if Input.is_action_just_pressed("oat_toggle_context_inventory") and environment_item_name:
+		oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.CONTEXT_INVENTORY)
+		get_tree().set_input_as_handled()
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
 	update_movement_direction()
@@ -78,3 +87,14 @@ func update_movement_direction():
 	movement_direction += camera_basis.x.normalized() * input_movement_vector.x
 	movement_direction.y = 0
 	movement_direction = movement_direction.normalized()
+
+
+func environment_item_selected(item_name):
+	if oat_interaction_signals.game_mode == oat_interaction_signals.GameMode.EXPLORING:
+		environment_item_name = item_name
+
+
+func environment_item_deselected(item_name):
+	if oat_interaction_signals.game_mode == oat_interaction_signals.GameMode.EXPLORING:
+		if item_name == environment_item_name:
+			environment_item_name = null

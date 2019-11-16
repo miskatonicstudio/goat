@@ -27,6 +27,7 @@ func _input(event):
 	if oat_interaction_signals.game_mode != oat_interaction_signals.GameMode.INVENTORY:
 		return
 	if Input.is_action_pressed("oat_inventory_item_rotation"):
+		# TODO: disable ray_cast when rotating
 		# TODO: turn this into another global mode?
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		if event is InputEventMouseMotion:
@@ -39,8 +40,12 @@ func _input(event):
 		
 			rotator.rotate_object_local(Vector3(0, 1, 0), angle_horizontal)
 			rotator.rotate_x(delta_angle_vertical)
-	if Input.is_action_just_released("oat_inventory_item_rotation"):
+	elif Input.is_action_just_released("oat_inventory_item_rotation"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	# TODO: use Esc too
+	elif Input.is_action_just_pressed("oat_toggle_inventory"):
+		oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.EXPLORING)
+		get_tree().set_input_as_handled()
 
 
 func game_mode_changed(new_game_mode):
