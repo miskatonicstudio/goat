@@ -33,7 +33,7 @@ func item_obtained(item_name, insert_after=null):
 	item_button.texture_normal = goat.inventory_items_textures[item_name]
 	item_button.connect("pressed", self, "item_button_pressed", [item_name, ])
 	item_button.connect("button_down", self, "item_button_down", [item_name, ])
-	item_button.add_to_group("oat_inventory_item_icon_" + item_name)
+	item_button.add_to_group("goat_inventory_item_icon_" + item_name)
 	
 	if insert_after:
 		item_container.add_child_below_node(insert_after, item_button)
@@ -49,7 +49,7 @@ func item_selected(item_name):
 
 
 func item_removed(item_name):
-	var removed_item = get_tree().get_nodes_in_group("oat_inventory_item_icon_" + item_name).pop_front()
+	var removed_item = get_tree().get_nodes_in_group("goat_inventory_item_icon_" + item_name).pop_front()
 	
 	if item_name == currently_selected_item:
 		var index = removed_item.get_index()
@@ -63,7 +63,7 @@ func item_removed(item_name):
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
-	var replaced_item = get_tree().get_nodes_in_group("oat_inventory_item_icon_" + item_name_replaced).pop_front()
+	var replaced_item = get_tree().get_nodes_in_group("goat_inventory_item_icon_" + item_name_replaced).pop_front()
 	item_obtained(item_name_replacing, replaced_item)
 	replaced_item.queue_free()
 	goat.emit_signal("oat_inventory_item_selected", item_name_replacing)

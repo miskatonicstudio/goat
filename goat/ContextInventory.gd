@@ -37,7 +37,7 @@ func item_obtained(item_name, insert_after=null):
 	var item_button = TextureButton.new()
 	item_button.texture_normal = goat.inventory_items_textures[item_name]
 	item_button.connect("pressed", self, "item_button_pressed", [item_name, ])
-	item_button.add_to_group("oat_context_inventory_item_icon_" + item_name)
+	item_button.add_to_group("goat_context_inventory_item_icon_" + item_name)
 	
 	if insert_after:
 		item_container.add_child_below_node(insert_after, item_button)
@@ -46,7 +46,7 @@ func item_obtained(item_name, insert_after=null):
 
 
 func item_removed(item_name):
-	var removed_item = get_tree().get_nodes_in_group("oat_context_inventory_item_icon_" + item_name).pop_front()
+	var removed_item = get_tree().get_nodes_in_group("goat_context_inventory_item_icon_" + item_name).pop_front()
 	removed_item.queue_free()
 
 

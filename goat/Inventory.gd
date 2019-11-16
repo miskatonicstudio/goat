@@ -61,8 +61,8 @@ func game_mode_changed(new_game_mode):
 
 func item_obtained(item_name, insert_after=null):
 	var obtained_item = goat.inventory_items_models[item_name].instance()
-	obtained_item.add_to_group("oat_inventory_item")
-	obtained_item.add_to_group("oat_inventory_item_" + item_name)
+	obtained_item.add_to_group("goat_inventory_item")
+	obtained_item.add_to_group("goat_inventory_item_" + item_name)
 	# TODO: find a better way to disable picking on non-selected items (hiding doesn't work)
 	obtained_item.translation.z = 999
 	obtained_item.hide()
@@ -74,21 +74,21 @@ func item_obtained(item_name, insert_after=null):
 
 
 func item_selected(item_name):
-	for item in get_tree().get_nodes_in_group("oat_inventory_item"):
+	for item in get_tree().get_nodes_in_group("goat_inventory_item"):
 		item.translation.z = 999
 		item.hide()
-	var selected_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front()
+	var selected_item = get_tree().get_nodes_in_group("goat_inventory_item_" + item_name).pop_front()
 	selected_item.translation.z = 0
 	selected_item.show()
 
 
 func item_removed(item_name):
-	var removed_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name).pop_front()
+	var removed_item = get_tree().get_nodes_in_group("goat_inventory_item_" + item_name).pop_front()
 	removed_item.queue_free()
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
-	var replaced_item = get_tree().get_nodes_in_group("oat_inventory_item_" + item_name_replaced).pop_front()
+	var replaced_item = get_tree().get_nodes_in_group("goat_inventory_item_" + item_name_replaced).pop_front()
 	item_obtained(item_name_replacing, replaced_item)
 	replaced_item.queue_free()
 
