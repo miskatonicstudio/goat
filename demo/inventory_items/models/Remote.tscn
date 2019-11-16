@@ -1,8 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://demo/inventory_items/models/Remote.gd" type="Script" id=1]
-[ext_resource path="res://goat/InteractiveItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/inventory_items/models/movie.ogv" type="VideoStream" id=3]
+
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.501961, 0.501961, 0.501961, 1 )

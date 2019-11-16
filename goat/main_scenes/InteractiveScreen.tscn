@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://goat/InteractiveScreen.gd" type="Script" id=1]
+[ext_resource path="res://goat/main_scenes/InteractiveScreen.gd" type="Script" id=1]
+
 
 [sub_resource type="ConvexPolygonShape" id=1]
 margin = 0.001

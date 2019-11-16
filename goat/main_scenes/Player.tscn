@@ -1,9 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://goat/Player.gd" type="Script" id=1]
-[ext_resource path="res://goat/RayCast3D.tscn" type="PackedScene" id=2]
-[ext_resource path="res://goat/Inventory.tscn" type="PackedScene" id=3]
-[ext_resource path="res://goat/ContextInventory.tscn" type="PackedScene" id=4]
+[ext_resource path="res://goat/main_scenes/Player.gd" type="Script" id=1]
+[ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/helper_scenes/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/helper_scenes/ContextInventory.tscn" type="PackedScene" id=4]
+
+
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.3
