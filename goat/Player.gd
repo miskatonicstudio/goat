@@ -71,13 +71,13 @@ func update_movement_direction():
 	
 	var input_movement_vector = Vector2()
 	
-	if Input.is_action_pressed("oat_movement_forward"):
+	if Input.is_action_pressed("goat_move_player_forward"):
 		input_movement_vector.y += 1
-	if Input.is_action_pressed("oat_movement_backward"):
+	if Input.is_action_pressed("goat_move_player_backward"):
 		input_movement_vector.y -= 1
-	if Input.is_action_pressed("oat_movement_left"):
+	if Input.is_action_pressed("goat_move_player_left"):
 		input_movement_vector.x -= 1
-	if Input.is_action_pressed("oat_movement_right"):
+	if Input.is_action_pressed("goat_move_player_right"):
 		input_movement_vector.x = 1
 	
 	input_movement_vector = input_movement_vector.normalized()
