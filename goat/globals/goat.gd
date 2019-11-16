@@ -1,11 +1,9 @@
 extends Node
 
+# Signals
 signal oat_environment_item_selected (item_name)
-# TODO: do not send "deselected" when obtained
 signal oat_environment_item_deselected (item_name)
 signal oat_environment_item_activated (item_name)
-# TODO: signal for permanent deactivation?
-# TODO: signal for reactivation (single use => deactivated => reactivated, or disabled => enabled)
 
 # TODO: rename this to "inventory_item" added or obtained
 signal oat_environment_item_obtained (item_name)
@@ -18,7 +16,6 @@ signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
 
 signal oat_interactive_screen_activated (screen_name, position)
 
-# TODO: send also old game mode
 signal game_mode_changed (new_game_mode)
 
 # Enumerations
@@ -32,9 +29,7 @@ enum GameMode {
 	GAME_MODE_CONTEXT_INVENTORY
 }
 
-# TODO: use setget for game_mode, raise exception when setting manually?
 export (GameMode) var game_mode = GAME_MODE_EXPLORING
-# TODO: add a nice method to add inventory items here
 export (Dictionary) var inventory_items_textures = {}
 export (Dictionary) var inventory_items_models = {}
 
@@ -42,7 +37,6 @@ var monologue_player = null
 
 
 func _ready():
-	# TODO: send detailed signals and allow monologue player to easily connect to them
 	monologue_player = AudioStreamPlayer.new()
 	add_child(monologue_player)
 	connect("game_mode_changed", self, "game_mode_changed")
@@ -56,7 +50,6 @@ func game_mode_changed(new_game_mode):
 	game_mode = new_game_mode
 
 
-# TODO: send individual signals for every event, with no args, and remove arg1
 func play_monologue(arg1, sound):
 	if monologue_player.playing:
 		monologue_player.stop()

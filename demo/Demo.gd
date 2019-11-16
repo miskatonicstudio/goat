@@ -21,12 +21,9 @@ func _ready():
 	goat.connect("oat_inventory_item_used_on_inventory", self, "use_item_on_inventory")
 	goat.connect("oat_inventory_item_used_on_environment", self, "use_item_on_environment")
 	
-	# TODO: do not send item selected signal when item is first added, instead send it when inventory is open?
-	# TODO: use other sounds for demo scene, these are annoying
 #	goat.connect_monologue("oat_inventory_item_selected", load("res://demo/sounds/short.ogg"))
 #	goat.connect_monologue("oat_inventory_item_used", load("res://demo/sounds/long.ogg"))
 	
-	# TODO: put it in a custom global file
 	goat.inventory_items_textures["pen"] = load("res://demo/inventory_items/icons/pen.png")
 	goat.inventory_items_textures["ball"] = load("res://demo/inventory_items/icons/ball.png")
 	goat.inventory_items_textures["ball_on_a_stick"] = load("res://demo/inventory_items/icons/ball_on_a_stick.png")
@@ -57,7 +54,6 @@ func notify2(item_name1, item_name2, text):
 
 
 func use_item_on_inventory(item_name1, item_name2):
-	# TODO: extract logic of joining objects?
 	if item_name1 == "pen" and item_name2 == "ball" or item_name1 == "ball" and item_name2 == "pen":
 		goat.emit_signal("oat_inventory_item_replaced", item_name2, "ball_on_a_stick")
 		goat.emit_signal("oat_inventory_item_removed", item_name1)

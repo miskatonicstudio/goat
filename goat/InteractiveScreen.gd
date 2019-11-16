@@ -20,7 +20,6 @@ func screen_activated(screen_name, position):
 		return
 	var local_position = screen_surface.to_local(position)
 	var screen_coordinates = Vector2(local_position.x + 0.5, 0.5 - local_position.y) * viewport.size
-	# TODO: make it work also with touch screen devices?
 	var ev = InputEventMouseButton.new()
 	ev.button_index = BUTTON_LEFT
 	ev.global_position = screen_coordinates

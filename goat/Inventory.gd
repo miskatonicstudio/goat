@@ -1,6 +1,5 @@
 extends Control
 
-# TODO: read this from settings
 export var ROTATION_SENSITIVITY_X = 1.0
 export var ROTATION_SENSITIVITY_Y = 1.0
 
@@ -9,7 +8,6 @@ onready var viewport = $CenterContainer/ViewportContainer/Viewport
 onready var ray_cast = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
 onready var camera = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera
 onready var rotator = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Rotator
-# TODO: keep rotation value separately for each item?
 var current_angle_vertical = 0
 
 
@@ -27,8 +25,6 @@ func _input(event):
 	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	if Input.is_action_pressed("goat_rotate_inventory"):
-		# TODO: disable ray_cast when rotating
-		# TODO: turn this into another global mode?
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		if event is InputEventMouseMotion:
 			var angles = event.relative
@@ -42,7 +38,6 @@ func _input(event):
 			rotator.rotate_x(delta_angle_vertical)
 	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	# TODO: use Esc too
 	elif Input.is_action_just_pressed("goat_toggle_inventory"):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 		get_tree().set_input_as_handled()
@@ -62,10 +57,8 @@ func item_obtained(item_name, insert_after=null):
 	var obtained_item = goat.inventory_items_models[item_name].instance()
 	obtained_item.add_to_group("goat_inventory_item")
 	obtained_item.add_to_group("goat_inventory_item_" + item_name)
-	# TODO: find a better way to disable picking on non-selected items (hiding doesn't work)
 	obtained_item.translation.z = 999
 	obtained_item.hide()
-	# TODO: is this necessary for 3D?
 	if insert_after:
 		rotator.add_child_below_node(insert_after, obtained_item)
 	else:

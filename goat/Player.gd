@@ -1,6 +1,5 @@
 extends KinematicBody
 
-# TODO: add settings and signals to change mouse sensitivity (but not speed)
 export (float) var MOUSE_SENSITIVITY = 0.3
 export (float) var SPEED = 3.0
 

@@ -65,5 +65,4 @@ func item_button_pressed(item_name):
 
 
 func _on_ExitButton_pressed():
-	# TODO: react also on Esc
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	goat.emit_signal("game_modre_changed", goat.GAME_MODE_EXPLORING)

@@ -53,7 +53,6 @@ func item_removed(item_name):
 	
 	if item_name == currently_selected_item:
 		var index = removed_item.get_index()
-		# TODO: handle empty inventory case!
 		if index + 1 < item_container.get_child_count():
 			index = index + 1
 		else:
@@ -77,8 +76,6 @@ func item_button_pressed(item_name):
 func item_button_down(item_name):
 	currently_dragged_item = item_name
 	var texture = goat.inventory_items_textures[item_name]
-	# TODO: read texture size from config
-	# TODO: use settings signals for setting cursor?
 	Input.set_custom_mouse_cursor(texture, Input.CURSOR_ARROW, Vector2(32, 32))
 
 

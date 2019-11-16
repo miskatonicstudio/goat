@@ -1,6 +1,5 @@
 extends RayCast
 
-# TODO: handle deselecting item from another scene (setting it to null changes the value in emitted signal)
 var currently_selected_item_name = null
 var collision_point = null
 
