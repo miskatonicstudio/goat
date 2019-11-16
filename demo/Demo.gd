@@ -4,7 +4,7 @@ var door_open = false
 
 
 func _ready():
-	goat.connect("oat_game_mode_changed", self, "notify", ["Game mode changed: "])
+	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
 	goat.connect("oat_environment_item_selected", self, "notify", ["Selected: "])
 	goat.connect("oat_environment_item_deselected", self, "notify", ["Deselected: "])
 	goat.connect("oat_environment_item_activated", self, "notify", ["Activated: "])

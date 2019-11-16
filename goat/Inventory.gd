@@ -16,7 +16,7 @@ var current_angle_vertical = 0
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
 	viewport.own_world = true
-	goat.connect("oat_game_mode_changed", self, "game_mode_changed")
+	goat.connect("game_mode_changed", self, "game_mode_changed")
 	goat.connect("oat_environment_item_obtained", self, "item_obtained")
 	goat.connect("oat_inventory_item_selected", self, "item_selected")
 	goat.connect("oat_inventory_item_removed", self, "item_removed")
@@ -24,7 +24,7 @@ func _ready():
 
 
 func _input(event):
-	if goat.game_mode != goat.GameMode.INVENTORY:
+	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	if Input.is_action_pressed("oat_inventory_item_rotation"):
 		# TODO: disable ray_cast when rotating
@@ -44,13 +44,13 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	# TODO: use Esc too
 	elif Input.is_action_just_pressed("oat_toggle_inventory"):
-		goat.emit_signal("oat_game_mode_changed", goat.GameMode.EXPLORING)
+		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 		get_tree().set_input_as_handled()
 
 
 func game_mode_changed(new_game_mode):
 	# TODO: move this logic to oat global?
-	var inventory_mode = new_game_mode == goat.GameMode.INVENTORY
+	var inventory_mode = new_game_mode == goat.GAME_MODE_INVENTORY
 	ray_cast.enabled = inventory_mode
 	if inventory_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
@@ -94,7 +94,7 @@ func item_replaced(item_name_replaced, item_name_replacing):
 
 
 func _on_ViewportContainer_gui_input(event):
-	if goat.game_mode != goat.GameMode.INVENTORY:
+	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	# We are currently rotating the item
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

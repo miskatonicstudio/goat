@@ -18,18 +18,22 @@ signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
 
 signal oat_interactive_screen_activated (screen_name, position)
 
-# TODO: send also old game mode, move all logic to global
-signal oat_game_mode_changed (new_game_mode)
+# TODO: send also old game mode
+signal game_mode_changed (new_game_mode)
 
-# TODO: fix enum (there are no hints in editor)
+# Enumerations
+const GAME_MODE_EXPLORING = 0
+const GAME_MODE_INVENTORY = 1
+const GAME_MODE_CONTEXT_INVENTORY = 2
+
 enum GameMode {
-	EXPLORING,
-	INVENTORY,
-	CONTEXT_INVENTORY
+	GAME_MODE_EXPLORING,
+	GAME_MODE_INVENTORY,
+	GAME_MODE_CONTEXT_INVENTORY
 }
 
 # TODO: use setget for game_mode, raise exception when setting manually?
-export (GameMode) var game_mode = GameMode.EXPLORING
+export (GameMode) var game_mode = GAME_MODE_EXPLORING
 # TODO: add a nice method to add inventory items here
 export (Dictionary) var inventory_items_textures = {}
 export (Dictionary) var inventory_items_models = {}
@@ -41,7 +45,7 @@ func _ready():
 	# TODO: send detailed signals and allow monologue player to easily connect to them
 	monologue_player = AudioStreamPlayer.new()
 	add_child(monologue_player)
-	connect("oat_game_mode_changed", self, "game_mode_changed")
+	connect("game_mode_changed", self, "game_mode_changed")
 
 
 func connect_monologue(signal_name, sound):

@@ -17,13 +17,13 @@ func _ready():
 	inventory.hide()
 	context_inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	goat.connect("oat_game_mode_changed", self, "game_mode_changed")
+	goat.connect("game_mode_changed", self, "game_mode_changed")
 	goat.connect("oat_environment_item_selected", self, "environment_item_selected")
 	goat.connect("oat_environment_item_deselected", self, "environment_item_deselected")
 
 
 func _physics_process(delta):
-	if goat.game_mode != goat.GameMode.EXPLORING:
+	if goat.game_mode != goat.GAME_MODE_EXPLORING:
 		return
 	if movement_direction:
 		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
@@ -32,13 +32,13 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if goat.game_mode != goat.GameMode.EXPLORING:
+	if goat.game_mode != goat.GAME_MODE_EXPLORING:
 		return
 	if Input.is_action_just_pressed("oat_toggle_inventory"):
-		goat.emit_signal("oat_game_mode_changed", goat.GameMode.INVENTORY)
+		goat.emit_signal("game_mode_changed", goat.GAME_MODE_INVENTORY)
 		get_tree().set_input_as_handled()
 	if Input.is_action_just_pressed("oat_toggle_context_inventory") and environment_item_name:
-		goat.emit_signal("oat_game_mode_changed", goat.GameMode.CONTEXT_INVENTORY)
+		goat.emit_signal("game_mode_changed", goat.GAME_MODE_CONTEXT_INVENTORY)
 		get_tree().set_input_as_handled()
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
@@ -46,12 +46,12 @@ func _input(event):
 
 
 func game_mode_changed(new_game_mode):
-	var exploring = new_game_mode == goat.GameMode.EXPLORING
+	var exploring = new_game_mode == goat.GAME_MODE_EXPLORING
 	$Scope.visible = exploring
 	ray_cast.enabled = exploring
 	if exploring:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	camera.environment.dof_blur_far_enabled = new_game_mode == goat.GameMode.INVENTORY
+	camera.environment.dof_blur_far_enabled = new_game_mode == goat.GAME_MODE_INVENTORY
 
 
 func rotate_camera(relative_movement):
@@ -90,11 +90,11 @@ func update_movement_direction():
 
 
 func environment_item_selected(item_name):
-	if goat.game_mode == goat.GameMode.EXPLORING:
+	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
 
 
 func environment_item_deselected(item_name):
-	if goat.game_mode == goat.GameMode.EXPLORING:
+	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		if item_name == environment_item_name:
 			environment_item_name = null
