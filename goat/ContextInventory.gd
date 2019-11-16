@@ -52,7 +52,7 @@ func item_removed(item_name):
 
 func item_replaced(item_name_replaced, item_name_replacing):
 	var replaced_item = get_tree().get_nodes_in_group(
-		"oat_context_inventory_item_icon_" + item_name_replaced
+		"goat_context_inventory_item_icon_" + item_name_replaced
 	).pop_front()
 	item_obtained(item_name_replacing, replaced_item)
 	replaced_item.queue_free()

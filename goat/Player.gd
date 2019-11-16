@@ -34,10 +34,10 @@ func _physics_process(delta):
 func _input(event):
 	if goat.game_mode != goat.GAME_MODE_EXPLORING:
 		return
-	if Input.is_action_just_pressed("oat_toggle_inventory"):
+	if Input.is_action_just_pressed("goat_toggle_inventory"):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_INVENTORY)
 		get_tree().set_input_as_handled()
-	if Input.is_action_just_pressed("oat_toggle_context_inventory") and environment_item_name:
+	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_CONTEXT_INVENTORY)
 		get_tree().set_input_as_handled()
 	if event is InputEventMouseMotion:

@@ -15,7 +15,7 @@ func _ready():
 
 
 func _input(event):
-	if currently_dragged_item and Input.is_action_just_released("oat_inventory_item_dragging"):
+	if currently_dragged_item and Input.is_action_just_released("goat_drag_inventory"):
 		Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
 		if (
 			event is InputEventMouse and

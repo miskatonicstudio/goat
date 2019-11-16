@@ -26,7 +26,7 @@ func _ready():
 func _input(event):
 	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
-	if Input.is_action_pressed("oat_inventory_item_rotation"):
+	if Input.is_action_pressed("goat_rotate_inventory"):
 		# TODO: disable ray_cast when rotating
 		# TODO: turn this into another global mode?
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -40,16 +40,15 @@ func _input(event):
 		
 			rotator.rotate_object_local(Vector3(0, 1, 0), angle_horizontal)
 			rotator.rotate_x(delta_angle_vertical)
-	elif Input.is_action_just_released("oat_inventory_item_rotation"):
+	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	# TODO: use Esc too
-	elif Input.is_action_just_pressed("oat_toggle_inventory"):
+	elif Input.is_action_just_pressed("goat_toggle_inventory"):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 		get_tree().set_input_as_handled()
 
 
 func game_mode_changed(new_game_mode):
-	# TODO: move this logic to oat global?
 	var inventory_mode = new_game_mode == goat.GAME_MODE_INVENTORY
 	ray_cast.enabled = inventory_mode
 	if inventory_mode:

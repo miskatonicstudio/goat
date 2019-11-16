@@ -8,9 +8,7 @@ var collision_point = null
 func _input(event):
 	if not enabled:
 		return
-	# TODO: rename to item activation
-	# TODO: consider using multiple actions for different raycast types?
-	if Input.is_action_just_pressed("oat_environment_item_activation") and currently_selected_item_name:
+	if Input.is_action_just_pressed("goat_interact") and currently_selected_item_name:
 		if collision_point:
 			# The item is a screen
 			goat.emit_signal("oat_interactive_screen_activated", currently_selected_item_name, collision_point)
