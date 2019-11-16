@@ -22,8 +22,9 @@ func _ready():
 	goat.connect("oat_inventory_item_used_on_environment", self, "use_item_on_environment")
 	
 	# TODO: do not send item selected signal when item is first added, instead send it when inventory is open?
-	goat.connect_monologue("oat_inventory_item_selected", load("res://demo/sounds/short.ogg"))
-	goat.connect_monologue("oat_inventory_item_used", load("res://demo/sounds/long.ogg"))
+	# TODO: use other sounds for demo scene, these are annoying
+#	goat.connect_monologue("oat_inventory_item_selected", load("res://demo/sounds/short.ogg"))
+#	goat.connect_monologue("oat_inventory_item_used", load("res://demo/sounds/long.ogg"))
 	
 	# TODO: put it in a custom global file
 	goat.inventory_items_textures["pen"] = load("res://demo/inventory_items/icons/pen.png")
