@@ -43,6 +43,6 @@ func activate(item_name):
 			remove_from_group("goat_interactive_item")
 			goat.emit_signal("oat_environment_item_deselected", item_name)
 		if inventory_item:
-			goat.emit_signal("oat_environment_item_obtained", unique_name)
+			goat.emit_signal("inventory_item_obtained", unique_name)
 			get_parent().remove_child(self)
 			queue_free()

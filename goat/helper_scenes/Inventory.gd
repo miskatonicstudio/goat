@@ -15,7 +15,7 @@ func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
 	viewport.own_world = true
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	goat.connect("oat_environment_item_obtained", self, "item_obtained")
+	goat.connect("inventory_item_obtained", self, "item_obtained")
 	goat.connect("oat_inventory_item_selected", self, "item_selected")
 	goat.connect("oat_inventory_item_removed", self, "item_removed")
 	goat.connect("oat_inventory_item_replaced", self, "item_replaced")

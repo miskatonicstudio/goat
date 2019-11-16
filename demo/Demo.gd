@@ -8,7 +8,7 @@ func _ready():
 	goat.connect("oat_environment_item_selected", self, "notify", ["Selected: "])
 	goat.connect("oat_environment_item_deselected", self, "notify", ["Deselected: "])
 	goat.connect("oat_environment_item_activated", self, "notify", ["Activated: "])
-	goat.connect("oat_environment_item_obtained", self, "notify", ["Obtained: "])
+	goat.connect("inventory_item_obtained", self, "notify", ["Obtained: "])
 	goat.connect("oat_inventory_item_selected", self, "notify", ["Selected: "])
 	goat.connect("oat_inventory_item_removed", self, "notify", ["Removed: "])
 	goat.connect("oat_inventory_item_used", self, "notify", ["Used: "])
