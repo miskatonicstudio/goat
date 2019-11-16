@@ -4,11 +4,6 @@
 [ext_resource path="res://goat/EnvironmentItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/inventory_items/models/movie.ogv" type="VideoStream" id=3]
 
-
-
-
-
-
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 

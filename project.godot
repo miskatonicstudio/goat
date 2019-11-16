@@ -20,7 +20,7 @@ run/main_scene="res://demo/Demo.tscn"
 
 [autoload]
 
-oat_interaction_signals="*res://goat/signals/oat_interaction_signals.gd"
+goat="*res://goat/globals/goat.gd"
 
 [input]
 

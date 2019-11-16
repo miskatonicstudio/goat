@@ -6,16 +6,16 @@ var environment_item_name = null
 
 
 func _ready():
-	oat_interaction_signals.connect("oat_game_mode_changed", self, "game_mode_changed")
-	oat_interaction_signals.connect("oat_environment_item_selected", self, "environment_item_selected")
-	oat_interaction_signals.connect("oat_environment_item_deselected", self, "environment_item_deselected")
-	oat_interaction_signals.connect("oat_environment_item_obtained", self, "item_obtained")
-	oat_interaction_signals.connect("oat_inventory_item_removed", self, "item_removed")
-	oat_interaction_signals.connect("oat_inventory_item_replaced", self, "item_replaced")
+	goat.connect("oat_game_mode_changed", self, "game_mode_changed")
+	goat.connect("oat_environment_item_selected", self, "environment_item_selected")
+	goat.connect("oat_environment_item_deselected", self, "environment_item_deselected")
+	goat.connect("oat_environment_item_obtained", self, "item_obtained")
+	goat.connect("oat_inventory_item_removed", self, "item_removed")
+	goat.connect("oat_inventory_item_replaced", self, "item_replaced")
 
 
 func game_mode_changed(new_game_mode):
-	if new_game_mode == oat_interaction_signals.GameMode.CONTEXT_INVENTORY:
+	if new_game_mode == goat.GameMode.CONTEXT_INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		show()
 	else:
@@ -23,19 +23,19 @@ func game_mode_changed(new_game_mode):
 
 
 func environment_item_selected(item_name):
-	if oat_interaction_signals.game_mode == oat_interaction_signals.GameMode.EXPLORING:
+	if goat.game_mode == goat.GameMode.EXPLORING:
 		environment_item_name = item_name
 
 
 func environment_item_deselected(item_name):
-	if oat_interaction_signals.game_mode == oat_interaction_signals.GameMode.EXPLORING:
+	if goat.game_mode == goat.GameMode.EXPLORING:
 		if item_name == environment_item_name:
 			environment_item_name = null
 
 
 func item_obtained(item_name, insert_after=null):
 	var item_button = TextureButton.new()
-	item_button.texture_normal = oat_interaction_signals.inventory_items_textures[item_name]
+	item_button.texture_normal = goat.inventory_items_textures[item_name]
 	item_button.connect("pressed", self, "item_button_pressed", [item_name, ])
 	item_button.add_to_group("oat_context_inventory_item_icon_" + item_name)
 	
@@ -54,14 +54,14 @@ func item_replaced(item_name_replaced, item_name_replacing):
 	var replaced_item = get_tree().get_nodes_in_group("oat_context_inventory_item_icon_" + item_name_replaced).pop_front()
 	item_obtained(item_name_replacing, replaced_item)
 	replaced_item.queue_free()
-	oat_interaction_signals.emit_signal("oat_context_inventory_item_selected", item_name_replacing)
+	goat.emit_signal("oat_context_inventory_item_selected", item_name_replacing)
 
 
 func item_button_pressed(item_name):
-	oat_interaction_signals.emit_signal("oat_inventory_item_used_on_environment", item_name, environment_item_name)
-	oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.EXPLORING)
+	goat.emit_signal("oat_inventory_item_used_on_environment", item_name, environment_item_name)
+	goat.emit_signal("oat_game_mode_changed", goat.GameMode.EXPLORING)
 
 
 func _on_ExitButton_pressed():
 	# TODO: react also on Esc
-	oat_interaction_signals.emit_signal("oat_game_mode_changed", oat_interaction_signals.GameMode.EXPLORING)
+	goat.emit_signal("oat_game_mode_changed", goat.GameMode.EXPLORING)

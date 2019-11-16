@@ -243,6 +243,7 @@ custom_constants/shadow_as_outline = 6
 align = 1
 
 [node name="Buttons" type="MeshInstance" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.684699, 0.603889, -3.23314 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
@@ -274,6 +275,7 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="Table" type="MeshInstance" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, -1.5 )
 material_override = SubResource( 9 )
 mesh = SubResource( 10 )
@@ -396,6 +398,7 @@ mesh = SubResource( 33 )
 material/0 = null
 
 [node name="UseItemOnEnvDemo" type="Spatial" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21016, 0, 0 )
 
 [node name="Stand" type="MeshInstance" parent="UseItemOnEnvDemo"]

@@ -17,9 +17,9 @@ func _ready():
 	model.material_override.emission = Color.white
 	model.material_override.emission_energy = 0.0
 	
-	oat_interaction_signals.connect("oat_environment_item_selected", self, "select")
-	oat_interaction_signals.connect("oat_environment_item_deselected", self, "deselect")
-	oat_interaction_signals.connect("oat_environment_item_activated", self, "activate")
+	goat.connect("oat_environment_item_selected", self, "select")
+	goat.connect("oat_environment_item_deselected", self, "deselect")
+	goat.connect("oat_environment_item_activated", self, "activate")
 
 
 func set_collision_shape(new_shape):
@@ -44,8 +44,8 @@ func activate(item_name):
 			deselect(item_name)
 			remove_from_group("goat_interactive_item")
 			# TODO: prevent deselecting twice, here and in RayCast3D
-			oat_interaction_signals.emit_signal("oat_environment_item_deselected", item_name)
+			goat.emit_signal("oat_environment_item_deselected", item_name)
 		if inventory_item:
-			oat_interaction_signals.emit_signal("oat_environment_item_obtained", unique_name)
+			goat.emit_signal("oat_environment_item_obtained", unique_name)
 			get_parent().remove_child(self)
 			queue_free()

@@ -12,7 +12,7 @@ func _ready():
 	viewport.add_child(content)
 	viewport.size = content.rect_size
 	screen_surface.material_override.albedo_texture = viewport.get_texture()
-	oat_interaction_signals.connect("oat_interactive_screen_activated", self, "screen_activated")
+	goat.connect("oat_interactive_screen_activated", self, "screen_activated")
 
 
 func screen_activated(screen_name, position):
