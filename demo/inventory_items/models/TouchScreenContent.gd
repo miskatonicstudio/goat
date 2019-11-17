@@ -3,10 +3,6 @@ extends Control
 onready var dot = $Dot
 
 
-func _ready():
-	pass # Replace with function body.
-
-
 func _on_ButtonDown_pressed():
 	dot.rect_position.y += 10
 
