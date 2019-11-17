@@ -2,7 +2,6 @@
 
 [ext_resource path="res://goat/main_scenes/InteractiveScreen.gd" type="Script" id=1]
 
-
 [sub_resource type="ConvexPolygonShape" id=1]
 margin = 0.001
 points = PoolVector3Array( -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0 )
@@ -25,4 +24,5 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Viewport" type="Viewport" parent="."]
+own_world = true
 render_target_v_flip = true

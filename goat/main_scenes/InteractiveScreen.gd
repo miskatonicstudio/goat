@@ -11,6 +11,7 @@ func _ready():
 	remove_child(content)
 	viewport.add_child(content)
 	viewport.size = content.rect_size
+	screen_surface.material_override = screen_surface.material_override.duplicate(true)
 	screen_surface.material_override.albedo_texture = viewport.get_texture()
 	goat.connect("oat_interactive_screen_activated", self, "screen_activated")
 
