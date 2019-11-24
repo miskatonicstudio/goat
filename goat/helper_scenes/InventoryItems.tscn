@@ -130,19 +130,17 @@ enabled_focus_mode = 1
 clip_text = true
 
 [node name="BottomBar" type="HBoxContainer" parent="."]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -66.0
-margin_top = -64.0
-margin_right = 66.0
+margin_top = -68.0
 alignment = 1
 
 [node name="BackButton" type="Button" parent="BottomBar"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
+margin_left = 442.0
+margin_right = 510.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 68, 68 )
 focus_mode = 0
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
@@ -152,10 +150,10 @@ enabled_focus_mode = 0
 text = "Back"
 
 [node name="UseButton" type="Button" parent="BottomBar"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
+margin_left = 514.0
+margin_right = 582.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 68, 68 )
 focus_mode = 0
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
