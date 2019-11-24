@@ -17,8 +17,8 @@ func _ready():
 	context_inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	goat.connect("oat_environment_item_selected", self, "environment_item_selected")
-	goat.connect("oat_environment_item_deselected", self, "environment_item_deselected")
+	goat.connect("environment_item_selected", self, "environment_item_selected")
+	goat.connect("environment_item_deselected", self, "environment_item_deselected")
 
 
 func _physics_process(delta):

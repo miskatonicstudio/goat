@@ -4,7 +4,6 @@
 [ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/helper_scenes/InventoryItems.tscn" type="PackedScene" id=3]
 
-
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,6 +16,7 @@ anchor_bottom = 1.0
 mouse_filter = 1
 
 [node name="ViewportContainer" type="ViewportContainer" parent="CenterContainer"]
+editor/display_folded = true
 margin_left = 212.0
 margin_right = 812.0
 margin_bottom = 600.0
@@ -31,6 +31,7 @@ render_target_update_mode = 3
 [node name="Inventory3D" type="Spatial" parent="CenterContainer/ViewportContainer/Viewport"]
 
 [node name="Camera" type="Camera" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
+editor/display_folded = true
 current = true
 far = 5.0
 

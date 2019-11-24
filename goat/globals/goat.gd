@@ -1,18 +1,18 @@
 extends Node
 
 # Signals
-signal oat_environment_item_selected (item_name)
-signal oat_environment_item_deselected (item_name)
-signal oat_environment_item_activated (item_name)
-signal oat_interactive_screen_activated (screen_name, position)
+signal environment_item_selected (item_name)
+signal environment_item_deselected (item_name)
+signal environment_item_activated (item_name)
+signal interactive_screen_activated (screen_name, position)
 
 signal inventory_item_obtained (item_name)
-signal oat_inventory_item_selected (item_name)
-signal oat_inventory_item_used (item_name)
-signal oat_inventory_item_removed (item_name)
-signal oat_inventory_item_replaced (item_name_replaced, item_name_replacing)
-signal oat_inventory_item_used_on_inventory (item_name, inventory_item_name)
-signal oat_inventory_item_used_on_environment (item_name, environment_item_name)
+signal inventory_item_selected (item_name)
+signal inventory_item_removed (item_name)
+signal inventory_item_replaced (item_name_replaced, item_name_replacing)
+signal inventory_item_used (item_name)
+signal inventory_item_used_on_inventory (item_name, inventory_item_name)
+signal inventory_item_used_on_environment (item_name, environment_item_name)
 
 signal game_mode_changed (new_game_mode)
 

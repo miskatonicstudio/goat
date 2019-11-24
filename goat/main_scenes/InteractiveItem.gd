@@ -15,9 +15,9 @@ func _ready():
 	model.material_override.emission = Color.white
 	model.material_override.emission_energy = 0.0
 	
-	goat.connect("oat_environment_item_selected", self, "select")
-	goat.connect("oat_environment_item_deselected", self, "deselect")
-	goat.connect("oat_environment_item_activated", self, "activate")
+	goat.connect("environment_item_selected", self, "select")
+	goat.connect("environment_item_deselected", self, "deselect")
+	goat.connect("environment_item_activated", self, "activate")
 
 
 func set_collision_shape(new_shape):
@@ -41,7 +41,7 @@ func activate(item_name):
 		if single_use:
 			deselect(item_name)
 			remove_from_group("goat_interactive_item")
-			goat.emit_signal("oat_environment_item_deselected", item_name)
+			goat.emit_signal("environment_item_deselected", item_name)
 		if inventory_item:
 			goat.emit_signal("inventory_item_obtained", unique_name)
 			get_parent().remove_child(self)
