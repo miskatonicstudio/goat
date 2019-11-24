@@ -60,13 +60,17 @@ func item_obtained(item_name):
 
 func item_selected(item_name):
 	if currently_selected_item == null:
-		var item_button = get_tree().get_nodes_in_group("goat_inventory_item_button_" + item_name).pop_front()
+		var item_button = get_tree().get_nodes_in_group(
+			"goat_inventory_item_button_" + item_name
+		).pop_front()
 		item_button.pressed = true
 	currently_selected_item = item_name
 
 
 func item_removed(item_name):
-	var removed_item = get_tree().get_nodes_in_group("goat_inventory_item_button_" + item_name).pop_front()
+	var removed_item = get_tree().get_nodes_in_group(
+		"goat_inventory_item_button_" + item_name
+	).pop_front()
 	
 	# Select a new item if the current one was removed
 	if item_name == currently_selected_item:
@@ -84,7 +88,10 @@ func item_removed(item_name):
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
-	var replaced_item = get_tree().get_nodes_in_group("goat_inventory_item_button_" + item_name_replaced).pop_front()
+	var replaced_item = get_tree().get_nodes_in_group(
+		"goat_inventory_item_button_" + item_name_replaced
+	).pop_front()
+	
 	var insert_position = replaced_item.get_index()
 	add_item_button(item_name_replacing, insert_position)
 	item_button_container.remove_child(replaced_item)
@@ -112,7 +119,7 @@ func _on_BackButton_pressed():
 	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 
 
-func add_item_button(item_name, insert_position=null):
+func add_item_button(item_name=null, insert_position=null):
 	if insert_position == null:
 		insert_position = number_of_items
 	
@@ -123,7 +130,6 @@ func add_item_button(item_name, insert_position=null):
 	item_button.focus_mode = Control.FOCUS_NONE
 	item_button.group = item_button_group
 	
-	item_button.set("custom_styles/focus", INVENTORY_BUTTON_STYLE_FOCUS)
 	item_button.set("custom_styles/pressed", INVENTORY_BUTTON_STYLE_FOCUS)
 	item_button.set("custom_styles/normal", INVENTORY_BUTTON_STYLE_NORMAL)
 	item_button.set("custom_styles/hover", INVENTORY_BUTTON_STYLE_HOVER)
@@ -144,7 +150,7 @@ func add_item_button(item_name, insert_position=null):
 func adjust_buttons():
 	# Add buttons if there are some missing
 	while item_button_container.get_child_count() < CAPACITY:
-		add_item_button(null)
+		add_item_button()
 	# Get rid of excess items
 	while item_button_container.get_child_count() > CAPACITY:
 		var last_button = item_button_container.get_children().pop_back()
