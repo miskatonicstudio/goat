@@ -455,7 +455,7 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.03457, -0.00655839 
 visible = false
 
 [node name="InteractiveScreen" parent="." instance=ExtResource( 5 )]
-transform = Transform( -0.491512, 0, -0.912268, 0, 0.8, 0, 1.09472, 0, -0.409593, 5.27675, 1.21506, -0.520952 )
+transform = Transform( 1.0865, 0, -0.424514, 0, 0.8, 0, 0.509418, 0, 0.905421, 2.3943, 1.21506, -6.49466 )
 unique_name = "big_screen"
 
 [node name="Content" parent="InteractiveScreen" instance=ExtResource( 6 )]

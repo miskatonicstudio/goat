@@ -5,24 +5,24 @@ var door_open = false
 
 func _ready():
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
-	goat.connect("oat_environment_item_selected", self, "notify", ["Selected: "])
-	goat.connect("oat_environment_item_deselected", self, "notify", ["Deselected: "])
-	goat.connect("oat_environment_item_activated", self, "notify", ["Activated: "])
+	goat.connect("environment_item_selected", self, "notify", ["Selected: "])
+	goat.connect("environment_item_deselected", self, "notify", ["Deselected: "])
+	goat.connect("environment_item_activated", self, "notify", ["Activated: "])
 	goat.connect("inventory_item_obtained", self, "notify", ["Obtained: "])
-	goat.connect("oat_inventory_item_selected", self, "notify", ["Selected: "])
-	goat.connect("oat_inventory_item_removed", self, "notify", ["Removed: "])
-	goat.connect("oat_inventory_item_used", self, "notify", ["Used: "])
-	goat.connect("oat_inventory_item_used_on_inventory", self, "notify2", ["Used inventory: "])
-	goat.connect("oat_inventory_item_used_on_environment", self, "notify2", ["Used environment: "])
-	goat.connect("oat_inventory_item_replaced", self, "notify2", ["Replaced: "])
+	goat.connect("inventory_item_selected", self, "notify", ["Selected: "])
+	goat.connect("inventory_item_removed", self, "notify", ["Removed: "])
+	goat.connect("inventory_item_used", self, "notify", ["Used: "])
+	goat.connect("inventory_item_used_on_inventory", self, "notify2", ["Used inventory: "])
+	goat.connect("inventory_item_used_on_environment", self, "notify2", ["Used environment: "])
+	goat.connect("inventory_item_replaced", self, "notify2", ["Replaced: "])
 	
-	goat.connect("oat_environment_item_activated", self, "activate")
-	goat.connect("oat_inventory_item_used", self, "use_item")
-	goat.connect("oat_inventory_item_used_on_inventory", self, "use_item_on_inventory")
-	goat.connect("oat_inventory_item_used_on_environment", self, "use_item_on_environment")
+	goat.connect("environment_item_activated", self, "activate")
+	goat.connect("inventory_item_used", self, "use_item")
+	goat.connect("inventory_item_used_on_inventory", self, "use_item_on_inventory")
+	goat.connect("inventory_item_used_on_environment", self, "use_item_on_environment")
 	
-#	goat.connect_monologue("oat_inventory_item_selected", load("res://demo/sounds/short.ogg"))
-#	goat.connect_monologue("oat_inventory_item_used", load("res://demo/sounds/long.ogg"))
+#	goat.connect_monologue("inventory_item_selected", load("res://demo/sounds/short.ogg"))
+#	goat.connect_monologue("inventory_item_used", load("res://demo/sounds/long.ogg"))
 	
 	goat.inventory_items_textures["pen"] = load("res://demo/inventory_items/icons/pen.png")
 	goat.inventory_items_textures["ball"] = load("res://demo/inventory_items/icons/ball.png")
@@ -55,22 +55,22 @@ func notify2(item_name1, item_name2, text):
 
 func use_item_on_inventory(item_name1, item_name2):
 	if item_name1 == "pen" and item_name2 == "ball" or item_name1 == "ball" and item_name2 == "pen":
-		goat.emit_signal("oat_inventory_item_replaced", item_name2, "ball_on_a_stick")
-		goat.emit_signal("oat_inventory_item_removed", item_name1)
+		goat.emit_signal("inventory_item_replaced", item_name2, "ball_on_a_stick")
+		goat.emit_signal("inventory_item_removed", item_name1)
 
 
 func use_item_on_environment(inventory_item_name, environment_item_name):
 	if inventory_item_name == "ball_on_a_stick" and environment_item_name == "prism":
-		goat.emit_signal("oat_inventory_item_removed", "ball_on_a_stick")
+		goat.emit_signal("inventory_item_removed", "ball_on_a_stick")
 		$UseItemOnEnvDemo/BallOnAStick.show()
 		$UseItemOnEnvDemo/AnimationPlayer.play("pulse_light")
 
 
 func use_item(item_name):
 	if item_name == "cube":
-		goat.emit_signal("oat_inventory_item_replaced", item_name, "square")
+		goat.emit_signal("inventory_item_replaced", item_name, "square")
 	if item_name == "square":
-		goat.emit_signal("oat_inventory_item_removed", "square")
+		goat.emit_signal("inventory_item_removed", "square")
 
 
 func _on_Timer_timeout():

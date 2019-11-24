@@ -2,7 +2,7 @@ extends Spatial
 
 
 func _ready():
-	goat.connect("oat_environment_item_activated", self, "item_activated")
+	goat.connect("environment_item_activated", self, "item_activated")
 	$Screen.material_override.albedo_texture = $Viewport.get_texture()
 
 
