@@ -71,19 +71,23 @@ func item_removed(item_name):
 	var removed_item = get_tree().get_nodes_in_group(
 		"goat_inventory_item_button_" + item_name
 	).pop_front()
-	
-	# Select a new item if the current one was removed
-	if item_name == currently_selected_item:
-		var index = removed_item.get_index()
-		if index + 1 < item_button_container.get_child_count():
-			index = index + 1
-		else:
-			index = index - 1
-		item_button_container.get_children()[index].pressed = true
+	var index = removed_item.get_index()
 	
 	item_button_container.remove_child(removed_item)
 	removed_item.queue_free()
 	number_of_items -= 1
+	
+	# Select a new item if the current one was removed
+	if item_name == currently_selected_item:
+		if number_of_items == 0:
+			currently_selected_item = null
+		else:
+			if index + 1 < item_button_container.get_child_count():
+				index = index + 1
+			else:
+				index = index - 1
+			item_button_container.get_children()[index].pressed = true
+	
 	adjust_buttons()
 
 
