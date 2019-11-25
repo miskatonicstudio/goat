@@ -25,7 +25,6 @@ func _input(event):
 	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	if Input.is_action_pressed("goat_rotate_inventory"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		if event is InputEventMouseMotion:
 			var angles = event.relative
 			var angle_horizontal = deg2rad(angles.x * ROTATION_SENSITIVITY_X)
@@ -36,8 +35,16 @@ func _input(event):
 		
 			rotator.rotate_object_local(Vector3(0, 1, 0), angle_horizontal)
 			rotator.rotate_x(delta_angle_vertical)
+	
+	if Input.is_action_just_pressed("goat_rotate_inventory"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		ray_cast.enabled = false
+		if ray_cast.currently_selected_item_name:
+			goat.emit_signal("environment_item_deselected", ray_cast.currently_selected_item_name)
+			ray_cast.currently_selected_item_name = null
 	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		ray_cast.enabled = true
 	elif Input.is_action_just_pressed("goat_toggle_inventory"):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 		get_tree().set_input_as_handled()
@@ -69,18 +76,24 @@ func item_selected(item_name):
 	for item in get_tree().get_nodes_in_group("goat_inventory_item"):
 		item.translation.z = 999
 		item.hide()
-	var selected_item = get_tree().get_nodes_in_group("goat_inventory_item_" + item_name).pop_front()
+	var selected_item = get_tree().get_nodes_in_group(
+		"goat_inventory_item_" + item_name
+	).pop_front()
 	selected_item.translation.z = 0
 	selected_item.show()
 
 
 func item_removed(item_name):
-	var removed_item = get_tree().get_nodes_in_group("goat_inventory_item_" + item_name).pop_front()
+	var removed_item = get_tree().get_nodes_in_group(
+		"goat_inventory_item_" + item_name
+	).pop_front()
 	removed_item.queue_free()
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
-	var replaced_item = get_tree().get_nodes_in_group("goat_inventory_item_" + item_name_replaced).pop_front()
+	var replaced_item = get_tree().get_nodes_in_group(
+		"goat_inventory_item_" + item_name_replaced
+	).pop_front()
 	item_obtained(item_name_replacing, replaced_item)
 	replaced_item.queue_free()
 
