@@ -14,8 +14,8 @@ onready var item_button_container = $CenterContainer/Center
 
 func _ready():
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	goat.connect("environment_item_selected", self, "environment_item_selected")
-	goat.connect("environment_item_deselected", self, "environment_item_deselected")
+	goat.connect("interactive_item_selected", self, "interactive_item_selected")
+	goat.connect("interactive_item_deselected", self, "interactive_item_deselected")
 	goat.connect("inventory_item_obtained", self, "item_obtained")
 	goat.connect("inventory_item_removed", self, "item_removed")
 	goat.connect("inventory_item_replaced", self, "item_replaced")
@@ -36,12 +36,12 @@ func game_mode_changed(new_game_mode):
 		hide()
 
 
-func environment_item_selected(item_name):
+func interactive_item_selected(item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
 
 
-func environment_item_deselected(item_name):
+func interactive_item_deselected(item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		if item_name == environment_item_name:
 			environment_item_name = null

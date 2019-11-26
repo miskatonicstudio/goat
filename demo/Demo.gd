@@ -5,9 +5,9 @@ var door_open = false
 
 func _ready():
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
-	goat.connect("environment_item_selected", self, "notify", ["Selected: "])
-	goat.connect("environment_item_deselected", self, "notify", ["Deselected: "])
-	goat.connect("environment_item_activated", self, "notify", ["Activated: "])
+	goat.connect("interactive_item_selected", self, "notify", ["Selected: "])
+	goat.connect("interactive_item_deselected", self, "notify", ["Deselected: "])
+	goat.connect("interactive_item_activated", self, "notify", ["Activated: "])
 	goat.connect("inventory_item_obtained", self, "notify", ["Obtained: "])
 	goat.connect("inventory_item_selected", self, "notify", ["Selected: "])
 	goat.connect("inventory_item_removed", self, "notify", ["Removed: "])
@@ -16,7 +16,7 @@ func _ready():
 	goat.connect("inventory_item_used_on_environment", self, "notify2", ["Used environment: "])
 	goat.connect("inventory_item_replaced", self, "notify2", ["Replaced: "])
 	
-	goat.connect("environment_item_activated", self, "activate")
+	goat.connect("interactive_item_activated", self, "activate")
 	goat.connect("inventory_item_used", self, "use_item")
 	goat.connect("inventory_item_used_on_inventory", self, "use_item_on_inventory")
 	goat.connect("inventory_item_used_on_environment", self, "use_item_on_environment")

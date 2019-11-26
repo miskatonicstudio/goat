@@ -1,9 +1,9 @@
 extends Node
 
 # Signals
-signal environment_item_selected (item_name)
-signal environment_item_deselected (item_name)
-signal environment_item_activated (item_name)
+signal interactive_item_selected (item_name)
+signal interactive_item_deselected (item_name)
+signal interactive_item_activated (item_name)
 signal interactive_screen_activated (screen_name, position)
 
 signal inventory_item_obtained (item_name)
