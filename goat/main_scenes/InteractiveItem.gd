@@ -9,6 +9,7 @@ onready var model = get_node("Model")
 
 
 func _ready():
+	add_to_group("goat_interactive_item_" + unique_name)
 	$CollisionShape.shape = collision_shape
 	
 	model.material_override.emission_enabled = true

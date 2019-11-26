@@ -10,6 +10,7 @@ onready var context_inventory = $ContextInventory
 
 var movement_direction = Vector3()
 var environment_item_name = null
+var is_inventory_item = false
 
 
 func _ready():
@@ -37,8 +38,11 @@ func _input(event):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_INVENTORY)
 		get_tree().set_input_as_handled()
 	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
-		goat.emit_signal("game_mode_changed", goat.GAME_MODE_CONTEXT_INVENTORY)
-		get_tree().set_input_as_handled()
+		if is_inventory_item:
+			goat.emit_signal("environment_item_activated", environment_item_name)
+		else:
+			goat.emit_signal("game_mode_changed", goat.GAME_MODE_CONTEXT_INVENTORY)
+			get_tree().set_input_as_handled()
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
 	update_movement_direction()
@@ -91,9 +95,12 @@ func update_movement_direction():
 func environment_item_selected(item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
+		var actual_item = get_tree().get_nodes_in_group("goat_interactive_item_" + item_name).pop_back()
+		is_inventory_item = actual_item.inventory_item
 
 
 func environment_item_deselected(item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		if item_name == environment_item_name:
 			environment_item_name = null
+			is_inventory_item = false
