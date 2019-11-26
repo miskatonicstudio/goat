@@ -77,18 +77,16 @@ func item_removed(item_name):
 	removed_item.queue_free()
 	number_of_items -= 1
 	
+	adjust_buttons()
+	
 	# Select a new item if the current one was removed
 	if item_name == currently_selected_item:
-		if number_of_items == 0:
-			currently_selected_item = null
-		else:
-			if index + 1 < item_button_container.get_child_count():
-				index = index + 1
-			else:
+		currently_selected_item = null
+		if number_of_items > 0:
+			if index >= number_of_items:
 				index = index - 1
-			item_button_container.get_children()[index].pressed = true
-	
-	adjust_buttons()
+			var new_item_name = item_button_container.get_children()[index].get_meta("item_name")
+			goat.emit_signal("inventory_item_selected", new_item_name)
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
@@ -101,6 +99,7 @@ func item_replaced(item_name_replaced, item_name_replacing):
 	item_button_container.remove_child(replaced_item)
 	replaced_item.queue_free()
 	if currently_selected_item == item_name_replaced:
+		currently_selected_item = null
 		goat.emit_signal("inventory_item_selected", item_name_replacing)
 
 
@@ -138,6 +137,7 @@ func add_item_button(item_name=null, insert_position=null):
 	item_button.set("custom_styles/normal", INVENTORY_BUTTON_STYLE_NORMAL)
 	item_button.set("custom_styles/hover", INVENTORY_BUTTON_STYLE_HOVER)
 	item_button.set("custom_styles/disabled", INVENTORY_BUTTON_STYLE_NORMAL)
+	item_button.set_meta("item_name", item_name)
 	
 	if item_name:
 		item_button.icon = goat.inventory_items_textures[item_name]
