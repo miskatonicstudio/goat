@@ -9,7 +9,7 @@ func _ready():
 	goat.connect("interactive_item_deselected", self, "notify", ["Deselected: "])
 	goat.connect("interactive_item_activated", self, "notify", ["Activated: "])
 	goat.connect("inventory_item_obtained", self, "notify", ["Obtained: "])
-	goat.connect("inventory_item_selected", self, "notify", ["Selected: "])
+	goat.connect("inventory_item_selected", self, "notify", ["Selected (inv): "])
 	goat.connect("inventory_item_removed", self, "notify", ["Removed: "])
 	goat.connect("inventory_item_used", self, "notify", ["Used: "])
 	goat.connect("inventory_item_used_on_inventory", self, "notify2", ["Used inventory: "])

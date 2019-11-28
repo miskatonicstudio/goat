@@ -1,11 +1,13 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://demo/Demo.gd" type="Script" id=1]
 [ext_resource path="res://goat/main_scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://demo/inventory_items/models/BallOnAStick.tscn" type="PackedScene" id=4]
-[ext_resource path="res://goat/main_scenes/InteractiveScreen.tscn" type="PackedScene" id=5]
-[ext_resource path="res://demo/inventory_items/models/BigScreenContent.tscn" type="PackedScene" id=6]
+[ext_resource path="res://demo/sounds/short.ogg" type="AudioStream" id=4]
+[ext_resource path="res://demo/sounds/long.ogg" type="AudioStream" id=5]
+[ext_resource path="res://demo/inventory_items/models/BallOnAStick.tscn" type="PackedScene" id=6]
+[ext_resource path="res://goat/main_scenes/InteractiveScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://demo/inventory_items/models/BigScreenContent.tscn" type="PackedScene" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 40, 40 )
@@ -19,7 +21,9 @@ size = Vector3( 1, 1.2, 0.2 )
 [sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -0.5, 0.5, 0.1, 0.5, 0.5, -0.1, 0.5, 0.5, 0.1, -0.5, 0.5, -0.1, -0.5, -0.5, 0.1, 0.5, -0.5, -0.1, 0.5, -0.5, 0.1, -0.5, -0.5, -0.1, 0.5, 0.5, 0.1, -0.5, 0.5, -0.1, 0.5, 0.5, -0.1, -0.5, 0.5, 0.1, 0.5, -0.5, 0.1, -0.5, -0.5, -0.1, 0.5, -0.5, -0.1, -0.5, -0.5, 0.1, 0.5, 0.5, 0.1, -0.5, -0.5, 0.1, -0.5, 0.5, 0.1, 0.5, -0.5, 0.1, 0.5, 0.5, -0.1, -0.5, -0.5, -0.1, -0.5, 0.5, -0.1, 0.5, -0.5, -0.1 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="BoxShape" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.301961, 0.298039, 0.298039, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -27,13 +31,13 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=7]
 size = Vector3( 0.2, 0.2, 0.2 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.1, 0.1, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=10]
 albedo_color = Color( 0.301961, 0.298039, 0.298039, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -41,20 +45,20 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=11]
 albedo_color = Color( 0.913725, 0.666667, 1, 1 )
 
-[sub_resource type="CubeMesh" id=10]
+[sub_resource type="CubeMesh" id=12]
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ConvexPolygonShape" id=11]
+[sub_resource type="ConvexPolygonShape" id=13]
 points = PoolVector3Array( -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5 )
 
-[sub_resource type="BoxShape" id=12]
+[sub_resource type="BoxShape" id=14]
 margin = 0.001
 extents = Vector3( 0.08, 0.16, 0.08 )
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.454902, 0.94902, 1, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -62,16 +66,16 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CylinderMesh" id=14]
+[sub_resource type="CylinderMesh" id=17]
 top_radius = 0.01
 bottom_radius = 0.01
 height = 0.1
 
-[sub_resource type="SphereShape" id=15]
+[sub_resource type="SphereShape" id=18]
 margin = 0.001
 radius = 0.09
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=20]
 albedo_color = Color( 0.929412, 0.760784, 0.352941, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -79,11 +83,11 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="SphereMesh" id=17]
+[sub_resource type="SphereMesh" id=21]
 radius = 0.05
 height = 0.1
 
-[sub_resource type="SpatialMaterial" id=18]
+[sub_resource type="SpatialMaterial" id=23]
 albedo_color = Color( 1, 0.4, 0.4, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -91,10 +95,10 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=19]
+[sub_resource type="CubeMesh" id=24]
 size = Vector3( 0.1, 0.1, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=20]
+[sub_resource type="SpatialMaterial" id=26]
 albedo_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -102,10 +106,10 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=21]
+[sub_resource type="CubeMesh" id=27]
 size = Vector3( 0.08, 0.1, 0.05 )
 
-[sub_resource type="SpatialMaterial" id=22]
+[sub_resource type="SpatialMaterial" id=29]
 albedo_color = Color( 1, 1, 0, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -113,10 +117,10 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=23]
+[sub_resource type="CubeMesh" id=30]
 size = Vector3( 0.2, 0.02, 0.2 )
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=31]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("DropItemDemo/Crate:translation")
@@ -131,7 +135,7 @@ tracks/0/keys = {
 "values": [ Vector3( 2, 3, 0 ), Vector3( 2, 0.5, 0 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=32]
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpeningDoorDemo/Hinge:rotation_degrees")
 tracks/0/interp = 1
@@ -145,42 +149,44 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 60, 0 ) ]
 }
 
-[sub_resource type="SpatialMaterial" id=26]
+[sub_resource type="SpatialMaterial" id=33]
 albedo_color = Color( 1, 0.576471, 0.576471, 1 )
 
-[sub_resource type="CubeMesh" id=27]
+[sub_resource type="CubeMesh" id=34]
 size = Vector3( 2, 2, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=28]
+[sub_resource type="SpatialMaterial" id=35]
 albedo_color = Color( 1, 0.929412, 0.596078, 1 )
 
-[sub_resource type="CubeMesh" id=29]
+[sub_resource type="CubeMesh" id=36]
 size = Vector3( 1.5, 2, 0.1 )
 
-[sub_resource type="SpatialMaterial" id=30]
+[sub_resource type="SpatialMaterial" id=37]
 albedo_color = Color( 0.67451, 0.545098, 0.32549, 1 )
 
-[sub_resource type="CubeMesh" id=31]
+[sub_resource type="CubeMesh" id=38]
 size = Vector3( 0.2, 4, 0.2 )
 
-[sub_resource type="SpatialMaterial" id=32]
+[sub_resource type="SpatialMaterial" id=39]
 albedo_color = Color( 0.972549, 0.729412, 0.466667, 1 )
 
-[sub_resource type="CubeMesh" id=33]
+[sub_resource type="CubeMesh" id=40]
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=34]
+[sub_resource type="SpatialMaterial" id=41]
 albedo_color = Color( 0.415686, 0.407843, 0.407843, 1 )
 metallic = 0.6
+roughness = 0.5
+roughness_texture_channel = 2
 
-[sub_resource type="CylinderMesh" id=35]
+[sub_resource type="CylinderMesh" id=42]
 top_radius = 0.1
 bottom_radius = 0.6
 height = 0.95
 radial_segments = 12
 rings = 2
 
-[sub_resource type="SpatialMaterial" id=36]
+[sub_resource type="SpatialMaterial" id=43]
 albedo_color = Color( 0.572549, 0.564706, 0.564706, 1 )
 emission_enabled = true
 emission = Color( 0.619608, 0.917647, 0.890196, 1 )
@@ -188,11 +194,11 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CapsuleMesh" id=37]
+[sub_resource type="CapsuleMesh" id=44]
 radius = 0.05
 mid_height = 0.5
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=45]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -208,7 +214,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="SpatialMaterial" id=39]
+[sub_resource type="SpatialMaterial" id=47]
 albedo_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
@@ -216,7 +222,7 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="PrismMesh" id=40]
+[sub_resource type="PrismMesh" id=48]
 size = Vector3( 0.05, 0.05, 0.05 )
 
 [node name="Demo" type="Spatial"]
@@ -245,7 +251,6 @@ custom_constants/shadow_as_outline = 6
 align = 1
 
 [node name="Buttons" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.684699, 0.603889, -3.23314 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
@@ -259,107 +264,109 @@ shape = SubResource( 4 )
 [node name="EnvItem1" parent="Buttons" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.317859, 0.4, 0.07 )
 unique_name = "button_1"
-single_use = true
+item_mode = 1
+sound = SubResource( 5 )
 
 [node name="Model" type="MeshInstance" parent="Buttons/EnvItem1"]
-material_override = SubResource( 5 )
-mesh = SubResource( 6 )
+material_override = SubResource( 6 )
+mesh = SubResource( 7 )
 material/0 = null
 
 [node name="EnvItem2" parent="Buttons" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310117, 0.4, 0.07 )
 unique_name = "button_2"
-collision_shape = SubResource( 7 )
+collision_shape = SubResource( 8 )
+sound = ExtResource( 4 )
 
 [node name="Model" type="MeshInstance" parent="Buttons/EnvItem2"]
-material_override = SubResource( 8 )
-mesh = SubResource( 6 )
+material_override = SubResource( 10 )
+mesh = SubResource( 7 )
 material/0 = null
 
 [node name="Table" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, -1.5 )
-material_override = SubResource( 9 )
-mesh = SubResource( 10 )
+material_override = SubResource( 11 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Table"]
 editor/display_folded = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Table/StaticBody"]
-shape = SubResource( 11 )
+shape = SubResource( 13 )
 
-[node name="EnvironmentItemPen" parent="Table" instance=ExtResource( 3 )]
+[node name="InteractiveItemPen" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 0.734248, 0.678882, 2.96749e-08, 0, -4.37114e-08, 1, 0.678882, -0.734248, -3.2095e-08, 0.339202, 0.510065, 0.110681 )
 unique_name = "pen"
-inventory_item = true
-collision_shape = SubResource( 12 )
+item_mode = 2
+collision_shape = SubResource( 14 )
+sound = ExtResource( 5 )
 
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemPen"]
-material_override = SubResource( 13 )
-mesh = SubResource( 14 )
-material/0 = null
-
-[node name="EnvironmentItemBall" parent="Table" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544935, 0.338758 )
-unique_name = "ball"
-inventory_item = true
-collision_shape = SubResource( 15 )
-
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemBall"]
+[node name="Model" type="MeshInstance" parent="Table/InteractiveItemPen"]
 material_override = SubResource( 16 )
 mesh = SubResource( 17 )
 material/0 = null
 
-[node name="EnvironmentItemCube" parent="Table" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21538, 0.592958, -0.134755 )
-unique_name = "cube"
-inventory_item = true
+[node name="InteractiveItemBall" parent="Table" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544935, 0.338758 )
+unique_name = "ball"
+item_mode = 2
+collision_shape = SubResource( 18 )
 
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemCube"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0407691, 0 )
-material_override = SubResource( 18 )
-mesh = SubResource( 19 )
-material/0 = null
-
-[node name="EnvironmentItemRemote" parent="Table" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321357, 0.558039, 0.296909 )
-unique_name = "remote"
-inventory_item = true
-
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemRemote"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0347357, 0 )
+[node name="Model" type="MeshInstance" parent="Table/InteractiveItemBall"]
 material_override = SubResource( 20 )
 mesh = SubResource( 21 )
 material/0 = null
 
-[node name="EnvironmentItemConsole" parent="Table" instance=ExtResource( 3 )]
+[node name="InteractiveItemCube" parent="Table" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21538, 0.592958, -0.134755 )
+unique_name = "cube"
+item_mode = 2
+
+[node name="Model" type="MeshInstance" parent="Table/InteractiveItemCube"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0407691, 0 )
+material_override = SubResource( 23 )
+mesh = SubResource( 24 )
+material/0 = null
+
+[node name="InteractiveItemRemote" parent="Table" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321357, 0.558039, 0.296909 )
+unique_name = "remote"
+item_mode = 2
+
+[node name="Model" type="MeshInstance" parent="Table/InteractiveItemRemote"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0347357, 0 )
+material_override = SubResource( 26 )
+mesh = SubResource( 27 )
+material/0 = null
+
+[node name="InteractiveItemConsole" parent="Table" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.142401, 0.50627, -0.224718 )
 unique_name = "console"
-inventory_item = true
+item_mode = 2
 
-[node name="Model" type="MeshInstance" parent="Table/EnvironmentItemConsole"]
-material_override = SubResource( 22 )
-mesh = SubResource( 23 )
+[node name="Model" type="MeshInstance" parent="Table/InteractiveItemConsole"]
+material_override = SubResource( 29 )
+mesh = SubResource( 30 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/drop_crate = SubResource( 24 )
-anims/open_door = SubResource( 25 )
+anims/drop_crate = SubResource( 31 )
+anims/open_door = SubResource( 32 )
 
 [node name="OpeningDoorDemo" type="Spatial" parent="."]
 editor/display_folded = true
 
 [node name="Wall01" type="MeshInstance" parent="OpeningDoorDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4.5 )
-material_override = SubResource( 26 )
-mesh = SubResource( 27 )
+material_override = SubResource( 33 )
+mesh = SubResource( 34 )
 material/0 = null
 
 [node name="Wall02" type="MeshInstance" parent="OpeningDoorDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, -4.5 )
-material_override = SubResource( 26 )
-mesh = SubResource( 27 )
+material_override = SubResource( 33 )
+mesh = SubResource( 34 )
 material/0 = null
 
 [node name="Hinge" type="Spatial" parent="OpeningDoorDemo"]
@@ -367,8 +374,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.5 )
 
 [node name="Door" type="MeshInstance" parent="OpeningDoorDemo/Hinge"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1, 0 )
-material_override = SubResource( 28 )
-mesh = SubResource( 29 )
+material_override = SubResource( 35 )
+mesh = SubResource( 36 )
 material/0 = null
 
 [node name="DropItemDemo" type="Spatial" parent="."]
@@ -377,36 +384,35 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61749, 0, -5.9365 )
 
 [node name="Beam1" type="MeshInstance" parent="DropItemDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-material_override = SubResource( 30 )
-mesh = SubResource( 31 )
+material_override = SubResource( 37 )
+mesh = SubResource( 38 )
 material/0 = null
 
 [node name="Beam2" type="MeshInstance" parent="DropItemDemo"]
 transform = Transform( -4.37114e-08, -0.55, 0, 1, -2.40413e-08, 0, 0, 0, 1, 1, 4, 0 )
-material_override = SubResource( 30 )
-mesh = SubResource( 31 )
+material_override = SubResource( 37 )
+mesh = SubResource( 38 )
 material/0 = null
 
 [node name="Beam3" type="MeshInstance" parent="DropItemDemo"]
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 2, 3.7, 0 )
-material_override = SubResource( 30 )
-mesh = SubResource( 31 )
+material_override = SubResource( 37 )
+mesh = SubResource( 38 )
 material/0 = null
 
 [node name="Crate" type="MeshInstance" parent="DropItemDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
-material_override = SubResource( 32 )
-mesh = SubResource( 33 )
+material_override = SubResource( 39 )
+mesh = SubResource( 40 )
 material/0 = null
 
 [node name="UseItemOnEnvDemo" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21016, 0, 0 )
 
 [node name="Stand" type="MeshInstance" parent="UseItemOnEnvDemo"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.445, 0 )
-material_override = SubResource( 34 )
-mesh = SubResource( 35 )
+material_override = SubResource( 41 )
+mesh = SubResource( 42 )
 material/0 = null
 
 [node name="Balls" type="Spatial" parent="UseItemOnEnvDemo"]
@@ -415,48 +421,48 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202794, 0 )
 
 [node name="Ball1" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( 0.866025, 2.18557e-08, 0.5, 0.5, -3.78552e-08, -0.866025, 0, 1, -4.37114e-08, 0.304985, 0.325881, 0 )
-material_override = SubResource( 36 )
-mesh = SubResource( 37 )
+material_override = SubResource( 43 )
+mesh = SubResource( 44 )
 material/0 = null
 
 [node name="Ball2" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( -3.78552e-08, 1, -6.55671e-08, 0.5, -3.78552e-08, -0.866025, -0.866025, -6.55671e-08, -0.5, 0, 0.326, -0.305 )
-material_override = SubResource( 36 )
-mesh = SubResource( 37 )
+material_override = SubResource( 43 )
+mesh = SubResource( 44 )
 material/0 = null
 
 [node name="Ball3" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( -0.866025, 8.15666e-08, -0.5, 0.5, -2.18557e-08, -0.866025, -8.15666e-08, -1, -2.18557e-08, -0.305, 0.326, 0 )
-material_override = SubResource( 36 )
-mesh = SubResource( 37 )
+material_override = SubResource( 43 )
+mesh = SubResource( 44 )
 material/0 = null
 
 [node name="Ball4" type="MeshInstance" parent="UseItemOnEnvDemo/Balls"]
 transform = Transform( -4.37114e-08, -1, 0, 0.5, -2.18557e-08, -0.866025, 0.866025, -3.78552e-08, 0.5, 0, 0.326, 0.305 )
-material_override = SubResource( 36 )
-mesh = SubResource( 37 )
+material_override = SubResource( 43 )
+mesh = SubResource( 44 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UseItemOnEnvDemo"]
-anims/pulse_light = SubResource( 38 )
+anims/pulse_light = SubResource( 45 )
 
-[node name="EnvironmentItem" parent="UseItemOnEnvDemo" instance=ExtResource( 3 )]
+[node name="InteractiveItem" parent="UseItemOnEnvDemo" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952203, 0 )
 unique_name = "prism"
 
-[node name="Model" type="MeshInstance" parent="UseItemOnEnvDemo/EnvironmentItem"]
+[node name="Model" type="MeshInstance" parent="UseItemOnEnvDemo/InteractiveItem"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.016634, 0 )
-material_override = SubResource( 39 )
-mesh = SubResource( 40 )
+material_override = SubResource( 47 )
+mesh = SubResource( 48 )
 material/0 = null
 
-[node name="BallOnAStick" parent="UseItemOnEnvDemo" instance=ExtResource( 4 )]
+[node name="BallOnAStick" parent="UseItemOnEnvDemo" instance=ExtResource( 6 )]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.03457, -0.00655839 )
 visible = false
 
-[node name="InteractiveScreen" parent="." instance=ExtResource( 5 )]
+[node name="InteractiveScreen" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1.0865, 0, -0.424514, 0, 0.8, 0, 0.509418, 0, 0.905421, 2.3943, 1.21506, -6.49466 )
 unique_name = "big_screen"
 
-[node name="Content" parent="InteractiveScreen" instance=ExtResource( 6 )]
+[node name="Content" parent="InteractiveScreen" instance=ExtResource( 8 )]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
