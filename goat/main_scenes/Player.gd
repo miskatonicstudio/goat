@@ -98,7 +98,7 @@ func interactive_item_selected(item_name):
 		var actual_item = get_tree().get_nodes_in_group("goat_interactive_item_" + item_name).pop_back()
 		# Double check in case this is a screen, not an item
 		if actual_item:
-			is_inventory_item = actual_item.inventory_item
+			is_inventory_item = actual_item.item_mode == actual_item.ITEM_MODE_INVENTORY
 
 
 func interactive_item_deselected(item_name):

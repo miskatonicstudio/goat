@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.1, 0.1, 0.1 )
 
-[node name="EnvironmentItem" type="StaticBody" groups=[
+[node name="InteractiveItem" type="StaticBody" groups=[
 "goat_interactive_item",
 ]]
 script = ExtResource( 1 )
@@ -13,3 +13,6 @@ collision_shape = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
+
+[node name="Player" type="AudioStreamPlayer3D" parent="."]
+[connection signal="finished" from="Player" to="." method="_on_Player_finished"]
