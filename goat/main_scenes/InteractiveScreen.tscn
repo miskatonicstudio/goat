@@ -11,7 +11,7 @@ points = PoolVector3Array( -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, -0.5,
 [sub_resource type="QuadMesh" id=3]
 
 [node name="InteractiveScreen" type="StaticBody" groups=[
-"goat_interactive_screen",
+"goat_interactive_item",
 ]]
 script = ExtResource( 1 )
 

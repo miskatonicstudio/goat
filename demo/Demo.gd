@@ -7,7 +7,7 @@ func _ready():
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
 	goat.connect("interactive_item_selected", self, "notify", ["Selected: "])
 	goat.connect("interactive_item_deselected", self, "notify", ["Deselected: "])
-	goat.connect("interactive_item_activated", self, "notify", ["Activated: "])
+	goat.connect("interactive_item_activated", self, "notify2", ["Activated: "])
 	goat.connect("inventory_item_obtained", self, "notify", ["Obtained: "])
 	goat.connect("inventory_item_selected", self, "notify", ["Selected (inv): "])
 	goat.connect("inventory_item_removed", self, "notify", ["Removed: "])
@@ -48,7 +48,7 @@ func notify(item_name, text):
 
 
 func notify2(item_name1, item_name2, text):
-	$Notification.text = text + item_name1 + " => " + item_name2
+	$Notification.text = text + item_name1 + " => " + str(item_name2)
 	print($Notification.text)
 	$Timer.start()
 

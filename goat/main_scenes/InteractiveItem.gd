@@ -28,8 +28,11 @@ func _ready():
 	model.material_override.emission = Color.white
 	model.material_override.emission_energy = 0.0
 	
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "select")
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "deselect")
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
 
 
@@ -59,16 +62,17 @@ func deselect(item_name):
 		model.material_override.emission_energy = 0.0
 
 
-func activate(item_name):
-	if item_name == unique_name:
-		if player.stream:
-			player.play()
-		if item_mode != ITEM_MODE_NORMAL:
-			collision_layer = 0
-		if item_mode == ITEM_MODE_INVENTORY:
-			goat.emit_signal("inventory_item_obtained", unique_name)
-			# Hide the model, but keep the rest until the sound is played
-			model.visible = false
+func activate(item_name, _position):
+	if item_name != unique_name:
+		return
+	if player.stream:
+		player.play()
+	if item_mode != ITEM_MODE_NORMAL:
+		collision_layer = 0
+	if item_mode == ITEM_MODE_INVENTORY:
+		goat.emit_signal("inventory_item_obtained", unique_name)
+		# Hide the model, but keep the rest until the sound is played
+		model.visible = false
 
 
 func _on_Player_finished():

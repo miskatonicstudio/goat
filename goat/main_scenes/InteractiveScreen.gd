@@ -13,11 +13,11 @@ func _ready():
 	viewport.size = content.rect_size
 	screen_surface.material_override = screen_surface.material_override.duplicate(true)
 	screen_surface.material_override.albedo_texture = viewport.get_texture()
-	goat.connect("interactive_screen_activated", self, "screen_activated")
+	goat.connect("interactive_item_activated", self, "activate")
 
 
-func screen_activated(screen_name, position):
-	if screen_name != unique_name:
+func activate(item_name, position):
+	if item_name != unique_name:
 		return
 	var local_position = screen_surface.to_local(position)
 	var screen_coordinates = Vector2(local_position.x + 0.5, 0.5 - local_position.y) * viewport.size
