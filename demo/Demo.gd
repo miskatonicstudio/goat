@@ -77,7 +77,7 @@ func _on_Timer_timeout():
 	$Notification.text = ""
 
 
-func activate(item_name):
+func activate(item_name, _position):
 	if item_name == "button_2":
 		if door_open:
 			$AnimationPlayer.play_backwards("open_door")

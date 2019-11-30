@@ -80,3 +80,7 @@ func _on_Player_finished():
 	if item_mode == ITEM_MODE_INVENTORY:
 		get_parent().remove_child(self)
 		call_deferred("queue_free")
+
+
+func is_inventory_item():
+	return item_mode == ITEM_MODE_INVENTORY

@@ -39,7 +39,7 @@ func _input(event):
 		get_tree().set_input_as_handled()
 	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
 		if is_inventory_item:
-			goat.emit_signal("interactive_item_activated", environment_item_name)
+			goat.emit_signal("interactive_item_activated", environment_item_name, null)
 		else:
 			goat.emit_signal("game_mode_changed", goat.GAME_MODE_CONTEXT_INVENTORY)
 			get_tree().set_input_as_handled()
@@ -96,9 +96,7 @@ func interactive_item_selected(item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
 		var actual_item = get_tree().get_nodes_in_group("goat_interactive_item_" + item_name).pop_back()
-		# Double check in case this is a screen, not an item
-		if actual_item:
-			is_inventory_item = actual_item.item_mode == actual_item.ITEM_MODE_INVENTORY
+		is_inventory_item = actual_item.is_inventory_item()
 
 
 func interactive_item_deselected(item_name):

@@ -8,11 +8,13 @@ onready var content = get_node("Content")
 
 
 func _ready():
+	add_to_group("goat_interactive_item_" + unique_name)
 	remove_child(content)
 	viewport.add_child(content)
 	viewport.size = content.rect_size
 	screen_surface.material_override = screen_surface.material_override.duplicate(true)
 	screen_surface.material_override.albedo_texture = viewport.get_texture()
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
 
 
@@ -33,3 +35,7 @@ func activate(item_name, position):
 	ev.pressed = false
 	ev.button_mask = 0
 	viewport.input(ev)
+
+
+func is_inventory_item():
+	return false
