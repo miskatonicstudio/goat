@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://goat/helper_scenes/ContextInventory.gd" type="Script" id=1]
 [ext_resource path="res://goat/styles/inventory_slot_hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://goat/styles/inventory_slot_focus.tres" type="StyleBox" id=3]
 [ext_resource path="res://goat/styles/inventory_slot_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://demo/inventory_items/icons/ball_on_a_stick.png" type="Texture" id=5]
-[ext_resource path="res://demo/inventory_items/icons/remote.png" type="Texture" id=6]
 
 [node name="ContextInventory" type="Control"]
 anchor_right = 1.0
@@ -154,20 +152,6 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/Center/Control6"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
-rect_scale = Vector2( 0.9, 0.9 )
-rect_pivot_offset = Vector2( 32, 32 )
-mouse_filter = 2
-texture = ExtResource( 5 )
-
 [node name="Control7" type="Control" parent="CenterContainer/Center"]
 editor/display_folded = true
 margin_top = -100.0
@@ -188,20 +172,6 @@ custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/Center/Control7"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
-rect_scale = Vector2( 0.9, 0.9 )
-rect_pivot_offset = Vector2( 32, 32 )
-mouse_filter = 2
-texture = ExtResource( 6 )
 
 [node name="Control8" type="Control" parent="CenterContainer/Center"]
 editor/display_folded = true
@@ -225,23 +195,6 @@ custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-
-[node name="Control" type="Control" parent="CenterContainer/Center"]
-margin_top = -100.0
-margin_bottom = -100.0
-rect_rotation = 45.0
-rect_pivot_offset = Vector2( 0, 100 )
-
-[node name="Button" type="Button" parent="CenterContainer/Center/Control"]
-margin_left = -34.0
-margin_top = -34.0
-margin_right = 34.0
-margin_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 68, 68 )
-rect_rotation = -45.0
-rect_pivot_offset = Vector2( 34, 34 )
 
 [node name="ExitButton" type="Button" parent="CenterContainer"]
 margin_left = 478.0
