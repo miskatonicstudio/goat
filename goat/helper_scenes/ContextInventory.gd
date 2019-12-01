@@ -13,11 +13,17 @@ onready var item_button_container = $CenterContainer/Center
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "interactive_item_selected")
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "interactive_item_deselected")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_obtained", self, "item_obtained")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_removed", self, "item_removed")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_replaced", self, "item_replaced")
 	
 	while item_button_container.get_child_count() > 0:
@@ -115,7 +121,7 @@ func add_item_button(item_name=null, insert_position=null):
 	item_button.set("custom_styles/disabled", INVENTORY_BUTTON_STYLE_NORMAL)
 	
 	if item_name:
-		item_button.icon = goat.inventory_items_textures[item_name]
+		item_button.icon = goat.get_inventory_item_icon(item_name)
 		item_button.connect("pressed", self, "item_button_pressed", [item_name, ])
 		item_button.connect("button_down", self, "item_button_down", [item_name, ])
 		button_pivot.add_to_group("goat_context_inventory_item_button_" + item_name)

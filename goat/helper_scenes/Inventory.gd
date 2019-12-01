@@ -62,7 +62,7 @@ func game_mode_changed(new_game_mode):
 
 
 func item_obtained(item_name, insert_after=null):
-	var obtained_item = goat.inventory_items_models[item_name].instance()
+	var obtained_item = goat.get_inventory_item_model(item_name).instance()
 	obtained_item.add_to_group("goat_inventory_item")
 	obtained_item.add_to_group("goat_inventory_item_" + item_name)
 	obtained_item.translation.z = 999

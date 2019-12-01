@@ -4,6 +4,16 @@ var door_open = false
 
 
 func _ready():
+	goat.set_game_resources_directory("demo")
+	
+	goat.register_inventory_item("pen")
+	goat.register_inventory_item("ball")
+	goat.register_inventory_item("ball_on_a_stick")
+	goat.register_inventory_item("remote")
+	goat.register_inventory_item("cube")
+	goat.register_inventory_item("square")
+	goat.register_inventory_item("console")
+	
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
 	goat.connect("interactive_item_selected", self, "notify", ["Selected: "])
 	goat.connect("interactive_item_deselected", self, "notify", ["Deselected: "])
@@ -25,22 +35,6 @@ func _ready():
 	
 #	goat.connect_monologue("inventory_item_selected", load("res://demo/sounds/short.ogg"))
 #	goat.connect_monologue("inventory_item_used", load("res://demo/sounds/long.ogg"))
-	
-	goat.inventory_items_textures["pen"] = load("res://demo/inventory_items/icons/pen.png")
-	goat.inventory_items_textures["ball"] = load("res://demo/inventory_items/icons/ball.png")
-	goat.inventory_items_textures["ball_on_a_stick"] = load("res://demo/inventory_items/icons/ball_on_a_stick.png")
-	goat.inventory_items_textures["cube"] = load("res://demo/inventory_items/icons/cube.png")
-	goat.inventory_items_textures["square"] = load("res://demo/inventory_items/icons/square.png")
-	goat.inventory_items_textures["remote"] = load("res://demo/inventory_items/icons/remote.png")
-	goat.inventory_items_textures["console"] = load("res://demo/inventory_items/icons/console.png")
-	
-	goat.inventory_items_models["pen"] = load("res://demo/inventory_items/models/Pen.tscn")
-	goat.inventory_items_models["ball"] = load("res://demo/inventory_items/models/Ball.tscn")
-	goat.inventory_items_models["ball_on_a_stick"] = load("res://demo/inventory_items/models/BallOnAStick.tscn")
-	goat.inventory_items_models["cube"] = load("res://demo/inventory_items/models/Cube.tscn")
-	goat.inventory_items_models["square"] = load("res://demo/inventory_items/models/Square.tscn")
-	goat.inventory_items_models["remote"] = load("res://demo/inventory_items/models/Remote.tscn")
-	goat.inventory_items_models["console"] = load("res://demo/inventory_items/models/Console.tscn")
 
 
 func notify(item_name, text):

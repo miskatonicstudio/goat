@@ -26,12 +26,14 @@ enum GameMode {
 	GAME_MODE_CONTEXT_INVENTORY
 }
 
+# Variables
 export (GameMode) var game_mode = GAME_MODE_EXPLORING
-export (Dictionary) var inventory_items_textures = {}
-export (Dictionary) var inventory_items_models = {}
+
+var _unique_names = []
+var _game_resources_directory = ProjectSettings.get("application/config/name").to_lower()
+var _inventory_items = {}
 
 var monologue_player = null
-var _unique_names = []
 
 
 func _ready():
@@ -82,3 +84,32 @@ func register_unique_name(unique_name):
 			add_user_signal(s.format([unique_name, other_name], "{}"))
 			add_user_signal(s.format([other_name, unique_name], "{}"))
 	_unique_names.append(unique_name)
+
+
+func set_game_resources_directory(name):
+	_game_resources_directory = name
+
+
+func register_inventory_item(item_name):
+	assert(not _inventory_items.has(item_name))
+	
+	var icon_path = "res://{}/inventory_items/icons/{}.png".format(
+		[_game_resources_directory, item_name], "{}"
+	)
+	# Comply with Godot scene naming standards
+	var model_name = item_name.capitalize().replace(" ", "")
+	var model_path = "res://{}/inventory_items/models/{}.tscn".format(
+		[_game_resources_directory, model_name], "{}"
+	)
+	_inventory_items[item_name] = {
+		"icon": load(icon_path),
+		"model": load(model_path),
+	}
+
+
+func get_inventory_item_icon(item_name):
+	return _inventory_items[item_name]["icon"]
+
+
+func get_inventory_item_model(item_name):
+	return _inventory_items[item_name]["model"]

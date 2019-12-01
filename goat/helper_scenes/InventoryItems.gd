@@ -119,7 +119,7 @@ func item_button_pressed(item_name):
 
 func item_button_down(item_name):
 	currently_dragged_item = item_name
-	var texture = goat.inventory_items_textures[item_name]
+	var texture = goat.get_inventory_item_icon(item_name)
 	Input.set_custom_mouse_cursor(texture, Input.CURSOR_ARROW, Vector2(32, 32))
 
 
@@ -150,7 +150,7 @@ func add_item_button(item_name=null, insert_position=null):
 	item_button.set_meta("item_name", item_name)
 	
 	if item_name:
-		item_button.icon = goat.inventory_items_textures[item_name]
+		item_button.icon = goat.get_inventory_item_icon(item_name)
 		item_button.connect("pressed", self, "item_button_pressed", [item_name, ])
 		item_button.connect("button_down", self, "item_button_down", [item_name, ])
 		item_button.add_to_group("goat_inventory_item_button_" + item_name)
