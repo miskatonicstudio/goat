@@ -14,10 +14,15 @@ var current_angle_vertical = 0
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
 	viewport.own_world = true
+	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_obtained", self, "item_obtained")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_selected", self, "item_selected")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_removed", self, "item_removed")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_replaced", self, "item_replaced")
 
 
@@ -46,7 +51,10 @@ func _input(event):
 	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		ray_cast.enabled = true
-	elif Input.is_action_just_pressed("goat_toggle_inventory"):
+	elif (
+		Input.is_action_just_pressed("goat_toggle_inventory") or
+		Input.is_action_just_pressed("goat_dismiss")
+	):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 		get_tree().set_input_as_handled()
 

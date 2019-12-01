@@ -34,6 +34,13 @@ func _ready():
 	adjust_buttons()
 
 
+func _input(_event):
+	if goat.game_mode != goat.GAME_MODE_CONTEXT_INVENTORY:
+		return
+	if Input.is_action_just_pressed("goat_dismiss"):
+		go_back_to_exploring()
+
+
 func game_mode_changed(new_game_mode):
 	if new_game_mode == goat.GAME_MODE_CONTEXT_INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
@@ -92,11 +99,11 @@ func item_button_pressed(item_name):
 	goat.emit_signal(
 		"inventory_item_{}_used_on_environment_{}".format([item_name, environment_item_name], "{}")
 	)
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	go_back_to_exploring()
 
 
 func _on_ExitButton_pressed():
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	go_back_to_exploring()
 
 
 func add_item_button(item_name=null, insert_position=null):
@@ -148,3 +155,7 @@ func adjust_buttons():
 		button_pivot.rect_rotation = 360.0 / CAPACITY * button_pivot.get_index()
 		var actual_button = button_pivot.get_children().pop_front()
 		actual_button.rect_rotation = -button_pivot.rect_rotation
+
+
+func go_back_to_exploring():
+	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
