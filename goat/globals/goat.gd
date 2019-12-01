@@ -22,6 +22,8 @@ signal inventory_item_used (item_name)
 signal inventory_item_used_on_inventory (item_name, inventory_item_name)
 # warning-ignore:unused_signal
 signal inventory_item_used_on_environment (item_name, environment_item_name)
+# This is emitted when the global inventory item list was updated
+signal inventory_items_changed (inventory_items)
 
 # warning-ignore:unused_signal
 signal game_mode_changed (new_game_mode)
@@ -80,15 +82,18 @@ func game_mode_changed(new_game_mode):
 func inventory_item_obtained(item_name):
 	if len(inventory_items) < INVENTORY_CAPACITY:
 		inventory_items.append(item_name)
+	emit_signal("inventory_items_changed", inventory_items)
 
 
 func inventory_item_replaced(item_name_replaced, item_name_replacing):
 	var item_index = inventory_items.find(item_name_replaced)
 	inventory_items[item_index] = item_name_replacing
+	emit_signal("inventory_items_changed", inventory_items)
 
 
 func inventory_item_removed(item_name):
 	inventory_items.erase(item_name)
+	emit_signal("inventory_items_changed", inventory_items)
 
 
 func set_game_resources_directory(name):
