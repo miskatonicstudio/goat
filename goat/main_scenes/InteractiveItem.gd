@@ -21,6 +21,7 @@ onready var player = $Player
 
 func _ready():
 	add_to_group("goat_interactive_item_" + unique_name)
+	goat.register_unique_name(unique_name)
 	$CollisionShape.shape = collision_shape
 	player.stream = sound
 	
@@ -71,6 +72,7 @@ func activate(item_name, _position):
 		collision_layer = 0
 	if item_mode == ITEM_MODE_INVENTORY:
 		goat.emit_signal("inventory_item_obtained", unique_name)
+		goat.emit_signal("inventory_item_obtained_" + unique_name)
 		# Hide the model, but keep the rest until the sound is played
 		model.visible = false
 

@@ -42,6 +42,11 @@ func _input(event):
 			goat.emit_signal(
 				"inventory_item_used_on_inventory", currently_dragged_item, currently_selected_item
 			)
+			goat.emit_signal(
+				"inventory_item_{}_used_on_inventory_{}".format(
+					[currently_dragged_item, currently_selected_item], "{}"
+				)
+			)
 		currently_dragged_item = null
 
 
@@ -56,6 +61,7 @@ func item_obtained(item_name):
 	
 	if not currently_selected_item:
 		goat.emit_signal("inventory_item_selected", item_name)
+		goat.emit_signal("inventory_item_selected_" + item_name)
 
 
 func item_selected(item_name):
@@ -87,6 +93,7 @@ func item_removed(item_name):
 				index = index - 1
 			var new_item_name = item_button_container.get_children()[index].get_meta("item_name")
 			goat.emit_signal("inventory_item_selected", new_item_name)
+			goat.emit_signal("inventory_item_selected_" + new_item_name)
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
@@ -101,11 +108,13 @@ func item_replaced(item_name_replaced, item_name_replacing):
 	if currently_selected_item == item_name_replaced:
 		currently_selected_item = null
 		goat.emit_signal("inventory_item_selected", item_name_replacing)
+		goat.emit_signal("inventory_item_selected_" + item_name_replacing)
 
 
 func item_button_pressed(item_name):
 	if item_name != currently_selected_item:
 		goat.emit_signal("inventory_item_selected", item_name)
+		goat.emit_signal("inventory_item_selected_" + item_name)
 
 
 func item_button_down(item_name):
@@ -116,6 +125,7 @@ func item_button_down(item_name):
 
 func _on_UseButton_pressed():
 	goat.emit_signal("inventory_item_used", currently_selected_item)
+	goat.emit_signal("inventory_item_used_" + currently_selected_item)
 
 
 func _on_BackButton_pressed():

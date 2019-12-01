@@ -31,6 +31,7 @@ export (Dictionary) var inventory_items_textures = {}
 export (Dictionary) var inventory_items_models = {}
 
 var monologue_player = null
+var _unique_names = []
 
 
 func _ready():
@@ -53,3 +54,33 @@ func play_monologue(arg1, sound):
 	monologue_player.stream = sound
 	monologue_player.stream.loop = false
 	monologue_player.play()
+
+
+func register_unique_name(unique_name):
+	assert(not _unique_names.has(unique_name))
+	
+	var single_argument_signals = [
+		"interactive_item_selected",
+		"interactive_item_deselected",
+		"interactive_item_activated",
+		"inventory_item_obtained",
+		"inventory_item_selected",
+		"inventory_item_removed",
+		"inventory_item_used",
+	]
+	
+	var double_argument_signals = [
+		"inventory_item_{}_replaced_by_{}",
+		"inventory_item_{}_used_on_inventory_{}",
+		"inventory_item_{}_used_on_environment_{}",
+	]
+	
+	for s in single_argument_signals:
+		add_user_signal(s + "_" + unique_name)
+	for s in double_argument_signals:
+		for other_name in _unique_names:
+			print(s.format([unique_name, other_name], "{}"))
+			print(s.format([other_name, unique_name], "{}"))
+			add_user_signal(s.format([unique_name, other_name], "{}"))
+			add_user_signal(s.format([other_name, unique_name], "{}"))
+	_unique_names.append(unique_name)

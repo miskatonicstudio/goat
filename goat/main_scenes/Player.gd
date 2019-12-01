@@ -40,6 +40,7 @@ func _input(event):
 	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
 		if is_inventory_item:
 			goat.emit_signal("interactive_item_activated", environment_item_name, null)
+			goat.emit_signal("interactive_item_activated_" + environment_item_name)
 		else:
 			goat.emit_signal("game_mode_changed", goat.GAME_MODE_CONTEXT_INVENTORY)
 			get_tree().set_input_as_handled()

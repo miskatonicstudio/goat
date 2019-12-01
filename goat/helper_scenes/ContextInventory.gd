@@ -83,6 +83,9 @@ func item_replaced(item_name_replaced, item_name_replacing):
 
 func item_button_pressed(item_name):
 	goat.emit_signal("inventory_item_used_on_environment", item_name, environment_item_name)
+	goat.emit_signal(
+		"inventory_item_{}_used_on_environment_{}".format([item_name, environment_item_name], "{}")
+	)
 	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 
 
@@ -136,6 +139,6 @@ func adjust_buttons():
 		last_button.queue_free()
 	
 	for button_pivot in item_button_container.get_children():
-		button_pivot.rect_rotation = 360/CAPACITY * button_pivot.get_index()
+		button_pivot.rect_rotation = 360.0 / CAPACITY * button_pivot.get_index()
 		var actual_button = button_pivot.get_children().pop_front()
 		actual_button.rect_rotation = -button_pivot.rect_rotation

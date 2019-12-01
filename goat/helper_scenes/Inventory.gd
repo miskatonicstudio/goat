@@ -41,6 +41,7 @@ func _input(event):
 		ray_cast.enabled = false
 		if ray_cast.currently_selected_item_name:
 			goat.emit_signal("interactive_item_deselected", ray_cast.currently_selected_item_name)
+			goat.emit_signal("interactive_item_deselected_" + ray_cast.currently_selected_item_name)
 			ray_cast.currently_selected_item_name = null
 	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)

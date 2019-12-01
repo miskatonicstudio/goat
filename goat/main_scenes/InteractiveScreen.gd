@@ -9,6 +9,7 @@ onready var content = get_node("Content")
 
 func _ready():
 	add_to_group("goat_interactive_item_" + unique_name)
+	goat.register_unique_name(unique_name)
 	remove_child(content)
 	viewport.add_child(content)
 	viewport.size = content.rect_size

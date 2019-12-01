@@ -21,6 +21,8 @@ func _ready():
 	goat.connect("inventory_item_used_on_inventory", self, "use_item_on_inventory")
 	goat.connect("inventory_item_used_on_environment", self, "use_item_on_environment")
 	
+	goat.connect("inventory_item_pen_used_on_environment_button_2", self, "pen_on_button_2")
+	
 #	goat.connect_monologue("inventory_item_selected", load("res://demo/sounds/short.ogg"))
 #	goat.connect_monologue("inventory_item_used", load("res://demo/sounds/long.ogg"))
 	
@@ -86,3 +88,7 @@ func activate(item_name, _position):
 		door_open = not door_open
 	if item_name == "button_1":
 		$AnimationPlayer.play("drop_crate")
+
+
+func pen_on_button_2():
+	print("Custom signal: pen on button_2")
