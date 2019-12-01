@@ -17,15 +17,19 @@ func _ready():
 	inventory.hide()
 	context_inventory.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "interactive_item_selected")
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "interactive_item_deselected")
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if goat.game_mode != goat.GAME_MODE_EXPLORING:
 		return
 	if movement_direction:
+		# warning-ignore:return_value_discarded
 		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
 	# Make sure that collisions didn't accidentally move the Player up or down 
 	translation.y = 0
