@@ -79,8 +79,6 @@ func register_unique_name(unique_name):
 		add_user_signal(s + "_" + unique_name)
 	for s in double_argument_signals:
 		for other_name in _unique_names:
-			print(s.format([unique_name, other_name], "{}"))
-			print(s.format([other_name, unique_name], "{}"))
 			add_user_signal(s.format([unique_name, other_name], "{}"))
 			add_user_signal(s.format([other_name, unique_name], "{}"))
 	_unique_names.append(unique_name)
