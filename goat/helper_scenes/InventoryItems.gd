@@ -128,9 +128,10 @@ func item_button_down(item_name):
 
 
 func _on_UseButton_pressed():
-	var item_name = currently_selected_item
-	goat.emit_signal("inventory_item_used", item_name)
-	goat.emit_signal("inventory_item_used_" + item_name)
+	if currently_selected_item:
+		var item_name = currently_selected_item
+		goat.emit_signal("inventory_item_used", item_name)
+		goat.emit_signal("inventory_item_used_" + item_name)
 
 
 func _on_BackButton_pressed():
