@@ -16,9 +16,13 @@ onready var item_button_container = $TopBar
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_obtained", self, "item_obtained")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_selected", self, "item_selected")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_removed", self, "item_removed")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_replaced", self, "item_replaced")
 	
 	# Clear temp inventory slots
@@ -33,7 +37,7 @@ func _ready():
 
 func _input(event):
 	if currently_dragged_item and Input.is_action_just_released("goat_drag_inventory"):
-		Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
+		Input.set_custom_mouse_cursor(goat.game_cursor)
 		if (
 			event is InputEventMouse and
 			not top_bar.get_global_rect().has_point(event.global_position) and
@@ -120,7 +124,7 @@ func item_button_pressed(item_name):
 func item_button_down(item_name):
 	currently_dragged_item = item_name
 	var texture = goat.get_inventory_item_icon(item_name)
-	Input.set_custom_mouse_cursor(texture, Input.CURSOR_ARROW, Vector2(32, 32))
+	Input.set_custom_mouse_cursor(texture, 0, Vector2(32, 32))
 
 
 func _on_UseButton_pressed():

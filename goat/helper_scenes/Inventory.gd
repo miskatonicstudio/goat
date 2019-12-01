@@ -50,6 +50,7 @@ func _input(event):
 			ray_cast.currently_selected_item_name = null
 	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		Input.set_custom_mouse_cursor(goat.game_cursor)
 		ray_cast.enabled = true
 	elif (
 		Input.is_action_just_pressed("goat_toggle_inventory") or
@@ -64,6 +65,7 @@ func game_mode_changed(new_game_mode):
 	ray_cast.enabled = inventory_mode
 	if inventory_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		Input.set_custom_mouse_cursor(goat.game_cursor)
 		show()
 	else:
 		hide()

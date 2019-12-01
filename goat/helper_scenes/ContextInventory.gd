@@ -44,6 +44,7 @@ func _input(_event):
 func game_mode_changed(new_game_mode):
 	if new_game_mode == goat.GAME_MODE_CONTEXT_INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		Input.set_custom_mouse_cursor(goat.game_cursor)
 		show()
 	else:
 		hide()

@@ -33,6 +33,7 @@ var _unique_names = []
 var _game_resources_directory = ProjectSettings.get("application/config/name").to_lower()
 var _inventory_items = {}
 
+var game_cursor = null
 var monologue_player = null
 
 
@@ -40,6 +41,13 @@ func _ready():
 	monologue_player = AudioStreamPlayer.new()
 	add_child(monologue_player)
 	connect("game_mode_changed", self, "game_mode_changed")
+	_load_game_resources()
+
+
+func _load_game_resources():
+	game_cursor = load(
+		"res://{}/images/cursor.png".format([_game_resources_directory], "{}")
+	)
 
 
 func connect_monologue(signal_name, sound):
@@ -88,6 +96,7 @@ func register_unique_name(unique_name):
 
 func set_game_resources_directory(name):
 	_game_resources_directory = name
+	_load_game_resources()
 
 
 func register_inventory_item(item_name):
