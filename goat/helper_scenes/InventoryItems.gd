@@ -13,6 +13,8 @@ var item_button_group = ButtonGroup.new()
 
 onready var top_bar = $TopBar
 onready var item_button_container = $TopBar
+onready var use_button = $BottomBar/UseButton
+onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
 
 
 func _ready():
@@ -60,8 +62,8 @@ func item_obtained(item_name):
 		return
 	
 	add_item_button(item_name)
-	adjust_buttons()
 	number_of_items += 1
+	adjust_buttons()
 	
 	if not currently_selected_item:
 		goat.emit_signal("inventory_item_selected", item_name)
@@ -176,3 +178,10 @@ func adjust_buttons():
 		var last_button = item_button_container.get_children().pop_back()
 		item_button_container.remove_child(last_button)
 		last_button.queue_free()
+	check_if_empty()
+
+
+func check_if_empty():
+	var empty = number_of_items == 0
+	empty_inventory_text.visible = empty
+	use_button.disabled = empty

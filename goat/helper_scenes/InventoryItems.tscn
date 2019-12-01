@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://goat/helper_scenes/InventoryItems.gd" type="Script" id=1]
 [ext_resource path="res://goat/styles/inventory_slot_hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://goat/styles/inventory_slot_focus.tres" type="StyleBox" id=3]
 [ext_resource path="res://goat/styles/inventory_slot_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://goat/styles/inventory_slot_disabled.tres" type="StyleBox" id=5]
 
 [node name="InventoryItems" type="Control"]
 anchor_right = 1.0
@@ -13,6 +14,7 @@ margin_bottom = -10.0
 script = ExtResource( 1 )
 
 [node name="TopBar" type="HBoxContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 margin_bottom = 68.0
 alignment = 1
@@ -158,8 +160,22 @@ focus_mode = 0
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 4 )
+disabled = true
 enabled_focus_mode = 0
 text = "Use"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="EmptyInventoryText" type="Label" parent="CenterContainer"]
+margin_left = 399.0
+margin_top = 283.0
+margin_right = 625.0
+margin_bottom = 297.0
+text = "There are no items in the inventory"
 [connection signal="pressed" from="BottomBar/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="BottomBar/UseButton" to="." method="_on_UseButton_pressed"]
