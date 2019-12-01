@@ -1,18 +1,29 @@
 extends Node
 
 # Signals
+# warning-ignore:unused_signal
 signal interactive_item_selected (item_name)
+# warning-ignore:unused_signal
 signal interactive_item_deselected (item_name)
+# warning-ignore:unused_signal
 signal interactive_item_activated (item_name, position)
 
+# warning-ignore:unused_signal
 signal inventory_item_obtained (item_name)
+# warning-ignore:unused_signal
 signal inventory_item_selected (item_name)
+# warning-ignore:unused_signal
 signal inventory_item_removed (item_name)
+# warning-ignore:unused_signal
 signal inventory_item_replaced (item_name_replaced, item_name_replacing)
+# warning-ignore:unused_signal
 signal inventory_item_used (item_name)
+# warning-ignore:unused_signal
 signal inventory_item_used_on_inventory (item_name, inventory_item_name)
+# warning-ignore:unused_signal
 signal inventory_item_used_on_environment (item_name, environment_item_name)
 
+# warning-ignore:unused_signal
 signal game_mode_changed (new_game_mode)
 
 # Enumerations
@@ -32,6 +43,7 @@ export (GameMode) var game_mode = GAME_MODE_EXPLORING
 var _unique_names = []
 var _game_resources_directory = ProjectSettings.get("application/config/name").to_lower()
 var _inventory_items = {}
+var _monologues = {}
 
 var game_cursor = null
 var monologue_player = null
@@ -40,6 +52,7 @@ var monologue_player = null
 func _ready():
 	monologue_player = AudioStreamPlayer.new()
 	add_child(monologue_player)
+	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
 	_load_game_resources()
 
@@ -50,19 +63,38 @@ func _load_game_resources():
 	)
 
 
-func connect_monologue(signal_name, sound):
-	connect(signal_name, self, "play_monologue", [sound])
-
-
 func game_mode_changed(new_game_mode):
 	game_mode = new_game_mode
 
 
-func play_monologue(arg1, sound):
+func set_game_resources_directory(name):
+	_game_resources_directory = name
+	_load_game_resources()
+
+
+func register_monologue(sound_name):
+	assert(not _monologues.has(sound_name))
+	var sound_path = "res://{}/sounds/{}.ogg".format(
+		[_game_resources_directory, sound_name], "{}"
+	)
+	var sound = load(sound_path)
+	if sound is AudioStreamSample:
+		sound.loop_mode = AudioStreamSample.LOOP_DISABLED
+	elif sound is AudioStreamOGGVorbis:
+		sound.loop = false
+	_monologues[sound_name] = sound
+
+
+func connect_monologue(signal_name, sound_name):
+	# warning-ignore:return_value_discarded
+	connect(signal_name, self, "play_monologue", [sound_name])
+
+
+# Can be used manually
+func play_monologue(sound_name):
 	if monologue_player.playing:
 		monologue_player.stop()
-	monologue_player.stream = sound
-	monologue_player.stream.loop = false
+	monologue_player.stream = _monologues[sound_name]
 	monologue_player.play()
 
 
@@ -92,11 +124,6 @@ func register_unique_name(unique_name):
 			add_user_signal(s.format([unique_name, other_name], "{}"))
 			add_user_signal(s.format([other_name, unique_name], "{}"))
 	_unique_names.append(unique_name)
-
-
-func set_game_resources_directory(name):
-	_game_resources_directory = name
-	_load_game_resources()
 
 
 func register_inventory_item(item_name):

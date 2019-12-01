@@ -6,6 +6,9 @@ var door_open = false
 func _ready():
 	goat.set_game_resources_directory("demo")
 	
+	goat.register_unique_name("ball_on_a_stick")
+	goat.register_unique_name("square")
+	
 	goat.register_inventory_item("pen")
 	goat.register_inventory_item("ball")
 	goat.register_inventory_item("ball_on_a_stick")
@@ -13,6 +16,12 @@ func _ready():
 	goat.register_inventory_item("cube")
 	goat.register_inventory_item("square")
 	goat.register_inventory_item("console")
+	
+	goat.register_monologue("short")
+	goat.register_monologue("long")
+	
+	goat.connect_monologue("inventory_item_used_cube", "short")
+	goat.connect_monologue("inventory_item_ball_on_a_stick_used_on_environment_prism", "long")
 	
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
 	goat.connect("interactive_item_selected", self, "notify", ["Selected: "])
@@ -32,9 +41,6 @@ func _ready():
 	goat.connect("inventory_item_used_on_environment", self, "use_item_on_environment")
 	
 	goat.connect("inventory_item_pen_used_on_environment_button_2", self, "pen_on_button_2")
-	
-#	goat.connect_monologue("inventory_item_selected", load("res://demo/sounds/short.ogg"))
-#	goat.connect_monologue("inventory_item_used", load("res://demo/sounds/long.ogg"))
 
 
 func notify(item_name, text):
