@@ -37,6 +37,10 @@ enum GameMode {
 	GAME_MODE_CONTEXT_INVENTORY
 }
 
+# Inventory
+const INVENTORY_CAPACITY = 8
+var inventory_items = []
+
 # Variables
 export (GameMode) var game_mode = GAME_MODE_EXPLORING
 
@@ -54,6 +58,12 @@ func _ready():
 	add_child(monologue_player)
 	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
+	# warning-ignore:return_value_discarded
+	connect("inventory_item_obtained", self, "inventory_item_obtained")
+	# warning-ignore:return_value_discarded
+	connect("inventory_item_replaced", self, "inventory_item_replaced")
+	# warning-ignore:return_value_discarded
+	connect("inventory_item_removed", self, "inventory_item_removed")
 	_load_game_resources()
 
 
@@ -65,6 +75,20 @@ func _load_game_resources():
 
 func game_mode_changed(new_game_mode):
 	game_mode = new_game_mode
+
+
+func inventory_item_obtained(item_name):
+	if len(inventory_items) < INVENTORY_CAPACITY:
+		inventory_items.append(item_name)
+
+
+func inventory_item_replaced(item_name_replaced, item_name_replacing):
+	var item_index = inventory_items.find(item_name_replaced)
+	inventory_items[item_index] = item_name_replacing
+
+
+func inventory_item_removed(item_name):
+	inventory_items.erase(item_name)
 
 
 func set_game_resources_directory(name):
