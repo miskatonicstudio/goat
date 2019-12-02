@@ -53,12 +53,12 @@ var _inventory_items = {}
 var _monologues = {}
 
 var game_cursor = null
-var monologue_player = null
+var _monologue_player = null
 
 
 func _ready():
-	monologue_player = AudioStreamPlayer.new()
-	add_child(monologue_player)
+	_monologue_player = AudioStreamPlayer.new()
+	add_child(_monologue_player)
 	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
 	# warning-ignore:return_value_discarded
@@ -126,10 +126,10 @@ func connect_monologue(signal_name, sound_name):
 
 # Can be used manually
 func play_monologue(sound_name):
-	if monologue_player.playing:
-		monologue_player.stop()
-	monologue_player.stream = _monologues[sound_name]
-	monologue_player.play()
+	if _monologue_player.playing:
+		_monologue_player.stop()
+	_monologue_player.stream = _monologues[sound_name]
+	_monologue_player.play()
 
 
 func register_unique_name(unique_name):
