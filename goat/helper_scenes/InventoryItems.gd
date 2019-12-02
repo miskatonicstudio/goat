@@ -1,13 +1,13 @@
 extends Control
 
-const item_button_path = "TopBar/Button{index}"
+const item_button_path = "Items/Button{index}"
 
 var currently_selected_item_name = null
 var currently_selected_item_index = null
 var currently_dragged_item_name = null
 
-onready var top_bar = $TopBar
-onready var use_button = $BottomBar/UseButton
+onready var items_container = $Items
+onready var use_button = $Buttons/UseButton
 onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
 
 
@@ -31,7 +31,7 @@ func _input(event):
 		Input.set_custom_mouse_cursor(goat.game_cursor)
 		if (
 			event is InputEventMouse and
-			not top_bar.get_global_rect().has_point(event.global_position) and
+			not items_container.get_global_rect().has_point(event.global_position) and
 			currently_dragged_item_name != currently_selected_item_name
 		):
 			# Making a copy of names to avoid changing them when the first signal is handled

@@ -34,7 +34,7 @@ func inventory_items_changed(inventory_items):
 func item_obtained(_item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		if animation_player.is_playing():
-			var progress = SLIDE_TIME * (MOVEMENT_OFFSET + $Items.rect_position.y) / MOVEMENT_RANGE
+			var progress = SLIDE_TIME * (MOVEMENT_OFFSET + $Items.rect_position.x) / MOVEMENT_RANGE
 			animation_player.seek(progress, true)
 		else:
 			animation_player.play("show")
