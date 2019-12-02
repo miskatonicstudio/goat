@@ -49,7 +49,7 @@ export (GameMode) var game_mode = GAME_MODE_EXPLORING
 
 var _unique_names = []
 var _game_resources_directory = ProjectSettings.get("application/config/name").to_lower()
-var _inventory_items = {}
+var _inventory_config = {}
 var _monologues = {}
 
 var game_cursor = null
@@ -161,7 +161,7 @@ func register_unique_name(unique_name):
 
 
 func register_inventory_item(item_name):
-	assert(not _inventory_items.has(item_name))
+	assert(not _inventory_config.has(item_name))
 	
 	var icon_path = "res://{}/inventory_items/icons/{}.png".format(
 		[_game_resources_directory, item_name], "{}"
@@ -171,15 +171,15 @@ func register_inventory_item(item_name):
 	var model_path = "res://{}/inventory_items/models/{}.tscn".format(
 		[_game_resources_directory, model_name], "{}"
 	)
-	_inventory_items[item_name] = {
+	_inventory_config[item_name] = {
 		"icon": load(icon_path),
 		"model": load(model_path),
 	}
 
 
 func get_inventory_item_icon(item_name):
-	return _inventory_items[item_name]["icon"]
+	return _inventory_config[item_name]["icon"]
 
 
 func get_inventory_item_model(item_name):
-	return _inventory_items[item_name]["model"]
+	return _inventory_config[item_name]["model"]
