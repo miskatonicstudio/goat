@@ -42,6 +42,7 @@ enum GameMode {
 # Inventory
 const INVENTORY_CAPACITY = 8
 var inventory_items = []
+var _previous_inventory_items = []
 
 # Variables
 export (GameMode) var game_mode = GAME_MODE_EXPLORING
@@ -69,6 +70,13 @@ func _ready():
 	_load_game_resources()
 
 
+func _process(_delta):
+	# Send this signal after other signals were handled
+	if _previous_inventory_items != inventory_items:
+		emit_signal("inventory_items_changed", inventory_items)
+		_previous_inventory_items = inventory_items.duplicate()
+
+
 func _load_game_resources():
 	game_cursor = load(
 		"res://{}/images/cursor.png".format([_game_resources_directory], "{}")
@@ -82,18 +90,15 @@ func game_mode_changed(new_game_mode):
 func inventory_item_obtained(item_name):
 	if len(inventory_items) < INVENTORY_CAPACITY:
 		inventory_items.append(item_name)
-	emit_signal("inventory_items_changed", inventory_items)
 
 
 func inventory_item_replaced(item_name_replaced, item_name_replacing):
 	var item_index = inventory_items.find(item_name_replaced)
 	inventory_items[item_index] = item_name_replacing
-	emit_signal("inventory_items_changed", inventory_items)
 
 
 func inventory_item_removed(item_name):
 	inventory_items.erase(item_name)
-	emit_signal("inventory_items_changed", inventory_items)
 
 
 func set_game_resources_directory(name):
