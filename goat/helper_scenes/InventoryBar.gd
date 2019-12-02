@@ -1,5 +1,9 @@
 extends Control
 
+const SLIDE_TIME = 0.4
+const MOVEMENT_OFFSET = 70
+const MOVEMENT_RANGE = 80
+
 onready var animation_player = $AnimationPlayer
 
 
@@ -8,6 +12,7 @@ func _ready():
 	goat.connect("game_mode_changed", self, "game_mode_changed")
 	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_obtained", self, "item_obtained")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_items_changed", self, "inventory_items_changed")
 
 
@@ -28,4 +33,8 @@ func inventory_items_changed(inventory_items):
 
 func item_obtained(_item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
-		animation_player.play("show")
+		if animation_player.is_playing():
+			var progress = SLIDE_TIME * (MOVEMENT_OFFSET + $Items.rect_position.y) / MOVEMENT_RANGE
+			animation_player.seek(progress, true)
+		else:
+			animation_player.play("show")
