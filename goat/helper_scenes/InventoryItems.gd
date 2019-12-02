@@ -50,7 +50,7 @@ func game_mode_changed(new_game_mode):
 		currently_selected_item_name == null and
 		not goat.inventory_items.empty()
 	):
-		var item_name = goat.inventory_items[0]
+		var item_name = goat.inventory_items.back()
 		goat.emit_signal("inventory_item_selected", item_name)
 		goat.emit_signal("inventory_item_selected_" + item_name)
 
