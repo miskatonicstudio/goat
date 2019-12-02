@@ -58,7 +58,6 @@ func game_mode_changed(new_game_mode):
 func item_selected(item_name):
 	var item_index = goat.inventory_items.find(item_name)
 	var item_button = get_node(item_button_path.format({"index": item_index}))
-	print("index ", item_index, " ", item_button.pressed)
 	# This should not send "pressed" signal
 	if not item_button.pressed:
 		item_button.pressed = true
