@@ -23,23 +23,39 @@ func _ready():
 	goat.connect_monologue("inventory_item_used_cube", "short")
 	goat.connect_monologue("inventory_item_ball_on_a_stick_used_on_environment_prism", "long")
 	
+	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "notify", ["Selected: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "notify", ["Deselected: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "notify2", ["Activated: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_obtained", self, "notify", ["Obtained: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_selected", self, "notify", ["Selected (inv): "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_removed", self, "notify", ["Removed: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_used", self, "notify", ["Used: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_used_on_inventory", self, "notify2", ["Used inventory: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_used_on_environment", self, "notify2", ["Used environment: "])
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_replaced", self, "notify2", ["Replaced: "])
 	
+	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_used", self, "use_item")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_used_on_inventory", self, "use_item_on_inventory")
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_used_on_environment", self, "use_item_on_environment")
 	
+	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_pen_used_on_environment_button_2", self, "pen_on_button_2")
 
 
