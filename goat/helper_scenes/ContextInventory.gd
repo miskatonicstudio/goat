@@ -1,7 +1,8 @@
 extends Control
 
+const item_button_path = "CenterContainer/Center/Item{index}/Button"
+
 var environment_item_name = null
-var item_button_path = "CenterContainer/Center/Item{index}/Button"
 
 
 func _ready():
