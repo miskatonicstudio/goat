@@ -3,12 +3,12 @@ extends Control
 export var ROTATION_SENSITIVITY_X = 1.0
 export var ROTATION_SENSITIVITY_Y = 1.0
 
-const MAX_VERTICAL_ANGLE = 80
 onready var viewport = $CenterContainer/ViewportContainer/Viewport
 onready var ray_cast = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
 onready var camera = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera
 onready var rotator = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Rotator
-var current_angle_vertical = 0
+
+var current_item = null
 
 
 func _ready():
@@ -30,16 +30,11 @@ func _input(event):
 	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	if Input.is_action_pressed("goat_rotate_inventory"):
-		if event is InputEventMouseMotion:
-			var angles = event.relative
-			var angle_horizontal = deg2rad(angles.x * ROTATION_SENSITIVITY_X)
-			var angle_vertical = current_angle_vertical + (angles.y * ROTATION_SENSITIVITY_Y)
-			angle_vertical = clamp(angle_vertical, -MAX_VERTICAL_ANGLE, MAX_VERTICAL_ANGLE)
-			var delta_angle_vertical = deg2rad(angle_vertical - current_angle_vertical)
-			current_angle_vertical = angle_vertical
-		
-			rotator.rotate_object_local(Vector3(0, 1, 0), angle_horizontal)
-			rotator.rotate_x(delta_angle_vertical)
+		if event is InputEventMouseMotion and current_item:
+			var angle_horizontal = deg2rad(event.relative.x * ROTATION_SENSITIVITY_X)
+			var angle_vertical = deg2rad(event.relative.y * ROTATION_SENSITIVITY_Y)
+			current_item.rotate_y(angle_horizontal)
+			current_item.rotate_x(angle_vertical)
 	
 	if Input.is_action_just_pressed("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -71,27 +66,27 @@ func game_mode_changed(new_game_mode):
 		hide()
 
 
-func item_obtained(item_name, insert_after=null):
+func item_obtained(item_name):
 	var obtained_item = goat.get_inventory_item_model(item_name).instance()
 	obtained_item.add_to_group("goat_inventory_item")
 	obtained_item.add_to_group("goat_inventory_item_" + item_name)
 	obtained_item.translation.z = 999
 	obtained_item.hide()
-	if insert_after:
-		rotator.add_child_below_node(insert_after, obtained_item)
-	else:
-		rotator.add_child(obtained_item)
+	rotator.add_child(obtained_item)
 
 
 func item_selected(item_name):
+	# Hide all other items
 	for item in get_tree().get_nodes_in_group("goat_inventory_item"):
 		item.translation.z = 999
 		item.hide()
+	# Select the item
 	var selected_item = get_tree().get_nodes_in_group(
 		"goat_inventory_item_" + item_name
-	).pop_front()
+	).front()
 	selected_item.translation.z = 0
 	selected_item.show()
+	current_item = selected_item
 
 
 func item_removed(item_name):
@@ -99,14 +94,13 @@ func item_removed(item_name):
 		"goat_inventory_item_" + item_name
 	).pop_front()
 	removed_item.queue_free()
+	if current_item == removed_item:
+		current_item = null
 
 
 func item_replaced(item_name_replaced, item_name_replacing):
-	var replaced_item = get_tree().get_nodes_in_group(
-		"goat_inventory_item_" + item_name_replaced
-	).pop_front()
-	item_obtained(item_name_replacing, replaced_item)
-	replaced_item.queue_free()
+	item_obtained(item_name_replacing)
+	item_removed(item_name_replaced)
 
 
 func _on_ViewportContainer_gui_input(event):
