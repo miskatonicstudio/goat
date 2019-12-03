@@ -55,6 +55,8 @@ var _monologues = {}
 var game_cursor = null
 var _monologue_player = null
 
+var settings = Settings.new()
+
 
 func _ready():
 	_monologue_player = AudioStreamPlayer.new()
@@ -68,6 +70,9 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	connect("inventory_item_removed", self, "inventory_item_removed")
 	_load_game_resources()
+	
+	settings.connect("value_changed_graphics_fullscreen", self, "update_fullscreen")
+	update_fullscreen()
 
 
 func _process(_delta):
@@ -183,3 +188,46 @@ func get_inventory_item_icon(item_name):
 
 func get_inventory_item_model(item_name):
 	return _inventory_config[item_name]["model"]
+
+
+# Settings
+func update_fullscreen():
+	OS.window_fullscreen = settings.get_value("graphics", "fullscreen")
+
+
+class Settings:
+	const SETTINGS_FILE_NAME = "user://settings.cfg"
+	const DEFAULT_VALUES = [
+		["graphics", "fullscreen", true],
+		["graphics", "glow", true],
+		["graphics", "reflections", true],
+	]
+	var _settings_file = ConfigFile.new()
+	var autosave = true
+	
+	signal value_changed (section, key)
+	
+	func _init():
+		_settings_file.load(SETTINGS_FILE_NAME)
+		for entry in DEFAULT_VALUES:
+			var section =  entry[0]
+			var key = entry[1]
+			add_user_signal("value_changed_{}_{}".format([section, key], "{}"))
+			if _settings_file.get_value(section, key) == null:
+				var value = entry[2]
+				_settings_file.set_value(section, key, value)
+		_settings_file.save(SETTINGS_FILE_NAME)
+	
+	func get_value(section, key):
+		var value = _settings_file.get_value(section, key)
+		assert(value != null)
+		return value
+	
+	func set_value(section, key, value):
+		var previous_value = _settings_file.get_value(section, key)
+		if previous_value != value:
+			_settings_file.set_value(section, key, value)
+			if autosave:
+				_settings_file.save(SETTINGS_FILE_NAME)
+			emit_signal("value_changed", section, key)
+			emit_signal("value_changed_{}_{}".format([section, key], "{}"))
