@@ -1,6 +1,7 @@
 extends StaticBody
 
 export (String) var unique_name
+export (Vector2) var content_size = Vector2(100, 100)
 
 onready var screen_surface = $ScreenSurface
 onready var viewport = $Viewport
@@ -12,11 +13,12 @@ func _ready():
 	goat.register_unique_name(unique_name)
 	remove_child(content)
 	viewport.add_child(content)
-	viewport.size = content.rect_size
 	screen_surface.material_override = screen_surface.material_override.duplicate(true)
 	screen_surface.material_override.albedo_texture = viewport.get_texture()
 	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
+	content.rect_size = content_size
+	viewport.size = content_size
 
 
 func activate(item_name, position):

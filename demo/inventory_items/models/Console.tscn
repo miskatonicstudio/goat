@@ -29,5 +29,6 @@ shape = SubResource( 3 )
 [node name="InteractiveScreen" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0.101762 )
 unique_name = "console_screen"
+content_size = Vector2( 400, 400 )
 
 [node name="Content" parent="InteractiveScreen" instance=ExtResource( 2 )]
