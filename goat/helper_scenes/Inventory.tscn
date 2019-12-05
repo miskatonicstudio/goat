@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://goat/helper_scenes/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/helper_scenes/InventoryItems.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Environment" id=1]
+ss_reflections_enabled = true
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -30,6 +37,7 @@ render_target_update_mode = 3
 [node name="Inventory3D" type="Spatial" parent="CenterContainer/ViewportContainer/Viewport"]
 
 [node name="Camera" type="Camera" parent="CenterContainer/ViewportContainer/Viewport/Inventory3D"]
+environment = SubResource( 1 )
 current = true
 far = 5.0
 
