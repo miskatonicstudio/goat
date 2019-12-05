@@ -23,6 +23,10 @@ func _ready():
 	goat.connect("interactive_item_selected", self, "interactive_item_selected")
 	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "interactive_item_deselected")
+	goat.settings.connect("value_changed_graphics_glow", self, "update_glow")
+	goat.settings.connect("value_changed_graphics_reflections", self, "update_reflections")
+	update_glow()
+	update_reflections()
 
 
 func _physics_process(_delta):
@@ -109,3 +113,11 @@ func interactive_item_deselected(item_name):
 		if item_name == environment_item_name:
 			environment_item_name = null
 			is_inventory_item = false
+
+
+func update_glow():
+	camera.environment.glow_enabled = goat.settings.get_value("graphics", "glow")
+
+
+func update_reflections():
+	camera.environment.ss_reflections_enabled = goat.settings.get_value("graphics", "reflections")
