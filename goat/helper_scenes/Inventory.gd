@@ -2,9 +2,6 @@ extends Control
 
 const SIDE_SCREEN_MARGIN = 80
 
-export var ROTATION_SENSITIVITY_X = 1.0
-export var ROTATION_SENSITIVITY_Y = 1.0
-
 onready var viewport_container = $ViewportContainer
 onready var viewport = $ViewportContainer/Viewport
 onready var ray_cast = $ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
@@ -38,9 +35,10 @@ func _input(event):
 	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	if Input.is_action_pressed("goat_rotate_inventory"):
+		var mouse_sensitivity = goat.settings.get_value("controls", "mouse_sensitivity")
 		if event is InputEventMouseMotion and current_item:
-			var angle_horizontal = deg2rad(event.relative.x * ROTATION_SENSITIVITY_X)
-			var angle_vertical = deg2rad(event.relative.y * ROTATION_SENSITIVITY_Y)
+			var angle_horizontal = deg2rad(event.relative.x * mouse_sensitivity)
+			var angle_vertical = deg2rad(event.relative.y * mouse_sensitivity)
 			current_item.rotate_y(angle_horizontal)
 			current_item.rotate_x(angle_vertical)
 	
@@ -131,7 +129,7 @@ func update_reflections():
 
 
 func _on_Inventory_resized():
-	# CenterContainer doesn't work correctly vith ViewportContainer
+	# CenterContainer doesn't work correctly with ViewportContainer
 	if viewport:
 		var s = min(rect_size.x - 2 * SIDE_SCREEN_MARGIN, rect_size.y)
 		var size = Vector2(s, s)

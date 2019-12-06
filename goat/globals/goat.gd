@@ -201,6 +201,7 @@ class Settings:
 		["graphics", "fullscreen", true],
 		["graphics", "glow", true],
 		["graphics", "reflections", true],
+		["controls", "mouse_sensitivity", 0.3],
 	]
 	var _settings_file = ConfigFile.new()
 	var autosave = true

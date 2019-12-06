@@ -1,6 +1,5 @@
 extends KinematicBody
 
-export (float) var MOUSE_SENSITIVITY = 0.3
 export (float) var SPEED = 3.0
 
 onready var camera = $Camera
@@ -67,10 +66,11 @@ func game_mode_changed(new_game_mode):
 
 
 func rotate_camera(relative_movement):
+	var mouse_sensitivity = goat.settings.get_value("controls", "mouse_sensitivity")
 	# Rotate horizontally
-	camera.rotate_y(deg2rad(relative_movement.x * MOUSE_SENSITIVITY * -1))
+	camera.rotate_y(deg2rad(relative_movement.x * mouse_sensitivity * -1))
 	# Rotate vertically
-	var angle = -relative_movement.y * MOUSE_SENSITIVITY
+	var angle = -relative_movement.y * mouse_sensitivity
 	var camera_rot = camera.rotation_degrees
 	camera_rot.x += angle
 	camera_rot.x = clamp(camera_rot.x, -80, 80)
