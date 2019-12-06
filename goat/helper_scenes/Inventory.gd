@@ -1,12 +1,15 @@
 extends Control
 
+const SIDE_SCREEN_MARGIN = 80
+
 export var ROTATION_SENSITIVITY_X = 1.0
 export var ROTATION_SENSITIVITY_Y = 1.0
 
-onready var viewport = $CenterContainer/ViewportContainer/Viewport
-onready var ray_cast = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
-onready var camera = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Camera
-onready var rotator = $CenterContainer/ViewportContainer/Viewport/Inventory3D/Rotator
+onready var viewport_container = $ViewportContainer
+onready var viewport = $ViewportContainer/Viewport
+onready var ray_cast = $ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
+onready var camera = $ViewportContainer/Viewport/Inventory3D/Camera
+onready var rotator = $ViewportContainer/Viewport/Inventory3D/Rotator
 
 var current_item = null
 
@@ -28,6 +31,7 @@ func _ready():
 	goat.settings.connect("value_changed_graphics_reflections", self, "update_reflections")
 	update_glow()
 	update_reflections()
+	_on_Inventory_resized()
 
 
 func _input(event):
@@ -124,3 +128,13 @@ func update_glow():
 
 func update_reflections():
 	camera.environment.ss_reflections_enabled = goat.settings.get_value("graphics", "reflections")
+
+
+func _on_Inventory_resized():
+	# CenterContainer doesn't work correctly vith ViewportContainer
+	if viewport:
+		var s = min(rect_size.x - 2 * SIDE_SCREEN_MARGIN, rect_size.y)
+		var size = Vector2(s, s)
+		viewport.size = size
+		viewport_container.rect_size = size
+		viewport_container.rect_position = (rect_size - size) / 2
