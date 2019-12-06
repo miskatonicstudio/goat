@@ -17,11 +17,11 @@ func _ready():
 	goat.register_inventory_item("square")
 	goat.register_inventory_item("console")
 	
-	goat.register_monologue("short")
-	goat.register_monologue("long")
+	goat.monologue.register("short", "Something short")
+	goat.monologue.register("long", "Something much, much longer")
 	
-	goat.connect_monologue("inventory_item_used_cube", "short")
-	goat.connect_monologue("inventory_item_ball_on_a_stick_used_on_environment_prism", "long")
+	goat.monologue.trigger("short", "inventory_item_used_cube")
+	goat.monologue.trigger("long", "inventory_item_ball_on_a_stick_used_on_environment_prism")
 	
 	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
