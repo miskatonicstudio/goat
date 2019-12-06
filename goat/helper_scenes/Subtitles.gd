@@ -14,6 +14,8 @@ func show_subtitles(monologue_name):
 	text_box.show()
 
 
-func hide_subtitles():
-	text.text = ""
-	text_box.hide()
+func hide_subtitles(_monologue_name, interrupted):
+	# The monologue was played fully and not replaced by another one
+	if not interrupted:
+		text.text = ""
+		text_box.hide()

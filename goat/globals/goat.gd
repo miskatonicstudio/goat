@@ -165,9 +165,10 @@ func get_inventory_item_model(item_name):
 # Monologue
 class Monologue extends Node:
 	var _audio_player = null
+	var _currently_playing = null
 	var _monologues = {}
 	signal started (monologue_name)
-	signal finished
+	signal finished (monologue_name, interrupted)
 	
 	func _init():
 		_audio_player = AudioStreamPlayer.new()
@@ -191,7 +192,9 @@ class Monologue extends Node:
 	
 	func play(monologue_name):
 		if _audio_player.playing:
+			emit_signal("finished", _currently_playing, true)
 			_audio_player.stop()
+		_currently_playing = monologue_name
 		_audio_player.stream = _monologues[monologue_name]["sound"]
 		_audio_player.play()
 		emit_signal("started", monologue_name)
@@ -200,7 +203,8 @@ class Monologue extends Node:
 		return _monologues[monologue_name]["transcript"]
 	
 	func on_audio_player_finished():
-		emit_signal("finished")
+		emit_signal("finished", _currently_playing, false)
+		_currently_playing = null
 
 
 # Settings
