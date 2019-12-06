@@ -50,17 +50,15 @@ export (GameMode) var game_mode = GAME_MODE_EXPLORING
 var _unique_names = []
 var _game_resources_directory = ProjectSettings.get("application/config/name").to_lower()
 var _inventory_config = {}
-var _monologues = {}
 
 var game_cursor = null
-var _monologue_player = null
 
 var settings = Settings.new()
+var monologue = Monologue.new()
 
 
 func _ready():
-	_monologue_player = AudioStreamPlayer.new()
-	add_child(_monologue_player)
+	add_child(monologue)
 	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
 	# warning-ignore:return_value_discarded
@@ -109,32 +107,6 @@ func inventory_item_removed(item_name):
 func set_game_resources_directory(name):
 	_game_resources_directory = name
 	_load_game_resources()
-
-
-func register_monologue(sound_name):
-	assert(not _monologues.has(sound_name))
-	var sound_path = "res://{}/sounds/{}.ogg".format(
-		[_game_resources_directory, sound_name], "{}"
-	)
-	var sound = load(sound_path)
-	if sound is AudioStreamSample:
-		sound.loop_mode = AudioStreamSample.LOOP_DISABLED
-	elif sound is AudioStreamOGGVorbis:
-		sound.loop = false
-	_monologues[sound_name] = sound
-
-
-func connect_monologue(signal_name, sound_name):
-	# warning-ignore:return_value_discarded
-	connect(signal_name, self, "play_monologue", [sound_name])
-
-
-# Can be used manually
-func play_monologue(sound_name):
-	if _monologue_player.playing:
-		_monologue_player.stop()
-	_monologue_player.stream = _monologues[sound_name]
-	_monologue_player.play()
 
 
 func register_unique_name(unique_name):
@@ -188,6 +160,47 @@ func get_inventory_item_icon(item_name):
 
 func get_inventory_item_model(item_name):
 	return _inventory_config[item_name]["model"]
+
+
+# Monologue
+class Monologue extends Node:
+	var _audio_player = null
+	var _monologues = {}
+	signal started (monologue_name)
+	signal finished
+	
+	func _init():
+		_audio_player = AudioStreamPlayer.new()
+		add_child(_audio_player)
+		_audio_player.connect("finished", self, "on_audio_player_finished")
+	
+	func register(monologue_name, transcript=""):
+		assert(not _monologues.has(monologue_name))
+		var sound_path = "res://{}/sounds/{}.ogg".format(
+			[goat._game_resources_directory, monologue_name], "{}"
+		)
+		var sound = load(sound_path)
+		if sound is AudioStreamSample:
+			sound.loop_mode = AudioStreamSample.LOOP_DISABLED
+		elif sound is AudioStreamOGGVorbis:
+			sound.loop = false
+		_monologues[monologue_name] = {"sound": sound, "transcript": transcript}
+	
+	func trigger(monologue_name, signal_name, signal_object=goat):
+		signal_object.connect(signal_name, self, "play", [monologue_name])
+	
+	func play(monologue_name):
+		if _audio_player.playing:
+			_audio_player.stop()
+		_audio_player.stream = _monologues[monologue_name]["sound"]
+		_audio_player.play()
+		emit_signal("started", monologue_name)
+	
+	func get_transcript(monologue_name):
+		return _monologues[monologue_name]["transcript"]
+	
+	func on_audio_player_finished():
+		emit_signal("finished")
 
 
 # Settings
