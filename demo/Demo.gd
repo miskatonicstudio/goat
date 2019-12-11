@@ -17,8 +17,8 @@ func _ready():
 	goat.register_inventory_item("square")
 	goat.register_inventory_item("console")
 	
-	goat.monologue.register("short", "Something short")
-	goat.monologue.register("long", "Something much, much longer")
+	goat.monologue.register("short", "The cube turned into a flat polygon!")
+	goat.monologue.register("long", "This seems to have triggered the device ...")
 	
 	goat.monologue.trigger("short", "inventory_item_used_cube")
 	goat.monologue.trigger("long", "inventory_item_ball_on_a_stick_used_on_environment_prism")
