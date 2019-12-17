@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://goat/helper_scenes/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=2]
-[ext_resource path="res://goat/helper_scenes/InventoryItems.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/images/intentory_background_light.png" type="Texture" id=2]
+[ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/helper_scenes/InventoryItems.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 2 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_energy = 10.0
 ss_reflections_enabled = true
 glow_enabled = true
 glow_levels/1 = true
@@ -32,18 +39,17 @@ render_target_update_mode = 3
 [node name="Inventory3D" type="Spatial" parent="ViewportContainer/Viewport"]
 
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D"]
-environment = SubResource( 1 )
+editor/display_folded = true
+environment = SubResource( 2 )
 current = true
 far = 5.0
 
-[node name="RayCast3D" parent="ViewportContainer/Viewport/Inventory3D/Camera" instance=ExtResource( 2 )]
-
-[node name="OmniLight" type="OmniLight" parent="ViewportContainer/Viewport/Inventory3D"]
+[node name="RayCast3D" parent="ViewportContainer/Viewport/Inventory3D/Camera" instance=ExtResource( 3 )]
 
 [node name="Rotator" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 
-[node name="InventoryItems" parent="." instance=ExtResource( 3 )]
+[node name="InventoryItems" parent="." instance=ExtResource( 4 )]
 mouse_filter = 2
 [connection signal="resized" from="." to="." method="_on_Inventory_resized"]
 [connection signal="gui_input" from="ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]
