@@ -9,19 +9,19 @@
 [ext_resource path="res://demo/workshop/Plastic_002.material" type="Material" id=7]
 [ext_resource path="res://demo/workshop/LED.material" type="Material" id=8]
 [ext_resource path="res://demo/workshop/Metal_Dark_001.material" type="Material" id=9]
-[ext_resource path="res://demo/workshop/Metal.material" type="Material" id=10]
+[ext_resource path="res://demo/workshop/Metal_001.material" type="Material" id=10]
 [ext_resource path="res://demo/workshop/Plastic.material" type="Material" id=11]
 [ext_resource path="res://demo/workshop/Plastic_003.material" type="Material" id=12]
 [ext_resource path="res://demo/workshop/Metal_Dark_002.material" type="Material" id=13]
 [ext_resource path="res://demo/workshop/Plastic_001.material" type="Material" id=14]
 [ext_resource path="res://demo/workshop/LED_002.material" type="Material" id=15]
 [ext_resource path="res://demo/workshop/Metal_002.material" type="Material" id=16]
-[ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=17]
-[ext_resource path="res://demo/workshop/Material.material" type="Material" id=18]
-[ext_resource path="res://demo/workshop/Material_001.material" type="Material" id=19]
-[ext_resource path="res://demo/workshop/Material_002.material" type="Material" id=20]
-[ext_resource path="res://demo/workshop/Paper.material" type="Material" id=21]
-[ext_resource path="res://demo/workshop/Metal_001.material" type="Material" id=22]
+[ext_resource path="res://demo/workshop/Metal.material" type="Material" id=17]
+[ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=18]
+[ext_resource path="res://demo/workshop/Material.material" type="Material" id=19]
+[ext_resource path="res://demo/workshop/Material_001.material" type="Material" id=20]
+[ext_resource path="res://demo/workshop/Material_002.material" type="Material" id=21]
+[ext_resource path="res://demo/workshop/Paper.material" type="Material" id=22]
 [ext_resource path="res://demo/workshop/LED_001.material" type="Material" id=23]
 [ext_resource path="res://demo/workshop/LED_003.material" type="Material" id=24]
 [ext_resource path="res://demo/workshop/Light.material" type="Material" id=25]
@@ -282,7 +282,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 1404,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 808
@@ -294,7 +294,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 294,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 196
@@ -336,7 +336,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 78,
-"material": ExtResource( 18 ),
+"material": ExtResource( 19 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 44
@@ -350,7 +350,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 84,
-"material": ExtResource( 19 ),
+"material": ExtResource( 20 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 56
@@ -420,7 +420,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 174,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 98
@@ -432,7 +432,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 30,
-"material": ExtResource( 20 ),
+"material": ExtResource( 21 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 20
@@ -458,7 +458,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 84,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 54
@@ -484,7 +484,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 84,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 54
@@ -510,7 +510,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 84,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 54
@@ -536,7 +536,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 84,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 54
@@ -562,7 +562,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 84,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 54
@@ -576,7 +576,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 6,
-"material": ExtResource( 21 ),
+"material": ExtResource( 22 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 4
@@ -591,7 +591,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 6,
-"material": ExtResource( 21 ),
+"material": ExtResource( 22 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 4
@@ -605,7 +605,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 480,
-"material": ExtResource( 22 ),
+"material": ExtResource( 10 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 328
@@ -617,7 +617,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 1818,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 1102
@@ -629,7 +629,7 @@ surfaces/2 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 720,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 418
@@ -644,7 +644,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 48,
-"material": ExtResource( 21 ),
+"material": ExtResource( 22 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 22
@@ -672,7 +672,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 78,
-"material": ExtResource( 18 ),
+"material": ExtResource( 19 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 44
@@ -686,7 +686,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 108,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 72
@@ -698,7 +698,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 96,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 64
@@ -712,7 +712,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 108,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 72
@@ -724,7 +724,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 96,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 64
@@ -738,7 +738,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 672,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 448
@@ -750,7 +750,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 432,
-"material": ExtResource( 20 ),
+"material": ExtResource( 21 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 288
@@ -764,7 +764,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -790,7 +790,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -816,7 +816,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -842,7 +842,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -869,7 +869,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 174,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 98
@@ -881,7 +881,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 30,
-"material": ExtResource( 20 ),
+"material": ExtResource( 21 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 20
@@ -895,7 +895,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -921,7 +921,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -947,7 +947,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -973,7 +973,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 100
@@ -1000,7 +1000,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 774,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 518
@@ -1050,7 +1050,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 432,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 288
@@ -1064,7 +1064,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 276,
-"material": ExtResource( 19 ),
+"material": ExtResource( 20 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 168
@@ -1130,7 +1130,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 126,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 84
@@ -1182,7 +1182,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 3726,
-"material": ExtResource( 10 ),
+"material": ExtResource( 17 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 2207
@@ -1194,7 +1194,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 2550,
-"material": ExtResource( 17 ),
+"material": ExtResource( 18 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 1700
@@ -1208,7 +1208,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 486,
-"material": ExtResource( 18 ),
+"material": ExtResource( 19 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 271
@@ -1234,7 +1234,7 @@ material = ExtResource( 13 )
 size = Vector2( 1.05, 2 )
 
 [sub_resource type="SphereMesh" id=55]
-material = ExtResource( 22 )
+material = ExtResource( 10 )
 radius = 0.05
 height = 0.1
 radial_segments = 6
@@ -1318,7 +1318,7 @@ material/0 = null
 material/1 = null
 
 [node name="Platform" type="MeshInstance" parent="Walls"]
-transform = Transform( 8.42089, 0, 0, 0, -0.690013, 0, 0, 0, 8.42089, -0.190395, 0.134908, -0.559686 )
+transform = Transform( 6, 0, 0, 0, -6, 9.05975e-07, 0, -9.05975e-07, -6, 2.92652, -0.158, 2.75421 )
 mesh = SubResource( 9 )
 material/0 = null
 material/1 = null
@@ -1453,7 +1453,7 @@ mesh = SubResource( 31 )
 material/0 = null
 
 [node name="Box001" type="MeshInstance" parent="Walls"]
-transform = Transform( 0.290947, 0, 0.199687, 0, 0.327335, 0, -0.149993, 0, 0.38734, 2.93799, 0.441289, 2.73619 )
+transform = Transform( 0.0496508, 0, -0.430741, 0, 0.327335, 0, 0.323547, 0, 0.0661006, 0.68754, 0.434885, -2.22027 )
 mesh = SubResource( 32 )
 material/0 = null
 
@@ -1607,13 +1607,13 @@ operation = 2
 width = 0.2
 height = 2.1
 depth = 1.1
-material = ExtResource( 20 )
+material = ExtResource( 21 )
 
 [node name="Hole" type="CSGBox" parent="Walls/Door/Frame"]
 operation = 2
 width = 1.0
 depth = 1.0
-material = ExtResource( 20 )
+material = ExtResource( 21 )
 
 [node name="ActualDoor" type="MeshInstance" parent="Walls/Door"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0556245, 1.03267, 0 )
