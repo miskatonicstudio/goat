@@ -2,6 +2,7 @@ extends StaticBody
 
 export (String) var unique_name
 export (Vector2) var content_size = Vector2(100, 100)
+export (float, 0, 16) var emission_energy = 1.0
 
 onready var screen_surface = $ScreenSurface
 onready var viewport = $Viewport
@@ -15,6 +16,10 @@ func _ready():
 	viewport.add_child(content)
 	screen_surface.material_override = screen_surface.material_override.duplicate(true)
 	screen_surface.material_override.albedo_texture = viewport.get_texture()
+	if emission_energy:
+		screen_surface.material_override.emission_enabled = true
+		screen_surface.material_override.emission_texture = viewport.get_texture()
+		screen_surface.material_override.emission_energy = emission_energy
 	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
 	content.rect_size = content_size
