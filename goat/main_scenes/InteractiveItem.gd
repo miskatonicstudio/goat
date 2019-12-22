@@ -15,7 +15,9 @@ export (String) var unique_name
 export (ItemMode) var item_mode = ITEM_MODE_NORMAL
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 export (AudioStream) var sound = null setget set_sound
-onready var model = get_node("Model")
+
+onready var model = $Model
+onready var icon_interact = $IconInteract
 onready var player = $Player
 
 
@@ -24,10 +26,6 @@ func _ready():
 	goat.register_unique_name(unique_name)
 	$CollisionShape.shape = collision_shape
 	player.stream = sound
-	
-	model.material_override.emission_enabled = true
-	model.material_override.emission = Color.white
-	model.material_override.emission_energy = 0.0
 	
 	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "select")
@@ -55,12 +53,12 @@ func set_sound(new_sound):
 
 func select(item_name):
 	if item_name == unique_name:
-		model.material_override.emission_energy = 0.2
+		icon_interact.show()
 
 
 func deselect(item_name):
 	if item_name == unique_name:
-		model.material_override.emission_energy = 0.0
+		icon_interact.hide()
 
 
 func activate(item_name, _position):
