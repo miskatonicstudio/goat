@@ -4,7 +4,7 @@
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/workshop/Metal_Dark_001.material" type="Material" id=3]
 [ext_resource path="res://demo/workshop/LED.material" type="Material" id=4]
-[ext_resource path="res://demo/workshop/materials/generator_screen_off.material" type="Material" id=5]
+[ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=5]
 [ext_resource path="res://demo/workshop/Plastic_001.material" type="Material" id=6]
 [ext_resource path="res://demo/workshop/Metal_002.material" type="Material" id=7]
 
