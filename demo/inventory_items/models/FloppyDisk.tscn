@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://demo/inventory_items/models/FloppyDisk.gd" type="Script" id=1]
+[ext_resource path="res://demo/workshop/materials/floppy_body.material" type="Material" id=2]
+[ext_resource path="res://demo/workshop/materials/floppy_metal.material" type="Material" id=3]
+[ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CylinderMesh" id=1]
+material = ExtResource( 3 )
+top_radius = 0.18
+bottom_radius = 0.18
+height = 0.05
+radial_segments = 12
+rings = 1
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.2, 0.02, 0.1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = ExtResource( 3 )
+size = Vector3( 0.3, 0.2, 0.05 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "move_shutter"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CSGCombiner/InteractiveItem/Shutter:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.049, 0, 0 ), Vector3( 0.049, 0, 0 ), Vector3( -0.049, 0, 0 ) ]
+}
+
+[node name="FloppyDisk" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+
+[node name="Body" type="CSGBox" parent="CSGCombiner"]
+width = 1.0
+height = 1.0
+depth = 0.05
+material = ExtResource( 2 )
+
+[node name="Dent" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.5, 0.5, 0 )
+operation = 2
+width = 0.1
+height = 0.2
+depth = 0.2
+material = ExtResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.115 )
+operation = 2
+width = 0.4
+height = 0.4
+depth = 0.2
+material = ExtResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.115 )
+operation = 2
+width = 0.4
+height = 0.4
+depth = 0.2
+material = ExtResource( 2 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595, 0 )
+operation = 2
+width = 0.4
+height = 0.2
+depth = 0.2
+material = ExtResource( 2 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.115 )
+operation = 2
+radius = 0.2
+height = 0.2
+sides = 12
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.115 )
+operation = 2
+radius = 0.2
+height = 0.2
+sides = 12
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="InteractiveItem" parent="CSGCombiner" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.4, 0 )
+unique_name = "shutter"
+collision_shape = SubResource( 4 )
+
+[node name="Shutter" type="MeshInstance" parent="CSGCombiner/InteractiveItem"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.049, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/move_shutter = SubResource( 3 )
