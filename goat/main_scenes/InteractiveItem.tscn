@@ -10,6 +10,7 @@ extents = Vector3( 0.1, 0.1, 0.1 )
 flags_transparent = true
 flags_unshaded = true
 flags_no_depth_test = true
+flags_fixed_size = true
 params_billboard_mode = 1
 
 [node name="InteractiveItem" type="StaticBody" groups=[
@@ -27,6 +28,6 @@ shape = SubResource( 1 )
 visible = false
 material_override = SubResource( 2 )
 cast_shadow = 0
-pixel_size = 0.0005
+pixel_size = 0.0002
 texture = ExtResource( 2 )
 [connection signal="finished" from="Player" to="." method="_on_Player_finished"]

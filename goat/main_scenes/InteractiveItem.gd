@@ -12,11 +12,11 @@ enum ItemMode {
 }
 
 export (String) var unique_name
+export (String) var inventory_item_name
 export (ItemMode) var item_mode = ITEM_MODE_NORMAL
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 export (AudioStream) var sound = null setget set_sound
 
-onready var model = $Model
 onready var icon_interact = $IconInteract
 onready var player = $Player
 
@@ -69,10 +69,11 @@ func activate(item_name, _position):
 	if item_mode != ITEM_MODE_NORMAL:
 		collision_layer = 0
 	if item_mode == ITEM_MODE_INVENTORY:
-		goat.emit_signal("inventory_item_obtained", unique_name)
-		goat.emit_signal("inventory_item_obtained_" + unique_name)
+		goat.emit_signal("inventory_item_obtained", inventory_item_name)
+		goat.emit_signal("inventory_item_obtained_" + inventory_item_name)
 		# Hide the model, but keep the rest until the sound is played
-		model.visible = false
+		if has_node("Model"):
+			get_node("Model").visible = false
 
 
 func _on_Player_finished():
