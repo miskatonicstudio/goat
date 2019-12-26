@@ -8,5 +8,5 @@ func _ready():
 
 
 func item_activated(item_name, _position):
-	if item_name == "shutter" and not animation_player.is_playing():
+	if item_name == "floppy_shutter" and not animation_player.is_playing():
 		animation_player.play("move_shutter")
