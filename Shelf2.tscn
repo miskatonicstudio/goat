@@ -3,7 +3,7 @@
 [ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=1]
 [ext_resource path="res://demo/workshop/Material_002.material" type="Material" id=2]
 [ext_resource path="res://demo/workshop/Metal.material" type="Material" id=3]
-[ext_resource path="res://demo/workshop/Plastic.material" type="Material" id=4]
+[ext_resource path="res://demo/workshop/plastic_red.material" type="Material" id=4]
 [ext_resource path="res://demo/workshop/Rubber.material" type="Material" id=5]
 [ext_resource path="res://demo/workshop/materials/computer_screen_on.material" type="Material" id=6]
 [ext_resource path="res://demo/workshop/FloppyOnShelf.tscn" type="PackedScene" id=7]
@@ -108,7 +108,7 @@ material/0 = null
 material/1 = null
 
 [node name="Cylinder019" type="MeshInstance" parent="Model"]
-transform = Transform( 0.166811, -2.70572, 4.73345e-08, -2.13924e-07, 0, -7.17808, 1.18833, 2.12441, -3.84925e-15, -0.52857, 11.4893, -0.89944 )
+transform = Transform( 0.166811, -2.70572, 4.73345e-08, -2.13924e-07, 0, -7.17808, 1.18833, 2.12441, -3.84925e-15, -0.52857, -0.161626, -0.89944 )
 mesh = SubResource( 2 )
 material/0 = null
 material/1 = null
