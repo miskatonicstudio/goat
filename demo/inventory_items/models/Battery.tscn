@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://demo/BatteryModel.tscn" type="PackedScene" id=1]
+
+[node name="Battery" type="Spatial"]
+
+[node name="BatteryModel" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.92388, 0, 0.382683, 0, 1, 0, -0.382683, 0, 0.92388, 0, 0, 0 )
