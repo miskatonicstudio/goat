@@ -21,6 +21,7 @@ run/main_scene="res://demo/Demo.tscn"
 [autoload]
 
 goat="*res://goat/globals/goat.gd"
+demo="*res://demo/globals/demo.gd"
 
 [input]
 
