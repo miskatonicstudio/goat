@@ -13,8 +13,7 @@ func item_activated(item_name, _position):
 	if item_name == "remote_button":
 		$AnimationPlayer.play("press_button")
 		if powered_up:
-			pass
-			# TODO: send a signal: portal activated
+			demo.emit_signal("remote_pressed")
 
 
 func item_used_on_item(item_name_1, item_name_2):
