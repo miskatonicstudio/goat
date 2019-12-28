@@ -48,7 +48,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595, 0 )
 operation = 2
 width = 0.4
 height = 0.2
-depth = 0.2
+depth = 0.05
 material = ExtResource( 1 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="."]
