@@ -1,14 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://demo/inventory_items/models/Remote.gd" type="Script" id=1]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/workshop/materials/remote_button.material" type="Material" id=3]
+[ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=4]
 
 [sub_resource type="CubeMesh" id=1]
-size = Vector3( 0.5, 1.2, 0.2 )
+size = Vector3( 0.6, 1, 0.2 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.25, 0.6, 0.1 )
+extents = Vector3( 0.3, 0.5, 0.1 )
 
 [sub_resource type="SphereShape" id=3]
 radius = 0.3
@@ -35,11 +36,17 @@ tracks/0/keys = {
 "values": [ Vector3( 0, -0.209, 0.1 ), Vector3( 0, -0.209, 0.05 ), Vector3( 0, -0.209, 0.1 ) ]
 }
 
+[sub_resource type="SphereMesh" id=6]
+material = ExtResource( 4 )
+radius = 0.05
+height = 0.05
+radial_segments = 8
+rings = 4
+
 [node name="Remote" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1.2, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
@@ -60,3 +67,8 @@ material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/press_button = SubResource( 5 )
+
+[node name="LED" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500605, 0 )
+mesh = SubResource( 6 )
+material/0 = null
