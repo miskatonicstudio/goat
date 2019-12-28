@@ -4,7 +4,9 @@
 [ext_resource path="res://demo/workshop/Material_002.material" type="Material" id=2]
 [ext_resource path="res://demo/workshop/Metal.material" type="Material" id=3]
 [ext_resource path="res://demo/workshop/plastic_red.material" type="Material" id=4]
-[ext_resource path="res://demo/BatteryOnShelf.tscn" type="PackedScene" id=5]
+[ext_resource path="res://demo/pickable_items/Battery.tscn" type="PackedScene" id=5]
+
+
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
