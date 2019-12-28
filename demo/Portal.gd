@@ -10,6 +10,7 @@ onready var portal = $CSGTorus/Portal
 
 func _ready():
 	goat.connect("interactive_item_activated", self, "item_activated")
+	goat.connect("inventory_item_used", self, "item_used")
 	demo.connect("program_uploaded", self, "program_uploaded")
 	demo.connect("remote_pressed", self, "remote_pressed")
 
@@ -21,10 +22,15 @@ func item_activated(item_name, _position):
 	if item_name == "portal":
 		if food_eaten:
 			# TODO: End the game
-			pass
+			print("That's it!")
 		else:
 			# TODO: Inform that you need to eat
 			pass
+
+
+func item_used(item_name):
+	if item_name == "pizza":
+		food_eaten = true
 
 
 func program_uploaded():
