@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://demo/Portal.gd" type="Script" id=1]
 [ext_resource path="res://demo/workshop/Metal_Dark_001.material" type="Material" id=2]
 [ext_resource path="res://demo/workshop/materials/portal_metal.material" type="Material" id=3]
 [ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=4]
+[ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=5]
+[ext_resource path="res://demo/workshop/materials/portal_active.material" type="Material" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Platform"
@@ -32,6 +34,15 @@ surfaces/1 = {
 "vertex_count": 60
 }
 
+[sub_resource type="CylinderShape" id=2]
+height = 0.1
+
+[sub_resource type="CylinderMesh" id=3]
+material = ExtResource( 6 )
+height = 0.01
+radial_segments = 12
+rings = 1
+
 [node name="Portal" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -42,7 +53,7 @@ material/0 = null
 material/1 = null
 
 [node name="CSGTorus" type="CSGTorus" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5678, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.59, 0 )
 inner_radius = 1.0
 outer_radius = 1.2
 sides = 12
@@ -57,3 +68,12 @@ sides = 12
 ring_sides = 4
 smooth_faces = false
 material = ExtResource( 4 )
+
+[node name="Portal" parent="CSGTorus" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+unique_name = "portal"
+collision_shape = SubResource( 2 )
+
+[node name="Model" type="MeshInstance" parent="CSGTorus/Portal"]
+mesh = SubResource( 3 )
+material/0 = null

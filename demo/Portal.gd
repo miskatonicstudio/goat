@@ -2,7 +2,10 @@ extends Spatial
 
 # State: off, on, ready, active
 var state = "off"
+var food_eaten = false
+
 onready var led = $CSGTorus/LED
+onready var portal = $CSGTorus/Portal
 
 
 func _ready():
@@ -15,6 +18,13 @@ func item_activated(item_name, _position):
 	if item_name == "generator" and state == "off":
 		led.material = load("res://demo/workshop/materials/portal_on.material")
 		state = "on"
+	if item_name == "portal":
+		if food_eaten:
+			# TODO: End the game
+			pass
+		else:
+			# TODO: Inform that you need to eat
+			pass
 
 
 func program_uploaded():
@@ -26,4 +36,6 @@ func program_uploaded():
 func remote_pressed():
 	if state == "ready":
 		led.material = load("res://demo/workshop/materials/portal_active.material")
+		# "Activate" = move the portal
+		portal.translation = Vector3(0, 0, 0)
 		state = "active"
