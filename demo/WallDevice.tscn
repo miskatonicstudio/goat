@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://demo/workshop/Metal.material" type="Material" id=1]
 [ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=2]
 [ext_resource path="res://demo/workshop/plastic_red.material" type="Material" id=3]
 [ext_resource path="res://demo/workshop/Metal_002.material" type="Material" id=4]
+[ext_resource path="res://demo/pickable_items/Remote.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Walldevice"
@@ -72,3 +73,6 @@ material/2 = null
 transform = Transform( 2.81499, -1.2229e-07, 4.35369, -3.15901e-07, -1.30868, 9.32315e-08, 1.90989, -1.81772e-07, -1.23489, 0.00715923, 1.02234, -1.14519 )
 mesh = SubResource( 2 )
 material/0 = null
+
+[node name="Remote" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.721708, 0, -0.692198, 0, 1, 0, 0.692198, 0, 0.721708, -0.202756, 0.487416, 0.16543 )
