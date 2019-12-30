@@ -25,6 +25,7 @@ func item_used_on_environment(inventory_item, environment_item):
 		if $Desk/Monitor/InteractiveScreen.visible:
 			return
 		$AnimationPlayer.play("insert_floppy_disk")
+		goat.emit_signal("inventory_item_removed", "floppy_disk")
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
