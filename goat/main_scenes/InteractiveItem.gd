@@ -71,9 +71,8 @@ func activate(item_name, _position):
 	if item_mode == ITEM_MODE_INVENTORY:
 		goat.emit_signal("inventory_item_obtained", inventory_item_name)
 		goat.emit_signal("inventory_item_obtained_" + inventory_item_name)
-		# Hide the model, but keep the rest until the sound is played
-		if has_node("Model"):
-			get_node("Model").visible = false
+		# Hide the item, but keep the rest until the sound is played
+		hide()
 
 
 func _on_Player_finished():
