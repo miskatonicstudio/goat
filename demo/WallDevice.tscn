@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://demo/workshop/Metal.material" type="Material" id=1]
 [ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=2]
@@ -60,6 +60,9 @@ surfaces/0 = {
 "vertex_count": 216
 }
 
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.496959, 0.503552, 0.23294 )
+
 [node name="Spatial" type="Spatial"]
 
 [node name="WallDevice" type="MeshInstance" parent="."]
@@ -76,3 +79,8 @@ material/0 = null
 
 [node name="Remote" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.721708, 0, -0.692198, 0, 1, 0, 0.692198, 0, 0.721708, -0.202756, 0.487416, 0.16543 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 3 )

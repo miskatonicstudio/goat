@@ -4,4 +4,5 @@
 
 [node name="RayCast3D" type="RayCast"]
 cast_to = Vector3( 0, 0, -1 )
+collision_mask = 2
 script = ExtResource( 1 )

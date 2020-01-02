@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://demo/Portal.gd" type="Script" id=1]
 [ext_resource path="res://demo/workshop/Metal_Dark_001.material" type="Material" id=2]
@@ -43,6 +43,9 @@ height = 0.01
 radial_segments = 12
 rings = 1
 
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1.19846, 1.41121, 0.21017 )
+
 [node name="Portal" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -77,3 +80,9 @@ collision_shape = SubResource( 2 )
 [node name="Model" type="MeshInstance" parent="CSGTorus/Portal"]
 mesh = SubResource( 3 )
 material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40811, 0 )
+shape = SubResource( 4 )

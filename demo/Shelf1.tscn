@@ -1,12 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=1]
 [ext_resource path="res://demo/workshop/Material_002.material" type="Material" id=2]
 [ext_resource path="res://demo/workshop/Metal.material" type="Material" id=3]
 [ext_resource path="res://demo/workshop/plastic_red.material" type="Material" id=4]
 [ext_resource path="res://demo/pickable_items/Battery.tscn" type="PackedScene" id=5]
-
-
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -243,6 +241,9 @@ surfaces/1 = {
 "vertex_count": 96
 }
 
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.816436, 1.20861, 0.359516 )
+
 [node name="Shelf1" type="Spatial"]
 
 [node name="Model" type="MeshInstance" parent="."]
@@ -301,3 +302,9 @@ material/1 = null
 
 [node name="Battery" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.636794, 0, -0.771034, 0, 1, 0, 0.771034, 0, 0.636794, 0, 1.19378, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1911, -0.12659 )
+shape = SubResource( 10 )

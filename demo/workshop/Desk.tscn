@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://demo/workshop/Desk.gd" type="Script" id=1]
 [ext_resource path="res://demo/workshop/Material_001.material" type="Material" id=2]
@@ -177,6 +177,9 @@ tracks/0/keys = {
 "values": [ Vector3( 0.1, 0.119, -0.086 ), Vector3( -0.122785, 0.118999, -0.0859638 ) ]
 }
 
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.945237, 1, 0.541277 )
+
 [node name="Desk" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -240,4 +243,10 @@ anims/insert_floppy_disk = SubResource( 8 )
 
 [node name="PizzaPlate" parent="." instance=ExtResource( 14 )]
 transform = Transform( 0.169524, 0, -0.183743, 0, 0.25, 0, 0.183743, 0, 0.169524, 0.840395, 0.81774, 0.346449 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.976332, 0 )
+shape = SubResource( 9 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

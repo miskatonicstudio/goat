@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://demo/workshop/Generator.gd" type="Script" id=1]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
@@ -76,6 +76,9 @@ surfaces/1 = {
 "vertex_count": 54
 }
 
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.23057, 0.705197, 0.796598 )
+
 [node name="Generator" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -97,3 +100,9 @@ transform = Transform( -0.0118147, -0.114467, 0.384311, -0.399828, 0.0326817, -0
 mesh = SubResource( 3 )
 material/0 = null
 material/1 = null
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677863, 0 )
+shape = SubResource( 4 )

@@ -16,6 +16,7 @@ params_billboard_mode = 1
 [node name="InteractiveItem" type="StaticBody" groups=[
 "goat_interactive_item",
 ]]
+collision_layer = 2
 script = ExtResource( 1 )
 collision_shape = SubResource( 1 )
 
