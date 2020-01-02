@@ -43,6 +43,7 @@ func set_collision_shape(new_shape):
 
 func set_sound(new_sound):
 	sound = new_sound
+	# Disable sound loop
 	if sound is AudioStreamSample:
 		sound.loop_mode = AudioStreamSample.LOOP_DISABLED
 	elif sound is AudioStreamOGGVorbis:
@@ -64,22 +65,34 @@ func deselect(item_name):
 func activate(item_name, _position):
 	if item_name != unique_name:
 		return
-	if player.stream:
-		player.play()
+	play_sound()
+	# Disable collision detection
 	if item_mode != ITEM_MODE_NORMAL:
 		collision_layer = 0
 	if item_mode == ITEM_MODE_INVENTORY:
 		goat.emit_signal("inventory_item_obtained", inventory_item_name)
 		goat.emit_signal("inventory_item_obtained_" + inventory_item_name)
-		# Hide the item, but keep the rest until the sound is played
+		# Hide the item, but keep it until the sound is played
 		hide()
+
+
+func play_sound():
+	if player.stream:
+		player.play()
+	else:
+		# Make sure that "after sound" logic is executed
+		_on_Player_finished()
+
+
+func remove():
+	get_parent().remove_child(self)
+	call_deferred("queue_free")
 
 
 func _on_Player_finished():
 	# Remove the entire item, if it was obtained
 	if item_mode == ITEM_MODE_INVENTORY:
-		get_parent().remove_child(self)
-		call_deferred("queue_free")
+		remove()
 
 
 func is_inventory_item():
