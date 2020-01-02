@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://demo/ProgramUpload.gd" type="Script" id=1]
 [ext_resource path="res://demo/program_upload_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://demo/upload_button_style.tres" type="StyleBox" id=3]
+[ext_resource path="res://demo/upload_button_highlight_style.tres" type="StyleBox" id=3]
+[ext_resource path="res://demo/upload_button_style.tres" type="StyleBox" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.8, 0.8, 0.8, 1 )
@@ -60,7 +61,6 @@ custom_styles/bg = SubResource( 2 )
 percent_visible = false
 
 [node name="Upload" type="VBoxContainer" parent="Background"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -88,7 +88,7 @@ margin_bottom = 73.0
 rect_min_size = Vector2( 130, 0 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "NO"
 
@@ -100,7 +100,7 @@ rect_min_size = Vector2( 130, 0 )
 focus_mode = 0
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "YES"
 

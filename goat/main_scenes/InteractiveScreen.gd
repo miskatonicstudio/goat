@@ -22,15 +22,33 @@ func _ready():
 		screen_surface.material_override.emission_energy = emission_energy
 	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
+	# warning-ignore:return_value_discarded
+	goat.connect("interactive_item_selected", self, "select")
 	content.rect_size = content_size
 	viewport.size = content_size
+
+
+func select(item_name, position):
+	if item_name != unique_name:
+		pass
+	var local_position = screen_surface.to_local(position)
+	var screen_coordinates = Vector2(
+		local_position.x + 0.5, 0.5 - local_position.y
+	) * viewport.size
+	# Mouse movement
+	var ev = InputEventMouseMotion.new()
+	ev.global_position = screen_coordinates
+	ev.position = screen_coordinates
+	viewport.input(ev)
 
 
 func activate(item_name, position):
 	if item_name != unique_name:
 		return
 	var local_position = screen_surface.to_local(position)
-	var screen_coordinates = Vector2(local_position.x + 0.5, 0.5 - local_position.y) * viewport.size
+	var screen_coordinates = Vector2(
+		local_position.x + 0.5, 0.5 - local_position.y
+	) * viewport.size
 	var ev = InputEventMouseButton.new()
 	ev.button_index = BUTTON_LEFT
 	ev.global_position = screen_coordinates

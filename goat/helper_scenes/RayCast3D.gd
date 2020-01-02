@@ -7,9 +7,13 @@ var collision_point = null
 func _input(_event):
 	if not enabled:
 		return
-	if Input.is_action_just_pressed("goat_interact") and currently_selected_item_name:
-		goat.emit_signal("interactive_item_activated", currently_selected_item_name, collision_point)
-		goat.emit_signal("interactive_item_activated_" + currently_selected_item_name)
+	if currently_selected_item_name:
+		if Input.is_action_just_pressed("goat_interact"):
+			goat.emit_signal("interactive_item_activated", currently_selected_item_name, collision_point)
+			goat.emit_signal("interactive_item_activated_" + currently_selected_item_name)
+		else:
+			goat.emit_signal("interactive_item_selected", currently_selected_item_name, collision_point)
+			goat.emit_signal("interactive_item_selected_" + currently_selected_item_name)
 
 
 func _process(_delta):
