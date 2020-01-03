@@ -75,4 +75,5 @@ margin_right = 312.0
 margin_bottom = 352.0
 text = "EXIT"
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

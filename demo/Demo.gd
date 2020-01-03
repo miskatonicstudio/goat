@@ -8,6 +8,7 @@ func _ready():
 	animation_player.play("start_game")
 	# warning-ignore:return_value_discarded
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])
+	animation_player.connect("animation_finished", self, "animation_finished")
 	# This is only for demonstration purpose
 	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
@@ -39,3 +40,8 @@ func notify(arg, text):
 
 func notify2(arg1, arg2, text):
 	print(text + arg1 + " => " + str(arg2))
+
+
+func animation_finished(animation_name):
+	if animation_name == "end_game":
+		get_tree().change_scene("res://demo/Credits.tscn")

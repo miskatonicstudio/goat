@@ -2,7 +2,8 @@ extends Control
 
 
 func _ready():
-	pass # Replace with function body.
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	Input.set_custom_mouse_cursor(load("res://demo/images/cursor.png"))
 
 
 func _on_Exit_pressed():
@@ -11,3 +12,7 @@ func _on_Exit_pressed():
 
 func _on_Play_pressed():
 	get_tree().change_scene("res://demo/Demo.tscn")
+
+
+func _on_Credits_pressed():
+	get_tree().change_scene("res://demo/Credits.tscn")
