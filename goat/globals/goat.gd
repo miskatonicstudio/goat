@@ -71,6 +71,8 @@ func _ready():
 	
 	settings.connect("value_changed_graphics_fullscreen", self, "update_fullscreen")
 	update_fullscreen()
+	settings.connect("value_changed_graphics_shadows", self, "update_shadows")
+	update_shadows()
 
 
 func _process(_delta):
@@ -212,12 +214,22 @@ func update_fullscreen():
 	OS.window_fullscreen = settings.get_value("graphics", "fullscreen")
 
 
+func update_shadows():
+	var shadows_enabled = settings.get_value("graphics", "shadows")
+	var lamps = get_tree().get_nodes_in_group("lamp")
+	for lamp in lamps:
+		lamp.shadow_enabled = shadows_enabled
+		# Specular light creates reflections, without shadows they look wrong
+		lamp.light_specular = 0.5 if shadows_enabled else 0.0
+
+
 class Settings:
 	const SETTINGS_FILE_NAME = "user://settings.cfg"
 	const DEFAULT_VALUES = [
 		["graphics", "fullscreen", true],
 		["graphics", "glow", true],
 		["graphics", "reflections", true],
+		["graphics", "shadows", true],
 		["controls", "mouse_sensitivity", 0.3],
 	]
 	var _settings_file = ConfigFile.new()
