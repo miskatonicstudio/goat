@@ -23,10 +23,11 @@
 [ext_resource path="res://demo/workshop/Metal_Dark_001.material" type="Material" id=21]
 [ext_resource path="res://demo/workshop/Generator.tscn" type="PackedScene" id=22]
 [ext_resource path="res://demo/workshop/Desk.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Shelf2.tscn" type="PackedScene" id=24]
+[ext_resource path="res://demo/Shelf2.tscn" type="PackedScene" id=24]
 [ext_resource path="res://demo/Shelf1.tscn" type="PackedScene" id=25]
 [ext_resource path="res://demo/WallDevice.tscn" type="PackedScene" id=26]
 [ext_resource path="res://demo/Portal.tscn" type="PackedScene" id=27]
+
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Walls"
