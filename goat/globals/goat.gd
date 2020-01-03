@@ -73,6 +73,10 @@ func _ready():
 	update_fullscreen()
 	settings.connect("value_changed_graphics_shadows", self, "update_shadows")
 	update_shadows()
+	settings.connect("value_changed_sound_music_volume", self, "update_music_volume")
+	update_music_volume()
+	settings.connect("value_changed_sound_effects_volume", self, "update_effects_volume")
+	update_effects_volume()
 
 
 func _process(_delta):
@@ -174,6 +178,7 @@ class Monologue extends Node:
 	
 	func _init():
 		_audio_player = AudioStreamPlayer.new()
+		_audio_player.bus = "Music"
 		add_child(_audio_player)
 		_audio_player.connect("finished", self, "on_audio_player_finished")
 	
@@ -223,6 +228,18 @@ func update_shadows():
 		lamp.light_specular = 0.5 if shadows_enabled else 0.0
 
 
+func update_music_volume():
+	var volume = settings.get_value("sound", "music")
+	var bus_id = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_volume_db(bus_id, volume)
+
+
+func update_effects_volume():
+	var volume = settings.get_value("sound", "effects")
+	var bus_id = AudioServer.get_bus_index("Effects")
+	AudioServer.set_bus_volume_db(bus_id, volume)
+
+
 class Settings:
 	const SETTINGS_FILE_NAME = "user://settings.cfg"
 	const DEFAULT_VALUES = [
@@ -230,6 +247,8 @@ class Settings:
 		["graphics", "glow", true],
 		["graphics", "reflections", true],
 		["graphics", "shadows", true],
+		["sound", "music_volume", 0.0],
+		["sound", "effects_volume", 0.0],
 		["controls", "mouse_sensitivity", 0.3],
 	]
 	var _settings_file = ConfigFile.new()
