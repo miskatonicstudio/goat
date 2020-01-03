@@ -21,8 +21,7 @@ func item_activated(item_name, _position):
 		state = "on"
 	if item_name == "portal":
 		if food_eaten:
-			# TODO: End the game
-			print("That's it!")
+			demo.emit_signal("portal_entered")
 		else:
 			# TODO: Inform that you need to eat
 			pass

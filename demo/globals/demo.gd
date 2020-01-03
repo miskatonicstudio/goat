@@ -7,6 +7,8 @@ signal program_activated
 signal program_uploaded
 # warning-ignore:unused_signal
 signal remote_pressed
+# warning-ignore:unused_signal
+signal portal_entered
 
 
 func _ready():

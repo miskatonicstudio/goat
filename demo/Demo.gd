@@ -1,8 +1,14 @@
 extends Spatial
 
+onready var animation_player = $AnimationPlayer
 
-# This is only for demonstration purpose
+
+
 func _ready():
+	animation_player.play("start_game")
+	# warning-ignore:return_value_discarded
+	demo.connect("portal_entered", animation_player, "play", ["end_game"])
+	# This is only for demonstration purpose
 	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "notify", ["Game mode changed: "])
 	# warning-ignore:return_value_discarded

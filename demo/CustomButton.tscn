@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://demo/upload_button_highlight_style.tres" type="StyleBox" id=1]
+[ext_resource path="res://demo/upload_button_style.tres" type="StyleBox" id=2]
+[ext_resource path="res://demo/program_upload_font.tres" type="DynamicFont" id=3]
+
+[node name="CustomButton" type="Button"]
+margin_right = 12.0
+margin_bottom = 20.0
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
