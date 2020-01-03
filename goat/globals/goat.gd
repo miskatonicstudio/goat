@@ -229,13 +229,13 @@ func update_shadows():
 
 
 func update_music_volume():
-	var volume = settings.get_value("sound", "music")
+	var volume = settings.get_value("sound", "music_volume")
 	var bus_id = AudioServer.get_bus_index("Music")
 	AudioServer.set_bus_volume_db(bus_id, volume)
 
 
 func update_effects_volume():
-	var volume = settings.get_value("sound", "effects")
+	var volume = settings.get_value("sound", "effects_volume")
 	var bus_id = AudioServer.get_bus_index("Effects")
 	AudioServer.set_bus_volume_db(bus_id, volume)
 
