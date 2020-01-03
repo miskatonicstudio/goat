@@ -2,6 +2,8 @@
 
 ## Licenses
 
+### Models
+
 Pizza slice and plate models were created by [Quaternius](quaternius.com)
 and are available in the [Ultimate Food Pack](
 https://drive.google.com/drive/folders/1zMfN7q9VU80M7mLAbBBJyY2OdoXslbl1?usp=sharing
@@ -13,3 +15,9 @@ Floppy disk, remote, portal, and door models were created by Paweł Fertyk and a
 The remaining models were created by [Dalton5000](https://twitter.com/dalton8000)
 and can be found in [this repository](https://github.com/Byteron/robo-platformer)
 distributed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
+
+### Images
+
+Interaction icon was created using [this image](
+https://publicdomainvectors.org/en/free-clipart/Silhouette-of-hand-palm/36250.html
+), distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
