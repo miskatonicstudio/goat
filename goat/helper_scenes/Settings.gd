@@ -29,5 +29,5 @@ func _on_Exit_pressed():
 		get_tree().quit()
 
 
-func _on_Back_pressed():
+func _on_Resume_pressed():
 	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)

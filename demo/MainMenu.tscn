@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://demo/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://demo/images/background.jpg" type="Texture" id=2]
 [ext_resource path="res://demo/program_upload_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://goat/settings/SettingsButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demo/Settings.tscn" type="PackedScene" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -74,6 +75,10 @@ margin_top = 144.0
 margin_right = 104.0
 margin_bottom = 172.0
 text = "EXIT"
+
+[node name="Settings" parent="." instance=ExtResource( 5 )]
+visible = false
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

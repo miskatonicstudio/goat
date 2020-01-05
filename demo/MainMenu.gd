@@ -16,3 +16,7 @@ func _on_Play_pressed():
 
 func _on_Credits_pressed():
 	get_tree().change_scene("res://demo/Credits.tscn")
+
+
+func _on_Settings_pressed():
+	$Settings.show()
