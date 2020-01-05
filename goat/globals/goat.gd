@@ -32,11 +32,13 @@ signal game_mode_changed (new_game_mode)
 const GAME_MODE_EXPLORING = 0
 const GAME_MODE_INVENTORY = 1
 const GAME_MODE_CONTEXT_INVENTORY = 2
+const GAME_MODE_SETTINGS = 3
 
 enum GameMode {
 	GAME_MODE_EXPLORING,
 	GAME_MODE_INVENTORY,
-	GAME_MODE_CONTEXT_INVENTORY
+	GAME_MODE_CONTEXT_INVENTORY,
+	GAME_MODE_SETTINGS,
 }
 
 # Inventory
@@ -55,6 +57,11 @@ var game_cursor = null
 
 var settings = Settings.new()
 var monologue = Monologue.new()
+
+# Template settings/game settings
+# Exit scene: if null, Exit button in settings ends the program.
+# Otherwise, it will load the specified scene.
+var EXIT_SCENE = null
 
 
 func _ready():

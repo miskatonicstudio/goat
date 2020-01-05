@@ -27,6 +27,6 @@ func set_label_text(new_label_text):
 		label.text = new_label_text
 
 
-func _on_Slider_value_changed(value):
+func _on_Slider_value_changed(_value):
 	if settings_section and settings_key:
 		goat.settings.set_value(settings_section, settings_key, slider.value)

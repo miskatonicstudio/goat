@@ -121,11 +121,15 @@ func _on_ViewportContainer_gui_input(event):
 
 
 func update_glow():
-	camera.environment.glow_enabled = goat.settings.get_value("graphics", "glow")
+	camera.environment.glow_enabled = goat.settings.get_value(
+		"graphics", "glow"
+	)
 
 
 func update_reflections():
-	camera.environment.ss_reflections_enabled = goat.settings.get_value("graphics", "reflections")
+	camera.environment.ss_reflections_enabled = goat.settings.get_value(
+		"graphics", "reflections"
+	)
 
 
 func _on_Inventory_resized():

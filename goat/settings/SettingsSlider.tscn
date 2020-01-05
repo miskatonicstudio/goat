@@ -38,5 +38,6 @@ custom_icons/grabber_highlight = ExtResource( 3 )
 custom_icons/grabber = ExtResource( 3 )
 custom_styles/slider = SubResource( 1 )
 custom_styles/grabber_area = SubResource( 2 )
+step = 0.1
 focus_mode = 0
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

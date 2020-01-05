@@ -6,6 +6,7 @@ onready var camera = $Camera
 onready var ray_cast = $Camera/RayCast3D
 onready var inventory = $Inventory
 onready var context_inventory = $ContextInventory
+onready var settings = $Settings
 
 var movement_direction = Vector3()
 var environment_item_name = null
@@ -15,6 +16,7 @@ var is_inventory_item = false
 func _ready():
 	inventory.hide()
 	context_inventory.hide()
+	settings.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
@@ -45,6 +47,9 @@ func _input(event):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_INVENTORY)
 		get_tree().set_input_as_handled()
 	# Instead of opening a context inventory, pick up an inventory item
+	if Input.is_action_just_pressed("goat_dismiss"):
+		goat.emit_signal("game_mode_changed", goat.GAME_MODE_SETTINGS)
+		get_tree().set_input_as_handled()
 	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
 		if is_inventory_item:
 			goat.emit_signal("interactive_item_activated", environment_item_name, null)
@@ -121,4 +126,6 @@ func update_glow():
 
 
 func update_reflections():
-	camera.environment.ss_reflections_enabled = goat.settings.get_value("graphics", "reflections")
+	camera.environment.ss_reflections_enabled = goat.settings.get_value(
+		"graphics", "reflections"
+	)

@@ -13,6 +13,7 @@ signal portal_entered
 
 func _ready():
 	goat.set_game_resources_directory("demo")
+	goat.EXIT_SCENE = "res://demo/MainMenu.tscn"
 	
 	goat.register_inventory_item("floppy_disk")
 	goat.register_inventory_item("battery")

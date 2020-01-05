@@ -2,11 +2,11 @@
 
 [ext_resource path="res://demo/upload_button_highlight_style.tres" type="StyleBox" id=1]
 [ext_resource path="res://demo/upload_button_style.tres" type="StyleBox" id=2]
-[ext_resource path="res://demo/program_upload_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://goat/fonts/settings_font.tres" type="DynamicFont" id=3]
 
-[node name="CustomButton" type="Button"]
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="SettingsButton" type="Button"]
+margin_right = 8.0
+margin_bottom = 73.0
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 1 )
 custom_styles/focus = ExtResource( 2 )
