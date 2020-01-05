@@ -13,12 +13,12 @@ onready var label = $Label
 
 func _ready():
 	label.text = label_text
+	if settings_section and settings_key:
+		slider.value = goat.settings.get_value(settings_section, settings_key)
 	if min_value:
 		slider.min_value = min_value
 	if max_value:
 		slider.max_value = max_value
-	if settings_section and settings_key:
-		slider.value = goat.settings.get_value(settings_section, settings_key)
 
 
 func set_label_text(new_label_text):
