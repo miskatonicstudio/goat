@@ -4,20 +4,21 @@
 [ext_resource path="res://goat/fonts/settings_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://goat/images/settings_slider_grabber.png" type="Texture" id=3]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 border_width_top = 8
 border_width_bottom = 8
 border_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 
 [node name="SettingsSlider" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1024.0
-margin_bottom = -560.0
+margin_bottom = -550.0
+rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 script = ExtResource( 1 )
 
@@ -30,13 +31,12 @@ valign = 1
 [node name="Slider" type="HSlider" parent="."]
 margin_top = 24.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
 custom_icons/grabber_disabled = ExtResource( 3 )
 custom_icons/grabber_highlight = ExtResource( 3 )
 custom_icons/grabber = ExtResource( 3 )
-custom_styles/slider = SubResource( 2 )
-custom_styles/grabber_area = SubResource( 1 )
-min_value = -16.0
-max_value = 16.0
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area = SubResource( 2 )
 focus_mode = 0
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]
