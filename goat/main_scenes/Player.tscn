@@ -3,10 +3,10 @@
 [ext_resource path="res://goat/main_scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://goat/environments/default_environment.tres" type="Environment" id=2]
 [ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://goat/helper_scenes/Subtitles.tscn" type="PackedScene" id=4]
-[ext_resource path="res://goat/helper_scenes/InventoryBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://goat/helper_scenes/Inventory.tscn" type="PackedScene" id=6]
-[ext_resource path="res://goat/helper_scenes/ContextInventory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://goat/helper_scenes/InventoryBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://goat/helper_scenes/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://goat/helper_scenes/ContextInventory.tscn" type="PackedScene" id=6]
+[ext_resource path="res://goat/helper_scenes/Subtitles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://goat/helper_scenes/Settings.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CylinderShape" id=1]
@@ -29,10 +29,6 @@ environment = ExtResource( 2 )
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
 
-[node name="Subtitles" parent="." instance=ExtResource( 4 )]
-
-[node name="InventoryBar" parent="." instance=ExtResource( 5 )]
-
 [node name="Scope" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,8 +40,12 @@ margin_right = 2.0
 margin_bottom = 7.0
 text = "·"
 
-[node name="Inventory" parent="." instance=ExtResource( 6 )]
+[node name="InventoryBar" parent="." instance=ExtResource( 4 )]
 
-[node name="ContextInventory" parent="." instance=ExtResource( 7 )]
+[node name="Inventory" parent="." instance=ExtResource( 5 )]
+
+[node name="ContextInventory" parent="." instance=ExtResource( 6 )]
+
+[node name="Subtitles" parent="." instance=ExtResource( 7 )]
 
 [node name="Settings" parent="." instance=ExtResource( 8 )]

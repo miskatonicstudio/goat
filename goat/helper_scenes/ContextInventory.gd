@@ -37,7 +37,7 @@ func game_mode_changed(new_game_mode):
 		hide()
 
 
-func interactive_item_selected(item_name):
+func interactive_item_selected(item_name, _position):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
 

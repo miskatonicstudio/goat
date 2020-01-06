@@ -52,7 +52,7 @@ func set_sound(new_sound):
 		player.stream = sound
 
 
-func select(item_name):
+func select(item_name, _position):
 	if item_name == unique_name:
 		icon_interact.show()
 

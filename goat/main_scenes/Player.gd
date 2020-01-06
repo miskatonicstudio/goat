@@ -107,7 +107,7 @@ func update_movement_direction():
 	movement_direction = movement_direction.normalized()
 
 
-func interactive_item_selected(item_name):
+func interactive_item_selected(item_name, _position):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
 		var actual_item = get_tree().get_nodes_in_group("goat_interactive_item_" + item_name).pop_back()

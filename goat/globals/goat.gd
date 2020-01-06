@@ -2,7 +2,7 @@ extends Node
 
 # Signals
 # warning-ignore:unused_signal
-signal interactive_item_selected (item_name)
+signal interactive_item_selected (item_name, position)
 # warning-ignore:unused_signal
 signal interactive_item_deselected (item_name)
 # warning-ignore:unused_signal
@@ -61,6 +61,7 @@ var monologue = Monologue.new()
 # Template settings/game settings
 # Exit scene: if null, Exit button in settings ends the program.
 # Otherwise, it will load the specified scene.
+# warning-ignore:unused_class_variable
 var EXIT_SCENE = null
 
 

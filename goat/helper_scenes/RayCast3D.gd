@@ -34,5 +34,5 @@ func _process(_delta):
 			goat.emit_signal("interactive_item_deselected_" + currently_selected_item_name)
 		currently_selected_item_name = new_item_name
 		if currently_selected_item_name:
-			goat.emit_signal("interactive_item_selected", currently_selected_item_name)
+			goat.emit_signal("interactive_item_selected", currently_selected_item_name, collision_point)
 			goat.emit_signal("interactive_item_selected_" + currently_selected_item_name)
