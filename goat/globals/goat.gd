@@ -183,6 +183,8 @@ class Monologue extends Node:
 	var _audio_player = null
 	var _currently_playing = null
 	var _monologues = {}
+	var _defaults = []
+	var _default_scheduled = false
 	signal started (monologue_name)
 	signal finished (monologue_name, interrupted)
 	
@@ -190,7 +192,7 @@ class Monologue extends Node:
 		_audio_player = AudioStreamPlayer.new()
 		_audio_player.bus = "Music"
 		add_child(_audio_player)
-		_audio_player.connect("finished", self, "on_audio_player_finished")
+		_audio_player.connect("finished", self, "_on_audio_player_finished")
 	
 	func register(monologue_name, transcript=""):
 		assert(not _monologues.has(monologue_name))
@@ -204,24 +206,51 @@ class Monologue extends Node:
 			sound.loop = false
 		_monologues[monologue_name] = {"sound": sound, "transcript": transcript}
 	
-	func trigger(monologue_name, signal_name, signal_object=goat):
-		signal_object.connect(signal_name, self, "play", [monologue_name])
+	func trigger(signal_object, signal_name, monologue_names):
+		signal_object.connect(signal_name, self, "play", [monologue_names])
 	
-	func play(monologue_name):
+	func play(monologue_names):
+		_default_scheduled = false
 		if _audio_player.playing:
 			emit_signal("finished", _currently_playing, true)
 			_audio_player.stop()
+		var monologue_name = null;
+		if monologue_names is Array:
+			randomize()
+			monologue_name = monologue_names[randi() % monologue_names.size()]
+		else:
+			monologue_name = monologue_names
 		_currently_playing = monologue_name
 		_audio_player.stream = _monologues[monologue_name]["sound"]
 		_audio_player.play()
 		emit_signal("started", monologue_name)
 	
+	func _process(_delta):
+		if _default_scheduled:
+			play_default()
+	
+	func set_defaults(defaults):
+		_defaults = defaults
+	
 	func get_transcript(monologue_name):
 		return _monologues[monologue_name]["transcript"]
 	
-	func on_audio_player_finished():
+	func _on_audio_player_finished():
 		emit_signal("finished", _currently_playing, false)
 		_currently_playing = null
+	
+	func connect_default(signal_object, signal_name):
+		signal_object.connect(signal_name, self, "schedule_default")
+	
+	func schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null):
+		_default_scheduled = true
+	
+	func play_default():
+		if _defaults:
+			randomize()
+			var monologue_name = _defaults[randi() % _defaults.size()]
+			play(monologue_name)
+		_default_scheduled = false
 
 
 # Settings
