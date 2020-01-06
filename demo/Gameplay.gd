@@ -8,6 +8,7 @@ func _ready():
 	animation_player.play("start_game")
 	# warning-ignore:return_value_discarded
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])
+	# warning-ignore:return_value_discarded
 	animation_player.connect("animation_finished", self, "animation_finished")
 	# This is only for demonstration purpose
 	# warning-ignore:return_value_discarded

@@ -11,7 +11,7 @@ func _on_Exit_pressed():
 
 
 func _on_Play_pressed():
-	get_tree().change_scene("res://demo/Demo.tscn")
+	get_tree().change_scene("res://demo/Gameplay.tscn")
 
 
 func _on_Credits_pressed():
