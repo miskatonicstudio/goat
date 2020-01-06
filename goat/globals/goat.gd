@@ -154,6 +154,7 @@ func register_unique_name(unique_name):
 
 func register_inventory_item(item_name):
 	assert(not _inventory_config.has(item_name))
+	register_unique_name(item_name)
 	
 	var icon_path = "res://{}/inventory_items/icons/{}.png".format(
 		[_game_resources_directory, item_name], "{}"
