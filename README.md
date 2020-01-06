@@ -21,3 +21,10 @@ distributed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/
 Interaction icon was created using [this image](
 https://publicdomainvectors.org/en/free-clipart/Silhouette-of-hand-palm/36250.html
 ), distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+### Sounds
+
+The following sounds are public domain and can be downloaded from
+[Freesound](https://freesound.org):
+
+* [generator.ogg](https://freesound.org/people/DiscoveryME/sounds/367175/)
