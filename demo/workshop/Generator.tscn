@@ -108,7 +108,7 @@ material/1 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677863, 0 )
 shape = SubResource( 4 )
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="WorkingSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 8 )
 unit_db = -16.0
 bus = "Effects"
