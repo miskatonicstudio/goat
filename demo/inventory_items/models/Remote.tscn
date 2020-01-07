@@ -13,8 +13,8 @@ size = Vector3( 0.6, 1, 0.2 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.3, 0.5, 0.1 )
 
-[sub_resource type="SphereShape" id=3]
-radius = 0.3
+[sub_resource type="SphereShape" id=7]
+radius = 0.17
 
 [sub_resource type="CylinderMesh" id=4]
 material = ExtResource( 4 )
@@ -53,6 +53,8 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 shape = SubResource( 2 )
@@ -60,7 +62,7 @@ shape = SubResource( 2 )
 [node name="Button" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.209, 0.1 )
 unique_name = "remote_button"
-collision_shape = SubResource( 3 )
+collision_shape = SubResource( 7 )
 sound = ExtResource( 3 )
 
 [node name="Model" type="MeshInstance" parent="Button"]

@@ -17,6 +17,7 @@ params_billboard_mode = 1
 "goat_interactive_item",
 ]]
 collision_layer = 2
+collision_mask = 2
 script = ExtResource( 1 )
 collision_shape = SubResource( 1 )
 
