@@ -110,4 +110,5 @@ shape = SubResource( 4 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 8 )
+unit_db = -16.0
 bus = "Effects"
