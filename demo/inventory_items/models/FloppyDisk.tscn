@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://demo/inventory_items/models/FloppyDisk.gd" type="Script" id=1]
 [ext_resource path="res://demo/FloppyDiskModel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://demo/workshop/materials/floppy_metal.material" type="Material" id=4]
+[ext_resource path="res://demo/sounds/shutter.ogg" type="AudioStream" id=4]
+[ext_resource path="res://demo/workshop/materials/floppy_metal.material" type="Material" id=5]
 
 [sub_resource type="Animation" id=1]
 length = 0.4
@@ -24,7 +25,7 @@ tracks/0/keys = {
 extents = Vector3( 0.2, 0.02, 0.1 )
 
 [sub_resource type="CubeMesh" id=3]
-material = ExtResource( 4 )
+material = ExtResource( 5 )
 size = Vector3( 0.3, 0.2, 0.05 )
 
 [node name="FloppyDisk" type="Spatial"]
@@ -39,6 +40,7 @@ anims/move_shutter = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.4, 0 )
 unique_name = "floppy_shutter"
 collision_shape = SubResource( 2 )
+sound = ExtResource( 4 )
 
 [node name="Shutter" type="MeshInstance" parent="InteractiveItem"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.049, 0, 0 )
