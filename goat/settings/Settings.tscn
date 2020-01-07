@@ -77,8 +77,8 @@ margin_bottom = 300.0
 label_text = "Music"
 settings_section = "sound"
 settings_key = "music_volume"
-min_value = -16.0
-max_value = 16.0
+min_value = -60.0
+max_value = 20.0
 
 [node name="Effects" parent="Settings" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -89,8 +89,8 @@ margin_bottom = 350.0
 label_text = "Effects"
 settings_section = "sound"
 settings_key = "effects_volume"
-min_value = -16.0
-max_value = 16.0
+min_value = -60.0
+max_value = 20.0
 
 [node name="Mouse" parent="Settings" instance=ExtResource( 3 )]
 anchor_right = 0.0
