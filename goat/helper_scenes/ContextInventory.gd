@@ -74,3 +74,4 @@ func _on_ExitButton_pressed():
 
 func go_back_to_exploring():
 	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	get_tree().set_input_as_handled()
