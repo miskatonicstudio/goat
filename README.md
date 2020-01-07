@@ -32,3 +32,4 @@ The following sounds are public domain and can be downloaded from
 * [pick_up.ogg](https://freesound.org/people/SilverIllusionist/sounds/411177/)
 * [tray.ogg](https://freesound.org/people/Handfan/sounds/71230/)
 * [battery_on_remote.ogg](https://freesound.org/people/_lourii/sounds/491905/)
+* [the_other_side.ogg](https://freesound.org/people/ricniclas/sounds/451949/)
