@@ -22,6 +22,8 @@ size = Vector2( 600, 600 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
 
 [node name="Inventory3D" type="Spatial" parent="ViewportContainer/Viewport"]
 
