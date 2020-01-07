@@ -6,6 +6,7 @@ var food_eaten = false
 
 onready var led = $CSGTorus/LED
 onready var portal = $CSGTorus/Portal
+onready var the_other_side_sound = $CSGTorus/Portal/TheOtherSideSound
 
 
 func _ready():
@@ -43,4 +44,5 @@ func remote_pressed():
 		led.material = load("res://demo/workshop/materials/portal_active.material")
 		# "Activate" = move the portal
 		portal.translation = Vector3(0, 0, 0)
+		the_other_side_sound.play()
 		state = "active"

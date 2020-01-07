@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://demo/Portal.gd" type="Script" id=1]
 [ext_resource path="res://demo/workshop/Metal_Dark_001.material" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=4]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demo/workshop/materials/portal_active.material" type="Material" id=6]
+[ext_resource path="res://demo/sounds/the_other_side.ogg" type="AudioStream" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Platform"
@@ -80,6 +81,10 @@ collision_shape = SubResource( 2 )
 [node name="Model" type="MeshInstance" parent="CSGTorus/Portal"]
 mesh = SubResource( 3 )
 material/0 = null
+
+[node name="TheOtherSideSound" type="AudioStreamPlayer3D" parent="CSGTorus/Portal"]
+stream = ExtResource( 7 )
+unit_db = 10.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
