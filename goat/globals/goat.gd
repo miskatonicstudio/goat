@@ -209,8 +209,10 @@ class Monologue extends Node:
 	func trigger(signal_object, signal_name, monologue_names):
 		signal_object.connect(signal_name, self, "play", [monologue_names])
 	
-	func play(monologue_names):
+	func play(monologue_names=null):
 		_default_scheduled = false
+		if monologue_names == null:
+			return
 		if _audio_player.playing:
 			emit_signal("finished", _currently_playing, true)
 			_audio_player.stop()

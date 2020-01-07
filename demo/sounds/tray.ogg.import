@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tray.ogg-8687ac839053b4d632127fe1a2b76fd1.oggstr"
+
+[deps]
+
+source_file="res://demo/sounds/tray.ogg"
+dest_files=[ "res://.import/tray.ogg-8687ac839053b4d632127fe1a2b76fd1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -30,3 +30,4 @@ The following sounds are public domain and can be downloaded from
 * [generator.ogg](https://freesound.org/people/DiscoveryME/sounds/367175/)
 * [button.ogg](https://freesound.org/people/LamaMakesMusic/sounds/403556/)
 * [pick_up.ogg](https://freesound.org/people/SilverIllusionist/sounds/411177/)
+* [tray.ogg](https://freesound.org/people/Handfan/sounds/71230/)

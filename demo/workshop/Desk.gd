@@ -24,6 +24,9 @@ func item_used_on_environment(inventory_item, environment_item):
 			return
 		if $Desk/Monitor/InteractiveScreen.visible:
 			return
+		# Play an empty monologue to prevent playing the default
+		goat.monologue.play()
+		$Desk/BottomComputer/TopComputer/InteractiveItem/AudioStreamPlayer3D.play()
 		$AnimationPlayer.play("insert_floppy_disk")
 		goat.emit_signal("inventory_item_removed", "floppy_disk")
 

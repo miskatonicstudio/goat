@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://demo/workshop/Desk.gd" type="Script" id=1]
 [ext_resource path="res://demo/workshop/Material_001.material" type="Material" id=2]
@@ -8,12 +8,13 @@
 [ext_resource path="res://demo/workshop/Metal.material" type="Material" id=6]
 [ext_resource path="res://demo/workshop/Light.material" type="Material" id=7]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=8]
-[ext_resource path="res://demo/FloppyDiskModel.tscn" type="PackedScene" id=9]
-[ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=10]
-[ext_resource path="res://goat/main_scenes/InteractiveScreen.tscn" type="PackedScene" id=11]
-[ext_resource path="res://demo/ProgramUpload.tscn" type="PackedScene" id=12]
-[ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=13]
-[ext_resource path="res://demo/PizzaPlate.tscn" type="PackedScene" id=14]
+[ext_resource path="res://demo/sounds/tray.ogg" type="AudioStream" id=9]
+[ext_resource path="res://demo/FloppyDiskModel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=11]
+[ext_resource path="res://goat/main_scenes/InteractiveScreen.tscn" type="PackedScene" id=12]
+[ext_resource path="res://demo/ProgramUpload.tscn" type="PackedScene" id=13]
+[ext_resource path="res://demo/workshop/Metal_Dark.material" type="Material" id=14]
+[ext_resource path="res://demo/PizzaPlate.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -130,7 +131,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 18,
-"material": ExtResource( 10 ),
+"material": ExtResource( 11 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 12
@@ -156,7 +157,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 2550,
-"material": ExtResource( 13 ),
+"material": ExtResource( 14 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 1700
@@ -184,7 +185,6 @@ extents = Vector3( 0.945237, 1, 0.541277 )
 script = ExtResource( 1 )
 
 [node name="Desk" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( -0.314794, 0, -1.02573e-07, 0, 0.314794, 0, 1.02573e-07, 0, -0.314794, 0, 0.535757, 0 )
 mesh = SubResource( 1 )
 material/0 = null
@@ -208,14 +208,17 @@ material/0 = null
 material/1 = null
 
 [node name="InteractiveItem" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 8 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.278467, 0, 0.143711 )
 unique_name = "computer"
 collision_shape = SubResource( 5 )
 
 [node name="Model" type="MeshInstance" parent="Desk/BottomComputer/TopComputer/InteractiveItem"]
 
-[node name="FloppyDisk" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 9 )]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Desk/BottomComputer/TopComputer/InteractiveItem"]
+stream = ExtResource( 9 )
+bus = "Effects"
+
+[node name="FloppyDisk" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 10 )]
 transform = Transform( -1.74846e-08, -0.4, -1.74846e-08, 0, -1.74846e-08, 0.4, -0.4, 1.74846e-08, 7.64274e-16, -0.122785, 0.118999, -0.0859638 )
 
 [node name="Monitor" type="MeshInstance" parent="Desk"]
@@ -224,13 +227,13 @@ mesh = SubResource( 6 )
 material/0 = null
 material/1 = null
 
-[node name="InteractiveScreen" parent="Desk/Monitor" instance=ExtResource( 11 )]
+[node name="InteractiveScreen" parent="Desk/Monitor" instance=ExtResource( 12 )]
 transform = Transform( -0.85, 0, -1.76665e-07, 0, 0.5, 0, 1.28346e-07, 0, -1.17, 0.00427535, 0.0711439, -0.0352828 )
 visible = false
 unique_name = "monitor"
 content_size = Vector2( 340, 200 )
 
-[node name="Content" parent="Desk/Monitor/InteractiveScreen" instance=ExtResource( 12 )]
+[node name="Content" parent="Desk/Monitor/InteractiveScreen" instance=ExtResource( 13 )]
 
 [node name="Keyboard" type="MeshInstance" parent="Desk"]
 transform = Transform( 3.15138, 0, -0.400152, 0, 3.17668, 0, 0.400152, 0, 3.15138, 1.35457, 1.00175, -1.08156 )
@@ -241,7 +244,7 @@ material/1 = null
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/insert_floppy_disk = SubResource( 8 )
 
-[node name="PizzaPlate" parent="." instance=ExtResource( 14 )]
+[node name="PizzaPlate" parent="." instance=ExtResource( 15 )]
 transform = Transform( 0.169524, 0, -0.183743, 0, 0.25, 0, 0.183743, 0, 0.169524, 0.840395, 0.81774, 0.346449 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
