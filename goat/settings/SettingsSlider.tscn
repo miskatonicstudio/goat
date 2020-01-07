@@ -3,15 +3,8 @@
 [ext_resource path="res://goat/settings/SettingsSlider.gd" type="Script" id=1]
 [ext_resource path="res://goat/fonts/settings_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://goat/images/settings_slider_grabber.png" type="Texture" id=3]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_top = 8
-border_width_bottom = 8
-border_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.501961, 0.501961, 0.501961, 1 )
+[ext_resource path="res://goat/styles/settings_slider.tres" type="StyleBox" id=4]
+[ext_resource path="res://goat/styles/settings_grabber_area.tres" type="StyleBox" id=5]
 
 [node name="SettingsSlider" type="VBoxContainer"]
 anchor_right = 1.0
@@ -36,8 +29,8 @@ focus_mode = 0
 custom_icons/grabber_disabled = ExtResource( 3 )
 custom_icons/grabber_highlight = ExtResource( 3 )
 custom_icons/grabber = ExtResource( 3 )
-custom_styles/slider = SubResource( 1 )
-custom_styles/grabber_area = SubResource( 2 )
+custom_styles/slider = ExtResource( 4 )
+custom_styles/grabber_area = ExtResource( 5 )
 step = 0.1
 focus_mode = 0
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

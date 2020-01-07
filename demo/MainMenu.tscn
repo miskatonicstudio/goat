@@ -2,8 +2,8 @@
 
 [ext_resource path="res://demo/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://demo/images/background.jpg" type="Texture" id=2]
-[ext_resource path="res://demo/program_upload_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://goat/settings/SettingsButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demo/fonts/big_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://demo/CustomButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://demo/Settings.tscn" type="PackedScene" id=5]
 
 [node name="MainMenu" type="Control"]
@@ -26,9 +26,9 @@ mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuScreen"]
 margin_left = 170.0
-margin_top = 171.0
+margin_top = 81.0
 margin_right = 854.0
-margin_bottom = 428.0
+margin_bottom = 518.0
 mouse_filter = 2
 custom_constants/separation = 20
 alignment = 1
@@ -43,37 +43,45 @@ align = 1
 [node name="CenterContainer" type="CenterContainer" parent="MainMenuScreen/VBoxContainer"]
 margin_top = 85.0
 margin_right = 684.0
-margin_bottom = 257.0
+margin_bottom = 437.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuScreen/VBoxContainer/CenterContainer"]
-margin_left = 290.0
-margin_right = 394.0
-margin_bottom = 172.0
+margin_left = 186.0
+margin_right = 498.0
+margin_bottom = 352.0
 mouse_filter = 2
 custom_constants/separation = 20
 
 [node name="Play" parent="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_right = 104.0
-margin_bottom = 28.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 312.0
+margin_bottom = 73.0
 text = "PLAY"
 
 [node name="Settings" parent="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 48.0
-margin_right = 104.0
-margin_bottom = 76.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 93.0
+margin_right = 312.0
+margin_bottom = 166.0
 text = "SETTINGS"
 
 [node name="Credits" parent="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 96.0
-margin_right = 104.0
-margin_bottom = 124.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 186.0
+margin_right = 312.0
+margin_bottom = 259.0
 text = "CREDITS"
 
 [node name="Exit" parent="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 144.0
-margin_right = 104.0
-margin_bottom = 172.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 279.0
+margin_right = 312.0
+margin_bottom = 352.0
 text = "EXIT"
 
 [node name="Settings" parent="." instance=ExtResource( 5 )]
