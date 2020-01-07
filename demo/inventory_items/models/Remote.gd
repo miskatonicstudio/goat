@@ -1,6 +1,5 @@
 extends Spatial
 
-
 var powered_up = false
 
 
@@ -14,7 +13,8 @@ func item_activated(item_name, _position):
 		$AnimationPlayer.play("press_button")
 		if powered_up:
 			demo.emit_signal("remote_pressed")
-			goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+		else:
+			goat.monologue.play("useless_without_battery")
 
 
 func item_used_on_item(item_name_1, item_name_2):

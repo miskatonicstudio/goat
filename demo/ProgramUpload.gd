@@ -22,6 +22,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 
 func _on_Yes_pressed():
 	demo.emit_signal("program_uploaded")
+	goat.monologue.play("coords_uploaded")
 	screen_upload.hide()
 	screen_done.show()
 

@@ -4,6 +4,8 @@ onready var animation_player = $AnimationPlayer
 
 
 func _ready():
+	goat.monologue.play("just_a_few_steps")
+	
 	animation_player.play("start_game")
 	# warning-ignore:return_value_discarded
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])

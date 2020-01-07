@@ -8,3 +8,4 @@ func _ready():
 func item_used(item_name):
 	if item_name == "pizza":
 		goat.emit_signal("inventory_item_removed", "pizza")
+		goat.monologue.play("pizza_eaten")

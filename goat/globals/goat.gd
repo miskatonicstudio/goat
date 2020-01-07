@@ -196,7 +196,7 @@ class Monologue extends Node:
 	
 	func register(monologue_name, transcript=""):
 		assert(not _monologues.has(monologue_name))
-		var sound_path = "res://{}/sounds/{}.ogg".format(
+		var sound_path = "res://{}/voice/{}.ogg".format(
 			[goat._game_resources_directory, monologue_name], "{}"
 		)
 		var sound = load(sound_path)

@@ -23,9 +23,9 @@ func item_activated(item_name, _position):
 	if item_name == "portal":
 		if food_eaten:
 			demo.emit_signal("portal_entered")
+			goat.monologue.play("another_world_awaits")
 		else:
-			# TODO: Inform that you need to eat
-			pass
+			goat.monologue.play("not_when_hungry")
 
 
 func item_used(item_name):
@@ -35,14 +35,22 @@ func item_used(item_name):
 
 func program_uploaded():
 	if state == "on":
-		led.material = load("res://demo/workshop/materials/portal_ready.material")
+		led.material = load(
+			"res://demo/workshop/materials/portal_ready.material"
+		)
 		state = "ready"
 
 
 func remote_pressed():
+	if state == "off" or state == "on":
+		goat.monologue.play("upload_first")
 	if state == "ready":
-		led.material = load("res://demo/workshop/materials/portal_active.material")
+		led.material = load(
+			"res://demo/workshop/materials/portal_active.material"
+		)
 		# "Activate" = move the portal
 		portal.translation = Vector3(0, 0, 0)
 		the_other_side_sound.play()
 		state = "active"
+		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+		goat.monologue.play("finally_active")
