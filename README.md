@@ -31,3 +31,4 @@ The following sounds are public domain and can be downloaded from
 * [button.ogg](https://freesound.org/people/LamaMakesMusic/sounds/403556/)
 * [pick_up.ogg](https://freesound.org/people/SilverIllusionist/sounds/411177/)
 * [tray.ogg](https://freesound.org/people/Handfan/sounds/71230/)
+* [battery_on_remote.ogg](https://freesound.org/people/_lourii/sounds/491905/)

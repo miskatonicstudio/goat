@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://demo/inventory_items/models/Remote.gd" type="Script" id=1]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/sounds/button.ogg" type="AudioStream" id=3]
 [ext_resource path="res://demo/workshop/materials/remote_button.material" type="Material" id=4]
 [ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=5]
+[ext_resource path="res://demo/sounds/battery_on_remote.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.6, 1, 0.2 )
@@ -74,3 +75,7 @@ anims/press_button = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500605, 0 )
 mesh = SubResource( 6 )
 material/0 = null
+
+[node name="BatterySound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 6 )
+bus = "Effects"
