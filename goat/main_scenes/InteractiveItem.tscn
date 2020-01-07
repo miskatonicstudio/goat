@@ -23,7 +23,7 @@ collision_shape = SubResource( 1 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="Player" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="."]
 bus = "Effects"
 
 [node name="IconInteract" type="Sprite3D" parent="."]
@@ -32,4 +32,4 @@ material_override = SubResource( 2 )
 cast_shadow = 0
 pixel_size = 0.0002
 texture = ExtResource( 2 )
-[connection signal="finished" from="Player" to="." method="_on_Player_finished"]
+[connection signal="finished" from="AudioPlayer" to="." method="_on_AudioPlayer_finished"]

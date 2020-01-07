@@ -18,14 +18,14 @@ export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 export (AudioStream) var sound = null setget set_sound
 
 onready var icon_interact = $IconInteract
-onready var player = $Player
+onready var audio_player = $AudioPlayer
 
 
 func _ready():
 	add_to_group("goat_interactive_item_" + unique_name)
 	goat.register_unique_name(unique_name)
 	$CollisionShape.shape = collision_shape
-	player.stream = sound
+	audio_player.stream = sound
 	
 	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "select")
@@ -49,7 +49,7 @@ func set_sound(new_sound):
 	elif sound is AudioStreamOGGVorbis:
 		sound.loop = false
 	if is_inside_tree():
-		player.stream = sound
+		audio_player.stream = sound
 
 
 func select(item_name, _position):
@@ -77,11 +77,11 @@ func activate(item_name, _position):
 
 
 func play_sound():
-	if player.stream:
-		player.play()
+	if audio_player.stream:
+		audio_player.play()
 	else:
 		# Make sure that "after sound" logic is executed
-		_on_Player_finished()
+		_on_AudioPlayer_finished()
 
 
 func remove():
@@ -89,7 +89,7 @@ func remove():
 	call_deferred("queue_free")
 
 
-func _on_Player_finished():
+func _on_AudioPlayer_finished():
 	# Remove the entire item, if it was obtained
 	if item_mode == ITEM_MODE_INVENTORY:
 		remove()
