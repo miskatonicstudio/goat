@@ -63,5 +63,5 @@ func activate(item_name, position):
 	viewport.input(ev)
 
 
-func is_inventory_item():
+func is_pickable_item():
 	return false

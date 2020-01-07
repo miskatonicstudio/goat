@@ -95,5 +95,5 @@ func _on_AudioPlayer_finished():
 		remove()
 
 
-func is_inventory_item():
+func is_pickable_item():
 	return item_mode == ITEM_MODE_INVENTORY

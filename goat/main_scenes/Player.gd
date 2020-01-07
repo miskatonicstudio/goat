@@ -10,7 +10,7 @@ onready var settings = $Settings
 
 var movement_direction = Vector3()
 var environment_item_name = null
-var is_inventory_item = false
+var is_pickable_item = false
 
 
 func _ready():
@@ -51,7 +51,7 @@ func _input(event):
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_SETTINGS)
 		get_tree().set_input_as_handled()
 	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
-		if is_inventory_item:
+		if is_pickable_item:
 			goat.emit_signal("interactive_item_activated", environment_item_name, null)
 			goat.emit_signal("interactive_item_activated_" + environment_item_name)
 		else:
@@ -111,14 +111,14 @@ func interactive_item_selected(item_name, _position):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		environment_item_name = item_name
 		var actual_item = get_tree().get_nodes_in_group("goat_interactive_item_" + item_name).pop_back()
-		is_inventory_item = actual_item.is_inventory_item()
+		is_pickable_item = actual_item.is_pickable_item()
 
 
 func interactive_item_deselected(item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		if item_name == environment_item_name:
 			environment_item_name = null
-			is_inventory_item = false
+			is_pickable_item = false
 
 
 func update_glow():
