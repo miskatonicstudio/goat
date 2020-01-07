@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://demo/inventory_items/models/Remote.gd" type="Script" id=1]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://demo/workshop/materials/remote_button.material" type="Material" id=3]
-[ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=4]
+[ext_resource path="res://demo/sounds/button.ogg" type="AudioStream" id=3]
+[ext_resource path="res://demo/workshop/materials/remote_button.material" type="Material" id=4]
+[ext_resource path="res://demo/workshop/materials/screen_off.material" type="Material" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.6, 1, 0.2 )
@@ -15,7 +16,7 @@ extents = Vector3( 0.3, 0.5, 0.1 )
 radius = 0.3
 
 [sub_resource type="CylinderMesh" id=4]
-material = ExtResource( 3 )
+material = ExtResource( 4 )
 top_radius = 0.15
 bottom_radius = 0.15
 height = 0.15
@@ -37,7 +38,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="SphereMesh" id=6]
-material = ExtResource( 4 )
+material = ExtResource( 5 )
 radius = 0.05
 height = 0.05
 radial_segments = 8
@@ -59,6 +60,7 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.209, 0.1 )
 unique_name = "remote_button"
 collision_shape = SubResource( 3 )
+sound = ExtResource( 3 )
 
 [node name="Model" type="MeshInstance" parent="Button"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
