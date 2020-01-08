@@ -66,6 +66,7 @@ var EXIT_SCENE = null
 
 
 func _ready():
+	get_tree().connect("node_added", self, "_on_node_added")
 	add_child(monologue)
 	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
@@ -80,8 +81,9 @@ func _ready():
 	AudioServer.set_bus_layout(load("res://goat/default_bus_layout.tres"))
 	settings.connect("value_changed_graphics_fullscreen", self, "update_fullscreen")
 	update_fullscreen()
-	settings.connect("value_changed_graphics_shadows", self, "update_shadows")
-	update_shadows()
+	settings.connect(
+		"value_changed_graphics_shadows", self, "_on_shadows_settings_changed"
+	)
 	settings.connect("value_changed_sound_music_volume", self, "update_music_volume")
 	update_music_volume()
 	settings.connect("value_changed_sound_effects_volume", self, "update_effects_volume")
@@ -260,13 +262,21 @@ func update_fullscreen():
 	OS.window_fullscreen = settings.get_value("graphics", "fullscreen")
 
 
-func update_shadows():
+func _on_node_added(node):
+	if node.is_in_group("lamp"):
+		update_single_lamp_shadows_settings(node)
+
+
+func update_single_lamp_shadows_settings(lamp):
 	var shadows_enabled = settings.get_value("graphics", "shadows")
-	var lamps = get_tree().get_nodes_in_group("lamp")
-	for lamp in lamps:
-		lamp.shadow_enabled = shadows_enabled
-		# Specular light creates reflections, without shadows they look wrong
-		lamp.light_specular = 0.5 if shadows_enabled else 0.0
+	lamp.shadow_enabled = shadows_enabled
+	# Specular light creates reflections, without shadows they look wrong
+	lamp.light_specular = 0.5 if shadows_enabled else 0.0
+
+
+func _on_shadows_settings_changed():
+	for lamp in get_tree().get_nodes_in_group("lamp"):
+		update_single_lamp_shadows_settings(lamp)
 
 
 func update_music_volume():
