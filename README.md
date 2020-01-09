@@ -4,7 +4,8 @@
 
 ### Game engine
 
-This project uses [Godot Engine 3.1.1 (stable)](https://github.com/godotengine/godot),
+This project uses [Godot Engine](https://github.com/godotengine/godot)
+version [3.2 beta5](https://downloads.tuxfamily.org/godotengine/3.2/beta5/),
 distributed under [MIT license](https://godotengine.org/license).
 
 ### Models

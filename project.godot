@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="GOAT"
 run/main_scene="res://demo/MainMenu.tscn"
 
+[audio]
+
+default_bus_layout="res://goat/default_bus_layout.tres"
+
 [autoload]
 
 goat="*res://goat/globals/goat.gd"
