@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GOAT"
-run/main_scene="res://demo/MainMenu.tscn"
+run/main_scene="res://demo/scenes/main/MainMenu.tscn"
 
 [audio]
 
