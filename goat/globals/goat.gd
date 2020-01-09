@@ -127,7 +127,7 @@ func set_game_resources_directory(name):
 
 
 func register_unique_name(unique_name):
-	assert(not _unique_names.has(unique_name))
+#	assert(not _unique_names.has(unique_name))
 	
 	var single_argument_signals = [
 		"interactive_item_selected",
@@ -145,13 +145,19 @@ func register_unique_name(unique_name):
 		"inventory_item_{}_used_on_environment_{}",
 	]
 	
-	for s in single_argument_signals:
-		add_user_signal(s + "_" + unique_name)
-	for s in double_argument_signals:
-		for other_name in _unique_names:
-			add_user_signal(s.format([unique_name, other_name], "{}"))
-			add_user_signal(s.format([other_name, unique_name], "{}"))
-	_unique_names.append(unique_name)
+	# TODO: bring back specific signals after GOAT redesign
+#	for s in single_argument_signals:
+#		add_user_signal(s + "_" + unique_name)
+#	for s in double_argument_signals:
+#		for other_name in _unique_names:
+#			add_user_signal(s.format([unique_name, other_name], "{}"))
+#			add_user_signal(s.format([other_name, unique_name], "{}"))
+#	_unique_names.append(unique_name)
+
+
+func reset_inventory():
+	_inventory_config.clear()
+	inventory_items.clear()
 
 
 func register_inventory_item(item_name):
@@ -195,6 +201,11 @@ class Monologue extends Node:
 		_audio_player.bus = "Music"
 		add_child(_audio_player)
 		_audio_player.connect("finished", self, "_on_audio_player_finished")
+	
+	
+	func reset():
+		_monologues.clear()
+		_defaults.clear()
 	
 	func register(monologue_name, transcript=""):
 		assert(not _monologues.has(monologue_name))
