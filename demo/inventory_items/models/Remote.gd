@@ -21,8 +21,8 @@ func item_used_on_item(item_name_1, item_name_2):
 	if item_name_1 == "battery" and item_name_2 == "remote":
 		goat.emit_signal("inventory_item_removed", "battery")
 		powered_up = true
-		$LED.set_surface_material(
-			0, load("res://demo/materials/remote_led_on.material")
+		$Button/Model/LED.material = load(
+			"res://demo/materials/remote_led_on.material"
 		)
 		# Prevent playing the default monologue
 		goat.monologue.play()
