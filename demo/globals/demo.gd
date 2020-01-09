@@ -13,4 +13,4 @@ signal portal_entered
 
 func _ready():
 	goat.set_game_resources_directory("demo")
-	goat.EXIT_SCENE = "res://demo/MainMenu.tscn"
+	goat.EXIT_SCENE = "res://demo/scenes/main/MainMenu.tscn"

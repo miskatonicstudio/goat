@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://demo/BatteryModel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://demo/models/BatteryModel.tscn" type="PackedScene" id=1]
+
 
 [node name="Battery" type="Spatial"]
 

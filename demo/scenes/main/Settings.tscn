@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://demo/scenes/main/Settings.gd" type="Script" id=1]
+[ext_resource path="res://goat/styles/settings_background.tres" type="StyleBox" id=2]
+[ext_resource path="res://goat/settings/Settings.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/settings/SettingsButton.tscn" type="PackedScene" id=4]
+
+[node name="Settings" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 100.0
+margin_top = 74.0
+margin_right = 924.0
+margin_bottom = 526.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 822.0
+margin_bottom = 450.0
+custom_constants/separation = 20
+
+[node name="Settings" parent="PanelContainer/VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 820.0
+margin_bottom = 400.0
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 420.0
+margin_right = 820.0
+margin_bottom = 448.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/CenterContainer"]
+margin_left = 382.0
+margin_right = 438.0
+margin_bottom = 28.0
+
+[node name="Back" parent="PanelContainer/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource( 4 )]
+margin_right = 56.0
+margin_bottom = 28.0
+text = "Back"
+[connection signal="pressed" from="PanelContainer/VBoxContainer/CenterContainer/HBoxContainer/Back" to="." method="_on_Back_pressed"]

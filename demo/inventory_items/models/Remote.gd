@@ -22,7 +22,7 @@ func item_used_on_item(item_name_1, item_name_2):
 		goat.emit_signal("inventory_item_removed", "battery")
 		powered_up = true
 		$LED.set_surface_material(
-			0, load("res://demo/workshop/materials/remote_led_on.material")
+			0, load("res://demo/materials/remote_led_on.material")
 		)
 		# Prevent playing the default monologue
 		goat.monologue.play()

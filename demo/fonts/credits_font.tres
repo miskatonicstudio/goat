@@ -3,5 +3,5 @@
 [ext_resource path="res://goat/fonts/FreeMono.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 64
+size = 32
 font_data = ExtResource( 1 )
