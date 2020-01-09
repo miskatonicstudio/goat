@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://goat/helper_scenes/Subtitles.gd" type="Script" id=1]
+[ext_resource path="res://goat/fonts/interface_font.tres" type="DynamicFont" id=2]
 
 [node name="Subtitles" type="Control"]
 anchor_right = 1.0
@@ -25,5 +26,6 @@ color = Color( 0, 0, 0, 0.235294 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 600, 50 )
+custom_fonts/font = ExtResource( 2 )
 align = 1
 valign = 1
