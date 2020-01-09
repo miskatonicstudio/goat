@@ -4,7 +4,6 @@
 [ext_resource path="res://demo/sounds/pick_up.ogg" type="AudioStream" id=2]
 [ext_resource path="res://demo/materials/remote_body.material" type="Material" id=3]
 
-
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 3 )
 size = Vector3( 0.06, 0.1, 0.02 )

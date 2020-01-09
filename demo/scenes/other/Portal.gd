@@ -7,6 +7,7 @@ var food_eaten = false
 onready var led = $CSGTorus/LED
 onready var portal = $CSGTorus/Portal
 onready var the_other_side_sound = $CSGTorus/Portal/TheOtherSideSound
+onready var animation_player = $AnimationPlayer
 
 
 func _ready():
@@ -50,6 +51,7 @@ func remote_pressed():
 		)
 		# "Activate" = move the portal
 		portal.translation = Vector3(0, 0, 0)
+		animation_player.play("portal_light")
 		the_other_side_sound.play()
 		state = "active"
 		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)

@@ -17,7 +17,7 @@ extents = Vector3( 0.3, 0.5, 0.1 )
 [sub_resource type="SphereShape" id=3]
 radius = 0.17
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Button:translation")
 tracks/0/interp = 1
@@ -72,7 +72,7 @@ smooth_faces = false
 material = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/press_button = SubResource( 5 )
+anims/press_button = SubResource( 4 )
 
 [node name="BatterySound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 6 )

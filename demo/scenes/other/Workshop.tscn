@@ -28,39 +28,6 @@
 [ext_resource path="res://demo/scenes/other/WallDevice.tscn" type="PackedScene" id=26]
 [ext_resource path="res://demo/scenes/other/Portal.tscn" type="PackedScene" id=27]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Walls"
 surfaces/0 = {
@@ -704,7 +671,6 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="NewWall1" type="MeshInstance" parent="Walls"]
-editor/display_folded = true
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.62874, 2.30824, 1.54988 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 1 )
@@ -715,7 +681,6 @@ material/0 = ExtResource( 1 )
 shape = SubResource( 4 )
 
 [node name="NewWall2" type="MeshInstance" parent="Walls"]
-editor/display_folded = true
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.55906, 2.30824, 3.42766 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 1 )
@@ -791,7 +756,6 @@ material/2 = null
 material/3 = null
 
 [node name="Box002" type="MeshInstance" parent="Walls"]
-editor/display_folded = true
 transform = Transform( 0, 0.15438, 0.338177, -7.41374e-09, 0.195065, -0.267642, -0.248764, -7.41374e-09, 0, -2.14799, 0.56218, 2.28029 )
 mesh = SubResource( 13 )
 material/0 = null
@@ -802,7 +766,6 @@ material/0 = null
 shape = SubResource( 14 )
 
 [node name="Sideboard" type="MeshInstance" parent="Walls"]
-editor/display_folded = true
 transform = Transform( 0.0538198, 0, 0, 0, 0.789838, 0, 0, 0, 1.37389, -2.64622, 2.45207, 0.812647 )
 mesh = SubResource( 15 )
 material/0 = null
@@ -891,7 +854,6 @@ mesh = SubResource( 30 )
 material/0 = null
 
 [node name="Box001" type="MeshInstance" parent="Walls"]
-editor/display_folded = true
 transform = Transform( 0.0496508, 0, -0.430741, 0, 0.327335, 0, 0.323547, 0, 0.0661006, 0.68754, 0.434885, -2.22027 )
 mesh = SubResource( 31 )
 material/0 = null
@@ -921,7 +883,6 @@ material/0 = null
 material/1 = null
 
 [node name="Pipe002" type="MeshInstance" parent="Walls"]
-editor/display_folded = true
 transform = Transform( 0.0484817, 0, 0, 0, 0.00971357, 0, 0, 0, 3.4754, -2.60116, 3.85713, 0.915735 )
 mesh = SubResource( 36 )
 material/0 = null
@@ -932,7 +893,6 @@ mesh = SubResource( 37 )
 material/0 = null
 
 [node name="Door" type="Spatial" parent="Walls"]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.578, 0, 0 )
 
 [node name="Frame" type="CSGCombiner" parent="Walls/Door"]
