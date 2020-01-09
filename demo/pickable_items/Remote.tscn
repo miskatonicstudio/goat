@@ -12,7 +12,7 @@ size = Vector3( 0.06, 0.1, 0.02 )
 
 [node name="InteractiveItem" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-unique_name = "remote_env"
+unique_name = "remote_pickable"
 inventory_item_name = "remote"
 item_mode = 2
 sound = ExtResource( 2 )

@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://demo/sounds/pick_up.ogg" type="AudioStream" id=1]
+[ext_resource path="res://demo/workshop/materials/floppy_body.material" type="Material" id=2]
+[ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.075, 0.01, 0.075 )
+
+[sub_resource type="CubeMesh" id=2]
+material = ExtResource( 2 )
+size = Vector3( 0.15, 0.01, 0.15 )
+
+[node name="Floppy" type="Spatial"]
+
+[node name="InteractiveItem" parent="." instance=ExtResource( 3 )]
+unique_name = "floppy_disk_pickable"
+inventory_item_name = "floppy_disk"
+item_mode = 2
+collision_shape = SubResource( 1 )
+sound = ExtResource( 1 )
+
+[node name="Model" type="MeshInstance" parent="InteractiveItem"]
+mesh = SubResource( 2 )
+material/0 = null

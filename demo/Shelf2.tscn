@@ -6,7 +6,7 @@
 [ext_resource path="res://demo/workshop/plastic_red.material" type="Material" id=4]
 [ext_resource path="res://demo/workshop/Rubber.material" type="Material" id=5]
 [ext_resource path="res://demo/workshop/materials/radio_screen.material" type="Material" id=6]
-[ext_resource path="res://demo/workshop/FloppyOnShelf.tscn" type="PackedScene" id=7]
+[ext_resource path="res://demo/pickable_items/Floppy.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -123,7 +123,7 @@ material/0 = null
 material/1 = null
 material/2 = null
 
-[node name="FloppyOnShelf" parent="." instance=ExtResource( 7 )]
+[node name="Floppy" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.932454, 0, 0.361289, 0, 1, 0, -0.361289, 0, 0.932454, -0.0921926, 1.76986, -0.436686 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
