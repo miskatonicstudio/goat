@@ -84,6 +84,13 @@ func _ready():
 	settings.connect(
 		"value_changed_graphics_shadows", self, "_on_shadows_settings_changed"
 	)
+	settings.connect(
+		"value_changed_graphics_reflections",
+		self, "_on_camera_settings_changed"
+	)
+	settings.connect(
+		"value_changed_graphics_glow", self, "_on_camera_settings_changed"
+	)
 	settings.connect("value_changed_sound_music_volume", self, "update_music_volume")
 	update_music_volume()
 	settings.connect("value_changed_sound_effects_volume", self, "update_effects_volume")
@@ -274,8 +281,10 @@ func update_fullscreen():
 
 
 func _on_node_added(node):
-	if node.is_in_group("lamp"):
+	if node.is_in_group("goat_lamp"):
 		update_single_lamp_shadows_settings(node)
+	if node.is_in_group("goat_camera"):
+		update_single_camera_settings(node)
 
 
 func update_single_lamp_shadows_settings(lamp):
@@ -285,9 +294,21 @@ func update_single_lamp_shadows_settings(lamp):
 	lamp.light_specular = 0.5 if shadows_enabled else 0.0
 
 
+func update_single_camera_settings(camera: Camera):
+	var reflections_enabled = settings.get_value("graphics", "reflections")
+	var glow_enabled = settings.get_value("graphics", "glow")
+	camera.environment.ss_reflections_enabled = reflections_enabled
+	camera.environment.glow_enabled = glow_enabled
+
+
 func _on_shadows_settings_changed():
-	for lamp in get_tree().get_nodes_in_group("lamp"):
+	for lamp in get_tree().get_nodes_in_group("goat_lamp"):
 		update_single_lamp_shadows_settings(lamp)
+
+
+func _on_camera_settings_changed():
+	for camera in get_tree().get_nodes_in_group("goat_camera"):
+		update_single_camera_settings(camera)
 
 
 func update_music_volume():

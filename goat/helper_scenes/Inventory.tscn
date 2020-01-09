@@ -27,8 +27,9 @@ audio_listener_enable_3d = true
 
 [node name="Inventory3D" type="Spatial" parent="ViewportContainer/Viewport"]
 
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D"]
-editor/display_folded = true
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D" groups=[
+"goat_camera",
+]]
 environment = ExtResource( 2 )
 current = true
 far = 5.0

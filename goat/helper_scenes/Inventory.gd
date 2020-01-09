@@ -24,10 +24,6 @@ func _ready():
 	goat.connect("inventory_item_removed", self, "item_removed")
 	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_replaced", self, "item_replaced")
-	goat.settings.connect("value_changed_graphics_glow", self, "update_glow")
-	goat.settings.connect("value_changed_graphics_reflections", self, "update_reflections")
-	update_glow()
-	update_reflections()
 	_on_Inventory_resized()
 
 
@@ -118,18 +114,6 @@ func _on_ViewportContainer_gui_input(event):
 	if event is InputEventMouseMotion:
 		var ray_vector = camera.project_ray_normal(event.position)
 		ray_cast.cast_to = ray_vector * 4
-
-
-func update_glow():
-	camera.environment.glow_enabled = goat.settings.get_value(
-		"graphics", "glow"
-	)
-
-
-func update_reflections():
-	camera.environment.ss_reflections_enabled = goat.settings.get_value(
-		"graphics", "reflections"
-	)
 
 
 func _on_Inventory_resized():
