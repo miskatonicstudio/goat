@@ -21,7 +21,7 @@ func item_activated(item_name, _position):
 func item_used_on_environment(inventory_item, environment_item):
 	if inventory_item == "floppy_disk" and environment_item == "computer":
 		if not computer_powered_up:
-			goat.monologue.play("power_it_up")
+			goat.monologue.play("power_it_up_first")
 			return
 		if $Desk/Monitor/InteractiveScreen.visible:
 			return

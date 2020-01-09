@@ -25,10 +25,11 @@ func _ready():
 		"just_a_few_steps", "Just a few steps more and I will open the portal!"
 	)
 	goat.monologue.register(
-		"power_it_up", "I should power it up first."
+		"power_it_up_first", "I should power it up first."
 	)
 	goat.monologue.register(
-		"not_when_hungry", "I cannot go there when I'm hungry."
+		"long_journey",
+		"It's going to be a long journey, I should eat something first."
 	)
 	goat.monologue.register(
 		"another_world_awaits",
@@ -38,10 +39,10 @@ func _ready():
 		"useless_without_battery", "It's useless without a battery."
 	)
 	goat.monologue.register(
-		"pizza_eaten", "Delicious!"
+		"pizza_eaten", "Mmmm, delicious!"
 	)
 	goat.monologue.register(
-		"upload_first", "I should upload the coordinates first."
+		"upload_coords_first", "I should upload the coordinates first."
 	)
 	goat.monologue.register(
 		"finally_active", "The portal is active! Almost there..."

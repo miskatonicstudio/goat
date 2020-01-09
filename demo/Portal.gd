@@ -25,7 +25,7 @@ func item_activated(item_name, _position):
 			demo.emit_signal("portal_entered")
 			goat.monologue.play("another_world_awaits")
 		else:
-			goat.monologue.play("not_when_hungry")
+			goat.monologue.play("long_journey")
 
 
 func item_used(item_name):
@@ -43,7 +43,7 @@ func program_uploaded():
 
 func remote_pressed():
 	if state == "off" or state == "on":
-		goat.monologue.play("upload_first")
+		goat.monologue.play("upload_coords_first")
 	if state == "ready":
 		led.material = load(
 			"res://demo/workshop/materials/portal_active.material"

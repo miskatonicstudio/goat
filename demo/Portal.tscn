@@ -84,7 +84,8 @@ material/0 = null
 
 [node name="TheOtherSideSound" type="AudioStreamPlayer3D" parent="CSGTorus/Portal"]
 stream = ExtResource( 7 )
-unit_db = 10.0
+unit_db = -10.0
+bus = "Effects"
 
 [node name="StaticBody" type="StaticBody" parent="."]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pizza_eaten.ogg-b38f75a5c6a74e6b631a555274c03f53.oggstr"
+
+[deps]
+
+source_file="res://demo/voice/pizza_eaten.ogg"
+dest_files=[ "res://.import/pizza_eaten.ogg-b38f75a5c6a74e6b631a555274c03f53.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

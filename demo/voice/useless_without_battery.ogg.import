@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/useless_without_battery.ogg-e5c98c265432b207ff247e06ef2577d8.oggstr"
+
+[deps]
+
+source_file="res://demo/voice/useless_without_battery.ogg"
+dest_files=[ "res://.import/useless_without_battery.ogg-e5c98c265432b207ff247e06ef2577d8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
