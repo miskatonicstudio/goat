@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://demo/materials/walls.material" type="Material" id=1]
 [ext_resource path="res://demo/materials/floor.material" type="Material" id=2]
@@ -657,6 +657,18 @@ rings = 6
 [sub_resource type="BoxShape" id=40]
 extents = Vector3( 2.23047, 0.2392, 3.97905 )
 
+[sub_resource type="SpatialMaterial" id=42]
+albedo_color = Color( 0.301961, 0.301961, 0.301961, 1 )
+metallic_specular = 0.0
+
+[sub_resource type="CubeMesh" id=41]
+material = SubResource( 42 )
+size = Vector3( 16, 4, 1 )
+
+[sub_resource type="CubeMesh" id=43]
+material = SubResource( 42 )
+size = Vector3( 3, 6, 1 )
+
 [node name="Workshop" type="Spatial"]
 
 [node name="Walls" type="MeshInstance" parent="."]
@@ -931,12 +943,19 @@ shape = SubResource( 40 )
 transform = Transform( 1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 1.23926, 2.19388, -2.89354 )
 shape = SubResource( 40 )
 
-[node name="Sun" type="OmniLight" parent="."]
-transform = Transform( -0.975762, 0.0426554, -0.214639, -0.0292382, 0.946614, 0.321041, 0.216874, 0.319535, -0.922422, 0.347564, 3.85641, -8.14653 )
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( -0.819783, -0.0662067, 0.568834, -0.0205513, 0.996056, 0.0863132, -0.572305, 0.0590678, -0.817911, 0, 1.81376, 0 )
 light_color = Color( 0.960784, 0.843137, 0.388235, 1 )
-light_energy = 8.0
+light_energy = 4.0
 shadow_enabled = true
-omni_range = 14.0
+shadow_bias = 0.9
+directional_shadow_split_1 = 0.08
+directional_shadow_split_2 = 0.15
+directional_shadow_split_3 = 0.2
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.0
+directional_shadow_bias_split_scale = 0.0
+directional_shadow_max_distance = 40.0
 
 [node name="Generator" parent="." instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.261, 0, 0.364 )
@@ -955,3 +974,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324487, 1.67579, -2.45178 )
 
 [node name="Portal" parent="." instance=ExtResource( 27 )]
 transform = Transform( 0.590477, 0, 0.807055, 0, 1, 0, -0.807055, 0, 0.590477, 2.80162, -0.1, 2.43202 )
+
+[node name="SunShade1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647369, -3.43403 )
+mesh = SubResource( 41 )
+material/0 = null
+
+[node name="SunShade2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0644157, 5.44704, -3.41914 )
+mesh = SubResource( 41 )
+material/0 = null
+
+[node name="SunShade3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14031, 3.26988, -3.43403 )
+mesh = SubResource( 43 )
+material/0 = null
+
+[node name="SunShade4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.96276, 2.80217, -3.43403 )
+mesh = SubResource( 43 )
+material/0 = null
