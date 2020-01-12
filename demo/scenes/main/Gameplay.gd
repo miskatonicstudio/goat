@@ -55,6 +55,7 @@ func _ready():
 	)
 	
 	goat.monologue.connect_default(goat, "inventory_item_used")
+	goat.monologue.connect_default(goat, "interactive_item_activated")
 	goat.monologue.connect_default(goat, "inventory_item_used_on_inventory")
 	goat.monologue.connect_default(goat, "inventory_item_used_on_environment")
 	
