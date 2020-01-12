@@ -95,14 +95,24 @@ func _on_effects_settings_changed():
 	AudioServer.set_bus_volume_db(bus_id, volume)
 
 
+func _on_shadows_settings_changed():
+	for lamp in get_tree().get_nodes_in_group("goat_lamp"):
+		_update_single_lamp_settings(lamp)
+
+
+func _on_camera_settings_changed():
+	for camera in get_tree().get_nodes_in_group("goat_camera"):
+		_update_single_camera_settings(camera)
+
+
 func _on_node_added(node: Node):
 	if node.is_in_group("goat_lamp"):
-		_update_single_lamp_shadows_settings(node)
+		_update_single_lamp_settings(node)
 	if node.is_in_group("goat_camera"):
 		_update_single_camera_settings(node)
 
 
-func _update_single_lamp_shadows_settings(lamp: Light):
+func _update_single_lamp_settings(lamp: Light):
 	var shadows_enabled = get_value("graphics", "shadows")
 	lamp.shadow_enabled = shadows_enabled
 	# Specular light creates reflections, without shadows they look wrong
@@ -114,13 +124,3 @@ func _update_single_camera_settings(camera: Camera):
 	var glow_enabled = get_value("graphics", "glow")
 	camera.environment.ss_reflections_enabled = reflections_enabled
 	camera.environment.glow_enabled = glow_enabled
-
-
-func _on_shadows_settings_changed():
-	for lamp in get_tree().get_nodes_in_group("goat_lamp"):
-		_update_single_lamp_shadows_settings(lamp)
-
-
-func _on_camera_settings_changed():
-	for camera in get_tree().get_nodes_in_group("goat_camera"):
-		_update_single_camera_settings(camera)
