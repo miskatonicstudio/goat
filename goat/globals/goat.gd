@@ -204,6 +204,7 @@ class Monologue extends Node:
 	signal finished (monologue_name, interrupted)
 	
 	func _init():
+		randomize()
 		_audio_player = AudioStreamPlayer.new()
 		_audio_player.bus = "Music"
 		add_child(_audio_player)
@@ -238,7 +239,6 @@ class Monologue extends Node:
 			_audio_player.stop()
 		var monologue_name = null;
 		if monologue_names is Array:
-			randomize()
 			monologue_name = monologue_names[randi() % monologue_names.size()]
 		else:
 			monologue_name = monologue_names
@@ -269,7 +269,6 @@ class Monologue extends Node:
 	
 	func play_default():
 		if _defaults:
-			randomize()
 			var monologue_name = _defaults[randi() % _defaults.size()]
 			play(monologue_name)
 		_default_scheduled = false
