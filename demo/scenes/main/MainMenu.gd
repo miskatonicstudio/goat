@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Input.set_custom_mouse_cursor(load("res://demo/images/cursor.png"))
 
 

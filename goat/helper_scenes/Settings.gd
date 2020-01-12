@@ -8,7 +8,7 @@ func _ready():
 
 func game_mode_changed(new_game_mode):
 	if new_game_mode == goat.GAME_MODE_SETTINGS:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		show()
 	else:
 		hide()
