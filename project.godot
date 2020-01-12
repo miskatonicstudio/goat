@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "GoatSettings",
+"language": "GDScript",
+"path": "res://goat/globals/goat_settings.gd"
+} ]
 _global_script_class_icons={
-
+"GoatSettings": ""
 }
 
 [application]
@@ -24,6 +29,7 @@ default_bus_layout="res://goat/default_bus_layout.tres"
 
 [autoload]
 
+goat_settings="*res://goat/globals/goat_settings.gd"
 goat="*res://goat/globals/goat.gd"
 demo="*res://demo/globals/demo.gd"
 

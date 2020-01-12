@@ -55,7 +55,6 @@ var _inventory_config = {}
 
 var game_cursor = null
 
-var settings = Settings.new()
 var monologue = Monologue.new()
 
 # Template settings/game settings
@@ -66,7 +65,6 @@ var EXIT_SCENE = null
 
 
 func _ready():
-	get_tree().connect("node_added", self, "_on_node_added")
 	add_child(monologue)
 	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
@@ -79,22 +77,6 @@ func _ready():
 	_load_game_resources()
 	
 	AudioServer.set_bus_layout(load("res://goat/default_bus_layout.tres"))
-	settings.connect("value_changed_graphics_fullscreen", self, "update_fullscreen")
-	update_fullscreen()
-	settings.connect(
-		"value_changed_graphics_shadows", self, "_on_shadows_settings_changed"
-	)
-	settings.connect(
-		"value_changed_graphics_reflections",
-		self, "_on_camera_settings_changed"
-	)
-	settings.connect(
-		"value_changed_graphics_glow", self, "_on_camera_settings_changed"
-	)
-	settings.connect("value_changed_sound_music_volume", self, "update_music_volume")
-	update_music_volume()
-	settings.connect("value_changed_sound_effects_volume", self, "update_effects_volume")
-	update_effects_volume()
 
 
 func _process(_delta):
@@ -272,93 +254,3 @@ class Monologue extends Node:
 			var monologue_name = _defaults[randi() % _defaults.size()]
 			play(monologue_name)
 		_default_scheduled = false
-
-
-# Settings
-func update_fullscreen():
-	OS.window_fullscreen = settings.get_value("graphics", "fullscreen")
-
-
-func _on_node_added(node):
-	if node.is_in_group("goat_lamp"):
-		update_single_lamp_shadows_settings(node)
-	if node.is_in_group("goat_camera"):
-		update_single_camera_settings(node)
-
-
-func update_single_lamp_shadows_settings(lamp):
-	var shadows_enabled = settings.get_value("graphics", "shadows")
-	lamp.shadow_enabled = shadows_enabled
-	# Specular light creates reflections, without shadows they look wrong
-	lamp.light_specular = 0.5 if shadows_enabled else 0.0
-
-
-func update_single_camera_settings(camera: Camera):
-	var reflections_enabled = settings.get_value("graphics", "reflections")
-	var glow_enabled = settings.get_value("graphics", "glow")
-	camera.environment.ss_reflections_enabled = reflections_enabled
-	camera.environment.glow_enabled = glow_enabled
-
-
-func _on_shadows_settings_changed():
-	for lamp in get_tree().get_nodes_in_group("goat_lamp"):
-		update_single_lamp_shadows_settings(lamp)
-
-
-func _on_camera_settings_changed():
-	for camera in get_tree().get_nodes_in_group("goat_camera"):
-		update_single_camera_settings(camera)
-
-
-func update_music_volume():
-	var volume = settings.get_value("sound", "music_volume")
-	var bus_id = AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_db(bus_id, volume)
-
-
-func update_effects_volume():
-	var volume = settings.get_value("sound", "effects_volume")
-	var bus_id = AudioServer.get_bus_index("Effects")
-	AudioServer.set_bus_volume_db(bus_id, volume)
-
-
-class Settings:
-	const SETTINGS_FILE_NAME = "user://settings.cfg"
-	const DEFAULT_VALUES = [
-		["graphics", "fullscreen", true],
-		["graphics", "glow", true],
-		["graphics", "reflections", true],
-		["graphics", "shadows", true],
-		["sound", "music_volume", 0.0],
-		["sound", "effects_volume", 0.0],
-		["controls", "mouse_sensitivity", 0.3],
-	]
-	var _settings_file = ConfigFile.new()
-	var autosave = true
-	
-	signal value_changed (section, key)
-	
-	func _init():
-		_settings_file.load(SETTINGS_FILE_NAME)
-		for entry in DEFAULT_VALUES:
-			var section =  entry[0]
-			var key = entry[1]
-			add_user_signal("value_changed_{}_{}".format([section, key], "{}"))
-			if _settings_file.get_value(section, key) == null:
-				var value = entry[2]
-				_settings_file.set_value(section, key, value)
-		_settings_file.save(SETTINGS_FILE_NAME)
-	
-	func get_value(section, key):
-		var value = _settings_file.get_value(section, key)
-		assert(value != null)
-		return value
-	
-	func set_value(section, key, value):
-		var previous_value = _settings_file.get_value(section, key)
-		if previous_value != value:
-			_settings_file.set_value(section, key, value)
-			if autosave:
-				_settings_file.save(SETTINGS_FILE_NAME)
-			emit_signal("value_changed", section, key)
-			emit_signal("value_changed_{}_{}".format([section, key], "{}"))

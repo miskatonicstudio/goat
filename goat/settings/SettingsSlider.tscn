@@ -16,6 +16,5 @@ custom_styles/slider = ExtResource( 2 )
 custom_styles/grabber_area = ExtResource( 3 )
 min_value = -100.0
 step = 0.1
-focus_mode = 0
 script = ExtResource( 4 )
 [connection signal="value_changed" from="." to="." method="_on_SettingsSlider_value_changed"]

@@ -6,9 +6,9 @@ export (String) var settings_key
 
 func _ready():
 	if settings_section and settings_key:
-		pressed = goat.settings.get_value(settings_section, settings_key)
+		pressed = goat_settings.get_value(settings_section, settings_key)
 
 
 func _on_CustomCheckButton_pressed():
 	if settings_section and settings_key:
-		goat.settings.set_value(settings_section, settings_key, pressed)
+		goat_settings.set_value(settings_section, settings_key, pressed)

@@ -31,7 +31,9 @@ func _input(event):
 	if goat.game_mode != goat.GAME_MODE_INVENTORY:
 		return
 	if Input.is_action_pressed("goat_rotate_inventory"):
-		var mouse_sensitivity = goat.settings.get_value("controls", "mouse_sensitivity")
+		var mouse_sensitivity = goat_settings.get_value(
+			"controls", "mouse_sensitivity"
+		)
 		if event is InputEventMouseMotion and current_item:
 			var angle_horizontal = deg2rad(event.relative.x * mouse_sensitivity)
 			var angle_vertical = deg2rad(event.relative.y * mouse_sensitivity)

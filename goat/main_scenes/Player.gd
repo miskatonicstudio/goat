@@ -68,7 +68,9 @@ func game_mode_changed(new_game_mode):
 
 
 func rotate_camera(relative_movement):
-	var mouse_sensitivity = goat.settings.get_value("controls", "mouse_sensitivity")
+	var mouse_sensitivity = goat_settings.get_value(
+		"controls", "mouse_sensitivity"
+	)
 	# Rotate horizontally
 	camera.rotate_y(deg2rad(relative_movement.x * mouse_sensitivity * -1))
 	# Rotate vertically
