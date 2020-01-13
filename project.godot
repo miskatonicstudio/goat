@@ -40,6 +40,11 @@ goat_voice="*res://goat/globals/goat_voice.gd"
 goat="*res://goat/globals/goat.gd"
 demo="*res://demo/globals/demo.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
 [input]
 
 goat_move_player_forward={

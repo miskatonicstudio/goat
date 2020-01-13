@@ -1,13 +1,9 @@
 extends Node
 
 # Demo game signals
-# warning-ignore:unused_signal
 signal program_activated
-# warning-ignore:unused_signal
 signal program_uploaded
-# warning-ignore:unused_signal
 signal remote_pressed
-# warning-ignore:unused_signal
 signal portal_entered
 
 

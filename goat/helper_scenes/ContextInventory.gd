@@ -6,13 +6,9 @@ var environment_item_name = null
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "interactive_item_selected")
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "interactive_item_deselected")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_items_changed", self, "inventory_items_changed")
 	
 	# Connect button signals

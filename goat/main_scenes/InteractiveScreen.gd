@@ -20,9 +20,7 @@ func _ready():
 		screen_surface.material_override.emission_enabled = true
 		screen_surface.material_override.emission_texture = viewport.get_texture()
 		screen_surface.material_override.emission_energy = emission_energy
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "select")
 	content.rect_size = content_size
 	viewport.size = content_size

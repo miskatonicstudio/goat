@@ -14,15 +14,10 @@ var current_item = null
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
 	viewport.own_world = true
-	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_obtained", self, "item_obtained")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_selected", self, "item_selected")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_removed", self, "item_removed")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_replaced", self, "item_replaced")
 	_on_Inventory_resized()
 

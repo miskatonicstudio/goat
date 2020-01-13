@@ -27,11 +27,8 @@ func _ready():
 	$CollisionShape.shape = collision_shape
 	audio_player.stream = sound
 	
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_selected", self, "select")
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_deselected", self, "deselect")
-	# warning-ignore:return_value_discarded
 	goat.connect("interactive_item_activated", self, "activate")
 
 

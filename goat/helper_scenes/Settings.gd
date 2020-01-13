@@ -2,7 +2,6 @@ extends CenterContainer
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
 
 

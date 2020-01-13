@@ -12,11 +12,8 @@ onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_item_selected", self, "item_selected")
-	# warning-ignore:return_value_discarded
 	goat.connect("inventory_items_changed", self, "inventory_items_changed")
 	
 	# Connect button signals

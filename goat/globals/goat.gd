@@ -1,31 +1,21 @@
 extends Node
 
 # Signals
-# warning-ignore:unused_signal
 signal interactive_item_selected (item_name, position)
-# warning-ignore:unused_signal
 signal interactive_item_deselected (item_name)
-# warning-ignore:unused_signal
 signal interactive_item_activated (item_name, position)
 
-# warning-ignore:unused_signal
+
 signal inventory_item_obtained (item_name)
-# warning-ignore:unused_signal
 signal inventory_item_selected (item_name)
-# warning-ignore:unused_signal
 signal inventory_item_removed (item_name)
-# warning-ignore:unused_signal
 signal inventory_item_replaced (item_name_replaced, item_name_replacing)
-# warning-ignore:unused_signal
 signal inventory_item_used (item_name)
-# warning-ignore:unused_signal
 signal inventory_item_used_on_inventory (item_name, inventory_item_name)
-# warning-ignore:unused_signal
 signal inventory_item_used_on_environment (item_name, environment_item_name)
 # This is emitted when the global inventory item list was updated
 signal inventory_items_changed (inventory_items)
 
-# warning-ignore:unused_signal
 signal game_mode_changed (new_game_mode)
 
 # Enumerations
@@ -58,18 +48,13 @@ var game_cursor = null
 # Template settings/game settings
 # Exit scene: if null, Exit button in settings ends the program.
 # Otherwise, it will load the specified scene.
-# warning-ignore:unused_class_variable
 var EXIT_SCENE = null
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
-	# warning-ignore:return_value_discarded
 	connect("inventory_item_obtained", self, "inventory_item_obtained")
-	# warning-ignore:return_value_discarded
 	connect("inventory_item_replaced", self, "inventory_item_replaced")
-	# warning-ignore:return_value_discarded
 	connect("inventory_item_removed", self, "inventory_item_removed")
 	_load_game_resources()
 	
