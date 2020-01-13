@@ -57,8 +57,6 @@ func _ready():
 	connect("inventory_item_replaced", self, "inventory_item_replaced")
 	connect("inventory_item_removed", self, "inventory_item_removed")
 	_load_game_resources()
-	
-	AudioServer.set_bus_layout(load("res://goat/default_bus_layout.tres"))
 
 
 func _process(_delta):
