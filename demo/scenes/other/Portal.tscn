@@ -93,10 +93,7 @@ material = ExtResource( 7 )
 [node name="Portal" parent="CSGTorus" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 unique_name = "portal"
-inventory_item_name = ""
-item_mode = 0
 collision_shape = SubResource( 2 )
-sound = null
 
 [node name="Model" type="MeshInstance" parent="CSGTorus/Portal"]
 mesh = SubResource( 3 )

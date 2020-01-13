@@ -55,8 +55,6 @@ var _inventory_config = {}
 
 var game_cursor = null
 
-var monologue = Monologue.new()
-
 # Template settings/game settings
 # Exit scene: if null, Exit button in settings ends the program.
 # Otherwise, it will load the specified scene.
@@ -65,7 +63,6 @@ var EXIT_SCENE = null
 
 
 func _ready():
-	add_child(monologue)
 	# warning-ignore:return_value_discarded
 	connect("game_mode_changed", self, "game_mode_changed")
 	# warning-ignore:return_value_discarded
@@ -173,84 +170,3 @@ func get_inventory_item_icon(item_name):
 
 func get_inventory_item_model(item_name):
 	return _inventory_config[item_name]["model"]
-
-
-# Monologue
-class Monologue extends Node:
-	var _audio_player = null
-	var _currently_playing = null
-	var _monologues = {}
-	var _defaults = []
-	var _default_scheduled = false
-	signal started (monologue_name)
-	signal finished (monologue_name, interrupted)
-	
-	func _init():
-		randomize()
-		_audio_player = AudioStreamPlayer.new()
-		_audio_player.bus = "Music"
-		add_child(_audio_player)
-		_audio_player.connect("finished", self, "_on_audio_player_finished")
-	
-	
-	func reset():
-		_monologues.clear()
-		_defaults.clear()
-	
-	func register(monologue_name, transcript=""):
-		assert(not _monologues.has(monologue_name))
-		var sound_path = "res://{}/voice/{}.ogg".format(
-			[goat._game_resources_directory, monologue_name], "{}"
-		)
-		var sound = load(sound_path)
-		if sound is AudioStreamSample:
-			sound.loop_mode = AudioStreamSample.LOOP_DISABLED
-		elif sound is AudioStreamOGGVorbis:
-			sound.loop = false
-		_monologues[monologue_name] = {"sound": sound, "transcript": transcript}
-	
-	func trigger(signal_object, signal_name, monologue_names):
-		signal_object.connect(signal_name, self, "play", [monologue_names])
-	
-	func play(monologue_names=null):
-		_default_scheduled = false
-		if monologue_names == null:
-			return
-		if _audio_player.playing:
-			emit_signal("finished", _currently_playing, true)
-			_audio_player.stop()
-		var monologue_name = null;
-		if monologue_names is Array:
-			monologue_name = monologue_names[randi() % monologue_names.size()]
-		else:
-			monologue_name = monologue_names
-		_currently_playing = monologue_name
-		_audio_player.stream = _monologues[monologue_name]["sound"]
-		_audio_player.play()
-		emit_signal("started", monologue_name)
-	
-	func _process(_delta):
-		if _default_scheduled:
-			play_default()
-	
-	func set_defaults(defaults):
-		_defaults = defaults
-	
-	func get_transcript(monologue_name):
-		return _monologues[monologue_name]["transcript"]
-	
-	func _on_audio_player_finished():
-		emit_signal("finished", _currently_playing, false)
-		_currently_playing = null
-	
-	func connect_default(signal_object, signal_name):
-		signal_object.connect(signal_name, self, "schedule_default")
-	
-	func schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null):
-		_default_scheduled = true
-	
-	func play_default():
-		if _defaults:
-			var monologue_name = _defaults[randi() % _defaults.size()]
-			play(monologue_name)
-		_default_scheduled = false

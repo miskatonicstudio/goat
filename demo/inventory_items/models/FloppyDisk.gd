@@ -8,7 +8,7 @@ func _ready():
 
 
 func item_activated(item_name, _position):
-	if item_name == "floppy_shutter" and not animation_player.is_playing():
-		# Prevent default monologues
-		goat.monologue.play()
-		animation_player.play("move_shutter")
+	if item_name == "floppy_shutter":
+		goat_voice.prevent_default()
+		if not animation_player.is_playing():
+			animation_player.play("move_shutter")

@@ -14,7 +14,7 @@ func item_activated(item_name, _position):
 		if powered_up:
 			demo.emit_signal("remote_pressed")
 		else:
-			goat.monologue.play("useless_without_battery")
+			goat_voice.play("useless_without_battery")
 
 
 func item_used_on_item(item_name_1, item_name_2):
@@ -24,6 +24,5 @@ func item_used_on_item(item_name_1, item_name_2):
 		$Button/Model/LED.material = load(
 			"res://demo/materials/remote_led_on.material"
 		)
-		# Prevent playing the default monologue
-		goat.monologue.play()
+		goat_voice.prevent_default()
 		$BatterySound.play()

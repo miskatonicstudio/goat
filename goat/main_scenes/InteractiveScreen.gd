@@ -45,8 +45,8 @@ func select(item_name, position):
 func activate(item_name, position):
 	if item_name != unique_name:
 		return
-	# Screen activation should not play default monologues
-	goat.monologue.play()
+	# Screen activation should not play default audio
+	goat_voice.prevent_default()
 	var local_position = screen_surface.to_local(position)
 	var screen_coordinates = Vector2(
 		local_position.x + 0.5, 0.5 - local_position.y

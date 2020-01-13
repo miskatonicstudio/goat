@@ -66,9 +66,9 @@ func activate(item_name, _position):
 	if item_name != unique_name:
 		return
 	play_sound()
+	# Inventory items should not play default audio
 	if item_mode == ITEM_MODE_INVENTORY:
-		# Inventory items should not play default monologues
-		goat.monologue.play()
+		goat_voice.prevent_default()
 	# Disable collision detection
 	if item_mode != ITEM_MODE_NORMAL:
 		collision_layer = 0

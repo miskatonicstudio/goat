@@ -7,8 +7,7 @@ func _ready():
 
 func item_activated(item_name, _position):
 	if item_name == "generator":
-		# Prevent default monologue
-		goat.monologue.play()
+		goat_voice.prevent_default()
 		var generator_screen_on = load(
 			"res://demo/materials/generator_screen_on.material"
 		)

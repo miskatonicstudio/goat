@@ -5,17 +5,18 @@ onready var text = $TextBox/Label
 
 
 func _ready():
-	goat.monologue.connect("started", self, "show_subtitles")
-	goat.monologue.connect("finished", self, "hide_subtitles")
+	goat_voice.connect("started", self, "show_subtitles")
+	goat_voice.connect("finished", self, "hide_subtitles")
 
 
-func show_subtitles(monologue_name):
-	text.text = goat.monologue.get_transcript(monologue_name)
+func show_subtitles(audio_name):
+	"""Show a bottom bar with subtitles"""
+	text.text = goat_voice.get_transcript(audio_name)
 	text_box.show()
 
 
-func hide_subtitles(_monologue_name, interrupted):
-	# The monologue was played fully and not replaced by another one
+func hide_subtitles(_audio_name, interrupted):
+	"""Hides subtitles, but only if audio was played fully"""
 	if not interrupted:
 		text.text = ""
 		text_box.hide()
