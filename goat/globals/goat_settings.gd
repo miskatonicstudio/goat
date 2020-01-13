@@ -2,7 +2,7 @@ class_name GoatSettings
 extends Node
 
 """
-This class helps with handling Godot Engine settings relevant to GOAT.
+Helps with handling Godot Engine settings relevant to GOAT.
 """
 
 signal value_changed (section, key)
