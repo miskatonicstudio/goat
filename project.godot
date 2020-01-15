@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "GoatInventory",
+"language": "GDScript",
+"path": "res://goat/globals/goat_inventory.gd"
+}, {
+"base": "Node",
 "class": "GoatSettings",
 "language": "GDScript",
 "path": "res://goat/globals/goat_settings.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://goat/globals/goat_voice.gd"
 } ]
 _global_script_class_icons={
+"GoatInventory": "",
 "GoatSettings": "",
 "GoatVoice": ""
 }
@@ -37,6 +43,7 @@ default_bus_layout="res://goat/default_bus_layout.tres"
 
 goat_settings="*res://goat/globals/goat_settings.gd"
 goat_voice="*res://goat/globals/goat_voice.gd"
+goat_inventory="*res://goat/globals/goat_inventory.gd"
 goat="*res://goat/globals/goat.gd"
 demo="*res://demo/globals/demo.gd"
 

@@ -37,7 +37,7 @@ func _process(_delta):
 		play_default()
 
 
-func register(audio_name: String, transcript:=""):
+func register(audio_name: String, transcript:="") -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
 	from the `voice` directory (audio_name and file name have to match).
@@ -58,7 +58,7 @@ func register(audio_name: String, transcript:=""):
 	_audio_mapping[audio_name] = {"sound": sound, "transcript": transcript}
 
 
-func play(audio_names):
+func play(audio_names) -> void:
 	"""
 	Plays an audio file with the given name. If and array of names is given,
 	chooses one at random. If audio is already playing, interrupts it.
@@ -86,18 +86,18 @@ func play_default():
 	_default_audio_scheduled = false
 
 
-func prevent_default():
+func prevent_default() -> void:
 	"""Prevents default audio from playing"""
 	_default_audio_scheduled = false
 
 
-func reset():
+func reset() -> void:
 	"""Clears all registered audio files and configuration"""
 	_audio_mapping.clear()
 	_default_audio_names.clear()
 
 
-func set_default_audio_names(default_audio_names: Array):
+func set_default_audio_names(default_audio_names: Array) -> void:
 	"""
 	Set the names of default audio files. Each of those files has to be
 	registered first.
@@ -105,7 +105,7 @@ func set_default_audio_names(default_audio_names: Array):
 	_default_audio_names = default_audio_names
 
 
-func get_transcript(audio_name: String):
+func get_transcript(audio_name: String) -> String:
 	"""Returns transcript associated with the given audio name"""
 	return _audio_mapping[audio_name]["transcript"]
 

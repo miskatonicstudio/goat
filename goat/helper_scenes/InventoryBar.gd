@@ -5,12 +5,13 @@ const MOVEMENT_OFFSET = 70
 const MOVEMENT_RANGE = 80
 
 onready var animation_player = $AnimationPlayer
+onready var items = $Items
 
 
 func _ready():
 	goat.connect("game_mode_changed", self, "game_mode_changed")
-	goat.connect("inventory_item_obtained", self, "item_obtained")
-	goat.connect("inventory_items_changed", self, "inventory_items_changed")
+	goat_inventory.connect("item_added", self, "_on_item_added")
+	goat_inventory.connect("items_changed", self, "_on_items_changed")
 
 
 func game_mode_changed(_new_game_mode):
@@ -18,20 +19,22 @@ func game_mode_changed(_new_game_mode):
 	animation_player.seek(0, true)
 
 
-func inventory_items_changed(inventory_items):
-	for i in range(goat.INVENTORY_CAPACITY):
+func _on_items_changed(new_items):
+	for i in range(goat_inventory.CAPACITY):
 		var item_button = get_node("Items/Item" + str(i))
-		if i < len(inventory_items):
-			var item_name = inventory_items[i]
-			item_button.icon = goat.get_inventory_item_icon(item_name)
+		if i < len(new_items):
+			var item_name = new_items[i]
+			item_button.icon = goat_inventory.get_item_icon(item_name)
 		else:
 			item_button.icon = null
 
 
-func item_obtained(_item_name):
+func _on_item_added(_item_name):
 	if goat.game_mode == goat.GAME_MODE_EXPLORING:
 		if animation_player.is_playing():
-			var progress = SLIDE_TIME * (MOVEMENT_OFFSET + $Items.rect_position.x) / MOVEMENT_RANGE
+			var progress = SLIDE_TIME * (
+				MOVEMENT_OFFSET + items.rect_position.x
+			) / MOVEMENT_RANGE
 			animation_player.seek(progress, true)
 		else:
 			animation_player.play("show")

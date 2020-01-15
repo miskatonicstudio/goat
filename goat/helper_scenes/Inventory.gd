@@ -12,13 +12,15 @@ var current_item = null
 
 
 func _ready():
-	# Setting own_world here, otherwise 3D world will not be shown in Godot Editor
+	# Setting own_world here, otherwise 3D world will not be shown in
+	# Godot Editor
 	viewport.own_world = true
-	goat.connect("game_mode_changed", self, "game_mode_changed")
-	goat.connect("inventory_item_obtained", self, "item_obtained")
-	goat.connect("inventory_item_selected", self, "item_selected")
-	goat.connect("inventory_item_removed", self, "item_removed")
-	goat.connect("inventory_item_replaced", self, "item_replaced")
+	
+	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
+	goat_inventory.connect("item_selected", self, "_on_item_selected")
+	goat_inventory.connect("item_added", self, "_on_item_added")
+	goat_inventory.connect("item_removed", self, "_on_item_removed")
+	goat_inventory.connect("item_replaced", self, "_on_item_replaced")
 	_on_Inventory_resized()
 
 
@@ -39,8 +41,14 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		ray_cast.enabled = false
 		if ray_cast.currently_selected_item_name:
-			goat.emit_signal("interactive_item_deselected", ray_cast.currently_selected_item_name)
-			goat.emit_signal("interactive_item_deselected_" + ray_cast.currently_selected_item_name)
+			goat.emit_signal(
+				"interactive_item_deselected",
+				ray_cast.currently_selected_item_name
+			)
+			goat.emit_signal(
+				"interactive_item_deselected_" +
+				ray_cast.currently_selected_item_name
+			)
 			ray_cast.currently_selected_item_name = null
 	elif Input.is_action_just_released("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -54,7 +62,7 @@ func _input(event):
 		get_tree().set_input_as_handled()
 
 
-func game_mode_changed(new_game_mode):
+func _on_game_mode_changed(new_game_mode):
 	var inventory_mode = new_game_mode == goat.GAME_MODE_INVENTORY
 	ray_cast.enabled = inventory_mode
 	if inventory_mode:
@@ -65,21 +73,23 @@ func game_mode_changed(new_game_mode):
 		hide()
 
 
-func item_obtained(item_name):
-	var obtained_item = goat.get_inventory_item_model(item_name).instance()
-	obtained_item.add_to_group("goat_inventory_item")
-	obtained_item.add_to_group("goat_inventory_item_" + item_name)
-	obtained_item.translation.z = 999
-	obtained_item.hide()
-	rotator.add_child(obtained_item)
+func _on_item_added(item_name):
+	var added_item = goat_inventory.get_item_model(item_name).instance()
+	added_item.add_to_group("goat_inventory_item")
+	added_item.add_to_group("goat_inventory_item_" + item_name)
+	added_item.translation.z = 999
+	added_item.hide()
+	rotator.add_child(added_item)
 
 
-func item_selected(item_name):
+func _on_item_selected(item_name):
 	# Hide all other items
 	for item in get_tree().get_nodes_in_group("goat_inventory_item"):
 		item.translation.z = 999
 		item.hide()
 	# Select the item
+	if item_name == null:
+		return
 	var selected_item = get_tree().get_nodes_in_group(
 		"goat_inventory_item_" + item_name
 	).front()
@@ -88,7 +98,7 @@ func item_selected(item_name):
 	current_item = selected_item
 
 
-func item_removed(item_name):
+func _on_item_removed(item_name):
 	var removed_item = get_tree().get_nodes_in_group(
 		"goat_inventory_item_" + item_name
 	).pop_front()
@@ -97,9 +107,9 @@ func item_removed(item_name):
 		current_item = null
 
 
-func item_replaced(item_name_replaced, item_name_replacing):
-	item_obtained(item_name_replacing)
-	item_removed(item_name_replaced)
+func _on_item_replaced(replaced_item_name, replacing_item_name):
+	_on_item_added(replaced_item_name)
+	_on_item_removed(replacing_item_name)
 
 
 func _on_ViewportContainer_gui_input(event):

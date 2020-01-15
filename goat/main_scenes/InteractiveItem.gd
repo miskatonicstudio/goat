@@ -63,15 +63,13 @@ func activate(item_name, _position):
 	if item_name != unique_name:
 		return
 	play_sound()
-	# Inventory items should not play default audio
-	if item_mode == ITEM_MODE_INVENTORY:
-		goat_voice.prevent_default()
 	# Disable collision detection
 	if item_mode != ITEM_MODE_NORMAL:
 		collision_layer = 0
 	if item_mode == ITEM_MODE_INVENTORY:
-		goat.emit_signal("inventory_item_obtained", inventory_item_name)
-		goat.emit_signal("inventory_item_obtained_" + inventory_item_name)
+		# Inventory items should not play default audio
+		goat_voice.prevent_default()
+		goat_inventory.add_item(inventory_item_name)
 		# Hide the item, but keep it until the sound is played
 		hide()
 

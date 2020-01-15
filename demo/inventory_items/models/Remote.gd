@@ -19,7 +19,7 @@ func item_activated(item_name, _position):
 
 func item_used_on_item(item_name_1, item_name_2):
 	if item_name_1 == "battery" and item_name_2 == "remote":
-		goat.emit_signal("inventory_item_removed", "battery")
+		goat_inventory.remove_item("battery")
 		powered_up = true
 		$Button/Model/LED.material = load(
 			"res://demo/materials/remote_led_on.material"

@@ -4,25 +4,29 @@ onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	goat.reset_inventory()
+	goat_inventory.reset()
 	goat_voice.reset()
 	
-	goat.register_inventory_item("floppy_disk")
-	goat.register_inventory_item("battery")
-	goat.register_inventory_item("remote")
-	goat.register_inventory_item("pizza")
-	
-	# Voice
+	# Configure GoatVoice
 	var audio_to_transcript := {
-		"just_a_few_steps": "Just a few steps more and I will open the portal!",
-		"power_it_up_first": "I should power it up first.",
-		"pizza_eaten": "Mmmm, delicious!",
-		"useless_without_battery": "It's useless without a battery.",
-		"upload_coords_first": "I should upload the coordinates first.",
-		"finally_active": "The portal is active! Almost there...",
-		"coords_uploaded": "The coordinates are uploaded. Now, where is the remote...",
-		"long_journey": "It's going to be a long journey, I should eat something first.",
-		"another_world_awaits": "Finally! This is actually happening! Another world awaits!",
+		"just_a_few_steps":
+			"Just a few steps more and I will open the portal!",
+		"power_it_up_first":
+			"I should power it up first.",
+		"pizza_eaten":
+			"Mmmm, delicious!",
+		"useless_without_battery":
+			"It's useless without a battery.",
+		"upload_coords_first":
+			"I should upload the coordinates first.",
+		"finally_active":
+			"The portal is active! Almost there...",
+		"coords_uploaded":
+			"The coordinates are uploaded. Now, where is the remote...",
+		"long_journey":
+			"It's going to be a long journey, I should eat something first.",
+		"another_world_awaits":
+			"Finally! This is actually happening! Another world awaits!",
 		# Defaults
 		"but_why": "But why?",
 		"what_for": "What for?",
@@ -41,12 +45,13 @@ func _ready():
 	goat_voice.connect_default(goat, "inventory_item_used_on_inventory")
 	goat_voice.connect_default(goat, "inventory_item_used_on_environment")
 	
-	animation_player.play("start_game")
+	# Configure Gameplay
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])
 	animation_player.connect("animation_finished", self, "animation_finished")
 	
-	goat_voice.play("just_a_few_steps")
 	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	animation_player.play("start_game")
+	goat_voice.play("just_a_few_steps")
 
 
 func animation_finished(animation_name):

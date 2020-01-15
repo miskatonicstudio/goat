@@ -12,6 +12,9 @@ margin_bottom = -200.0
 custom_constants/vseparation = 0
 custom_constants/hseparation = 20
 columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Settings" type="VBoxContainer" parent="."]
 margin_right = 400.0

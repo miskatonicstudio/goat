@@ -28,7 +28,7 @@ func item_used_on_environment(inventory_item, environment_item):
 		goat_voice.prevent_default()
 		$Desk/BottomComputer/TopComputer/InteractiveItem/InsertSound.play()
 		$AnimationPlayer.play("insert_floppy_disk")
-		goat.emit_signal("inventory_item_removed", "floppy_disk")
+		goat_inventory.remove_item("floppy_disk")
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

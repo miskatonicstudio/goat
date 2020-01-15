@@ -48,6 +48,8 @@ shape = SubResource( 2 )
 [node name="Button" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.209, 0.1 )
 unique_name = "remote_button"
+inventory_item_name = ""
+item_mode = 0
 collision_shape = SubResource( 3 )
 sound = ExtResource( 3 )
 

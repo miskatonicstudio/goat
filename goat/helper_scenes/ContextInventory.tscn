@@ -41,6 +41,9 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Item1" type="Control" parent="CenterContainer/Center"]
 margin_left = 70.0
