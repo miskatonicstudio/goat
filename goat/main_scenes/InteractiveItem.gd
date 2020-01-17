@@ -23,7 +23,6 @@ onready var audio_player = $AudioPlayer
 
 func _ready():
 	add_to_group("goat_interactive_item_" + unique_name)
-	goat.register_unique_name(unique_name)
 	$CollisionShape.shape = collision_shape
 	audio_player.stream = sound
 	

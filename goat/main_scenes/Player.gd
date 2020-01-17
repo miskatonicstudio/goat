@@ -45,7 +45,6 @@ func _input(event):
 	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
 		if is_pickable_item:
 			goat.emit_signal("interactive_item_activated", environment_item_name, null)
-			goat.emit_signal("interactive_item_activated_" + environment_item_name)
 		else:
 			goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
 			get_tree().set_input_as_handled()
@@ -105,7 +104,9 @@ func update_movement_direction():
 func interactive_item_selected(item_name, _position):
 	if goat.game_mode == goat.GameMode.EXPLORING:
 		environment_item_name = item_name
-		var actual_item = get_tree().get_nodes_in_group("goat_interactive_item_" + item_name).pop_back()
+		var actual_item = get_tree().get_nodes_in_group(
+			"goat_interactive_item_" + item_name
+		).pop_back()
 		is_pickable_item = actual_item.is_pickable_item()
 
 

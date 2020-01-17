@@ -40,11 +40,6 @@ func _input(event):
 			goat.emit_signal(
 				"inventory_item_used_on_inventory", item_name_1, item_name_2
 			)
-			goat.emit_signal(
-				"inventory_item_{}_used_on_inventory_{}".format(
-					[item_name_1, item_name_2], "{}"
-				)
-			)
 		currently_dragged_item_name = null
 
 
@@ -106,7 +101,6 @@ func _on_UseButton_pressed():
 	if selected_item_name:
 		# Making a copy of names to avoid changing them when the first signal is handled
 		goat.emit_signal("inventory_item_used", selected_item_name)
-		goat.emit_signal("inventory_item_used_" + selected_item_name)
 
 
 func _on_BackButton_pressed():

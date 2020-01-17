@@ -66,11 +66,6 @@ func _on_item_button_pressed(item_index):
 	goat.emit_signal(
 		"inventory_item_used_on_environment", item_name, environment_item_name
 		)
-	goat.emit_signal(
-		"inventory_item_{}_used_on_environment_{}".format(
-			[item_name, environment_item_name], "{}"
-		)
-	)
 	go_back_to_exploring()
 
 
