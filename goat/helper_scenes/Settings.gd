@@ -2,11 +2,11 @@ extends CenterContainer
 
 
 func _ready():
-	goat.connect("game_mode_changed", self, "game_mode_changed")
+	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
 
 
-func game_mode_changed(new_game_mode):
-	if new_game_mode == goat.GAME_MODE_SETTINGS:
+func _on_game_mode_changed(new_game_mode):
+	if new_game_mode == goat.GameMode.SETTINGS:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		show()
 	else:
@@ -14,19 +14,20 @@ func game_mode_changed(new_game_mode):
 
 
 func _input(_event):
-	if goat.game_mode != goat.GAME_MODE_SETTINGS:
+	if goat.game_mode != goat.GameMode.SETTINGS:
 		return
 	if Input.is_action_just_pressed("goat_dismiss"):
-		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+		goat.game_mode = goat.GameMode.EXPLORING
 		get_tree().set_input_as_handled()
 
 
 func _on_Exit_pressed():
 	if goat.EXIT_SCENE:
 		get_tree().change_scene(goat.EXIT_SCENE)
+		goat.game_mode = goat.GameMode.EXPLORING
 	else:
 		get_tree().quit()
 
 
 func _on_Resume_pressed():
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	goat.game_mode = goat.GameMode.EXPLORING

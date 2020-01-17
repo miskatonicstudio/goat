@@ -25,7 +25,7 @@ func _ready():
 
 
 func _input(event):
-	if goat.game_mode != goat.GAME_MODE_INVENTORY:
+	if goat.game_mode != goat.GameMode.INVENTORY:
 		return
 	if Input.is_action_pressed("goat_rotate_inventory"):
 		var mouse_sensitivity = goat_settings.get_value(
@@ -58,12 +58,12 @@ func _input(event):
 		Input.is_action_just_pressed("goat_toggle_inventory") or
 		Input.is_action_just_pressed("goat_dismiss")
 	):
-		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+		goat.game_mode = goat.GameMode.EXPLORING
 		get_tree().set_input_as_handled()
 
 
 func _on_game_mode_changed(new_game_mode):
-	var inventory_mode = new_game_mode == goat.GAME_MODE_INVENTORY
+	var inventory_mode = new_game_mode == goat.GameMode.INVENTORY
 	ray_cast.enabled = inventory_mode
 	if inventory_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -113,7 +113,7 @@ func _on_item_replaced(replaced_item_name, replacing_item_name):
 
 
 func _on_ViewportContainer_gui_input(event):
-	if goat.game_mode != goat.GAME_MODE_INVENTORY:
+	if goat.game_mode != goat.GameMode.INVENTORY:
 		return
 	# We are currently rotating the item
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

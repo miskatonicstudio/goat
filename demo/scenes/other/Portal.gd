@@ -54,5 +54,6 @@ func remote_pressed():
 		animation_player.play("portal_light")
 		the_other_side_sound.play()
 		state = "active"
-		goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+		# Exit inventory mode to show that the portal is active
+		goat.game_mode = goat.GameMode.EXPLORING
 		goat_voice.play("finally_active")

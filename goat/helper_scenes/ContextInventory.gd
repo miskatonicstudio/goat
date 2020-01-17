@@ -23,14 +23,14 @@ func _ready():
 
 
 func _input(_event):
-	if goat.game_mode != goat.GAME_MODE_CONTEXT_INVENTORY:
+	if goat.game_mode != goat.GameMode.CONTEXT_INVENTORY:
 		return
 	if Input.is_action_just_pressed("goat_dismiss"):
 		go_back_to_exploring()
 
 
 func _on_game_mode_changed(new_game_mode):
-	if new_game_mode == goat.GAME_MODE_CONTEXT_INVENTORY:
+	if new_game_mode == goat.GameMode.CONTEXT_INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Input.set_custom_mouse_cursor(goat.game_cursor)
 		show()
@@ -39,12 +39,12 @@ func _on_game_mode_changed(new_game_mode):
 
 
 func _on_interactive_item_selected(item_name, _position):
-	if goat.game_mode == goat.GAME_MODE_EXPLORING:
+	if goat.game_mode == goat.GameMode.EXPLORING:
 		environment_item_name = item_name
 
 
 func _on_interactive_item_deselected(item_name):
-	if goat.game_mode == goat.GAME_MODE_EXPLORING:
+	if goat.game_mode == goat.GameMode.EXPLORING:
 		if item_name == environment_item_name:
 			environment_item_name = null
 
@@ -79,5 +79,5 @@ func _on_ExitButton_pressed():
 
 
 func go_back_to_exploring():
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	goat.game_mode = goat.GameMode.EXPLORING
 	get_tree().set_input_as_handled()

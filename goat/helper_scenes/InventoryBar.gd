@@ -30,7 +30,7 @@ func _on_items_changed(new_items):
 
 
 func _on_item_added(_item_name):
-	if goat.game_mode == goat.GAME_MODE_EXPLORING:
+	if goat.game_mode == goat.GameMode.EXPLORING:
 		if animation_player.is_playing():
 			var progress = SLIDE_TIME * (
 				MOVEMENT_OFFSET + items.rect_position.x

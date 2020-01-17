@@ -51,7 +51,7 @@ func _input(event):
 func _on_game_mode_changed(new_game_mode):
 	# Select the last item if this is the first time the inventory is opened
 	if (
-		new_game_mode == goat.GAME_MODE_INVENTORY and
+		new_game_mode == goat.GameMode.INVENTORY and
 		goat_inventory.get_selected_item() == null and
 		not goat_inventory.get_items().empty()
 	):
@@ -110,4 +110,4 @@ func _on_UseButton_pressed():
 
 
 func _on_BackButton_pressed():
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
+	goat.game_mode = goat.GameMode.EXPLORING

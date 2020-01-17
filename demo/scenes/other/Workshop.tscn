@@ -657,16 +657,16 @@ rings = 6
 [sub_resource type="BoxShape" id=40]
 extents = Vector3( 2.23047, 0.2392, 3.97905 )
 
-[sub_resource type="SpatialMaterial" id=42]
+[sub_resource type="SpatialMaterial" id=41]
 albedo_color = Color( 0.301961, 0.301961, 0.301961, 1 )
 metallic_specular = 0.0
 
-[sub_resource type="CubeMesh" id=41]
-material = SubResource( 42 )
+[sub_resource type="CubeMesh" id=42]
+material = SubResource( 41 )
 size = Vector3( 16, 4, 1 )
 
 [sub_resource type="CubeMesh" id=43]
-material = SubResource( 42 )
+material = SubResource( 41 )
 size = Vector3( 3, 6, 1 )
 
 [node name="Workshop" type="Spatial"]
@@ -977,12 +977,12 @@ transform = Transform( 0.590477, 0, 0.807055, 0, 1, 0, -0.807055, 0, 0.590477, 2
 
 [node name="SunShade1" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647369, -3.43403 )
-mesh = SubResource( 41 )
+mesh = SubResource( 42 )
 material/0 = null
 
 [node name="SunShade2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0644157, 5.44704, -3.41914 )
-mesh = SubResource( 41 )
+mesh = SubResource( 42 )
 material/0 = null
 
 [node name="SunShade3" type="MeshInstance" parent="."]

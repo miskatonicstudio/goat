@@ -49,7 +49,6 @@ func _ready():
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])
 	animation_player.connect("animation_finished", self, "animation_finished")
 	
-	goat.emit_signal("game_mode_changed", goat.GAME_MODE_EXPLORING)
 	animation_player.play("start_game")
 	goat_voice.play("just_a_few_steps")
 
