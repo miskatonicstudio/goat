@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_interact.png-323a6f21e1668dc58a6b7542b49a9d66.stex"
+path="res://.import/interaction_icon.png-4988d62a944964b8c599c940c476426c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://goat/images/icon_interact.png"
-dest_files=[ "res://.import/icon_interact.png-323a6f21e1668dc58a6b7542b49a9d66.stex" ]
+source_file="res://goat/images/interaction_icon.png"
+dest_files=[ "res://.import/interaction_icon.png-4988d62a944964b8c599c940c476426c.stex" ]
 
 [params]
 
