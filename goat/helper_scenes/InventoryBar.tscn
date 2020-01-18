@@ -104,3 +104,4 @@ rect_min_size = Vector2( 68, 68 )
 custom_styles/normal = ExtResource( 2 )
 button_mask = 0
 clip_text = true
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

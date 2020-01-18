@@ -9,14 +9,14 @@ onready var items = $Items
 
 
 func _ready():
-	goat.connect("game_mode_changed", self, "game_mode_changed")
+	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
 	goat_inventory.connect("item_added", self, "_on_item_added")
 	goat_inventory.connect("items_changed", self, "_on_items_changed")
 
 
-func game_mode_changed(_new_game_mode):
-	animation_player.seek(0, true)
+func _on_game_mode_changed(_new_game_mode):
 	animation_player.stop(true)
+	hide()
 
 
 func _on_items_changed(new_items):
@@ -31,6 +31,7 @@ func _on_items_changed(new_items):
 
 func _on_item_added(_item_name):
 	if goat.game_mode == goat.GameMode.EXPLORING:
+		show()
 		if animation_player.is_playing():
 			var progress = SLIDE_TIME * (
 				MOVEMENT_OFFSET + items.rect_position.x
@@ -38,3 +39,7 @@ func _on_item_added(_item_name):
 			animation_player.seek(progress, true)
 		else:
 			animation_player.play("show")
+
+
+func _on_AnimationPlayer_animation_finished(_anim_name):
+	hide()
