@@ -23,8 +23,12 @@ distributed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/
 
 ### Images
 
-Interaction icon was created using
+Item interaction icon was created using
 [this image](https://publicdomainvectors.org/en/free-clipart/Silhouette-of-hand-palm/36250.html),
+distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+Screen interaction icon was created using
+[this image](https://publicdomainvectors.org/en/free-clipart/Zoom-in-sign/44722.html),
 distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ### Voice
