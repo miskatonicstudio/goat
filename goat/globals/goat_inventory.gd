@@ -60,6 +60,7 @@ func get_item_model(item_name: String):
 func reset() -> void:
 	"""Clears inventory items, but keeps the configuration"""
 	_items.clear()
+	_selected_item = null
 
 
 func get_items() -> Array:
