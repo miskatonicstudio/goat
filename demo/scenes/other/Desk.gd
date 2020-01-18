@@ -10,9 +10,7 @@ onready var sound = $Desk/BottomComputer/TopComputer/InteractiveItem/InsertSound
 
 func _ready():
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
-	goat.connect(
-		"inventory_item_used_on_environment", self, "item_used_on_environment"
-	)
+	goat_inventory.connect("item_used", self, "_on_item_used")
 
 
 func _on_object_activated(object_name, _point):
@@ -24,8 +22,8 @@ func _on_object_activated(object_name, _point):
 		computer_powered_up = true
 
 
-func item_used_on_environment(inventory_item, environment_item):
-	if inventory_item == "floppy_disk" and environment_item == "computer":
+func _on_item_used(item_name, used_on_name):
+	if item_name == "floppy_disk" and used_on_name == "computer":
 		if not computer_powered_up:
 			goat_voice.play("power_it_up_first")
 			return

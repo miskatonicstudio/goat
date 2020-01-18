@@ -9,7 +9,7 @@ onready var battery_insert_sound = $BatterySound
 
 func _ready():
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
-	goat.connect("inventory_item_used_on_inventory", self, "item_used_on_item")
+	goat_inventory.connect("item_used", self, "_on_item_used")
 
 
 func _on_object_activated(object_name, _point):
@@ -21,8 +21,8 @@ func _on_object_activated(object_name, _point):
 			goat_voice.play("useless_without_battery")
 
 
-func item_used_on_item(item_name_1, item_name_2):
-	if item_name_1 == "battery" and item_name_2 == "remote":
+func _on_item_used(item_name, used_on_name):
+	if item_name == "battery" and used_on_name == "remote":
 		goat_inventory.remove_item("battery")
 		powered_up = true
 		led.material = load("res://demo/materials/remote_led_on.material")

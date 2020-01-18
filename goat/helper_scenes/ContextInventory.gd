@@ -46,9 +46,7 @@ func _on_items_changed(new_items):
 func _on_item_button_pressed(item_index):
 	var item_name = goat_inventory.get_items()[item_index]
 	var environment_object = goat_interaction.get_selected_object("environment")
-	goat.emit_signal(
-		"inventory_item_used_on_environment", item_name, environment_object
-	)
+	goat_inventory.use_item(item_name, environment_object)
 	_go_back_to_exploring()
 
 

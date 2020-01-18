@@ -33,13 +33,8 @@ func _input(event):
 			not item_container_area.has_point(event.global_position) and
 			currently_dragged_item_name != goat_inventory.get_selected_item()
 		):
-			# Making a copy of names to avoid changing them
-			# when the first signal is handled
-			var item_name_1 = currently_dragged_item_name
-			var item_name_2 = goat_inventory.get_selected_item()
-			goat.emit_signal(
-				"inventory_item_used_on_inventory", item_name_1, item_name_2
-			)
+			var inventory_item = goat_inventory.get_selected_item()
+			goat_inventory.use_item(currently_dragged_item_name, inventory_item)
 		currently_dragged_item_name = null
 
 
@@ -99,8 +94,7 @@ func _on_item_button_down(item_index):
 func _on_UseButton_pressed():
 	var selected_item_name = goat_inventory.get_selected_item()
 	if selected_item_name:
-		# Making a copy of names to avoid changing them when the first signal is handled
-		goat.emit_signal("inventory_item_used", selected_item_name)
+		goat_inventory.use_item(selected_item_name)
 
 
 func _on_BackButton_pressed():

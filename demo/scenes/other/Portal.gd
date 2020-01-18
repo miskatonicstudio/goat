@@ -18,7 +18,7 @@ onready var animation_player = $AnimationPlayer
 
 func _ready():
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
-	goat.connect("inventory_item_used", self, "item_used")
+	goat_inventory.connect("item_used", self, "_on_item_used")
 	demo.connect("program_uploaded", self, "_on_program_uploaded")
 	demo.connect("remote_pressed", self, "_on_remote_pressed")
 
@@ -36,8 +36,8 @@ func _on_object_activated(object_name, _point):
 			goat_voice.play("long_journey")
 
 
-func item_used(item_name):
-	if item_name == "pizza":
+func _on_item_used(item_name, used_on_name):
+	if item_name == "pizza" and used_on_name == "pizza":
 		food_eaten = true
 
 

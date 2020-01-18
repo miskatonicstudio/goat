@@ -1,9 +1,6 @@
 class_name Goat
 extends Node
 
-signal inventory_item_used (item_name)
-signal inventory_item_used_on_inventory (item_name, inventory_item_name)
-signal inventory_item_used_on_environment (item_name, environment_item_name)
 signal game_mode_changed (new_game_mode)
 
 enum GameMode {
@@ -15,16 +12,16 @@ enum GameMode {
 
 export (GameMode) var game_mode = GameMode.EXPLORING setget set_game_mode
 
-var _game_resources_directory = ProjectSettings.get(
-	"application/config/name"
-).to_lower()
-
 var game_cursor = null
 
 # Template settings/game settings
 # Exit scene: if null, Exit button in settings ends the program.
 # Otherwise, it will load the specified scene.
 var EXIT_SCENE = null
+
+var _game_resources_directory = ProjectSettings.get(
+	"application/config/name"
+).to_lower()
 
 
 func set_game_mode(new_game_model):

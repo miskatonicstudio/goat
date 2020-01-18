@@ -10,6 +10,7 @@ signal item_selected (item_name)
 signal item_added (item_name)
 signal item_removed (item_name)
 signal item_replaced (replaced_item_name, replacing_item_name)
+signal item_used (item_name, used_on_name)
 # Emitted every time there is a change in inventory items
 signal items_changed (new_items)
 
@@ -114,7 +115,7 @@ func remove_item(item_name: String) -> void:
 
 
 func replace_item(replaced_item_name: String, replacing_item_name: String):
-	"""Replaced one item with another"""
+	"""Replaces one item with another"""
 	assert (replaced_item_name in _items)
 	assert (not replacing_item_name in _items)
 	
@@ -124,3 +125,20 @@ func replace_item(replaced_item_name: String, replacing_item_name: String):
 	emit_signal("items_changed", _items)
 	if replaced_item_name == _selected_item:
 		select_item(replacing_item_name)
+
+
+func use_item(item_name: String, used_on_name=null) -> void:
+	"""
+	Uses an item on another one. Doesn't change anything in the inventory, just
+	emits signals. Both items can have the same value, which represents a
+	situation of using an item on itself or just using an item
+	(e.g. eating a pizza or unwrapping a package). If used_on_name is null,
+	it will be set to item_name before signals are emitted.
+	"""
+	assert (item_name in _items)
+	assert (item_name != null)
+	
+	if used_on_name == null:
+		used_on_name = item_name
+	
+	emit_signal("item_used", item_name, used_on_name)

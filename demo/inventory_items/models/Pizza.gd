@@ -2,10 +2,10 @@ extends Spatial
 
 
 func _ready():
-	goat.connect("inventory_item_used", self, "item_used")
+	goat_inventory.connect("item_used", self, "_on_item_used")
 
 
-func item_used(item_name):
-	if item_name == "pizza":
+func _on_item_used(item_name, used_on_name):
+	if item_name == "pizza" and used_on_name == "pizza":
 		goat_inventory.remove_item("pizza")
 		goat_voice.play("pizza_eaten")
