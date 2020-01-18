@@ -15,8 +15,8 @@ func _ready():
 
 
 func game_mode_changed(_new_game_mode):
-	animation_player.stop(true)
 	animation_player.seek(0, true)
+	animation_player.stop(true)
 
 
 func _on_items_changed(new_items):
