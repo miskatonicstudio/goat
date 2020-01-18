@@ -25,7 +25,6 @@ func _input(_event):
 func _on_game_mode_changed(new_game_mode):
 	if new_game_mode == goat.GameMode.CONTEXT_INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		Input.set_custom_mouse_cursor(goat.game_cursor)
 		show()
 	else:
 		hide()
