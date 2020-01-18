@@ -19,7 +19,7 @@ var _default_audio_scheduled := false
 # Sound files and transcripts associated with audio names
 var _audio_mapping := {}
 # Currently playing sound, required for sending a signal if interrupted
-var _currently_playing_audio_name: String
+var _currently_playing_audio_name = null
 # List of audio names to play if a meaningless action is performed
 var _default_audio_names := []
 
@@ -130,4 +130,4 @@ func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null):
 
 func _on_audio_player_finished():
 	emit_signal("finished", _currently_playing_audio_name, false)
-	_currently_playing_audio_name = ""
+	_currently_playing_audio_name = null
