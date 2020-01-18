@@ -1,4 +1,12 @@
+class_name InteractiveScreen
 extends StaticBody
+
+"""
+Represents a flat screen with interactive content. Actual content is provided
+by 'Content' node that needs to be added as a child. The 'object_selected'
+signal will be passed to content as mouse movement. The 'object_activated'
+signal will be passed to content as LMB click.
+"""
 
 export (String) var unique_name
 export (Vector2) var content_size = Vector2(100, 100)
@@ -6,61 +14,79 @@ export (float, 0, 16) var emission_energy = 1.0
 
 onready var screen_surface = $ScreenSurface
 onready var viewport = $Viewport
+# A 2D node with screen's content should be added as a child 
 onready var content = get_node("Content")
 
 
 func _ready():
-	add_to_group("goat_interactive_item_" + unique_name)
-	remove_child(content)
-	viewport.add_child(content)
-	screen_surface.material_override = screen_surface.material_override.duplicate(true)
-	screen_surface.material_override.albedo_texture = viewport.get_texture()
-	if emission_energy:
-		screen_surface.material_override.emission_enabled = true
-		screen_surface.material_override.emission_texture = viewport.get_texture()
-		screen_surface.material_override.emission_energy = emission_energy
-	goat.connect("interactive_item_activated", self, "activate")
-	goat.connect("interactive_item_selected", self, "select")
+	add_to_group("goat_interactive_object_" + unique_name)
+	
+	goat_interaction.connect("object_selected", self, "_on_object_selected")
+	goat_interaction.connect("object_activated", self, "_on_object_activated")
+	goat_interaction.connect(
+		"object_activated_alternatively", self,
+		"_on_object_activated_alternatively"
+	)
+	
+	# Content is moved to the Viewport
 	content.rect_size = content_size
 	viewport.size = content_size
+	remove_child(content)
+	viewport.add_child(content)
+	
+	# Duplicate the existing material and set a viewport texture
+	var new_material = screen_surface.material_override.duplicate(true)
+	new_material.albedo_texture = viewport.get_texture()
+	if emission_energy:
+		new_material.emission_enabled = true
+		new_material.emission_texture = viewport.get_texture()
+		new_material.emission_energy = emission_energy
+	screen_surface.material_override = new_material
 
 
-func select(item_name, position):
-	if item_name != unique_name:
-		pass
-	var local_position = screen_surface.to_local(position)
-	var screen_coordinates = Vector2(
-		local_position.x + 0.5, 0.5 - local_position.y
-	) * viewport.size
-	# Mouse movement
-	var ev = InputEventMouseMotion.new()
-	ev.global_position = screen_coordinates
-	ev.position = screen_coordinates
-	viewport.input(ev)
-
-
-func activate(item_name, position):
-	if item_name != unique_name:
+func _on_object_selected(object_name, point):
+	if object_name != unique_name:
 		return
+	
+	var screen_coordinates = _convert_to_screen_coordinates(point)
+	# Creates a mouse motion event
+	var event = InputEventMouseMotion.new()
+	event.global_position = screen_coordinates
+	event.position = screen_coordinates
+	viewport.input(event)
+
+
+func _on_object_activated(object_name, point):
+	if object_name != unique_name:
+		return
+	
 	# Screen activation should not play default audio
 	goat_voice.prevent_default()
-	var local_position = screen_surface.to_local(position)
-	var screen_coordinates = Vector2(
-		local_position.x + 0.5, 0.5 - local_position.y
-	) * viewport.size
-	var ev = InputEventMouseButton.new()
-	ev.button_index = BUTTON_LEFT
-	ev.global_position = screen_coordinates
-	ev.position = screen_coordinates
+	var screen_coordinates = _convert_to_screen_coordinates(point)
+	var event = InputEventMouseButton.new()
+	# Creates 2 mouse button events: button pressed and button released
+	event.button_index = BUTTON_LEFT
+	event.global_position = screen_coordinates
+	event.position = screen_coordinates
 	# Press the button
-	ev.pressed = true
-	ev.button_mask = 1
-	viewport.input(ev)
+	event.pressed = true
+	event.button_mask = 1
+	viewport.input(event)
 	# Release the button
-	ev.pressed = false
-	ev.button_mask = 0
-	viewport.input(ev)
+	event.pressed = false
+	event.button_mask = 0
+	viewport.input(event)
 
 
-func is_pickable_item():
-	return false
+func _on_object_activated_alternatively(object_name, _point):
+	if object_name != unique_name:
+		return
+	
+	goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
+
+
+func _convert_to_screen_coordinates(global_point):
+	# Converts to local point where z = 0 and x and y are between -0.5 and 0.5
+	var local_point = screen_surface.to_local(global_point)
+	# Converts to screen space ranging from (0, 0) to viewport.size
+	return Vector2(local_point.x + 0.5, 0.5 - local_point.y) * viewport.size

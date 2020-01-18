@@ -1,7 +1,13 @@
 extends Spatial
 
-# State: off, on, ready, active
-var state = "off"
+enum Status {
+	POWERED_OFF,
+	POWERED_ON,
+	READY_TO_ACTIVATE,
+	ACTIVE
+}
+
+var status = Status.POWERED_OFF
 var food_eaten = false
 
 onready var led = $CSGTorus/LED
@@ -11,17 +17,18 @@ onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	goat.connect("interactive_item_activated", self, "item_activated")
+	goat_interaction.connect("object_activated", self, "_on_object_activated")
 	goat.connect("inventory_item_used", self, "item_used")
-	demo.connect("program_uploaded", self, "program_uploaded")
-	demo.connect("remote_pressed", self, "remote_pressed")
+	demo.connect("program_uploaded", self, "_on_program_uploaded")
+	demo.connect("remote_pressed", self, "_on_remote_pressed")
 
 
-func item_activated(item_name, _position):
-	if item_name == "generator" and state == "off":
+func _on_object_activated(object_name, _point):
+	if object_name == "generator" and status == Status.POWERED_OFF:
 		led.material = load("res://demo/materials/portal_on.material")
-		state = "on"
-	if item_name == "portal":
+		status = Status.POWERED_ON
+	# Portal is only available after coords are uploaded and remote is pressed
+	if object_name == "portal":
 		if food_eaten:
 			demo.emit_signal("portal_entered")
 			goat_voice.play("another_world_awaits")
@@ -34,26 +41,22 @@ func item_used(item_name):
 		food_eaten = true
 
 
-func program_uploaded():
-	if state == "on":
-		led.material = load(
-			"res://demo/materials/portal_ready.material"
-		)
-		state = "ready"
+func _on_program_uploaded():
+	if status == Status.POWERED_ON:
+		led.material = load("res://demo/materials/portal_ready.material")
+		status = Status.READY_TO_ACTIVATE
 
 
-func remote_pressed():
-	if state == "off" or state == "on":
+func _on_remote_pressed():
+	if status == Status.POWERED_OFF or status == Status.POWERED_ON:
 		goat_voice.play("upload_coords_first")
-	if state == "ready":
-		led.material = load(
-			"res://demo/materials/portal_active.material"
-		)
-		# "Activate" = move the portal
+	if status == Status.READY_TO_ACTIVATE:
+		led.material = load("res://demo/materials/portal_active.material")
+		status = Status.ACTIVE
+		# "Activate" = move the portal from below
 		portal.translation = Vector3(0, 0, 0)
 		animation_player.play("portal_light")
 		the_other_side_sound.play()
-		state = "active"
 		# Exit inventory mode to show that the portal is active
 		goat.game_mode = goat.GameMode.EXPLORING
 		goat_voice.play("finally_active")

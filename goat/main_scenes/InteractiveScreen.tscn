@@ -11,7 +11,7 @@ points = PoolVector3Array( -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, -0.5,
 [sub_resource type="QuadMesh" id=3]
 
 [node name="InteractiveScreen" type="StaticBody" groups=[
-"goat_interactive_item",
+"goat_interactive_object",
 ]]
 collision_layer = 2
 script = ExtResource( 1 )

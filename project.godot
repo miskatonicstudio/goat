@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Goat",
+"language": "GDScript",
+"path": "res://goat/globals/goat.gd"
+}, {
+"base": "Node",
+"class": "GoatInteraction",
+"language": "GDScript",
+"path": "res://goat/globals/goat_interaction.gd"
+}, {
+"base": "Node",
 "class": "GoatInventory",
 "language": "GDScript",
 "path": "res://goat/globals/goat_inventory.gd"
@@ -23,11 +33,37 @@ _global_script_classes=[ {
 "class": "GoatVoice",
 "language": "GDScript",
 "path": "res://goat/globals/goat_voice.gd"
+}, {
+"base": "StaticBody",
+"class": "InteractiveItem",
+"language": "GDScript",
+"path": "res://goat/main_scenes/InteractiveItem.gd"
+}, {
+"base": "StaticBody",
+"class": "InteractiveScreen",
+"language": "GDScript",
+"path": "res://goat/main_scenes/InteractiveScreen.gd"
+}, {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://goat/main_scenes/Player.gd"
+}, {
+"base": "RayCast",
+"class": "RayCast3D",
+"language": "GDScript",
+"path": "res://goat/helper_scenes/RayCast3D.gd"
 } ]
 _global_script_class_icons={
+"Goat": "",
+"GoatInteraction": "",
 "GoatInventory": "",
 "GoatSettings": "",
-"GoatVoice": ""
+"GoatVoice": "",
+"InteractiveItem": "",
+"InteractiveScreen": "",
+"Player": "",
+"RayCast3D": ""
 }
 
 [application]
@@ -43,6 +79,7 @@ default_bus_layout="res://goat/default_bus_layout.tres"
 
 goat_settings="*res://goat/globals/goat_settings.gd"
 goat_voice="*res://goat/globals/goat_voice.gd"
+goat_interaction="*res://goat/globals/goat_interaction.gd"
 goat_inventory="*res://goat/globals/goat_inventory.gd"
 goat="*res://goat/globals/goat.gd"
 demo="*res://demo/globals/demo.gd"
@@ -83,6 +120,11 @@ goat_interact={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+goat_interact_alternatively={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 goat_toggle_inventory={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"unicode":0,"echo":false,"script":null)
@@ -96,11 +138,6 @@ goat_rotate_inventory={
 goat_drag_inventory={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
-goat_toggle_context_inventory={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 goat_dismiss={

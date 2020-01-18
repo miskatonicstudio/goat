@@ -29,6 +29,7 @@ environment = ExtResource( 2 )
 [node name="RayCast3D" parent="Camera" instance=ExtResource( 3 )]
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
+category = "environment"
 
 [node name="Scope" type="Label" parent="."]
 anchor_left = 0.5

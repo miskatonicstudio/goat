@@ -1,66 +1,52 @@
+class_name Player
 extends KinematicBody
 
 export (float) var SPEED = 3.0
+
+var movement_direction = Vector3()
 
 onready var camera = $Camera
 onready var ray_cast = $Camera/RayCast3D
 onready var inventory = $Inventory
 onready var context_inventory = $ContextInventory
 onready var settings = $Settings
-
-var movement_direction = Vector3()
-var environment_item_name = null
-var is_pickable_item = false
+onready var scope = $Scope
 
 
 func _ready():
 	inventory.hide()
 	context_inventory.hide()
 	settings.hide()
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
-	goat.connect("interactive_item_selected", self, "interactive_item_selected")
-	goat.connect("interactive_item_deselected", self, "interactive_item_deselected")
-
-
-func _physics_process(_delta):
-	if goat.game_mode != goat.GameMode.EXPLORING:
-		return
-	if movement_direction:
-		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
-	# Make sure that collisions didn't accidentally move the Player up or down 
-	translation.y = 0
 
 
 func _input(event):
 	if goat.game_mode != goat.GameMode.EXPLORING:
 		return
+	
 	if Input.is_action_just_pressed("goat_toggle_inventory"):
 		goat.game_mode = goat.GameMode.INVENTORY
-		get_tree().set_input_as_handled()
-	# Instead of opening a context inventory, pick up an inventory item
+	
 	if Input.is_action_just_pressed("goat_dismiss"):
 		goat.game_mode = goat.GameMode.SETTINGS
-		get_tree().set_input_as_handled()
-	if Input.is_action_just_pressed("goat_toggle_context_inventory") and environment_item_name:
-		if is_pickable_item:
-			goat.emit_signal("interactive_item_activated", environment_item_name, null)
-		else:
-			goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
-			get_tree().set_input_as_handled()
+	
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
+	
 	update_movement_direction()
 
 
-func _on_game_mode_changed(new_game_mode):
-	var exploring_mode = new_game_mode == goat.GameMode.EXPLORING
-	var inventory_mode = new_game_mode == goat.GameMode.INVENTORY
-	$Scope.visible = exploring_mode
-	ray_cast.enabled = exploring_mode
-	if exploring_mode:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	camera.environment.dof_blur_far_enabled = inventory_mode
+func _physics_process(_delta):
+	if goat.game_mode != goat.GameMode.EXPLORING:
+		return
+	
+	if movement_direction:
+		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
+	# Make sure that collisions didn't accidentally move the Player up or down 
+	translation.y = 0
 
 
 func rotate_camera(relative_movement):
@@ -101,17 +87,13 @@ func update_movement_direction():
 	movement_direction = movement_direction.normalized()
 
 
-func interactive_item_selected(item_name, _position):
-	if goat.game_mode == goat.GameMode.EXPLORING:
-		environment_item_name = item_name
-		var actual_item = get_tree().get_nodes_in_group(
-			"goat_interactive_item_" + item_name
-		).pop_back()
-		is_pickable_item = actual_item.is_pickable_item()
-
-
-func interactive_item_deselected(item_name):
-	if goat.game_mode == goat.GameMode.EXPLORING:
-		if item_name == environment_item_name:
-			environment_item_name = null
-			is_pickable_item = false
+func _on_game_mode_changed(new_game_mode):
+	var exploring_mode = new_game_mode == goat.GameMode.EXPLORING
+	var inventory_mode = new_game_mode == goat.GameMode.INVENTORY
+	
+	scope.visible = exploring_mode
+	ray_cast.enabled = exploring_mode
+	camera.environment.dof_blur_far_enabled = inventory_mode
+	
+	if exploring_mode:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

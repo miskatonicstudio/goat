@@ -18,7 +18,6 @@ func _input(_event):
 		return
 	if Input.is_action_just_pressed("goat_dismiss"):
 		goat.game_mode = goat.GameMode.EXPLORING
-		get_tree().set_input_as_handled()
 
 
 func _on_Exit_pressed():

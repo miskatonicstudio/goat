@@ -15,9 +15,9 @@ height = 0.2
 
 [node name="InteractiveItem" parent="PlateModel" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.214922, 0 )
-unique_name = "pizza_env"
+unique_name = "pizza_pickable"
+item_type = 2
 inventory_item_name = "pizza"
-item_mode = 2
 collision_shape = SubResource( 1 )
 sound = ExtResource( 2 )
 

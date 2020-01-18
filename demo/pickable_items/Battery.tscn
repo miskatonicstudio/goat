@@ -4,13 +4,12 @@
 [ext_resource path="res://demo/sounds/pick_up.ogg" type="AudioStream" id=2]
 [ext_resource path="res://demo/models/BatteryModel.tscn" type="PackedScene" id=3]
 
-
 [node name="Battery" type="Spatial"]
 
 [node name="InteractiveItem" parent="." instance=ExtResource( 1 )]
-unique_name = "battery_env"
+unique_name = "battery_pickable"
+item_type = 2
 inventory_item_name = "battery"
-item_mode = 2
 sound = ExtResource( 2 )
 
 [node name="Model" parent="InteractiveItem" instance=ExtResource( 3 )]

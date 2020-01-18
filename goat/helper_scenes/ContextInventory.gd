@@ -2,17 +2,9 @@ extends Control
 
 const ITEM_BUTTON_PATH = "CenterContainer/Center/Item{index}/Button"
 
-var environment_item_name = null
-
 
 func _ready():
 	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
-	goat.connect(
-		"interactive_item_selected", self, "_on_interactive_item_selected"
-	)
-	goat.connect(
-		"interactive_item_deselected", self, "_on_interactive_item_deselected"
-	)
 	goat_inventory.connect("items_changed", self, "_on_items_changed")
 	
 	# Connect button signals
@@ -25,8 +17,9 @@ func _ready():
 func _input(_event):
 	if goat.game_mode != goat.GameMode.CONTEXT_INVENTORY:
 		return
+	
 	if Input.is_action_just_pressed("goat_dismiss"):
-		go_back_to_exploring()
+		_go_back_to_exploring()
 
 
 func _on_game_mode_changed(new_game_mode):
@@ -36,17 +29,6 @@ func _on_game_mode_changed(new_game_mode):
 		show()
 	else:
 		hide()
-
-
-func _on_interactive_item_selected(item_name, _position):
-	if goat.game_mode == goat.GameMode.EXPLORING:
-		environment_item_name = item_name
-
-
-func _on_interactive_item_deselected(item_name):
-	if goat.game_mode == goat.GameMode.EXPLORING:
-		if item_name == environment_item_name:
-			environment_item_name = null
 
 
 func _on_items_changed(new_items):
@@ -63,16 +45,16 @@ func _on_items_changed(new_items):
 
 func _on_item_button_pressed(item_index):
 	var item_name = goat_inventory.get_items()[item_index]
+	var environment_object = goat_interaction.get_selected_object("environment")
 	goat.emit_signal(
-		"inventory_item_used_on_environment", item_name, environment_item_name
-		)
-	go_back_to_exploring()
+		"inventory_item_used_on_environment", item_name, environment_object
+	)
+	_go_back_to_exploring()
 
 
 func _on_ExitButton_pressed():
-	go_back_to_exploring()
+	_go_back_to_exploring()
 
 
-func go_back_to_exploring():
+func _go_back_to_exploring():
 	goat.game_mode = goat.GameMode.EXPLORING
-	get_tree().set_input_as_handled()

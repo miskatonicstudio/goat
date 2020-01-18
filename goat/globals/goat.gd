@@ -1,17 +1,11 @@
+class_name Goat
 extends Node
-
-# Signals
-signal interactive_item_selected (item_name, position)
-signal interactive_item_deselected (item_name)
-signal interactive_item_activated (item_name, position)
 
 signal inventory_item_used (item_name)
 signal inventory_item_used_on_inventory (item_name, inventory_item_name)
 signal inventory_item_used_on_environment (item_name, environment_item_name)
-
 signal game_mode_changed (new_game_mode)
 
-# Enums
 enum GameMode {
 	EXPLORING,
 	INVENTORY,
@@ -19,7 +13,6 @@ enum GameMode {
 	SETTINGS,
 }
 
-# Variables
 export (GameMode) var game_mode = GameMode.EXPLORING setget set_game_mode
 
 var _game_resources_directory = ProjectSettings.get(
@@ -35,6 +28,9 @@ var EXIT_SCENE = null
 
 
 func set_game_mode(new_game_model):
+	# Usually game mode change is a result of user input (e.g. pressing Tab),
+	# and that input shouldn't cause further game mode changes
+	get_tree().set_input_as_handled()
 	game_mode = new_game_model
 	emit_signal("game_mode_changed", game_mode)
 

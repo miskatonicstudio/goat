@@ -1,16 +1,18 @@
 extends Spatial
 
+onready var generator_model = $InteractiveItem/Model
+onready var working_sound = $WorkingSound
+
 
 func _ready():
-	goat.connect("interactive_item_activated", self, "item_activated")
+	goat_interaction.connect("object_activated", self, "_on_object_activated")
 
 
-func item_activated(item_name, _position):
-	if item_name == "generator":
+func _on_object_activated(object_name, _point):
+	if object_name == "generator":
 		goat_voice.prevent_default()
-		var generator_screen_on = load(
-			"res://demo/materials/generator_screen_on.material"
-		)
 		# Set generator screen's material (surface: 2)
-		$InteractiveItem/Model.set_surface_material(2, generator_screen_on)
-		$WorkingSound.play()
+		generator_model.set_surface_material(
+			2, load("res://demo/materials/generator_screen_on.material")
+		)
+		working_sound.play()

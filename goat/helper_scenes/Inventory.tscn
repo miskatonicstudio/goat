@@ -38,6 +38,8 @@ current = true
 far = 5.0
 
 [node name="RayCast3D" parent="ViewportContainer/Viewport/Inventory3D/Camera" instance=ExtResource( 3 )]
+category = "inventory"
+supports_alternative_interaction = false
 
 [node name="Rotator" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )

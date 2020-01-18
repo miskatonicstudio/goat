@@ -1,34 +1,42 @@
+class_name RayCast3D
 extends RayCast
 
-var currently_selected_item_name = null
-var collision_point = null
+"""
+Handles selecting and activating interactive objects, which includes e.g. light
+switches or touch screens. There are currently 2 categories in use:
+	* environment (for objects in the 3D environment, e.g. a switch on a wall)
+	* inventory (for objects in 3D inventory, e.g. a screen of a smartphone)
+"""
+
+# Category associated with the raycast
+export (String) var category
+# If false, alternative interaction will be ignored
+export (bool) var supports_alternative_interaction = true
 
 
 func _input(_event):
 	if not enabled:
 		return
-	if currently_selected_item_name:
-		if Input.is_action_just_pressed("goat_interact"):
-			goat.emit_signal("interactive_item_activated", currently_selected_item_name, collision_point)
-		else:
-			goat.emit_signal("interactive_item_selected", currently_selected_item_name, collision_point)
+	
+	if Input.is_action_just_pressed("goat_interact"):
+		goat_interaction.activate_object(category)
+	
+	if Input.is_action_just_pressed("goat_interact_alternatively"):
+		if supports_alternative_interaction:
+			goat_interaction.alternatively_activate_object(category)
 
 
 func _process(_delta):
 	if not enabled:
 		return
-	collision_point = null
-	var new_item_name = null
 	
+	var collided = false
 	if is_colliding():
 		var collider = get_collider()
-		if collider and collider.is_in_group("goat_interactive_item"):
-			new_item_name = collider.unique_name
-			collision_point = get_collision_point()
-		
-	if (new_item_name or currently_selected_item_name) and new_item_name != currently_selected_item_name:
-		if currently_selected_item_name:
-			goat.emit_signal("interactive_item_deselected", currently_selected_item_name)
-		currently_selected_item_name = new_item_name
-		if currently_selected_item_name:
-			goat.emit_signal("interactive_item_selected", currently_selected_item_name, collision_point)
+		if collider and collider.is_in_group("goat_interactive_object"):
+			var object_name = collider.unique_name
+			var point = get_collision_point()
+			goat_interaction.select_object(object_name, point, category)
+			collided = true
+	if not collided:
+		goat_interaction.deselect_object(category)

@@ -4,7 +4,6 @@
 [ext_resource path="res://demo/materials/floppy_body.material" type="Material" id=2]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.075, 0.01, 0.075 )
 
@@ -16,8 +15,8 @@ size = Vector3( 0.15, 0.01, 0.15 )
 
 [node name="InteractiveItem" parent="." instance=ExtResource( 3 )]
 unique_name = "floppy_disk_pickable"
+item_type = 2
 inventory_item_name = "floppy_disk"
-item_mode = 2
 collision_shape = SubResource( 1 )
 sound = ExtResource( 1 )
 

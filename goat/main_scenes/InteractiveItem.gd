@@ -1,40 +1,52 @@
 tool
+class_name InteractiveItem
 extends StaticBody
 
-const ITEM_MODE_NORMAL = 0
-const ITEM_MODE_SINGLE_USE = 1
-const ITEM_MODE_INVENTORY = 2
+"""
+Represents a simple interactive object, e.g. a switch on a wall or a lever.
+There are 3 types of items:
+	* normal (can be used multiple times, e.g. a switch)
+	* single use (can be used only once, e.g. a mirror that falls into pieces)
+	* inventory (activating will remove it and add an inventory item)
+"""
 
-enum ItemMode {
-	ITEM_MODE_NORMAL,
-	ITEM_MODE_SINGLE_USE,
-	ITEM_MODE_INVENTORY,
+enum ItemType {
+	NORMAL,
+	SINGLE_USE,
+	INVENTORY,
 }
 
 export (String) var unique_name
+export (ItemType) var item_type = ItemType.NORMAL
+# This will only be used by items with type INVENTORY
 export (String) var inventory_item_name
-export (ItemMode) var item_mode = ITEM_MODE_NORMAL
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
 export (AudioStream) var sound = null setget set_sound
 
-onready var icon_interact = $IconInteract
+onready var interaction_icon = $InteractionIcon
 onready var audio_player = $AudioPlayer
+onready var collision_shape_node = $CollisionShape
 
 
 func _ready():
-	add_to_group("goat_interactive_item_" + unique_name)
-	$CollisionShape.shape = collision_shape
+	# This would make it easier to find the item
+	add_to_group("goat_interactive_object_" + unique_name)
+	collision_shape_node.shape = collision_shape
 	audio_player.stream = sound
 	
-	goat.connect("interactive_item_selected", self, "select")
-	goat.connect("interactive_item_deselected", self, "deselect")
-	goat.connect("interactive_item_activated", self, "activate")
+	goat_interaction.connect("object_selected", self, "_on_object_selected")
+	goat_interaction.connect("object_deselected", self, "_on_object_deselected")
+	goat_interaction.connect("object_activated", self, "_on_object_activated")
+	goat_interaction.connect(
+		"object_activated_alternatively", self,
+		"_on_object_activated_alternatively"
+	)
 
 
 func set_collision_shape(new_shape):
 	collision_shape = new_shape
 	if is_inside_tree():
-		$CollisionShape.shape = collision_shape
+		collision_shape_node.shape = collision_shape
 
 
 func set_sound(new_sound):
@@ -48,49 +60,58 @@ func set_sound(new_sound):
 		audio_player.stream = sound
 
 
-func select(item_name, _position):
-	if item_name == unique_name:
-		icon_interact.show()
+func _on_object_selected(object_naem, _point):
+	if object_naem == unique_name:
+		interaction_icon.show()
 
 
-func deselect(item_name):
-	if item_name == unique_name:
-		icon_interact.hide()
+func _on_object_deselected(object_name):
+	if object_name == unique_name:
+		interaction_icon.hide()
 
 
-func activate(item_name, _position):
-	if item_name != unique_name:
+func _on_object_activated(object_name, _point):
+	if object_name != unique_name:
 		return
-	play_sound()
-	# Disable collision detection
-	if item_mode != ITEM_MODE_NORMAL:
+	
+	_play_sound()
+	
+	# Items other than NORMAL can only be used once
+	if item_type != ItemType.NORMAL:
 		collision_layer = 0
-	if item_mode == ITEM_MODE_INVENTORY:
-		# Inventory items should not play default audio
+	
+	if item_type == ItemType.INVENTORY:
+		# INVENTORY items should not play default audio
 		goat_voice.prevent_default()
 		goat_inventory.add_item(inventory_item_name)
 		# Hide the item, but keep it until the sound is played
 		hide()
 
 
-func play_sound():
+func _on_object_activated_alternatively(object_name, _point):
+	if object_name != unique_name:
+		return
+	
+	# Inventory items don't show context inventory, instead they are picked up
+	if item_type == ItemType.INVENTORY:
+		_on_object_activated(object_name, _point)
+	else:
+		goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
+
+
+func _play_sound():
 	if audio_player.stream:
 		audio_player.play()
 	else:
 		# Make sure that "after sound" logic is executed
-		_on_AudioPlayer_finished()
-
-
-func remove():
-	get_parent().remove_child(self)
-	call_deferred("queue_free")
+		_remove_if_inventory_item()
 
 
 func _on_AudioPlayer_finished():
-	# Remove the entire item, if it was obtained
-	if item_mode == ITEM_MODE_INVENTORY:
-		remove()
+	_remove_if_inventory_item()
 
 
-func is_pickable_item():
-	return item_mode == ITEM_MODE_INVENTORY
+func _remove_if_inventory_item():
+	if item_type == ItemType.INVENTORY:
+		get_parent().remove_child(self)
+		call_deferred("queue_free")

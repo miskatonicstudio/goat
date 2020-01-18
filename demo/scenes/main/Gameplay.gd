@@ -41,9 +41,9 @@ func _ready():
 	)
 	
 	goat_voice.connect_default(goat, "inventory_item_used")
-	goat_voice.connect_default(goat, "interactive_item_activated")
 	goat_voice.connect_default(goat, "inventory_item_used_on_inventory")
 	goat_voice.connect_default(goat, "inventory_item_used_on_environment")
+	goat_voice.connect_default(goat_interaction, "object_activated")
 	
 	# Configure Gameplay
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])
