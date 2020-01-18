@@ -74,11 +74,15 @@ func _on_object_activated(object_name, _point):
 	if object_name != unique_name:
 		return
 	
-	_play_sound()
+	if not collision_layer:
+		return
 	
 	# Items other than NORMAL can only be used once
 	if item_type != ItemType.NORMAL:
 		collision_layer = 0
+		collision_mask = 0
+	
+	_play_sound()
 	
 	if item_type == ItemType.INVENTORY:
 		# INVENTORY items should not play default audio
