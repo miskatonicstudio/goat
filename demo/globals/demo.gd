@@ -15,3 +15,6 @@ func _ready():
 	goat_inventory.register_item("battery")
 	goat_inventory.register_item("remote")
 	goat_inventory.register_item("pizza")
+	
+	goat_voice.connect_default(goat_inventory, "item_used")
+	goat_voice.connect_default(goat_interaction, "object_activated")

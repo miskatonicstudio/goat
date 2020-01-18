@@ -40,9 +40,6 @@ func _ready():
 		["but_why", "what_for", "this_doesnt_make_sense"]
 	)
 	
-	goat_voice.connect_default(goat_inventory, "item_used")
-	goat_voice.connect_default(goat_interaction, "object_activated")
-	
 	# Configure Gameplay
 	demo.connect("portal_entered", animation_player, "play", ["end_game"])
 	animation_player.connect("animation_finished", self, "animation_finished")
