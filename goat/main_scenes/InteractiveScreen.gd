@@ -14,6 +14,7 @@ export (float, 0, 16) var emission_energy = 1.0
 
 onready var screen_surface = $ScreenSurface
 onready var viewport = $Viewport
+onready var interaction_icon = $InteractionIcon
 # A 2D node with screen's content should be added as a child 
 onready var content = get_node("Content")
 
@@ -22,6 +23,7 @@ func _ready():
 	add_to_group("goat_interactive_object_" + unique_name)
 	
 	goat_interaction.connect("object_selected", self, "_on_object_selected")
+	goat_interaction.connect("object_deselected", self, "_on_object_deselected")
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
 	goat_interaction.connect(
 		"object_activated_alternatively", self,
@@ -48,12 +50,21 @@ func _on_object_selected(object_name, point):
 	if object_name != unique_name:
 		return
 	
+	if not interaction_icon.visible:
+		interaction_icon.show()
+	interaction_icon.translation = screen_surface.to_local(point)
+	
 	var screen_coordinates = _convert_to_screen_coordinates(point)
 	# Creates a mouse motion event
 	var event = InputEventMouseMotion.new()
 	event.global_position = screen_coordinates
 	event.position = screen_coordinates
 	viewport.input(event)
+
+
+func _on_object_deselected(object_name):
+	if object_name == unique_name:
+		interaction_icon.hide()
 
 
 func _on_object_activated(object_name, point):
@@ -79,10 +90,8 @@ func _on_object_activated(object_name, point):
 
 
 func _on_object_activated_alternatively(object_name, _point):
-	if object_name != unique_name:
-		return
-	
-	goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
+	if object_name == unique_name:
+		goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
 
 
 func _convert_to_screen_coordinates(global_point):

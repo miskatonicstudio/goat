@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://goat/main_scenes/InteractiveScreen.gd" type="Script" id=1]
+[ext_resource path="res://goat/images/screen_interaction_icon.png" type="Texture" id=2]
+[ext_resource path="res://goat/materials/interaction_icon.tres" type="Material" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 margin = 0.001
@@ -27,3 +29,12 @@ material/0 = null
 [node name="Viewport" type="Viewport" parent="."]
 own_world = true
 render_target_v_flip = true
+
+[node name="InteractionIcon" type="Sprite3D" parent="."]
+visible = false
+material_override = ExtResource( 3 )
+cast_shadow = 0
+centered = false
+offset = Vector2( 0, -512 )
+pixel_size = 0.0002
+texture = ExtResource( 2 )
