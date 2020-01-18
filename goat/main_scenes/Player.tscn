@@ -41,6 +41,8 @@ margin_top = -7.0
 margin_right = 2.0
 margin_bottom = 7.0
 text = "·"
+align = 1
+valign = 1
 
 [node name="InventoryBar" parent="." instance=ExtResource( 4 )]
 
