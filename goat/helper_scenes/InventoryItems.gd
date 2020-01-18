@@ -7,6 +7,7 @@ var currently_dragged_item_name = null
 onready var items_container = $Items
 onready var use_button = $Buttons/UseButton
 onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
+onready var help_text = $HelpText
 
 
 func _ready():
@@ -75,8 +76,9 @@ func _on_items_changed(new_items):
 	
 	var inventory_empty = new_items.empty()
 	# Handle empty inventory
-	empty_inventory_text.visible = inventory_empty
 	use_button.disabled = inventory_empty
+	empty_inventory_text.visible = inventory_empty
+	help_text.visible = not inventory_empty
 
 
 func _on_item_button_pressed(item_index):

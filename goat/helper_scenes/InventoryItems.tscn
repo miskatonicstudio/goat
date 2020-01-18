@@ -37,6 +37,9 @@ text = "There are no items in the inventory"
 anchor_bottom = 1.0
 margin_right = 68.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button0" type="Button" parent="Items"]
 margin_top = 14.0
@@ -202,5 +205,23 @@ custom_fonts/font = ExtResource( 6 )
 disabled = true
 enabled_focus_mode = 0
 text = "Use"
+
+[node name="HelpText" type="Label" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 6 )
+text = "
+Press RMB to rotate.
+Drag and drop other
+items to use them on
+this one."
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Buttons/UseButton" to="." method="_on_UseButton_pressed"]
