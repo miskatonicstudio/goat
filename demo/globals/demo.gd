@@ -2,10 +2,21 @@ extends Node
 
 # Demo game signals
 signal generator_activated
-signal program_activated
-signal program_uploaded
-signal remote_pressed
+signal floppy_inserted
+signal coords_uploaded
+signal remote_activated
 signal portal_entered
+# Demo game variables (state)
+enum PortalStatus {
+	NOT_READY,
+	READY,
+	OPEN,
+	ENTERED
+}
+var food_eaten = false
+var power_on = false
+var remote_has_battery = false
+var portal_status = PortalStatus.NOT_READY
 
 
 func _ready():

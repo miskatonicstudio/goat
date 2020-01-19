@@ -7,7 +7,7 @@
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demo/sounds/generator.ogg" type="AudioStream" id=6]
 [ext_resource path="res://demo/materials/plastic_1.material" type="Material" id=7]
-[ext_resource path="res://demo/materials/screen_off.material" type="Material" id=8]
+[ext_resource path="res://demo/materials/generator_screen.material" type="Material" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.25, 0.6, 0.8 )

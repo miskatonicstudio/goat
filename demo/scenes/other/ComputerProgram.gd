@@ -11,7 +11,7 @@ onready var animation_player = $AnimationPlayer
 
 func _ready():
 	demo.connect("generator_activated", self, "_on_generator_activated")
-	demo.connect("program_activated", self, "_on_program_activated")
+	demo.connect("floppy_inserted", self, "_on_floppy_inserted")
 	# For testing purpose
 	if owner == null:
 		animation_player.play("upload")
@@ -21,9 +21,9 @@ func _on_generator_activated():
 	screen_blank.color = Color("005eff")
 
 
-func _on_program_activated():
+func _on_floppy_inserted():
 	screen_blank.hide()
-	animation_player.play("upload")
+	animation_player.play("load_program")
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
@@ -32,7 +32,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 
 
 func _on_Yes_pressed():
-	demo.emit_signal("program_uploaded")
+	demo.emit_signal("coords_uploaded")
 	goat_voice.play("coords_uploaded")
 	screen_upload.hide()
 	screen_done.show()

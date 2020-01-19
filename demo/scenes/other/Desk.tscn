@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://demo/scenes/other/Desk.gd" type="Script" id=1]
 [ext_resource path="res://demo/materials/desk.material" type="Material" id=2]
@@ -10,9 +10,8 @@
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=8]
 [ext_resource path="res://demo/sounds/tray.ogg" type="AudioStream" id=9]
 [ext_resource path="res://demo/models/FloppyDiskModel.tscn" type="PackedScene" id=10]
-[ext_resource path="res://demo/materials/screen_off.material" type="Material" id=11]
 [ext_resource path="res://goat/main_scenes/InteractiveScreen.tscn" type="PackedScene" id=12]
-[ext_resource path="res://demo/scenes/other/ProgramUpload.tscn" type="PackedScene" id=13]
+[ext_resource path="res://demo/scenes/other/ComputerProgram.tscn" type="PackedScene" id=13]
 [ext_resource path="res://demo/materials/metal_dark_3.material" type="Material" id=14]
 [ext_resource path="res://demo/scenes/other/PizzaPlate.tscn" type="PackedScene" id=15]
 
@@ -131,7 +130,6 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 18,
-"material": ExtResource( 11 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 12
@@ -217,7 +215,7 @@ collision_shape = SubResource( 5 )
 [node name="FloppyDisk" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 10 )]
 transform = Transform( -1.74846e-08, -0.4, -1.74846e-08, 0, -1.74846e-08, 0.4, -0.4, 1.74846e-08, 7.64274e-16, -0.122785, 0.118999, -0.0859638 )
 
-[node name="InsertSound" type="AudioStreamPlayer3D" parent="Desk/BottomComputer"]
+[node name="FloppyInsertSound" type="AudioStreamPlayer3D" parent="Desk/BottomComputer"]
 transform = Transform( 0.520631, 0, -1.33565, 0, 1.43353, 0, 1.33565, 0, 0.520631, -0.342912, 0.355336, 0.117394 )
 stream = ExtResource( 9 )
 bus = "Effects"

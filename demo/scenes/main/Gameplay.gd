@@ -23,7 +23,7 @@ func _ready():
 			"The portal is active! Almost there...",
 		"coords_uploaded":
 			"The coordinates are uploaded. Now, where is the remote...",
-		"long_journey":
+		"eat_something_first":
 			"It's going to be a long journey, I should eat something first.",
 		"another_world_awaits":
 			"Finally! This is actually happening! Another world awaits!",

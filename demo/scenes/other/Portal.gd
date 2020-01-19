@@ -1,16 +1,6 @@
 extends Spatial
 
-enum Status {
-	POWERED_OFF,
-	POWERED_ON,
-	READY_TO_ACTIVATE,
-	ACTIVE
-}
-
-var status = Status.POWERED_OFF
-var food_eaten = false
-
-onready var led = $CSGTorus/LED
+onready var portal_light_material = $CSGTorus/LED.material
 onready var portal = $CSGTorus/Portal
 onready var the_other_side_sound = $CSGTorus/Portal/TheOtherSideSound
 onready var animation_player = $AnimationPlayer
@@ -18,46 +8,42 @@ onready var animation_player = $AnimationPlayer
 
 func _ready():
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
-	goat_inventory.connect("item_used", self, "_on_item_used")
 	demo.connect("generator_activated", self, "_on_generator_activated")
-	demo.connect("program_uploaded", self, "_on_program_uploaded")
-	demo.connect("remote_pressed", self, "_on_remote_pressed")
+	demo.connect("coords_uploaded", self, "_on_coords_uploaded")
+	demo.connect("remote_activated", self, "_on_remote_activated")
 
 
 func _on_object_activated(object_name, _point):
 	# Portal is only available after coords are uploaded and remote is pressed
 	if object_name == "portal":
-		if food_eaten:
+		if demo.portal_status != demo.PortalStatus.OPEN:
+			goat_voice.prevent_default()
+			return
+		
+		if demo.food_eaten:
+			demo.portal_status = demo.PortalStatus.ENTERED
 			demo.emit_signal("portal_entered")
 			goat_voice.play("another_world_awaits")
 		else:
-			goat_voice.play("long_journey")
-
-
-func _on_item_used(item_name, used_on_name):
-	if item_name == "pizza" and used_on_name == "pizza":
-		food_eaten = true
+			goat_voice.play("eat_something_first")
 
 
 func _on_generator_activated():
 	# Generator can be activated only once
-	led.material = load("res://demo/materials/portal_on.material")
-	status = Status.POWERED_ON
+	portal_light_material.emission = Color("c87808")
 
 
-func _on_program_uploaded():
-	if status == Status.POWERED_ON:
-		led.material = load("res://demo/materials/portal_ready.material")
-		status = Status.READY_TO_ACTIVATE
+func _on_coords_uploaded():
+	# Coords can be uploaded only once, and after generator is activated
+	portal_light_material.emission = Color("93f740")
+	demo.portal_status = demo.PortalStatus.READY
 
 
-func _on_remote_pressed():
-	if status == Status.POWERED_OFF or status == Status.POWERED_ON:
-		goat_voice.play("upload_coords_first")
-	if status == Status.READY_TO_ACTIVATE:
-		led.material = load("res://demo/materials/portal_active.material")
-		status = Status.ACTIVE
-		# "Activate" = move the portal from below
+func _on_remote_activated():
+	if demo.portal_status == demo.PortalStatus.READY:
+		portal_light_material.emission = Color("21dada")
+		demo.portal_status = demo.PortalStatus.OPEN
+		# Move the portal up, so it can be interacted with
 		portal.translation = Vector3(0, 0, 0)
 		animation_player.play("portal_light")
 		the_other_side_sound.play()

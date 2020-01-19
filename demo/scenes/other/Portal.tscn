@@ -1,12 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://demo/scenes/other/Portal.gd" type="Script" id=1]
-[ext_resource path="res://demo/materials/portal_active.material" type="Material" id=2]
 [ext_resource path="res://demo/sounds/the_other_side.ogg" type="AudioStream" id=3]
 [ext_resource path="res://demo/materials/metal_dark_1.material" type="Material" id=4]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demo/materials/portal_metal.material" type="Material" id=6]
-[ext_resource path="res://demo/materials/screen_off.material" type="Material" id=7]
+[ext_resource path="res://demo/materials/portal_light.material" type="Material" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Platform"
@@ -39,7 +38,7 @@ surfaces/1 = {
 height = 0.1
 
 [sub_resource type="CylinderMesh" id=3]
-material = ExtResource( 2 )
+material = ExtResource( 7 )
 height = 0.01
 radial_segments = 12
 rings = 1
