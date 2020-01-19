@@ -214,12 +214,13 @@ collision_shape = SubResource( 5 )
 
 [node name="Model" type="MeshInstance" parent="Desk/BottomComputer/TopComputer/InteractiveItem"]
 
-[node name="InsertSound" type="AudioStreamPlayer3D" parent="Desk/BottomComputer/TopComputer/InteractiveItem"]
-stream = ExtResource( 9 )
-bus = "Effects"
-
 [node name="FloppyDisk" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 10 )]
 transform = Transform( -1.74846e-08, -0.4, -1.74846e-08, 0, -1.74846e-08, 0.4, -0.4, 1.74846e-08, 7.64274e-16, -0.122785, 0.118999, -0.0859638 )
+
+[node name="InsertSound" type="AudioStreamPlayer3D" parent="Desk/BottomComputer"]
+transform = Transform( 0.520631, 0, -1.33565, 0, 1.43353, 0, 1.33565, 0, 0.520631, -0.342912, 0.355336, 0.117394 )
+stream = ExtResource( 9 )
+bus = "Effects"
 
 [node name="Monitor" type="MeshInstance" parent="Desk"]
 transform = Transform( 3.17184, 0, -0.175247, 0, 3.17668, 0, 0.175247, 0, 3.17184, 1.45524, 1.91783, 0.259408 )
@@ -229,7 +230,6 @@ material/1 = null
 
 [node name="InteractiveScreen" parent="Desk/Monitor" instance=ExtResource( 12 )]
 transform = Transform( -0.85, 0, -1.76665e-07, 0, 0.5, 0, 1.28346e-07, 0, -1.17, 0.00427535, 0.0711439, -0.0352828 )
-visible = false
 unique_name = "monitor"
 content_size = Vector2( 340, 200 )
 

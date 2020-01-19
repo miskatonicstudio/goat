@@ -1,6 +1,7 @@
 extends Node
 
 # Demo game signals
+signal generator_activated
 signal program_activated
 signal program_uploaded
 signal remote_pressed

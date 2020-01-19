@@ -1,5 +1,6 @@
 extends Control
 
+onready var screen_blank = $BlankScreen
 onready var screen_progress = $Background/ProgressBar
 onready var screen_upload = $Background/Upload
 onready var screen_why_not = $Background/WhyNot
@@ -9,10 +10,20 @@ onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	demo.connect("program_activated", animation_player, "play", ["upload"])
+	demo.connect("generator_activated", self, "_on_generator_activated")
+	demo.connect("program_activated", self, "_on_program_activated")
 	# For testing purpose
 	if owner == null:
 		animation_player.play("upload")
+
+
+func _on_generator_activated():
+	screen_blank.color = Color("005eff")
+
+
+func _on_program_activated():
+	screen_blank.hide()
+	animation_player.play("upload")
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

@@ -19,14 +19,12 @@ onready var animation_player = $AnimationPlayer
 func _ready():
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
 	goat_inventory.connect("item_used", self, "_on_item_used")
+	demo.connect("generator_activated", self, "_on_generator_activated")
 	demo.connect("program_uploaded", self, "_on_program_uploaded")
 	demo.connect("remote_pressed", self, "_on_remote_pressed")
 
 
 func _on_object_activated(object_name, _point):
-	if object_name == "generator" and status == Status.POWERED_OFF:
-		led.material = load("res://demo/materials/portal_on.material")
-		status = Status.POWERED_ON
 	# Portal is only available after coords are uploaded and remote is pressed
 	if object_name == "portal":
 		if food_eaten:
@@ -39,6 +37,12 @@ func _on_object_activated(object_name, _point):
 func _on_item_used(item_name, used_on_name):
 	if item_name == "pizza" and used_on_name == "pizza":
 		food_eaten = true
+
+
+func _on_generator_activated():
+	# Generator can be activated only once
+	led.material = load("res://demo/materials/portal_on.material")
+	status = Status.POWERED_ON
 
 
 func _on_program_uploaded():

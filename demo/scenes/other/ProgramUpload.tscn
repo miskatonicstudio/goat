@@ -38,12 +38,18 @@ margin_right = -684.0
 margin_bottom = -400.0
 rect_min_size = Vector2( 340, 200 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 340, 200 )
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ProgressBar" type="ProgressBar" parent="Background"]
 anchor_left = 0.5
@@ -119,6 +125,14 @@ margin_right = 76.0
 margin_bottom = 32.5
 custom_fonts/font = ExtResource( 2 )
 text = "DONE"
+
+[node name="BlankScreen" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/upload = SubResource( 3 )

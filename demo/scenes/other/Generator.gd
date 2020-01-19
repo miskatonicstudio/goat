@@ -16,3 +16,4 @@ func _on_object_activated(object_name, _point):
 			2, load("res://demo/materials/generator_screen_on.material")
 		)
 		working_sound.play()
+		demo.emit_signal("generator_activated")
