@@ -32,12 +32,12 @@ func register_item(item_name: String) -> void:
 	assert(not _config.has(item_name))
 	
 	var icon_path := "res://{}/inventory_items/icons/{}.png".format(
-		[goat._game_resources_directory, item_name], "{}"
+		[goat.GAME_RESOURCES_DIRECTORY, item_name], "{}"
 	)
 	# Comply with Godot scene naming standards
 	var model_name := item_name.capitalize().replace(" ", "")
 	var model_path := "res://{}/inventory_items/models/{}.tscn".format(
-		[goat._game_resources_directory, model_name], "{}"
+		[goat.GAME_RESOURCES_DIRECTORY, model_name], "{}"
 	)
 	
 	# Do not load models yet, just keep the paths

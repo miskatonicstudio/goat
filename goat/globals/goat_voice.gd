@@ -46,7 +46,7 @@ func register(audio_name: String, transcript:="") -> void:
 	assert(not _audio_mapping.has(audio_name))
 	
 	var sound_path := "res://{}/voice/{}.ogg".format(
-		[goat._game_resources_directory, audio_name], "{}"
+		[goat.GAME_RESOURCES_DIRECTORY, audio_name], "{}"
 	)
 	var sound := load(sound_path)
 	# Disable loop mode

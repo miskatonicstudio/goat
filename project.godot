@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://goat/main_scenes/InteractiveScreen.gd"
 }, {
+"base": "Control",
+"class": "InventoryItems",
+"language": "GDScript",
+"path": "res://goat/helper_scenes/InventoryItems.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
@@ -62,6 +67,7 @@ _global_script_class_icons={
 "GoatVoice": "",
 "InteractiveItem": "",
 "InteractiveScreen": "",
+"InventoryItems": "",
 "Player": "",
 "RayCast3D": ""
 }

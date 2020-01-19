@@ -12,17 +12,6 @@ enum GameMode {
 
 export (GameMode) var game_mode = GameMode.EXPLORING setget set_game_mode
 
-var game_cursor = null
-
-# Template settings/game settings
-# Exit scene: if null, Exit button in settings ends the program.
-# Otherwise, it will load the specified scene.
-var EXIT_SCENE = null
-
-var _game_resources_directory = ProjectSettings.get(
-	"application/config/name"
-).to_lower()
-
 
 func set_game_mode(new_game_model):
 	# Usually game mode change is a result of user input (e.g. pressing Tab),
@@ -32,12 +21,15 @@ func set_game_mode(new_game_model):
 	emit_signal("game_mode_changed", game_mode)
 
 
-func set_game_resources_directory(name):
-	_game_resources_directory = name
-	_load_game_resources()
+##############################################################################
+# SETTINGS
+##############################################################################
 
+# Exit scene: if null, 'Exit' button in settings ends the program.
+# Otherwise, it will load the specified scene.
+var EXIT_SCENE = null
 
-func _load_game_resources():
-	game_cursor = load(
-		"res://{}/images/cursor.png".format([_game_resources_directory], "{}")
-	)
+# Game resources directory: defines a place where all game resources are stored.
+# The directory needs to have a specific structure, e.g. it needs to contain
+# 'inventory_items' and 'voice' directories.
+var GAME_RESOURCES_DIRECTORY = null

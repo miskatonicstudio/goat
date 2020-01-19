@@ -1,10 +1,7 @@
+class_name InventoryItems
 extends Control
 
-const ITEM_BUTTON_PATH = "Items/Button{index}"
-
-var currently_dragged_item_name = null
-
-onready var items_container = $Items
+onready var item_buttons_container = $ItemButtons
 onready var use_button = $Buttons/UseButton
 onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
 onready var help_text = $HelpText
@@ -17,29 +14,13 @@ func _ready():
 	
 	# Connect button signals
 	for i in range(goat_inventory.CAPACITY):
-		var item_button = get_node(ITEM_BUTTON_PATH.format({"index": i}))
+		var item_button = _get_item_button(i)
 		item_button.connect("pressed", self, "_on_item_button_pressed", [i])
 		item_button.connect("button_down", self, "_on_item_button_down", [i])
+		item_button.connect("button_up", self, "_on_item_button_up", [i])
 
 
-func _input(event):
-	if (
-		currently_dragged_item_name and
-		Input.is_action_just_released("goat_drag_inventory")
-	):
-		Input.set_custom_mouse_cursor(goat.game_cursor)
-		var item_container_area = items_container.get_global_rect()
-		if (
-			event is InputEventMouse and
-			not item_container_area.has_point(event.global_position) and
-			currently_dragged_item_name != goat_inventory.get_selected_item()
-		):
-			var inventory_item = goat_inventory.get_selected_item()
-			goat_inventory.use_item(currently_dragged_item_name, inventory_item)
-		currently_dragged_item_name = null
-
-
-func _on_game_mode_changed(new_game_mode):
+func _on_game_mode_changed(new_game_mode) -> void:
 	# Select the last item if this is the first time the inventory is opened
 	if (
 		new_game_mode == goat.GameMode.INVENTORY and
@@ -50,20 +31,21 @@ func _on_game_mode_changed(new_game_mode):
 		goat_inventory.select_item(item_name)
 
 
-func _on_item_selected(item_name):
+func _on_item_selected(item_name: String) -> void:
 	if item_name == null:
 		return
+	
 	var item_index = goat_inventory.get_items().find(item_name)
-	var item_button = get_node(ITEM_BUTTON_PATH.format({"index": item_index}))
+	var item_button = _get_item_button(item_index)
 	# This should not send "pressed" signal
 	if not item_button.pressed:
 		item_button.pressed = true
 
 
-func _on_items_changed(new_items):
+func _on_items_changed(new_items: Array) -> void:
 	# Update icons
 	for i in range(goat_inventory.CAPACITY):
-		var item_button = get_node(ITEM_BUTTON_PATH.format({"index": i}))
+		var item_button = _get_item_button(i)
 		if i < len(new_items):
 			var item_name = new_items[i]
 			var selected = item_name == goat_inventory.get_selected_item()
@@ -74,30 +56,57 @@ func _on_items_changed(new_items):
 			item_button.icon = null
 			item_button.disabled = true
 	
-	var inventory_empty = new_items.empty()
 	# Handle empty inventory
+	var inventory_empty = new_items.empty()
 	use_button.disabled = inventory_empty
 	empty_inventory_text.visible = inventory_empty
 	help_text.visible = not inventory_empty
 
 
-func _on_item_button_pressed(item_index):
+func _on_item_button_pressed(item_index: int) -> void:
 	var item_name = goat_inventory.get_items()[item_index]
 	goat_inventory.select_item(item_name)
 
 
-func _on_item_button_down(item_index):
+func _on_item_button_down(item_index: int) -> void:
 	var item_name = goat_inventory.get_items()[item_index]
 	var texture = goat_inventory.get_item_icon(item_name)
-	currently_dragged_item_name = item_name
-	Input.set_custom_mouse_cursor(texture, 0, Vector2(32, 32))
+	Input.set_custom_mouse_cursor(texture, Input.CURSOR_DRAG, Vector2(32, 32))
+	var item_button = _get_item_button(item_index)
+	item_button.mouse_default_cursor_shape = Input.CURSOR_DRAG
 
 
-func _on_UseButton_pressed():
+func _on_item_button_up(item_index: int) -> void:
+	var item_name = goat_inventory.get_items()[item_index]
+	
+	var item_buttons_area = item_buttons_container.get_global_rect()
+	var mouse_position = get_global_mouse_position()
+	
+	# Check if item was dropped, but not on other item buttons
+	if (
+		item_name != goat_inventory.get_selected_item() and
+		not item_buttons_area.has_point(mouse_position)
+	):
+		var inventory_item = goat_inventory.get_selected_item()
+		goat_inventory.use_item(item_name, inventory_item)
+	
+	# Restore original cursor shape
+	var item_button = _get_item_button(item_index)
+	item_button.mouse_default_cursor_shape = Input.CURSOR_ARROW
+	Input.set_custom_mouse_cursor(null, Input.CURSOR_DRAG)
+	# Send mouse motion event to update cursor's shape immediately
+	get_viewport().input(InputEventMouseMotion.new())
+
+
+func _on_UseButton_pressed() -> void:
 	var selected_item_name = goat_inventory.get_selected_item()
 	if selected_item_name:
 		goat_inventory.use_item(selected_item_name)
 
 
-func _on_BackButton_pressed():
+func _on_BackButton_pressed() -> void:
 	goat.game_mode = goat.GameMode.EXPLORING
+
+
+func _get_item_button(button_index: int) -> Button:
+	return get_node("ItemButtons/Button" + str(button_index)) as Button

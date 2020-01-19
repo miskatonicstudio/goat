@@ -36,7 +36,7 @@ margin_bottom = 310.0
 custom_fonts/font = ExtResource( 6 )
 text = "There are no items in the inventory"
 
-[node name="Items" type="VBoxContainer" parent="."]
+[node name="ItemButtons" type="VBoxContainer" parent="."]
 anchor_bottom = 1.0
 margin_right = 68.0
 alignment = 1
@@ -44,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button0" type="Button" parent="Items"]
+[node name="Button0" type="Button" parent="ItemButtons"]
 margin_top = 14.0
 margin_right = 68.0
 margin_bottom = 82.0
@@ -60,7 +60,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button1" type="Button" parent="Items"]
+[node name="Button1" type="Button" parent="ItemButtons"]
 margin_top = 86.0
 margin_right = 68.0
 margin_bottom = 154.0
@@ -76,7 +76,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button2" type="Button" parent="Items"]
+[node name="Button2" type="Button" parent="ItemButtons"]
 margin_top = 158.0
 margin_right = 68.0
 margin_bottom = 226.0
@@ -92,7 +92,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button3" type="Button" parent="Items"]
+[node name="Button3" type="Button" parent="ItemButtons"]
 margin_top = 230.0
 margin_right = 68.0
 margin_bottom = 298.0
@@ -108,7 +108,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button4" type="Button" parent="Items"]
+[node name="Button4" type="Button" parent="ItemButtons"]
 margin_top = 302.0
 margin_right = 68.0
 margin_bottom = 370.0
@@ -124,7 +124,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button5" type="Button" parent="Items"]
+[node name="Button5" type="Button" parent="ItemButtons"]
 margin_top = 374.0
 margin_right = 68.0
 margin_bottom = 442.0
@@ -140,7 +140,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button6" type="Button" parent="Items"]
+[node name="Button6" type="Button" parent="ItemButtons"]
 margin_top = 446.0
 margin_right = 68.0
 margin_bottom = 514.0
@@ -156,7 +156,7 @@ enabled_focus_mode = 0
 group = SubResource( 1 )
 clip_text = true
 
-[node name="Button7" type="Button" parent="Items"]
+[node name="Button7" type="Button" parent="ItemButtons"]
 margin_top = 518.0
 margin_right = 68.0
 margin_bottom = 586.0
@@ -178,6 +178,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -68.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BackButton" type="Button" parent="Buttons"]
 margin_top = 230.0
