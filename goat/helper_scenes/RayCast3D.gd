@@ -18,6 +18,9 @@ func _input(_event):
 	if not enabled:
 		return
 	
+	# Force detecting items, in case some of them were deactivated
+	_detect_interactive_objects()
+	
 	if Input.is_action_just_pressed("goat_interact"):
 		goat_interaction.activate_object(category)
 	
@@ -27,10 +30,13 @@ func _input(_event):
 
 
 func _process(_delta):
-	if not enabled:
-		return
-	
+	if enabled:
+		_detect_interactive_objects()
+
+
+func _detect_interactive_objects():
 	var collided = false
+	
 	if is_colliding():
 		var collider = get_collider()
 		if collider and collider.is_in_group("goat_interactive_object"):
@@ -38,5 +44,6 @@ func _process(_delta):
 			var point = get_collision_point()
 			goat_interaction.select_object(object_name, point, category)
 			collided = true
+	
 	if not collided:
 		goat_interaction.deselect_object(category)

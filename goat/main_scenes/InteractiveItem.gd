@@ -74,13 +74,9 @@ func _on_object_activated(object_name, _point):
 	if object_name != unique_name:
 		return
 	
-	if not collision_layer:
-		return
-	
 	# Items other than NORMAL can only be used once
 	if item_type != ItemType.NORMAL:
-		collision_layer = 0
-		collision_mask = 0
+		remove_from_group("goat_interactive_object")
 	
 	_play_sound()
 	
