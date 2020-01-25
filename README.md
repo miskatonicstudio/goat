@@ -25,8 +25,9 @@ assumptions that you need to keep in mind while working with it. This section
 provides a general overview of the template. More details can be found in other
 sections of this document.
 
-GOAT supports only 3D single player games. The player can explore the 3D environment
-and interact with some objects in it. A special type of interaction allows the player
+GOAT supports only 3D, first person perspective, single player games.
+The player can explore the 3D environment and interact with some objects in it.
+A special type of interaction allows the player
 to pick up an object and add it to the inventory. The inventory contains 3D items
 that can be rotated and interacted with. There is a general distinction between
 the environment (where the player can move) and the inventory (where picked up
@@ -36,8 +37,8 @@ control (inventory).
 
 TODO: picture of remote button
 
-The template uses some global variables (AutoLoad). One of them is the state
-of the game. Currently, 4 states are implemented:
+The template uses some global variables (AutoLoad). One of them is the mode
+of the game. Currently, 4 modes are implemented:
 
 * `EXPLORING` the player is moving and interacting with the 3D environment
 * `INVENTORY` the player is browsing 3D items in the inventory
@@ -119,6 +120,94 @@ the main menu of your game, you can change it like this:
 goat.EXIT_SCENE = "res://demo/scenes/main/MainMenu.tscn"
 ```
 
+## Features
+
+### Player
+
+GOAT features `Player.tscn` scene. Adding it to your project enables a 3D rotating
+camera (first person perspective) that can move (currently only on flat surfaces).
+Player is surrounded with a collision shape, so it will interact properly with
+obstacles in your game. It also includes a raycast used for selecting 3D
+environment objects.
+
+Moreover, all GOAT interface elements are already attached to the player.
+That way you only need to instance `Player.tscn`, and you will automatically
+get an inventory, context inventory, subtitles for voice recordings, and
+a simple settings screen.
+
+### Interactive items
+
+Simple interaction can be added to your program by using `InteractiveItem.tscn`
+scene. It represents an object that can be activated, for example a switch on
+a wall or a button on a keyboard.
+
+There are 3 types of iteractive items:
+
+* `NORMAL`: can be activated multiple times, e.g. a door that opens and closes
+* `SINGLE_USE`: can be activated only once, e.g. a rock pushed from a cliff
+* `INVENTORY`: activating it removes the interactive item and adds an inventory item
+
+Interactive item contains a collision shape that is detected by raycasts.
+A default collision shape is provided, but you can easily change it.
+You can also configure a sound that will be played when an item is activated.
+
+**Note: interactive items don't have any visible elements by default. If you
+want to associate them with a 3D model, add a mesh as interactive item's child.
+You can also use models added elsewhere, but it will not work correctly with
+`INVENTORY` items (which should be removed after activation).**
+
+When an interactive item is in range (that is: close enough and in front of the
+camera or under the mouse cursor) it will be selected. This state is indicated
+by an interaction icon:
+
+TODO: screenshot of interaction icon (generator)
+
+When an item is selected, LMB click will activate it. RMB click will call an
+alternative activation, which for `INVENTORY` type items works like normal
+activation (the item will be picked up), and for other items shows the context
+inventory screen.
+
+Interactive items work both in the environment and in the inventory, however,
+in inventory mode alternative activation is not supported.
+
+TODO: screenshot of remote button
+
+Each interactive item should have a unique name, which will be used to send
+signals (more about it later). Moreover, for `INVENTORY` items you need to
+configure the name of the inventory item that will be added after interactive
+item is activated (inventory items configuration will be explained later).
+
+TODO: editor screenshot
+
+### Interactive screens
+
+A different type of interaction is offered by `InteractiveScreen.tscn` scene.
+It represents a flat surface that the player can click on, such as a touch
+screen of a smartphone. Any type of 2D content can be used with interactive
+screens, including movie players and minigames.
+
+There are some things to keep in mind while working with interactive screens:
+
+* each screen needs a child node called `Content`, which represents a 2D content
+displayed on the screen
+* content size has to be specified
+* the screen's surface is a square mesh, but it can be resized to achieve other
+aspect ratios
+
+When a screen is in range, an iteraction icon will be shown, and it will follow
+the movement of the raycast (either the camera or the mouse cursor):
+
+TODO: screenshot (interaction icon)
+
+While doing that, the `Content` node will receive `InputEventMouseMotion`
+events. When the screen is selected, LMB click will activate it. As a result,
+the `Content` node will receive two `InputEventMouseButton` events, one for
+pressing the mouse button, and one for releasing it. RMB click will show the
+context inventory screen (but only for environment screens).
+
+Similar to interactive items, interactive screens should have a unique name.
+They also work both in the environment and in the inventory. Additionally,
+you can set the emission energy, which can be useful for computer screens.
 
 
 
