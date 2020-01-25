@@ -26,9 +26,9 @@ provides a general overview of the template. More details can be found in other
 sections of this document.
 
 GOAT supports only 3D, first person perspective, single player games.
-The player can explore the 3D environment and interact with some objects in it.
-A special type of interaction allows the player
-to pick up an object and add it to the inventory. The inventory contains 3D items
+The player can explore a 3D environment and interact with objects in it.
+A special type of interaction allows the player to pick up an object and add it
+to the inventory. The inventory contains 3D items
 that can be rotated and interacted with. There is a general distinction between
 the environment (where the player can move) and the inventory (where picked up
 items are stored). However, both support practically the same types of
