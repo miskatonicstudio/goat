@@ -129,11 +129,12 @@ goat.EXIT_SCENE = "res://demo/scenes/main/MainMenu.tscn"
 
 GOAT features `Player.tscn` scene. Adding it to your project enables a 3D rotating
 camera (first person perspective) that can move (currently only on flat surfaces).
+Movement can be performed using arrow keys or WSAD keys.
 Player is surrounded with a collision shape, so it will interact properly with
 obstacles in your game. It also includes a raycast used for selecting 3D
 environment objects.
 
-Moreover, all GOAT interface elements are already attached to the player.
+All GOAT interface elements are already attached to the player.
 That way you only need to instance `Player.tscn`, and you will automatically
 get an inventory, context inventory, subtitles for voice recordings, and
 a simple settings screen.
@@ -290,9 +291,14 @@ by your script or automatically when an `INVENTORY` interactive item is activate
 You can also use items on each other (drag and drop), on themselves ("Use" button),
 or on environment (using the custom inventory, explained in the next section).
 
+You can open the inventory by pressing Tab while in `EXPLORING` mode. In inventory,
+you can rotate items by holding RMB and moving the mouse. You can also interact
+with items by clicking on them with LMB (that is, if they contain any
+interactive parts). Clicking on a button on the left side selects a different item.
+
 TODO: screenshot with a "Use" button and drag and drop
 
-First, you need to register an inventory item:
+To use the inventory, you need to register an inventory item first:
 
 ```
 goat_inventory.register_item(item_name)
@@ -402,6 +408,27 @@ configuration created by `register_item` method) you can do it like this:
 ```
 goat_inventory.reset()
 ```
+
+### Context inventory
+
+Sometimes you might want to use an inventory item (e.g. a key) on an object in
+the 3D environment (e.g. a door). You can do it by using the context inventory.
+First, you need to approach an interactive item or screen (until you see the
+interaction icon). Then, you need to click RMB. A simple layout of all currently
+available inventory items will be shown in the middle of the screen.
+
+TODO: screenshot (context on computer)
+
+Selecting an item will emit a signal:
+
+```
+goat_inventory.item_used(item_name, used_on_name)
+```
+
+Where `item_name` is the name of the selected inventory item and `used_on_name`
+is the `unique_name` property of the environment object.
+
+Currently, there are no signals or methods associated with the context inventory.
 
 ### Voice
 
