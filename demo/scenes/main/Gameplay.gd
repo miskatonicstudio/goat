@@ -6,6 +6,7 @@ onready var animation_player = $AnimationPlayer
 func _ready():
 	goat_inventory.reset()
 	goat_voice.reset()
+	demo.reset()
 	
 	# Configure GoatVoice
 	var audio_to_transcript := {

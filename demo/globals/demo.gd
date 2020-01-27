@@ -30,3 +30,10 @@ func _ready():
 	
 	goat_voice.connect_default(goat_inventory, "item_used")
 	goat_voice.connect_default(goat_interaction, "object_activated")
+
+
+func reset():
+	food_eaten = false
+	power_on = false
+	remote_has_battery = false
+	portal_status = PortalStatus.NOT_READY
