@@ -37,7 +37,7 @@ control (inventory).
 
 TODO: picture of remote button
 
-The template uses some global variables (AutoLoad). One of them is the mode
+The template uses several global variables (AutoLoad). One of them is the mode
 of the game. Currently, 4 modes are implemented:
 
 * `EXPLORING` the player is moving and interacting with the 3D environment
@@ -48,27 +48,30 @@ environment (e.g. open a door with a key)
 
 **Note: the game doesn't pause in any of these modes.**
 
-GOAT is a Godot project. The assumption is that when you want to create your
+GOAT is a Godot project. The assumption is that if you want to create your
 own game, you will clone this repository and replace the demo game files with
 your own. In order to create an interactive environment, you can use 3 main
 scenes provided by GOAT (all described in detail in other sections):
 
 * `Player`
-* `InteractiveObject`
+* `InteractiveItem`
 * `InteractiveScreen`
 
-You also need to provide configuration for:
+You also need to provide the configuration for:
 
 * inventory items
 * voice recordings
 
-And, of course, you need to connect everything. GOAT provides many signals,
-that let you react to different situations in the game. For example, you can
-decide to play a voice recording after a button on a wall is pressed or remove
-an inventory item after the player uses it.
+Most GOAT resources (voice recordings, interactive objects, inventory items) are
+identified by unique names. In most cases, getter methods return those names,
+not the actual resources (e.g. audio files or 3D scenes).
+
+GOAT provides many signals, that let you react to different situations in the
+game. For example, you can decide to play a voice recording after a button on a
+wall is pressed or remove an inventory item after the player uses it.
 
 GOAT provides also default styles and layouts for the inventory, context
-inventory, subtitles, and settings. Usually there is no reason to change
+inventory, subtitles, and settings. Usually, there is no reason to change
 anything in the template files, unless you want to modify the style or add new
 features (which you are encouraged to do, this is open source after all!).
 
@@ -278,6 +281,127 @@ selected, the previous one will be deselected first.
 `goat_inventory` contains methods for selecting/deselecting/activating
 interactive objects, but they are used internally by GOAT and usually don't
 need to be used directly by game developers.
+
+### Inventory
+
+GOAT offers an inventory system. It holds a maximum of 8 items, each represented
+by a 3D model that can be rotated and interacted with. Items can be added either
+by your script or automatically when an `INVENTORY` interactive item is activated.
+You can also use items on each other (drag and drop), on themselves ("Use" button),
+or on environment (using the custom inventory, explained in the next section).
+
+TODO: screenshot with a "Use" button and drag and drop
+
+First, you need to register an inventory item:
+
+```
+goat_inventory.register_item(item_name)
+```
+
+Inventory items must be stored in the `inventory_items` directory of your game
+resources folder. You need to provide both a 2D icon (shown in the inventory
+bar), and a 3D model. `item_name` must match both files (without extension, and
+following Godot's naming convention for scenes). For example, a `floppy_disk`
+item would need the following files:
+
+```
+demo/inventory_items/
+├── icons
+│   └── floppy_disk.png
+└── models
+    ├── FloppyDisk.gd # This is not obligatory
+    └── FloppyDisk.tscn
+```
+
+And the registration would look like this:
+
+```
+goat_inventory.register_item("floppy_disk")
+```
+
+Icons have to be 64x64 PNG images, and should have a transparent background.
+Models can be any Spatial scenes, and can have additional logic included in a
+script. Models should be centered in (0, 0, 0) and should not be larger than
+a sphere with a 1 unit radius (otherwise they will not be displayed properly).
+
+Item registration process stores the names of icons and models, but nothing
+more. At some point you might want to actually load those resources:
+
+```
+goat_inventory.get_item_icon(item_name)
+goat_inventory.get_item_model(item_name)
+```
+
+Icons are returned as a `StreamTexture`, models as a `PackedScene` (which has
+to be instanced). Both of these methods are used internally by GOAT and usually
+don't have to be accessed directly by game developers.
+
+You can add, remove, and replace items in the inventory using the following
+methods:
+
+```
+goat_inventory.add_item(item_name)
+goat_inventory.remove_item(item_name)
+goat_inventory.replace_item(replaced_item_name, replacing_item_name)
+```
+
+You can also use items, but that part is handled automatically by GOAT and
+there is usually no reason to use it directly:
+
+```
+goat_inventory.use_item(item_name, used_on_name=null)
+```
+
+`item_name` is an inventory item that you want to use on something else.
+`used_on_name` can represent another inventory item, an interactive item or screen
+(property `unique_name`) or it can be null, meaning that you use the item on
+itself or on the player (e.g. use a pizza slice = eat it, use a lamp = turn it on).
+
+GOAT also allows you to select one of the inventory items. That item will
+be shown in the 3D inventory. If the inventory is empty, then no item is selected.
+
+This feature is usually managed by GOAT, but sometimes you might want to select
+a specific item to bring more attention to it. You can do it like this:
+
+```
+goat_inventory.select_item(item_name)
+```
+
+`item_name` can be null, which means that you deselect the current item.
+
+Each action mentioned above emits a signal:
+
+```
+goat_inventory.item_added (item_name)
+goat_inventory.item_removed (item_name)
+goat_inventory.item_replaced (replaced_item_name, replacing_item_name)
+goat_inventory.item_used (item_name, used_on_name)
+goat_inventory.item_selected (item_name)
+```
+
+Moreover, every time the content of the inventory changes, this signal will be
+emitted:
+
+```
+goat_inventory.items_changed (new_items)
+```
+
+`new_items` is the current content of the inventory (as `Array`), in order the
+items were added to it.
+
+You can also access the list of items or the selected item at any time:
+
+```
+goat_inventory.get_items()
+goat_inventory.get_selected_item()
+```
+
+If you want to clean the content of the inventory (but keep the inventory item
+configuration created by `register_item` method) you can do it like this:
+
+```
+goat_inventory.reset()
+```
 
 ### Voice
 
