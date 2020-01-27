@@ -449,7 +449,7 @@ case, probably, "But why?"). It will be shown at the bottom of the screen when
 the recording is played. At the moment, multiple transcripts in different
 languages are not supported (but they will be implemented soon).
 
-TODO: picture of subtitles
+![Subtitles shown when the voice is playing](https://user-images.githubusercontent.com/36821133/73210781-425d8800-414b-11ea-9a7e-0c0527c0e47d.png)
 
 You can play a registered voice sample at any time:
 
