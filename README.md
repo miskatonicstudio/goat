@@ -164,7 +164,7 @@ When an interactive item is in range (that is: close enough and in front of the
 camera or under the mouse cursor) it will be selected. This state is indicated
 by an interaction icon:
 
-TODO: screenshot of interaction icon (generator)
+![Interactive item's icon](https://user-images.githubusercontent.com/36821133/73209757-37a1f380-4149-11ea-8934-9154d4a71ee3.png)
 
 When an item is selected, LMB click will activate it. RMB click will call an
 alternative activation, which for `INVENTORY` type items works like normal
