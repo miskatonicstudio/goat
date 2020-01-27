@@ -181,7 +181,7 @@ signals (more about it later). Moreover, for `INVENTORY` items you need to
 configure the name of the inventory item that will be added after interactive
 item is activated (inventory items configuration will be explained later).
 
-TODO: editor screenshot
+![Editor settings for interactive items](https://user-images.githubusercontent.com/36821133/73211894-60c48300-414d-11ea-9c79-61f565aa1a81.png)
 
 ### Interactive screens
 
