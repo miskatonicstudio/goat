@@ -417,7 +417,7 @@ First, you need to approach an interactive item or screen (until you see the
 interaction icon). Then, you need to click RMB. A simple layout of all currently
 available inventory items will be shown in the middle of the screen.
 
-TODO: screenshot (context on computer)
+![Context inventory](https://user-images.githubusercontent.com/36821133/73209586-d11cd580-4148-11ea-8b5b-92d0762b0526.png)
 
 Selecting an item will emit a signal:
 
