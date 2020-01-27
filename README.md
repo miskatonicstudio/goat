@@ -535,7 +535,7 @@ supported. The settings file (INI-style) is saved in `user://settings.cfg`.
 When the program runs for the first time, the file is created with the default
 values.
 
-TODO: settings screen screenshot
+![Settings screen](https://user-images.githubusercontent.com/36821133/73210231-1db4e080-414a-11ea-8548-2517c6c204dd.png)
 
 Section | Key | Default value
 --- | --- | ---
@@ -549,7 +549,7 @@ controls | mouse_sensitivity | 0.3
 
 **Note: the volume is stored in decibels, so 0.0 doesn't mean that the sound
 is muted (it becomes muted at -60 dB). Mouse sensitivity is used for player's
-camera rotation and inventory item rotation**
+camera rotation and inventory item rotation.**
 
 In order to react to changes in settings, you can connect to a signal:
 
