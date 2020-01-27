@@ -35,7 +35,7 @@ items are stored). However, both support practically the same types of
 interaction, e.g. you can press a button on a wall (environment) or on a remote
 control (inventory).
 
-TODO: picture of remote button
+![Interactive button of a remote control in inventory](https://user-images.githubusercontent.com/36821133/73209215-14c30f80-4148-11ea-8afc-3f2fc7ef9037.png)
 
 The template uses several global variables (AutoLoad). One of them is the mode
 of the game. Currently, 4 modes are implemented:
@@ -174,7 +174,7 @@ inventory screen.
 Interactive items work both in the environment and in the inventory, however,
 in inventory mode alternative activation is not supported.
 
-TODO: screenshot of remote button
+![Interactive item in inventory](https://user-images.githubusercontent.com/36821133/73208525-e55fd300-4146-11ea-9ce3-39e1c1caeaae.png)
 
 Each interactive item should have a unique name, which will be used to send
 signals (more about it later). Moreover, for `INVENTORY` items you need to
