@@ -201,7 +201,7 @@ aspect ratios
 When a screen is in range, an iteraction icon will be shown, and it will follow
 the movement of the raycast (either the camera or the mouse cursor):
 
-TODO: screenshot (interaction icon)
+![Interactive screen's icon](https://user-images.githubusercontent.com/36821133/73209966-97000380-4149-11ea-8ef9-2fd9185fa7d0.png)
 
 While doing that, the `Content` node will receive `InputEventMouseMotion`
 events. When the screen is selected, LMB click will activate it. As a result,
@@ -415,7 +415,7 @@ Sometimes you might want to use an inventory item (e.g. a key) on an object in
 the 3D environment (e.g. a door). You can do it by using the context inventory.
 First, you need to approach an interactive item or screen (until you see the
 interaction icon). Then, you need to click RMB. A simple layout of all currently
-available inventory items will be shown in the middle of the screen.
+available inventory items will be shown in the middle of the screen:
 
 ![Context inventory](https://user-images.githubusercontent.com/36821133/73209586-d11cd580-4148-11ea-8b5b-92d0762b0526.png)
 
