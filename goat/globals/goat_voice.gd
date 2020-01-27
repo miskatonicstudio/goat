@@ -37,7 +37,7 @@ func _process(_delta):
 		play_default()
 
 
-func register(audio_name: String, transcript:="") -> void:
+func register(audio_name: String, transcript) -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
 	from the `voice` directory (audio_name and file name have to match).
