@@ -296,7 +296,7 @@ you can rotate items by holding RMB and moving the mouse. You can also interact
 with items by clicking on them with LMB (that is, if they contain any
 interactive parts). Clicking on a button on the left side selects a different item.
 
-TODO: screenshot with a "Use" button and drag and drop
+![Inventory with the "Use" button](https://user-images.githubusercontent.com/36821133/73211081-d3ccfa00-414b-11ea-82cf-366c2728a07a.png)
 
 To use the inventory, you need to register an inventory item first:
 
