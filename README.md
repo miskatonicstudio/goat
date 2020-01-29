@@ -12,7 +12,7 @@ available soon.
 ## Getting started
 
 * install [Godot Engine](https://github.com/godotengine/godot)
-[3.2 beta5](https://downloads.tuxfamily.org/godotengine/3.2/beta5/) on your machine
+[3.2 stable](https://downloads.tuxfamily.org/godotengine/3.2/) on your machine
 * clone this repository and import it as a Godot project
 * play the project (F5) to start a demo game: **"2 minute adventure"**
 * once you are familiar with how the template works, remove demo game files
@@ -576,7 +576,7 @@ goat_settings.autosave = false
 ### Game engine
 
 This project uses [Godot Engine](https://github.com/godotengine/godot)
-version [3.2 beta5](https://downloads.tuxfamily.org/godotengine/3.2/beta5/),
+version [3.2 stable](https://downloads.tuxfamily.org/godotengine/3.2/),
 distributed under [MIT license](https://godotengine.org/license).
 
 ### Models
