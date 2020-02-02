@@ -97,8 +97,8 @@ func _on_item_removed(item_name):
 
 func _on_item_replaced(replaced_item_name, replacing_item_name):
 	# For 3D items order doesn't matter
-	_on_item_added(replaced_item_name)
-	_on_item_removed(replacing_item_name)
+	_on_item_added(replacing_item_name)
+	_on_item_removed(replaced_item_name)
 
 
 func _on_ViewportContainer_gui_input(event):
