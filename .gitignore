@@ -1,4 +1,4 @@
-
+docs/_build/
 # Godot-specific ignores
 .import/
 export.cfg
