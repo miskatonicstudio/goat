@@ -22,7 +22,7 @@ item is activated.
 **Note: interactive items don't have any visible elements by default. If
 you want to associate them with a 3D model, add a mesh as interactive
 item's child. You can also use models added elsewhere, but it will not
-work correctly with ``INVENTORY`` items (which should be removed after
+work correctly with** ``INVENTORY`` **items (which should be removed after
 activation).**
 
 When an interactive item is in range (that is: close enough and in front
