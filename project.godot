@@ -147,6 +147,10 @@ goat_dismiss={
  ]
 }
 
+[locale]
+
+translations=PoolStringArray( "res://demo/locale/2ma.en.translation", "res://demo/locale/2ma.de.translation", "res://demo/locale/2ma.pl.translation" )
+
 [rendering]
 
 quality/filters/use_nearest_mipmap_filter=true

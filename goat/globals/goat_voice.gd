@@ -37,7 +37,7 @@ func _process(_delta):
 		play_default()
 
 
-func register(audio_name: String, transcript) -> void:
+func register(audio_name: String, transcript: String) -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
 	from the `voice` directory (audio_name and file name have to match).
@@ -79,7 +79,7 @@ func play(audio_names) -> void:
 	emit_signal("started", audio_name)
 
 
-func play_default():
+func play_default() -> void:
 	"""Plays one of the default audio files"""
 	if _default_audio_names:
 		play(_default_audio_names)
@@ -106,11 +106,11 @@ func set_default_audio_names(default_audio_names: Array) -> void:
 
 
 func get_transcript(audio_name: String) -> String:
-	"""Returns transcript associated with the given audio name"""
-	return _audio_mapping[audio_name]["transcript"]
+	"""Returns localized transcript associated with the given audio name"""
+	return tr(_audio_mapping[audio_name]["transcript"])
 
 
-func connect_default(signal_object, signal_name):
+func connect_default(signal_object: Object, signal_name: String) -> void:
 	"""
 	Configures default audio files to be played when signal_object emits
 	signal_name. This can be called several times to play default audio in
