@@ -44,8 +44,11 @@ far = 5.0
 category = "inventory"
 supports_alternative_interaction = false
 
-[node name="Rotator" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
+[node name="Pivot" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+
+[node name="HiddenPivot" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 
 [node name="InventoryItems" parent="." instance=ExtResource( 4 )]
 mouse_filter = 2

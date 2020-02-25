@@ -6,7 +6,8 @@ onready var viewport_container = $ViewportContainer
 onready var viewport = $ViewportContainer/Viewport
 onready var ray_cast = $ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
 onready var camera = $ViewportContainer/Viewport/Inventory3D/Camera
-onready var rotator = $ViewportContainer/Viewport/Inventory3D/Rotator
+onready var pivot = $ViewportContainer/Viewport/Inventory3D/Pivot
+onready var hidden_pivot = $ViewportContainer/Viewport/Inventory3D/HiddenPivot
 
 
 func _ready():
@@ -27,18 +28,16 @@ func _input(event):
 		return
 	
 	if Input.is_action_pressed("goat_rotate_inventory"):
-		var selected_item = goat_inventory.get_selected_item()
-		if event is InputEventMouseMotion and selected_item:
-			var selected_item_model = get_tree().get_nodes_in_group(
-				"goat_inventory_item_" + selected_item
-			).front()
+		var selected_item_name = goat_inventory.get_selected_item()
+		if event is InputEventMouseMotion and selected_item_name:
+			var selected_item = _get_item(selected_item_name)
 			var mouse_sensitivity = goat_settings.get_value(
 				"controls", "mouse_sensitivity"
 			)
 			var angle_horizontal = deg2rad(event.relative.x * mouse_sensitivity)
 			var angle_vertical = deg2rad(event.relative.y * mouse_sensitivity)
-			selected_item_model.rotate_y(angle_horizontal)
-			selected_item_model.rotate_x(angle_vertical)
+			selected_item.rotate_y(angle_horizontal)
+			selected_item.rotate_x(angle_vertical)
 	
 	if Input.is_action_just_pressed("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -52,6 +51,16 @@ func _input(event):
 		Input.is_action_just_pressed("goat_dismiss")
 	):
 		goat.game_mode = goat.GameMode.EXPLORING
+
+
+func _get_item(item_name: String) -> Node:
+	var item_group = "goat_inventory_item_" + item_name
+	return get_tree().get_nodes_in_group(item_group).front()
+
+
+func _reparent(node: Node, new_parent: Node) -> void:
+	node.get_parent().remove_child(node)
+	new_parent.add_child(node)
 
 
 func _on_game_mode_changed(new_game_mode):
@@ -68,31 +77,25 @@ func _on_item_added(item_name):
 	var added_item = goat_inventory.get_item_model(item_name).instance()
 	added_item.add_to_group("goat_inventory_item")
 	added_item.add_to_group("goat_inventory_item_" + item_name)
-	added_item.translation.z = 999
 	added_item.hide()
-	rotator.add_child(added_item)
+	hidden_pivot.add_child(added_item)
 
 
 func _on_item_selected(item_name):
-	# Hide all other items
+	# Hide all items
 	for item in get_tree().get_nodes_in_group("goat_inventory_item"):
-		item.translation.z = 999
-		item.hide()
-	# Select the item
+		_reparent(item, hidden_pivot)
+	# Item deselected, nothing to do here
 	if item_name == null:
 		return
-	var selected_item = get_tree().get_nodes_in_group(
-		"goat_inventory_item_" + item_name
-	).front()
-	selected_item.translation.z = 0
+	# Select the new item
+	var selected_item = _get_item(item_name)
 	selected_item.show()
+	_reparent(selected_item, pivot)
 
 
 func _on_item_removed(item_name):
-	var removed_item = get_tree().get_nodes_in_group(
-		"goat_inventory_item_" + item_name
-	).front()
-	removed_item.queue_free()
+	_get_item(item_name).queue_free()
 
 
 func _on_item_replaced(replaced_item_name, replacing_item_name):
