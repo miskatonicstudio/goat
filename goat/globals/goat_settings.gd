@@ -85,14 +85,12 @@ func _on_fullscreen_settings_changed():
 
 func _on_music_settings_changed():
 	var volume = get_value("sound", "music_volume")
-	var bus_id = AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_db(bus_id, volume)
+	_set_volume_db("Music", volume)
 
 
 func _on_effects_settings_changed():
 	var volume = get_value("sound", "effects_volume")
-	var bus_id = AudioServer.get_bus_index("Effects")
-	AudioServer.set_bus_volume_db(bus_id, volume)
+	_set_volume_db("Effects", volume)
 
 
 func _on_shadows_settings_changed():
@@ -124,3 +122,18 @@ func _update_single_camera_settings(camera: Camera):
 	var glow_enabled = get_value("graphics", "glow")
 	camera.environment.ss_reflections_enabled = reflections_enabled
 	camera.environment.glow_enabled = glow_enabled
+
+
+func _set_volume_db(bus_name: String, volume: float) -> void:
+	"""
+	Volume is a value between 0 (complete silence) and 1 (default bus volume).
+	It is recalculated to a non-linear value between -80 and 0 dB.
+	Using a linear value causes the sound to almost vanish long before the
+	volume slider reaches minimum.
+	"""
+	# Min volume dB
+	var M = -80.0
+	# Recalculate to <M, 0>, non-linear
+	var volume_db = abs(M) * sqrt(2 * volume - pow(volume, 2)) + M
+	var bus_id = AudioServer.get_bus_index(bus_name)
+	AudioServer.set_bus_volume_db(bus_id, volume_db)

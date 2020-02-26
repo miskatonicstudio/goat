@@ -17,4 +17,7 @@ custom_styles/grabber_area = ExtResource( 3 )
 min_value = -100.0
 step = 0.1
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="value_changed" from="." to="." method="_on_SettingsSlider_value_changed"]
