@@ -39,7 +39,7 @@ margin_right = 400.0
 margin_bottom = 100.0
 text = "Fullscreen"
 settings_section = "graphics"
-settings_key = "fullscreen"
+settings_key = "fullscreen_enabled"
 
 [node name="Shadows" parent="Settings" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -49,7 +49,7 @@ margin_right = 400.0
 margin_bottom = 150.0
 text = "Shadows"
 settings_section = "graphics"
-settings_key = "shadows"
+settings_key = "shadows_enabled"
 
 [node name="Glow" parent="Settings" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -59,7 +59,7 @@ margin_right = 400.0
 margin_bottom = 200.0
 text = "Glow"
 settings_section = "graphics"
-settings_key = "glow"
+settings_key = "glow_enabled"
 
 [node name="Reflections" parent="Settings" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -69,7 +69,7 @@ margin_right = 400.0
 margin_bottom = 250.0
 text = "Reflections"
 settings_section = "graphics"
-settings_key = "reflections"
+settings_key = "reflections_enabled"
 
 [node name="MusicLabel" type="Label" parent="Settings"]
 margin_top = 250.0

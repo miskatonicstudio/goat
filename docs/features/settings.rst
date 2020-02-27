@@ -9,20 +9,22 @@ the file is created with the default values.
 
 |Settings screen|
 
-======== ================= =============
-Section  Key               Default value
-======== ================= =============
-graphics fullscreen        true
-graphics glow              true
-graphics reflections       true
-graphics shadows           true
-sound    music_volume      0.0
-sound    effects_volume    0.0
-controls mouse_sensitivity 0.3
-======== ================= =============
+======== =================== =============
+Section  Key                 Default value
+======== =================== =============
+graphics fullscreen_enabled  true
+graphics glow_enabled        true
+graphics reflections_enabled true
+graphics shadows_enabled     true
+sound    music_volume        0.0
+sound    effects_volume      0.0
+controls mouse_sensitivity   0.3
+======== =================== =============
 
-**Note: the volume is stored in decibels, so 0.0 doesn't mean that the
-sound is muted (it becomes muted at -60 dB). Mouse sensitivity is used
+**Note: the volume is a value between 0 (complete silence) and 1
+(default bus volume), which is recalculated to a non-linear value between
+-80 and 0 dB (using a linear value causes the sound to almost vanish long
+before the volume slider reaches minimum). Mouse sensitivity is used
 for player's camera rotation and inventory item rotation.**
 
 In order to react to changes in settings, you can connect to a signal:
