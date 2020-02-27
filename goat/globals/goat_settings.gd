@@ -14,8 +14,8 @@ const DEFAULT_VALUES := [
 	["graphics", "glow_enabled", true],
 	["graphics", "reflections_enabled", true],
 	["graphics", "shadows_enabled", true],
-	["sound", "music_volume", 0.0],
-	["sound", "effects_volume", 0.0],
+	["sound", "music_volume", 1.0],
+	["sound", "effects_volume", 1.0],
 	["controls", "mouse_sensitivity", 0.3],
 ]
 
