@@ -49,6 +49,11 @@ downloaded from `Freesound`_:
 -  `the_other_side.ogg`_
 -  `shutter.ogg`_
 
+Fonts
+-----
+
+The ``FreeMono.ttf`` font is licensed under `GNU GPL 3`_.
+
 .. _Godot Engine: https://github.com/godotengine/godot
 .. _3.2 stable: https://downloads.tuxfamily.org/godotengine/3.2/
 .. _MIT license: https://godotengine.org/license
@@ -68,3 +73,4 @@ downloaded from `Freesound`_:
 .. _battery_on_remote.ogg: https://freesound.org/people/_lourii/sounds/491905/
 .. _the_other_side.ogg: https://freesound.org/people/ricniclas/sounds/451949/
 .. _shutter.ogg: https://freesound.org/people/aldenroth2/sounds/272017/
+.. _GNU GPL 3: http://www.gnu.org/licenses/
