@@ -57,6 +57,6 @@ All sounds used in the project are in public domain and can be downloaded from
 * [the_other_side.ogg](https://freesound.org/people/ricniclas/sounds/451949/)
 * [shutter.ogg](https://freesound.org/people/aldenroth2/sounds/272017/)
 
-## Fonts
+### Fonts
 
 The `FreeMono.ttf` font is licensed under [GNU GPL 3](http://www.gnu.org/licenses/).
