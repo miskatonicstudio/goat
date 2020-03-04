@@ -1,3 +1,5 @@
+<img src="./docs/img/logo_goat.svg" alt="GOAT logo" width="128">
+
 # GOAT
 
 **Godot Open Adventure Template (GOAT)** is a tool for making 3D adventure
