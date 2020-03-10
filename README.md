@@ -61,4 +61,6 @@ All sounds used in the project are in public domain and can be downloaded from
 
 ### Fonts
 
-The `FreeMono.ttf` font is licensed under [GNU GPL 3](http://www.gnu.org/licenses/).
+The `Tuffy.ttf` font was downloaded from
+[Public Domain Files](http://www.publicdomainfiles.com/show_file.php?id=13486218041168)
+and is in public domain.
