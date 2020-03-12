@@ -21,6 +21,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
+	# Make sure that the Player is standing on the ground
+	move_and_collide(Vector3(0, -100, 0))
 
 
 func _input(event):
@@ -44,9 +46,9 @@ func _physics_process(_delta):
 		return
 	
 	if movement_direction:
-		move_and_slide(movement_direction * SPEED, Vector3(0, 1, 0))
-	# Make sure that collisions didn't accidentally move the Player up or down 
-	translation.y = 0
+		move_and_slide_with_snap(
+			movement_direction * SPEED, Vector3(0, -100, 0), Vector3(0, 1, 0)
+		)
 
 
 func rotate_camera(relative_movement):

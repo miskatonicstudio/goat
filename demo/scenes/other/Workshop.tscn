@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://demo/materials/walls.material" type="Material" id=1]
 [ext_resource path="res://demo/materials/floor.material" type="Material" id=2]
@@ -669,6 +669,9 @@ size = Vector3( 16, 4, 1 )
 material = SubResource( 41 )
 size = Vector3( 3, 6, 1 )
 
+[sub_resource type="BoxShape" id=44]
+extents = Vector3( 10, 1, 10 )
+
 [node name="Workshop" type="Spatial"]
 
 [node name="Walls" type="MeshInstance" parent="."]
@@ -994,3 +997,9 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.96276, 2.80217, -3.43403 )
 mesh = SubResource( 43 )
 material/0 = null
+
+[node name="Floor" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 44 )
