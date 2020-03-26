@@ -9,6 +9,8 @@ onready var camera = $ViewportContainer/Viewport/Inventory3D/Camera
 onready var pivot = $ViewportContainer/Viewport/Inventory3D/Pivot
 onready var hidden_pivot = $ViewportContainer/Viewport/Inventory3D/HiddenPivot
 
+var original_mouse_position = null
+
 
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Editor
@@ -41,9 +43,12 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("goat_rotate_inventory"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		ray_cast.enabled = false
 		goat_interaction.deselect_object(ray_cast.category)
+		original_mouse_position = event.global_position
+		ray_cast.enabled = false
 	elif Input.is_action_just_released("goat_rotate_inventory"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Input.warp_mouse_position(original_mouse_position)
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		ray_cast.enabled = true
 	elif (
