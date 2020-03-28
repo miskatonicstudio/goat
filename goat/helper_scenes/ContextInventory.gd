@@ -2,6 +2,8 @@ extends Control
 
 const ITEM_BUTTON_PATH = "CenterContainer/Center/Item{index}/Button"
 
+onready var exit_button = $CenterContainer/ExitButton
+
 
 func _ready():
 	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
@@ -14,17 +16,22 @@ func _ready():
 		item_button.disabled = true
 
 
-func _input(_event):
+func _input(event):
 	if goat.game_mode != goat.GameMode.CONTEXT_INVENTORY:
 		return
 	
 	if Input.is_action_just_pressed("goat_dismiss"):
 		_go_back_to_exploring()
+	
+	if event is InputEventMouseMotion:
+		exit_button.release_focus()
 
 
 func _on_game_mode_changed(new_game_mode):
 	if new_game_mode == goat.GameMode.CONTEXT_INVENTORY:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		# This is a workaround for "hovering" the button before the mouse moves
+		exit_button.grab_focus()
 		show()
 	else:
 		hide()
