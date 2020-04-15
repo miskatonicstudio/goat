@@ -21,6 +21,7 @@ func _input(_event):
 
 
 func _on_Exit_pressed():
+	goat_voice.stop()
 	if goat.EXIT_SCENE:
 		get_tree().change_scene(goat.EXIT_SCENE)
 		goat.game_mode = goat.GameMode.EXPLORING

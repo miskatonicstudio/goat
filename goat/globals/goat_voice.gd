@@ -64,9 +64,7 @@ func play(audio_names) -> void:
 	chooses one at random. If audio is already playing, interrupts it.
 	"""
 	prevent_default()
-	if _audio_player.playing:
-		emit_signal("finished", _currently_playing_audio_name, true)
-		_audio_player.stop()
+	stop()
 	var audio_name: String;
 	if audio_names is Array:
 		audio_name = audio_names[randi() % audio_names.size()]
@@ -77,6 +75,12 @@ func play(audio_names) -> void:
 	_audio_player.stream = _audio_mapping[audio_name]["sound"]
 	_audio_player.play()
 	emit_signal("started", audio_name)
+
+
+func stop() -> void:
+	if _audio_player.playing:
+		emit_signal("finished", _currently_playing_audio_name, true)
+		_audio_player.stop()
 
 
 func play_default() -> void:
