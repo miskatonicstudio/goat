@@ -19,6 +19,7 @@ graphics shadows_enabled     true
 sound    music_volume        1.0
 sound    effects_volume      1.0
 controls mouse_sensitivity   0.3
+gui      subtitles           true
 ======== =================== =============
 
 **Note: the volume is a value between 0 (complete silence) and 1

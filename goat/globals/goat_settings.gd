@@ -17,6 +17,7 @@ const DEFAULT_VALUES := [
 	["sound", "music_volume", 1.0],
 	["sound", "effects_volume", 1.0],
 	["controls", "mouse_sensitivity", 0.3],
+	["gui", "subtitles", true],
 ]
 
 # If enabled, settings will be saved to file when changed

@@ -4,7 +4,7 @@
 [ext_resource path="res://goat/settings/SettingsCheckButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/settings/SettingsSlider.tscn" type="PackedScene" id=3]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 10.0
@@ -13,14 +13,14 @@ bg_color = Color( 1, 1, 1, 0 )
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 10.0
 content_margin_bottom = 6.0
 bg_color = Color( 1, 1, 1, 0 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_top = 10.0
 bg_color = Color( 1, 1, 1, 0 )
 
@@ -28,23 +28,23 @@ bg_color = Color( 1, 1, 1, 0 )
 margin_right = 8.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 650, 0 )
-custom_styles/tab_fg = SubResource( 3 )
-custom_styles/tab_bg = SubResource( 1 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/tab_fg = SubResource( 1 )
+custom_styles/tab_bg = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 custom_fonts/font = ExtResource( 1 )
 use_hidden_tabs_for_min_size = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Graphics" type="VBoxContainer" parent="."]
+[node name="Display" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 47.0
 rect_min_size = Vector2( 400, 0 )
 custom_constants/separation = 4
 
-[node name="Fullscreen" parent="Graphics" instance=ExtResource( 2 )]
+[node name="Fullscreen" parent="Display" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 650.0
@@ -53,7 +53,7 @@ text = "Fullscreen"
 settings_section = "graphics"
 settings_key = "fullscreen_enabled"
 
-[node name="Shadows" parent="Graphics" instance=ExtResource( 2 )]
+[node name="Shadows" parent="Display" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 54.0
@@ -63,7 +63,7 @@ text = "Shadows"
 settings_section = "graphics"
 settings_key = "shadows_enabled"
 
-[node name="Glow" parent="Graphics" instance=ExtResource( 2 )]
+[node name="Glow" parent="Display" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 108.0
@@ -73,7 +73,7 @@ text = "Glow"
 settings_section = "graphics"
 settings_key = "glow_enabled"
 
-[node name="Reflections" parent="Graphics" instance=ExtResource( 2 )]
+[node name="Reflections" parent="Display" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 162.0
@@ -82,6 +82,21 @@ margin_bottom = 212.0
 text = "Reflections"
 settings_section = "graphics"
 settings_key = "reflections_enabled"
+
+[node name="HSeparator" type="HSeparator" parent="Display"]
+margin_top = 216.0
+margin_right = 650.0
+margin_bottom = 220.0
+
+[node name="Subtitles" parent="Display" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 224.0
+margin_right = 650.0
+margin_bottom = 274.0
+text = "Subtitles"
+settings_section = "gui"
+settings_key = "subtitles"
 
 [node name="Sound" type="VBoxContainer" parent="."]
 visible = false
