@@ -9,6 +9,6 @@ func _ready():
 		pressed = goat_settings.get_value(settings_section, settings_key)
 
 
-func _on_CustomCheckButton_pressed():
+func _on_SettingsCheckButton_pressed():
 	if settings_section and settings_key:
 		goat_settings.set_value(settings_section, settings_key, pressed)

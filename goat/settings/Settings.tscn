@@ -98,6 +98,16 @@ text = "Subtitles"
 settings_section = "gui"
 settings_key = "subtitles"
 
+[node name="Scope" parent="Display" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 278.0
+margin_right = 650.0
+margin_bottom = 328.0
+text = "Scope"
+settings_section = "gui"
+settings_key = "scope"
+
 [node name="Sound" type="VBoxContainer" parent="."]
 visible = false
 anchor_right = 1.0

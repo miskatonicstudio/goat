@@ -17,10 +17,14 @@ func _ready():
 	inventory.hide()
 	context_inventory.hide()
 	settings.hide()
+	update_scope_visibility()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
+	goat_settings.connect(
+		"value_changed_gui_scope", self, "_on_scope_settings_changed"
+	)
 	# Make sure that the Player is standing on the ground
 	move_and_collide(Vector3(0, -100, 0))
 
@@ -89,13 +93,24 @@ func update_movement_direction():
 	movement_direction = movement_direction.normalized()
 
 
+func update_scope_visibility():
+	scope.visible = (
+		goat.game_mode == goat.GameMode.EXPLORING and
+		goat_settings.get_value("gui", "scope")
+	)
+
+
 func _on_game_mode_changed(new_game_mode):
 	var exploring_mode = new_game_mode == goat.GameMode.EXPLORING
 	var inventory_mode = new_game_mode == goat.GameMode.INVENTORY
 	
-	scope.visible = exploring_mode
+	update_scope_visibility()
 	ray_cast.enabled = exploring_mode
 	camera.environment.dof_blur_far_enabled = inventory_mode
 	
 	if exploring_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _on_scope_settings_changed():
+	update_scope_visibility()
