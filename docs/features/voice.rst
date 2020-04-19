@@ -17,8 +17,15 @@ must match the name of an audio file in the ``voice`` directory (e.g.
 ``demo/voice/but_why.ogg`` becomes ``but_why``). ``transcript`` is the
 text included in the voice recording (in this case, probably, "But
 why?"). It will be shown at the bottom of the screen when the recording
-is played. At the moment, multiple transcripts in different languages
-are not supported (but they will be implemented soon).
+is played. The transcript is fully translatable (you just need to add the
+translation to your Godot project).
+
+There is an additional parameter to this method: ``time``. If you specify a
+value greater than 0, the ``register`` method will not attempt to load the
+audio file. Instead, it will register the transcript and the duration it should
+be "played" (for the purpose of showing the subtitles). This feature is useful
+if you don't want to or cannot provide an audio sample, but still want to see
+the subtitles.
 
 |Subtitles shown when the voice is playing|
 

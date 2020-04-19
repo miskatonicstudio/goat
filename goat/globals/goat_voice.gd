@@ -3,7 +3,7 @@ extends Node
 
 """
 Plays audio (currently intended for the voice of the protagonist). Stores sounds
-and associated transcripts. Supports "default" audio: a lisf of files that will
+and associated transcripts. Supports "default" audio: a list of files that will
 be played by default if a meaningless action is performed (e.g. an item
 combination that doesn't make sense is attempted). This is not intended to play
 environment sounds or background music.
@@ -14,6 +14,7 @@ signal finished (audio_name, interrupted)
 
 # Actual audio player
 var _audio_player := AudioStreamPlayer.new()
+var _audio_timer := Timer.new()
 # Delays playing the default audio, so it can be replaced by a specific one
 var _default_audio_scheduled := false
 # Sound files and transcripts associated with audio names
@@ -28,8 +29,11 @@ func _ready():
 	# Randomize to get better results when playing random audio
 	randomize()
 	add_child(_audio_player)
+	add_child(_audio_timer)
 	_audio_player.bus = "Music"
-	_audio_player.connect("finished", self, "_on_audio_player_finished")
+	_audio_player.connect("finished", self, "_on_audio_finished")
+	_audio_timer.one_shot = true
+	_audio_timer.connect("timeout", self, "_on_audio_finished")
 
 
 func _process(_delta):
@@ -37,25 +41,33 @@ func _process(_delta):
 		play_default()
 
 
-func register(audio_name: String, transcript: String) -> void:
+func register(audio_name: String, transcript: String, time: float = 0) -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
-	from the `voice` directory (audio_name and file name have to match).
-	Currently only supports OGG files.
+	from the `voice` directory (`audio_name` and file name have to match).
+	Currently only supports OGG files. If `time` is not 0, this method will not
+	attempt to read the audio file. Instead, it will register the transcript and
+	the duration is should be "played" (for the purpose of showing
+	the subtitles).
 	"""
 	assert(not _audio_mapping.has(audio_name))
 	
-	var sound_path := "res://{}/voice/{}.ogg".format(
-		[goat.GAME_RESOURCES_DIRECTORY, audio_name], "{}"
-	)
-	var sound := load(sound_path)
-	# Disable loop mode
-	if sound is AudioStreamSample:
-		sound.loop_mode = AudioStreamSample.LOOP_DISABLED
-	elif sound is AudioStreamOGGVorbis:
-		sound.loop = false
+	var sound = null
 	
-	_audio_mapping[audio_name] = {"sound": sound, "transcript": transcript}
+	if not time:
+		var sound_path := "res://{}/voice/{}.ogg".format(
+			[goat.GAME_RESOURCES_DIRECTORY, audio_name], "{}"
+		)
+		sound = load(sound_path)
+		# Disable loop mode
+		if sound is AudioStreamSample:
+			sound.loop_mode = AudioStreamSample.LOOP_DISABLED
+		elif sound is AudioStreamOGGVorbis:
+			sound.loop = false
+	
+	_audio_mapping[audio_name] = {
+		"transcript": transcript, "time": time, "sound": sound
+	}
 
 
 func play(audio_names) -> void:
@@ -72,15 +84,21 @@ func play(audio_names) -> void:
 		audio_name = audio_names
 	assert(audio_name in _audio_mapping)
 	_currently_playing_audio_name = audio_name
-	_audio_player.stream = _audio_mapping[audio_name]["sound"]
-	_audio_player.play()
+	
+	if _audio_mapping[audio_name]["time"]:
+		_audio_timer.start(_audio_mapping[audio_name]["time"])
+	else:
+		_audio_player.stream = _audio_mapping[audio_name]["sound"]
+		_audio_player.play()
 	emit_signal("started", audio_name)
 
 
 func stop() -> void:
-	if _audio_player.playing:
+	if is_playing():
 		emit_signal("finished", _currently_playing_audio_name, true)
+		_currently_playing_audio_name = null
 		_audio_player.stop()
+		_audio_timer.stop()
 
 
 func play_default() -> void:
@@ -123,7 +141,11 @@ func connect_default(signal_object: Object, signal_name: String) -> void:
 	signal_object.connect(signal_name, self, "_schedule_default")
 
 
-func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null):
+func is_playing() -> bool:
+	return _audio_player.playing or not _audio_timer.is_stopped()
+
+
+func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null) -> void:
 	"""
 	Schedules a default audio, but doesn't play it yet, allowing a more specific
 	audio to be played first instead. Arguments are ignored to allow this
@@ -132,6 +154,8 @@ func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null):
 	_default_audio_scheduled = true
 
 
-func _on_audio_player_finished():
-	emit_signal("finished", _currently_playing_audio_name, false)
-	_currently_playing_audio_name = null
+func _on_audio_finished() -> void:
+	# Stopped audio player emits a signal, but the timer might still be active
+	if not is_playing():
+		emit_signal("finished", _currently_playing_audio_name, false)
+		_currently_playing_audio_name = null

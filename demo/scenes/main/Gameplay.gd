@@ -37,6 +37,11 @@ func _ready():
 	for audio_name in audio_to_transcript:
 		goat_voice.register(audio_name, audio_to_transcript[audio_name])
 	
+	# Voice without audio, with forced duration for subtitles
+	goat_voice.register(
+		"better_way", "There should be a better way of using it...", 5
+	)
+	
 	goat_voice.set_default_audio_names(
 		["but_why", "what_for", "this_doesnt_make_sense"]
 	)
