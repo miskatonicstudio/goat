@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://goat/settings/SettingsLanguageButton.gd" type="Script" id=1]
+[ext_resource path="res://goat/fonts/settings_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://goat/styles/settings_button_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://goat/styles/settings_button_hover.tres" type="StyleBox" id=4]
+
+[sub_resource type="ImageTexture" id=1]
+
+[node name="SettingsLanguageButton" type="OptionButton"]
+margin_right = 10.0
+margin_bottom = 29.0
+focus_mode = 0
+custom_icons/arrow = SubResource( 1 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="item_selected" from="." to="." method="_on_SettingsLanguageButton_item_selected"]

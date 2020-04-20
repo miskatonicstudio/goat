@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation" ]
+
+source_file="res://goat/locale/goat.csv"
+dest_files=[ "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation" ]
+
+[params]
+
+compress=true
+delimiter=0

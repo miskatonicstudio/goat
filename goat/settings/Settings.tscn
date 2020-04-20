@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://goat/fonts/settings_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://goat/settings/SettingsCheckButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://goat/settings/SettingsSlider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/settings/SettingsLanguageButton.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
@@ -23,6 +24,10 @@ bg_color = Color( 1, 1, 1, 0 )
 [sub_resource type="StyleBoxFlat" id=3]
 content_margin_top = 10.0
 bg_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 6.0
+bg_color = Color( 0, 0, 0, 0 )
 
 [node name="Settings" type="TabContainer"]
 margin_right = 8.0
@@ -107,6 +112,43 @@ margin_bottom = 328.0
 text = "Scope"
 settings_section = "gui"
 settings_key = "scope"
+
+[node name="HSeparator2" type="HSeparator" parent="Display"]
+margin_top = 332.0
+margin_right = 650.0
+margin_bottom = 336.0
+
+[node name="Language" type="HBoxContainer" parent="Display"]
+margin_top = 340.0
+margin_right = 650.0
+margin_bottom = 390.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Label" type="Label" parent="Display/Language"]
+margin_top = 14.0
+margin_right = 466.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+text = "Language"
+
+[node name="Margin" type="Control" parent="Display/Language"]
+margin_left = 470.0
+margin_right = 650.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 180, 0 )
+
+[node name="SettingsLanguageButton" parent="Display/Language/Margin" instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -14.5
+margin_right = 80.0
+margin_bottom = 14.5
+rect_min_size = Vector2( 160, 0 )
 
 [node name="Sound" type="VBoxContainer" parent="."]
 visible = false
