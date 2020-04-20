@@ -21,6 +21,7 @@ sound    effects_volume      1.0
 controls mouse_sensitivity   0.3
 gui      subtitles           true
 gui      scope               true
+gui      language            first matched
 ======== =================== =============
 
 **Note: the volume is a value between 0 (complete silence) and 1

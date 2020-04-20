@@ -72,7 +72,7 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Question" type="Label" parent="Background/Upload"]
-margin_top = 29.0
+margin_top = 28.0
 margin_right = 340.0
 margin_bottom = 94.0
 custom_fonts/font = ExtResource( 2 )
@@ -82,26 +82,26 @@ align = 1
 [node name="Buttons" type="HBoxContainer" parent="Background/Upload"]
 margin_top = 98.0
 margin_right = 340.0
-margin_bottom = 171.0
-custom_constants/separation = 32
+margin_bottom = 172.0
+custom_constants/separation = 22
 alignment = 1
 
 [node name="No" parent="Background/Upload/Buttons" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 24.0
-margin_right = 154.0
-margin_bottom = 73.0
-rect_min_size = Vector2( 130, 0 )
+margin_left = 21.0
+margin_right = 159.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 138, 0 )
 text = "NO"
 
 [node name="Yes" parent="Background/Upload/Buttons" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 186.0
-margin_right = 316.0
-margin_bottom = 73.0
-rect_min_size = Vector2( 130, 0 )
+margin_left = 181.0
+margin_right = 319.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 138, 0 )
 text = "YES"
 
 [node name="WhyNot" type="Label" parent="Background"]

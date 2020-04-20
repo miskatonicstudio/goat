@@ -49,12 +49,13 @@ margin_right = 650.0
 margin_bottom = 537.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Buttons"]
-margin_left = 301.0
-margin_right = 349.0
+margin_left = 275.0
+margin_right = 375.0
 margin_bottom = 29.0
 
 [node name="Back" parent="PanelContainer/VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 4 )]
-margin_right = 48.0
+margin_right = 100.0
 margin_bottom = 29.0
+rect_min_size = Vector2( 100, 0 )
 text = "Back"
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/HBoxContainer/Back" to="." method="_on_Back_pressed"]

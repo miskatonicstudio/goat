@@ -50,16 +50,17 @@ margin_bottom = 442.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuScreen/VBoxContainer/CenterContainer"]
-margin_left = 174.0
-margin_right = 461.0
+margin_left = 107.0
+margin_right = 527.0
 margin_bottom = 356.0
+rect_min_size = Vector2( 420, 0 )
 mouse_filter = 2
 custom_constants/separation = 20
 
 [node name="Play" parent="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 287.0
+margin_right = 420.0
 margin_bottom = 74.0
 text = "PLAY"
 
@@ -67,7 +68,7 @@ text = "PLAY"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 94.0
-margin_right = 287.0
+margin_right = 420.0
 margin_bottom = 168.0
 text = "SETTINGS"
 
@@ -75,7 +76,7 @@ text = "SETTINGS"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 188.0
-margin_right = 287.0
+margin_right = 420.0
 margin_bottom = 262.0
 text = "CREDITS"
 
@@ -83,7 +84,7 @@ text = "CREDITS"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 282.0
-margin_right = 287.0
+margin_right = 420.0
 margin_bottom = 356.0
 text = "EXIT"
 
