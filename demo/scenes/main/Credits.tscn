@@ -43,39 +43,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Center"]
-margin_left = 8.0
-margin_top = 31.0
-margin_right = 1015.0
-margin_bottom = 568.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Center"]
+margin_left = 137.0
+margin_top = 76.0
+margin_right = 887.0
+margin_bottom = 523.0
+
+[node name="GOAT" type="Label" parent="Center/VBoxContainer"]
+margin_right = 750.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 750, 0 )
 custom_fonts/font = ExtResource( 2 )
-text = "\"2 minute adventure\" is a demonstration of the
-Godot Open Adventure Template (GOAT), created by
-
-
-
-
-
-
-
-
-
-
-Source code and full credits are available on GitHub:
-https://github.com/miskatonicstudio/goat
-"
+text = "\"2 minute adventure\" is a demonstration of the Godot Open Adventure Template (GOAT), created by"
 align = 1
-valign = 1
+autowrap = true
 
-[node name="TextureRect" type="TextureRect" parent="Center"]
-margin_left = 384.0
-margin_top = 172.0
-margin_right = 640.0
-margin_bottom = 428.0
+[node name="Logo" type="TextureRect" parent="Center/VBoxContainer"]
+margin_top = 73.0
+margin_right = 750.0
+margin_bottom = 373.0
+rect_min_size = Vector2( 0, 300 )
 texture = ExtResource( 3 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SourceCode" type="Label" parent="Center/VBoxContainer"]
+margin_top = 377.0
+margin_right = 750.0
+margin_bottom = 410.0
+custom_fonts/font = ExtResource( 2 )
+text = "Source code and full credits are available on GitHub:"
+align = 1
+
+[node name="GitHubLink" type="Label" parent="Center/VBoxContainer"]
+margin_top = 414.0
+margin_right = 750.0
+margin_bottom = 447.0
+custom_fonts/font = ExtResource( 2 )
+text = "https://github.com/miskatonicstudio/goat"
+align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "show_credits"
