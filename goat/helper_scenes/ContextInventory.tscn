@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://goat/helper_scenes/ContextInventory.gd" type="Script" id=1]
 [ext_resource path="res://goat/styles/inventory_slot_hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://goat/styles/inventory_slot_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://goat/fonts/interface_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://goat/images/cancel_icon.png" type="Texture" id=5]
 
 [node name="ContextInventory" type="Control"]
 anchor_right = 1.0
@@ -217,6 +218,7 @@ margin_right = 546.0
 margin_bottom = 334.0
 rect_min_size = Vector2( 68, 68 )
 rect_pivot_offset = Vector2( 34, 34 )
+hint_tooltip = "Cancel"
 focus_mode = 1
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
@@ -224,5 +226,6 @@ custom_styles/focus = ExtResource( 2 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 enabled_focus_mode = 1
-text = "X"
+icon = ExtResource( 5 )
+clip_text = true
 [connection signal="pressed" from="CenterContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

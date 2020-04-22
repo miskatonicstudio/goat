@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://goat/helper_scenes/InventoryItems.gd" type="Script" id=1]
 [ext_resource path="res://goat/styles/inventory_slot_hover.tres" type="StyleBox" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://goat/styles/inventory_slot_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://goat/styles/inventory_slot_disabled.tres" type="StyleBox" id=5]
 [ext_resource path="res://goat/fonts/interface_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://goat/images/cancel_icon.png" type="Texture" id=7]
+[ext_resource path="res://goat/images/item_interaction_icon.png" type="Texture" id=8]
 
 [sub_resource type="ButtonGroup" id=1]
 resource_name = "InventoryButtons"
@@ -29,9 +31,9 @@ __meta__ = {
 }
 
 [node name="EmptyInventoryText" type="Label" parent="CenterContainer"]
-margin_left = 292.0
-margin_top = 290.0
-margin_right = 712.0
+margin_left = 354.0
+margin_top = 289.0
+margin_right = 650.0
 margin_bottom = 310.0
 custom_fonts/font = ExtResource( 6 )
 text = "There are no items in the inventory"
@@ -187,6 +189,7 @@ margin_top = 230.0
 margin_right = 68.0
 margin_bottom = 298.0
 rect_min_size = Vector2( 68, 68 )
+hint_tooltip = "Cancel"
 focus_mode = 0
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
@@ -194,13 +197,15 @@ custom_styles/focus = ExtResource( 2 )
 custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 enabled_focus_mode = 0
-text = "Back"
+icon = ExtResource( 7 )
+clip_text = true
 
 [node name="UseButton" type="Button" parent="Buttons"]
 margin_top = 302.0
 margin_right = 68.0
 margin_bottom = 370.0
 rect_min_size = Vector2( 68, 68 )
+hint_tooltip = "Use"
 focus_mode = 0
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
@@ -210,7 +215,9 @@ custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 disabled = true
 enabled_focus_mode = 0
-text = "Use"
+icon = ExtResource( 8 )
+clip_text = true
+expand_icon = true
 
 [node name="HelpText" type="Label" parent="."]
 visible = false
