@@ -1,4 +1,5 @@
 keys,en,de,pl
+"""2 minute adventure"" is a demonstration of the Godot Open Adventure Template (GOAT), created by","""2 minute adventure"" is a demonstration of the\nGodot Open Adventure Template (GOAT), created by","""2 Minuten Abenteuer"" ist eine Demonstration der\nGodot Open Adventure Template (GOAT), erstellt von","""2 minutowa przygoda"" jest demonstracją\n Godot Open Adventure Template (GOAT), autorstwa"
 "2 MINUTE ADVENTURE","2 MINUTE ADVENTURE","2 MINUTEN ABENTEUER","2 MINUTOWA PRZYGODA"
 "But why?","But why?","Aber warum?","Ale dlaczego?"
 "CREDITS","CREDITS","CREDITS","TWÓRCY"
@@ -13,6 +14,7 @@ keys,en,de,pl
 "NO","NO","NEIN","NIE"
 "PLAY","PLAY","SPIEL","GRAJ"
 "SETTINGS","SETTINGS","EINSTELLUNG","USTAWIENIA"
+"Source code and full credits are available on GitHub:","Source code and full credits are available on GitHub:","Quellcode und vollständige Credits sind auf GitHub verfügbar:","Kod źródłowy i informacje o twórcach są dostępne na GitHubie:"
 "The coordinates are uploaded. Now, where is the remote...","The coordinates are uploaded. Now, where is the remote...","Die Koordinaten werden hochgeladen. Wo ist die Fernbedienung…","Współrzędne są wgrane. Gdzie podział się pilot…"
 "The portal is active! Almost there...","The portal is active! Almost there...","Das Portal ist aktiv! Fast dort...","Portal jest aktywny! Już prawie…"
 "There should be a better way of using it...","There should be a better way of using it...","Es sollte eine bessere Möglichkeit geben, es zu verwenden...","Powinien istnieć lepszy sposób korzystania z tego..."

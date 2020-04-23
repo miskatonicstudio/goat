@@ -228,50 +228,49 @@ value = 0.1
 settings_section = "controls"
 settings_key = "mouse_sensitivity"
 
-[node name="Move" type="HBoxContainer" parent="Controls"]
+[node name="Movement" type="HBoxContainer" parent="Controls"]
 margin_top = 58.0
 margin_right = 650.0
 margin_bottom = 108.0
 custom_constants/separation = 0
 
-[node name="Label" type="Label" parent="Controls/Move"]
+[node name="Label" type="Label" parent="Controls/Movement"]
 margin_top = -1.0
 margin_right = 520.0
 margin_bottom = 49.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
-text = "Move"
+text = "Movement"
 valign = 1
 
-[node name="Value" type="Label" parent="Controls/Move"]
+[node name="Value" type="Label" parent="Controls/Movement"]
 margin_left = 520.0
 margin_right = 650.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 130, 50 )
 custom_fonts/font = ExtResource( 1 )
-text = "WSAD
-Arrow keys"
+text = "WSAD,Arrow keys"
 align = 1
 valign = 1
 
-[node name="LookAround" type="HBoxContainer" parent="Controls"]
+[node name="CameraRotation" type="HBoxContainer" parent="Controls"]
 margin_top = 112.0
 margin_right = 650.0
 margin_bottom = 162.0
 custom_constants/separation = 0
 
-[node name="Label" type="Label" parent="Controls/LookAround"]
+[node name="Label" type="Label" parent="Controls/CameraRotation"]
 margin_top = -1.0
 margin_right = 520.0
 margin_bottom = 49.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
-text = "Look around"
+text = "Camera rotation"
 valign = 1
 
-[node name="Value" type="Label" parent="Controls/LookAround"]
+[node name="Value" type="Label" parent="Controls/CameraRotation"]
 margin_left = 520.0
 margin_right = 650.0
 margin_bottom = 50.0
@@ -294,7 +293,7 @@ margin_bottom = 49.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
-text = "Interact/pick up"
+text = "Use/pick up"
 valign = 1
 
 [node name="Value" type="Label" parent="Controls/Interact"]

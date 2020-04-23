@@ -223,16 +223,15 @@ expand_icon = true
 visible = false
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -240.0
-margin_bottom = 89.0
+margin_left = -209.0
+margin_top = 20.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 6 )
-text = "
-Press RMB to rotate.
-Drag and drop other
-items to use them on
-this one."
+text = "Press RMB to rotate. Drag and drop other items to use them on this one."
 align = 1
 valign = 2
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
