@@ -30,6 +30,14 @@ gui      language            first matched
 before the volume slider reaches minimum). Mouse sensitivity is used
 for player's camera rotation and inventory item rotation.**
 
+The default value of the ``language`` setting is determined based on provided
+translations and currently selected locale. Please check the
+``goat_settings.find_matching_loaded_locale`` method for more details about the
+process. The matching happens only once, when the game runs for the first time
+and the ``language`` is not yet set. After that, the value is saved with the
+rest of the settings and can be changed manually to any language with provided
+translations.
+
 In order to react to changes in settings, you can connect to a signal:
 
 ::

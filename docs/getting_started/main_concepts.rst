@@ -19,8 +19,9 @@ on a remote control (inventory).
 |Interactive button of a remote control in inventory|
 
 The template uses several global variables (AutoLoad). One of them is
-the mode of the game. Currently, 4 modes are implemented:
+the mode of the game. Currently, 5 modes are implemented:
 
+-  ``NONE`` the game hasn't started yet (default)
 -  ``EXPLORING`` the player is moving and interacting with the 3D
    environment
 -  ``INVENTORY`` the player is browsing 3D items in the inventory

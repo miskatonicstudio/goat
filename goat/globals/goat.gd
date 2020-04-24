@@ -4,13 +4,14 @@ extends Node
 signal game_mode_changed (new_game_mode)
 
 enum GameMode {
+	NONE,
 	EXPLORING,
 	INVENTORY,
 	CONTEXT_INVENTORY,
 	SETTINGS,
 }
 
-export (GameMode) var game_mode = GameMode.EXPLORING setget set_game_mode
+export (GameMode) var game_mode = GameMode.NONE setget set_game_mode
 
 
 func set_game_mode(new_game_model):

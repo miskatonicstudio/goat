@@ -2,8 +2,9 @@ Game mode
 =========
 
 GOAT stores the current mode of the game in a global ``goat.game_mode``
-variable. There are 4 modes available at the moment:
+variable. There are 5 modes available at the moment:
 
+-  ``NONE``
 -  ``EXPLORING``
 -  ``INVENTORY``
 -  ``CONTEXT_INVENTORY``
@@ -12,7 +13,8 @@ variable. There are 4 modes available at the moment:
 Each game mode has a corresponding screen, e.g. ``CONTEXT_INVENTORY``
 shows a compact view of all available inventory items and allows the
 player to choose one of them and use it on the currently selected
-environment object.
+environment object. The ``NONE`` mode should be used for e.g. main menu
+of the game.
 
 You can change the game mode at any time like this:
 
