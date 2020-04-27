@@ -14,6 +14,7 @@ var DEFAULT_VALUES := [
 	["graphics", "glow_enabled", true],
 	["graphics", "reflections_enabled", true],
 	["graphics", "shadows_enabled", true],
+	["graphics", "ao_enabled", true],
 	["sound", "music_volume", 1.0],
 	["sound", "effects_volume", 1.0],
 	["controls", "mouse_sensitivity", 0.3],
@@ -49,6 +50,7 @@ func _ready():
 		"value_changed_graphics_shadows_enabled": "_on_shadows_settings_changed",
 		"value_changed_graphics_reflections_enabled": "_on_camera_settings_changed",
 		"value_changed_graphics_glow_enabled": "_on_camera_settings_changed",
+		"value_changed_graphics_ao_enabled": "_on_camera_settings_changed",
 		"value_changed_graphics_fullscreen_enabled": "_on_fullscreen_settings_changed",
 		"value_changed_sound_music_volume": "_on_music_settings_changed",
 		"value_changed_sound_effects_volume": "_on_effects_settings_changed",
@@ -157,8 +159,10 @@ func _update_single_lamp_settings(lamp: Light) -> void:
 func _update_single_camera_settings(camera: Camera) -> void:
 	var reflections_enabled = get_value("graphics", "reflections_enabled")
 	var glow_enabled = get_value("graphics", "glow_enabled")
+	var ao_enabled = get_value("graphics", "ao_enabled")
 	camera.environment.ss_reflections_enabled = reflections_enabled
 	camera.environment.glow_enabled = glow_enabled
+	camera.environment.ssao_enabled = ao_enabled
 
 
 func _on_gui_language_changed() -> void:
