@@ -60,8 +60,8 @@ func set_sound(new_sound):
 		audio_player.stream = sound
 
 
-func _on_object_selected(object_naem, _point):
-	if object_naem == unique_name:
+func _on_object_selected(object_name, _point):
+	if object_name == unique_name:
 		interaction_icon.show()
 
 
