@@ -245,9 +245,8 @@ margin_bottom = 108.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Controls/Movement"]
-margin_top = -1.0
-margin_right = 520.0
-margin_bottom = 49.0
+margin_right = 501.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -255,7 +254,7 @@ text = "Movement"
 valign = 1
 
 [node name="Value" type="Label" parent="Controls/Movement"]
-margin_left = 520.0
+margin_left = 501.0
 margin_right = 650.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 130, 50 )
@@ -271,9 +270,8 @@ margin_bottom = 162.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Controls/CameraRotation"]
-margin_top = -1.0
 margin_right = 520.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -297,9 +295,8 @@ margin_bottom = 216.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Controls/Interact"]
-margin_top = -1.0
 margin_right = 520.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -323,9 +320,8 @@ margin_bottom = 270.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Controls/Inventory"]
-margin_top = -1.0
 margin_right = 520.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -349,9 +345,8 @@ margin_bottom = 324.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Controls/ContextInventory"]
-margin_top = -1.0
 margin_right = 520.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -375,9 +370,8 @@ margin_bottom = 378.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Controls/Settings"]
-margin_top = -1.0
 margin_right = 520.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -394,28 +388,27 @@ text = "Esc"
 align = 1
 valign = 1
 
-[node name="Dismiss" type="HBoxContainer" parent="Controls"]
+[node name="Screenshot" type="HBoxContainer" parent="Controls"]
 margin_top = 382.0
 margin_right = 650.0
 margin_bottom = 432.0
 custom_constants/separation = 0
 
-[node name="Label" type="Label" parent="Controls/Dismiss"]
-margin_top = -1.0
+[node name="Label" type="Label" parent="Controls/Screenshot"]
 margin_right = 520.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
-text = "Dismiss"
+text = "Take a screenshot"
 valign = 1
 
-[node name="Value" type="Label" parent="Controls/Dismiss"]
+[node name="Value" type="Label" parent="Controls/Screenshot"]
 margin_left = 520.0
 margin_right = 650.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 130, 50 )
 custom_fonts/font = ExtResource( 1 )
-text = "Esc"
+text = "P"
 align = 1
 valign = 1

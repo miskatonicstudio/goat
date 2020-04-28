@@ -36,6 +36,7 @@ playing voice recordings with subtitles, and changing game settings.
    features/context_inventory
    features/voice
    features/settings
+   features/screenshots
 
 .. toctree::
    :maxdepth: 1
