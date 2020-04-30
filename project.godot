@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://goat/globals/goat_settings.gd"
 }, {
 "base": "Node",
+"class": "GoatState",
+"language": "GDScript",
+"path": "res://goat/globals/goat_state.gd"
+}, {
+"base": "Node",
 "class": "GoatVoice",
 "language": "GDScript",
 "path": "res://goat/globals/goat_voice.gd"
@@ -64,6 +69,7 @@ _global_script_class_icons={
 "GoatInteraction": "",
 "GoatInventory": "",
 "GoatSettings": "",
+"GoatState": "",
 "GoatVoice": "",
 "InteractiveItem": "",
 "InteractiveScreen": "",
@@ -87,6 +93,7 @@ goat_settings="*res://goat/globals/goat_settings.gd"
 goat_voice="*res://goat/globals/goat_voice.gd"
 goat_interaction="*res://goat/globals/goat_interaction.gd"
 goat_inventory="*res://goat/globals/goat_inventory.gd"
+goat_state="*res://goat/globals/goat_state.gd"
 goat="*res://goat/globals/goat.gd"
 demo="*res://demo/globals/demo.gd"
 

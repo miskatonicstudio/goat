@@ -31,7 +31,7 @@ func _on_game_mode_changed(new_game_mode) -> void:
 		goat_inventory.select_item(item_name)
 
 
-func _on_item_selected(item_name: String) -> void:
+func _on_item_selected(item_name) -> void:
 	if item_name == null:
 		return
 	

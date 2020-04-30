@@ -208,7 +208,10 @@ material/1 = null
 [node name="InteractiveItem" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.278467, 0, 0.143711 )
 unique_name = "computer"
+item_type = 0
+inventory_item_name = ""
 collision_shape = SubResource( 5 )
+sound = null
 
 [node name="Model" type="MeshInstance" parent="Desk/BottomComputer/TopComputer/InteractiveItem"]
 

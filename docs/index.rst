@@ -31,6 +31,7 @@ playing voice recordings with subtitles, and changing game settings.
    features/interactive_items
    features/interactive_screens
    features/game_mode
+   features/game_state
    features/interaction
    features/inventory
    features/context_inventory

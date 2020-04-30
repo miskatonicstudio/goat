@@ -13,9 +13,9 @@ func _ready():
 func _on_object_activated(object_name, _point):
 	if object_name == "remote_button":
 		animation_player.play("press_button")
-		if demo.remote_has_battery:
-			demo.emit_signal("remote_activated")
-			if demo.portal_status == demo.PortalStatus.NOT_READY:
+		if goat_state.get_value("battery_inserted"):
+			goat_state.set_value("red_button_pressed", true)
+			if goat_state.get_value("portal_status") == "not_ready":
 				goat_voice.play("upload_coords_first")
 			else:
 				goat_voice.prevent_default()
@@ -25,7 +25,7 @@ func _on_object_activated(object_name, _point):
 
 func _on_item_used(item_name, used_on_name):
 	if item_name == "battery" and used_on_name == "remote":
-		demo.remote_has_battery = true
+		goat_state.set_value("battery_inserted", true)
 		goat_inventory.remove_item("battery")
 		led_material.emission_energy = 1
 		goat_voice.prevent_default()

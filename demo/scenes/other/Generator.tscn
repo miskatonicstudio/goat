@@ -87,7 +87,9 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.559469, 0 )
 unique_name = "generator"
 item_type = 1
+inventory_item_name = ""
 collision_shape = SubResource( 1 )
+sound = null
 
 [node name="Model" type="MeshInstance" parent="InteractiveItem"]
 transform = Transform( 1.13722, 0, 0, 0, 1.13722, 0, 0, 0, 1.13722, 0, 0, 0 )

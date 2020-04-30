@@ -9,4 +9,4 @@ func _on_item_used(item_name, used_on_name):
 	if item_name == "pizza" and used_on_name == "pizza":
 		goat_inventory.remove_item("pizza")
 		goat_voice.play("pizza_eaten")
-		demo.food_eaten = true
+		goat_state.set_value("food_eaten", true)

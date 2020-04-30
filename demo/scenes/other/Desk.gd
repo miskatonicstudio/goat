@@ -10,7 +10,7 @@ func _ready():
 
 func _on_item_used(item_name, used_on_name):
 	if item_name == "floppy_disk" and used_on_name == "computer":
-		if not demo.power_on:
+		if not goat_state.get_value("power_on"):
 			goat_voice.play("power_it_up_first")
 			return
 		goat_inventory.remove_item("floppy_disk")
@@ -22,4 +22,4 @@ func _on_item_used(item_name, used_on_name):
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	demo.emit_signal("floppy_inserted")
+	goat_state.set_value("floppy_inserted", true)

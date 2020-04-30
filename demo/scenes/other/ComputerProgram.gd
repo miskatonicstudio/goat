@@ -10,20 +10,19 @@ onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	demo.connect("generator_activated", self, "_on_generator_activated")
-	demo.connect("floppy_inserted", self, "_on_floppy_inserted")
+	goat_state.connect("changed", self, "_on_game_state_changed")
 	# For testing purpose
 	if owner == null:
 		animation_player.play("upload")
 
 
-func _on_generator_activated():
-	screen_blank.color = Color("005eff")
-
-
-func _on_floppy_inserted():
-	screen_blank.hide()
-	animation_player.play("load_program")
+func _on_game_state_changed(variable_name, _from_value, to_value):
+	if variable_name == "power_on" and to_value:
+		screen_blank.color = Color("005eff")
+	
+	if variable_name == "floppy_inserted" and to_value:
+		screen_blank.hide()
+		animation_player.play("load_program")
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
@@ -32,7 +31,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 
 
 func _on_Yes_pressed():
-	demo.emit_signal("coords_uploaded")
+	goat_state.set_value("coords_uploaded", true)
 	goat_voice.play("coords_uploaded")
 	screen_upload.hide()
 	screen_done.show()

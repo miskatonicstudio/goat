@@ -13,5 +13,4 @@ func _on_object_activated(object_name, _point):
 		goat_voice.prevent_default()
 		screen_surface.emission = Color("ff4848")
 		working_sound.play()
-		demo.power_on = true
-		demo.emit_signal("generator_activated")
+		goat_state.set_value("power_on", true)
