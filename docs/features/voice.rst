@@ -62,13 +62,6 @@ Transcript for any recording can be obtained this way:
 
    goat_voice.get_transcript(audio_name)
 
-If you want to clear all registered voice recordings, you can do it like
-this:
-
-::
-
-   goat_voice.reset()
-
 Default voice recordings
 ------------------------
 

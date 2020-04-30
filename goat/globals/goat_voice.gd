@@ -113,12 +113,6 @@ func prevent_default() -> void:
 	_default_audio_scheduled = false
 
 
-func reset() -> void:
-	"""Clears all registered audio files and configuration"""
-	_audio_mapping.clear()
-	_default_audio_names.clear()
-
-
 func set_default_audio_names(default_audio_names: Array) -> void:
 	"""
 	Set the names of default audio files. Each of those files has to be
