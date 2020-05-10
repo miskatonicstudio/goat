@@ -7,6 +7,12 @@ Game engine
 This project uses `Godot Engine`_ version `3.2 stable`_, distributed
 under `MIT license`_.
 
+Plugins
+-------
+
+GOAT uses an addon called `Random Audio Stream Player Nodes for Godot Engine`_.
+It was created by `Tim Krief`_ and is licensed under `MIT license <https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt>`__.
+
 Models
 ------
 
@@ -41,13 +47,16 @@ Sounds
 All sounds used in the project are in public domain and can be
 downloaded from `Freesound`_:
 
--  `generator.ogg`_
--  `button.ogg`_
--  `pick_up.ogg`_
--  `tray.ogg`_
 -  `battery_on_remote.ogg`_
--  `the_other_side.ogg`_
+-  `click01.ogg`_
+-  `click02.ogg`_
+-  `click03.ogg`_
+-  `click04.ogg`_
+-  `generator.ogg`_
+-  `pick_up.ogg`_
 -  `shutter.ogg`_
+-  `the_other_side.ogg`_
+-  `tray.ogg`_
 
 Fonts
 -----
@@ -57,6 +66,8 @@ The ``Tuffy.ttf`` font was downloaded from `Public Domain Files`_ and is in publ
 .. _Godot Engine: https://github.com/godotengine/godot
 .. _3.2 stable: https://downloads.tuxfamily.org/godotengine/3.2/
 .. _MIT license: https://godotengine.org/license
+.. _Random Audio Stream Player Nodes for Godot Engine: https://gitlab.com/timkrief/godot-random-audio-stream-player
+.. _Tim Krief: http://timkrief.com/en/
 .. _Quaternius: quaternius.com
 .. _Ultimate Food Pack: https://drive.google.com/drive/folders/1zMfN7q9VU80M7mLAbBBJyY2OdoXslbl1?usp=sharing
 .. _CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
@@ -67,7 +78,10 @@ The ``Tuffy.ttf`` font was downloaded from `Public Domain Files`_ and is in publ
 .. _VoiceOverAngela: https://www.fiverr.com/voiceoverangela
 .. _Freesound: https://freesound.org
 .. _generator.ogg: https://freesound.org/people/DiscoveryME/sounds/367175/
-.. _button.ogg: https://freesound.org/people/LamaMakesMusic/sounds/403556/
+.. _click01.ogg: https://freesound.org/people/LamaMakesMusic/sounds/403556/
+.. _click02.ogg: https://freesound.org/people/Masgame/sounds/347544/
+.. _click03.ogg: https://freesound.org/people/Masgame/sounds/347544/
+.. _click04.ogg: https://freesound.org/people/Masgame/sounds/347544/
 .. _pick_up.ogg: https://freesound.org/people/SilverIllusionist/sounds/411177/
 .. _tray.ogg: https://freesound.org/people/Handfan/sounds/71230/
 .. _battery_on_remote.ogg: https://freesound.org/people/_lourii/sounds/491905/

@@ -19,7 +19,7 @@ unique_name = "pizza_pickable"
 item_type = 2
 inventory_item_name = "pizza"
 collision_shape = SubResource( 1 )
-sound = ExtResource( 2 )
+sounds = [ ExtResource( 2 ) ]
 
 [node name="Model" parent="PlateModel/InteractiveItem" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154955, 0.143883 )

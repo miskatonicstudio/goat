@@ -2,7 +2,6 @@
 
 [ext_resource path="res://demo/materials/plate.material" type="Material" id=1]
 
-
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
 "aabb": AABB( -0.868659, 0.008435, -0.913362, 1.73732, 0.254741, 1.82672 ),

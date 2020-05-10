@@ -102,6 +102,10 @@ demo="*res://demo/globals/demo.gd"
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
 
+[editor_plugins]
+
+enabled=PoolStringArray( "randomAudioStreamPlayer" )
+
 [input]
 
 goat_move_player_forward={

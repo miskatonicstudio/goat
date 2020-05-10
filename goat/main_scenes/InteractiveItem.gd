@@ -21,10 +21,10 @@ export (ItemType) var item_type = ItemType.NORMAL
 # This will only be used by items with type INVENTORY
 export (String) var inventory_item_name
 export (Shape) var collision_shape = BoxShape.new() setget set_collision_shape
-export (AudioStream) var sound = null setget set_sound
+export (Array, AudioStream) var sounds setget set_sounds
 
 onready var interaction_icon = $InteractionIcon
-onready var audio_player = $AudioPlayer
+onready var random_audio_player = $RandomAudioPlayer
 onready var collision_shape_node = $CollisionShape
 
 
@@ -32,7 +32,7 @@ func _ready():
 	# This would make it easier to find the item
 	add_to_group("goat_interactive_object_" + unique_name)
 	collision_shape_node.shape = collision_shape
-	audio_player.stream = sound
+	random_audio_player.streams = sounds
 	
 	goat_interaction.connect("object_selected", self, "_on_object_selected")
 	goat_interaction.connect("object_deselected", self, "_on_object_deselected")
@@ -49,15 +49,16 @@ func set_collision_shape(new_shape):
 		collision_shape_node.shape = collision_shape
 
 
-func set_sound(new_sound):
-	sound = new_sound
+func set_sounds(new_sounds):
+	sounds = new_sounds
 	# Disable sound loop
-	if sound is AudioStreamSample:
-		sound.loop_mode = AudioStreamSample.LOOP_DISABLED
-	elif sound is AudioStreamOGGVorbis:
-		sound.loop = false
+	for sound in sounds:
+		if sound is AudioStreamSample:
+			sound.loop_mode = AudioStreamSample.LOOP_DISABLED
+		elif sound is AudioStreamOGGVorbis:
+			sound.loop = false
 	if is_inside_tree():
-		audio_player.stream = sound
+		random_audio_player.stream = sounds
 
 
 func _on_object_selected(object_name, _point):
@@ -100,14 +101,14 @@ func _on_object_activated_alternatively(object_name, _point):
 
 
 func _play_sound():
-	if audio_player.stream:
-		audio_player.play()
+	if random_audio_player.streams:
+		random_audio_player.play()
 	else:
 		# Make sure that "after sound" logic is executed
 		_remove_if_inventory_item()
 
 
-func _on_AudioPlayer_finished():
+func _on_RandomAudioPlayer_finished():
 	_remove_if_inventory_item()
 
 

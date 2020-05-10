@@ -10,7 +10,7 @@
 unique_name = "battery_pickable"
 item_type = 2
 inventory_item_name = "battery"
-sound = ExtResource( 2 )
+sounds = [ ExtResource( 2 ) ]
 
 [node name="Model" parent="InteractiveItem" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0, 0.1, 0, 0, 0 )

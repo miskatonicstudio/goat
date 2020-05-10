@@ -16,7 +16,7 @@ There are 3 types of iteractive items:
 
 Interactive item contains a collision shape that is detected by
 raycasts. A default collision shape is provided, but you can easily
-change it. You can also configure a sound that will be played when an
+change it. You can also configure sounds that will be played randomly when the
 item is activated.
 
 **Note: interactive items don't have any visible elements by default. If

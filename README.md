@@ -18,6 +18,10 @@ This project uses [Godot Engine](https://github.com/godotengine/godot)
 version [3.2 stable](https://downloads.tuxfamily.org/godotengine/3.2/),
 distributed under [MIT license](https://godotengine.org/license).
 
+### Plugins
+
+GOAT uses an addon called [Random Audio Stream Player Nodes for Godot Engine](https://gitlab.com/timkrief/godot-random-audio-stream-player). It was created by [Tim Krief](http://timkrief.com/en/) and is licensed under [MIT license](https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt).
+
 ### Models
 
 Pizza slice and plate models were created by [Quaternius](quaternius.com)
@@ -51,13 +55,16 @@ All voice samples were recorded by
 All sounds used in the project are in public domain and can be downloaded from
 [Freesound](https://freesound.org):
 
-* [generator.ogg](https://freesound.org/people/DiscoveryME/sounds/367175/)
-* [button.ogg](https://freesound.org/people/LamaMakesMusic/sounds/403556/)
-* [pick_up.ogg](https://freesound.org/people/SilverIllusionist/sounds/411177/)
-* [tray.ogg](https://freesound.org/people/Handfan/sounds/71230/)
 * [battery_on_remote.ogg](https://freesound.org/people/_lourii/sounds/491905/)
-* [the_other_side.ogg](https://freesound.org/people/ricniclas/sounds/451949/)
+* [click01.ogg](https://freesound.org/people/LamaMakesMusic/sounds/403556/)
+* [click02.ogg](https://freesound.org/people/Masgame/sounds/347544/)
+* [click03.ogg](https://freesound.org/people/Masgame/sounds/347544/)
+* [click04.ogg](https://freesound.org/people/Masgame/sounds/347544/)
+* [generator.ogg](https://freesound.org/people/DiscoveryME/sounds/367175/)
+* [pick_up.ogg](https://freesound.org/people/SilverIllusionist/sounds/411177/)
 * [shutter.ogg](https://freesound.org/people/aldenroth2/sounds/272017/)
+* [the_other_side.ogg](https://freesound.org/people/ricniclas/sounds/451949/)
+* [tray.ogg](https://freesound.org/people/Handfan/sounds/71230/)
 
 ### Fonts
 

@@ -18,7 +18,7 @@ unique_name = "floppy_disk_pickable"
 item_type = 2
 inventory_item_name = "floppy_disk"
 collision_shape = SubResource( 1 )
-sound = ExtResource( 1 )
+sounds = [ ExtResource( 1 ) ]
 
 [node name="Model" type="MeshInstance" parent="InteractiveItem"]
 mesh = SubResource( 2 )

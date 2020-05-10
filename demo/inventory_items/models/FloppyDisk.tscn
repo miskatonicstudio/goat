@@ -40,7 +40,7 @@ anims/move_shutter = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.4, 0 )
 unique_name = "floppy_shutter"
 collision_shape = SubResource( 2 )
-sound = ExtResource( 4 )
+sounds = [ ExtResource( 4 ) ]
 
 [node name="Shutter" type="MeshInstance" parent="InteractiveItem"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.049, 0, 0 )

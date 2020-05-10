@@ -1,12 +1,19 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://demo/inventory_items/models/Remote.gd" type="Script" id=1]
 [ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://demo/sounds/button.ogg" type="AudioStream" id=3]
+[ext_resource path="res://demo/sounds/click02.ogg" type="AudioStream" id=3]
 [ext_resource path="res://demo/materials/remote_button.material" type="Material" id=4]
 [ext_resource path="res://demo/materials/remote_body.material" type="Material" id=5]
 [ext_resource path="res://demo/sounds/battery_on_remote.ogg" type="AudioStream" id=6]
 [ext_resource path="res://demo/materials/remote_led_on.material" type="Material" id=7]
+[ext_resource path="res://demo/sounds/click04.ogg" type="AudioStream" id=8]
+[ext_resource path="res://demo/sounds/click03.ogg" type="AudioStream" id=9]
+[ext_resource path="res://demo/sounds/click01.ogg" type="AudioStream" id=10]
+
+
+
+
 
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 5 )
@@ -19,6 +26,7 @@ extents = Vector3( 0.3, 0.5, 0.1 )
 radius = 0.17
 
 [sub_resource type="Animation" id=4]
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Button:translation")
 tracks/0/interp = 1
@@ -26,7 +34,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, -0.209, 0.1 ), Vector3( 0, -0.209, 0.05 ), Vector3( 0, -0.209, 0.1 ) ]
@@ -50,7 +58,7 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.209, 0.1 )
 unique_name = "remote_button"
 collision_shape = SubResource( 3 )
-sound = ExtResource( 3 )
+sounds = [ ExtResource( 3 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ]
 
 [node name="Model" type="CSGCombiner" parent="Button"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 7.45058e-09 )
