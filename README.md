@@ -1,4 +1,4 @@
-<img src="./docs/img/logo_goat.svg" alt="GOAT logo" width="128">
+<img src="./docs/img/logo_goat.png" alt="GOAT logo" width="128">
 
 # GOAT
 

@@ -82,6 +82,7 @@ _global_script_class_icons={
 
 config/name="GOAT"
 run/main_scene="res://demo/scenes/main/MainMenu.tscn"
+config/icon="res://docs/img/logo_goat.png"
 
 [audio]
 

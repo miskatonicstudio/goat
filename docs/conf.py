@@ -60,4 +60,4 @@ html_css_files = [
     'css/logo.css',
 ]
 
-html_logo = 'img/logo_goat.svg'
+html_logo = 'img/logo_goat.png'
