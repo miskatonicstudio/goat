@@ -21,7 +21,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="." groups=[
-"goat_camera",
+"goat_cameras",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
 environment = ExtResource( 2 )

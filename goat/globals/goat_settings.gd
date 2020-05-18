@@ -133,19 +133,19 @@ func _on_effects_settings_changed() -> void:
 
 
 func _on_shadows_settings_changed() -> void:
-	for lamp in get_tree().get_nodes_in_group("goat_lamp"):
+	for lamp in get_tree().get_nodes_in_group("goat_lamps"):
 		_update_single_lamp_settings(lamp)
 
 
 func _on_camera_settings_changed() -> void:
-	for camera in get_tree().get_nodes_in_group("goat_camera"):
+	for camera in get_tree().get_nodes_in_group("goat_cameras"):
 		_update_single_camera_settings(camera)
 
 
 func _on_node_added(node: Node) -> void:
-	if node.is_in_group("goat_lamp"):
+	if node.is_in_group("goat_lamps"):
 		_update_single_lamp_settings(node)
-	if node.is_in_group("goat_camera"):
+	if node.is_in_group("goat_cameras"):
 		_update_single_camera_settings(node)
 
 

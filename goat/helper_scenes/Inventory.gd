@@ -80,7 +80,7 @@ func _on_game_mode_changed(new_game_mode):
 
 func _on_item_added(item_name):
 	var added_item = goat_inventory.get_item_model(item_name).instance()
-	added_item.add_to_group("goat_inventory_item")
+	added_item.add_to_group("goat_inventory_items")
 	added_item.add_to_group("goat_inventory_item_" + item_name)
 	added_item.hide()
 	hidden_pivot.add_child(added_item)
@@ -88,7 +88,7 @@ func _on_item_added(item_name):
 
 func _on_item_selected(item_name):
 	# Hide all items
-	for item in get_tree().get_nodes_in_group("goat_inventory_item"):
+	for item in get_tree().get_nodes_in_group("goat_inventory_items"):
 		_reparent(item, hidden_pivot)
 	# Item deselected, nothing to do here
 	if item_name == null:

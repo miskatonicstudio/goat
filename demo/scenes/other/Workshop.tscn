@@ -720,7 +720,7 @@ mesh = SubResource( 7 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=[
-"goat_lamp",
+"goat_lamps",
 ]]
 light_color = Color( 0.85098, 0.905882, 1, 1 )
 shadow_enabled = true
@@ -729,7 +729,7 @@ shadow_contact = 0.05
 omni_range = 7.0
 
 [node name="SpotLight" type="SpotLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=[
-"goat_lamp",
+"goat_lamps",
 ]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 light_color = Color( 0.996078, 0.972549, 0.639216, 1 )

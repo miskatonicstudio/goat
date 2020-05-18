@@ -11,10 +11,6 @@
 [ext_resource path="res://demo/sounds/click03.ogg" type="AudioStream" id=9]
 [ext_resource path="res://demo/sounds/click01.ogg" type="AudioStream" id=10]
 
-
-
-
-
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 5 )
 size = Vector3( 0.6, 1, 0.2 )

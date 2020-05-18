@@ -77,7 +77,7 @@ func _on_object_activated(object_name, _point):
 	
 	# Items other than NORMAL can only be used once
 	if item_type != ItemType.NORMAL:
-		remove_from_group("goat_interactive_object")
+		remove_from_group("goat_interactive_objects")
 	
 	_play_sound()
 	

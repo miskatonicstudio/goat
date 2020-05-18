@@ -39,7 +39,7 @@ func _detect_interactive_objects():
 	
 	if is_colliding():
 		var collider = get_collider()
-		if collider and collider.is_in_group("goat_interactive_object"):
+		if collider and collider.is_in_group("goat_interactive_objects"):
 			var object_name = collider.unique_name
 			var point = get_collision_point()
 			goat_interaction.select_object(object_name, point, category)
