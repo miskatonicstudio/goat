@@ -38,7 +38,9 @@ func _ready():
 	}
 	
 	for audio_name in audio_to_transcript:
-		goat_voice.register(audio_name, audio_to_transcript[audio_name])
+		goat_voice.register(
+			audio_name + ".ogg", audio_to_transcript[audio_name]
+		)
 	
 	# Voice without audio, with forced duration for subtitles
 	goat_voice.register(

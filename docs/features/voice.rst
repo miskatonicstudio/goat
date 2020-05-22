@@ -9,12 +9,13 @@ First thing you need to do is to register a voice sample:
 
 ::
 
-   goat_voice.register(audio_name, transcript)
+   goat_voice.register(audio_file_name, transcript, time = 0, audio_name = null)
 
 All voice samples must be stored in the ``voice`` directory of your game
-resources folder. Currenly, only OGG files are supported. ``audio_name``
-must match the name of an audio file in the ``voice`` directory (e.g.
-``demo/voice/but_why.ogg`` becomes ``but_why``). ``transcript`` is the
+resources folder. By default the name of the registered audio will be the same
+as the name of the audio file (``audio_file_name``) without the extension (e.g.
+``but_why.ogg`` will be registered as ``but_why``). The name can also be set
+manually by using the ``audio_name`` attribute. ``transcript`` is the
 text included in the voice recording (in this case, probably, "But
 why?"). It will be shown at the bottom of the screen when the recording
 is played. The transcript is fully translatable (you just need to add the

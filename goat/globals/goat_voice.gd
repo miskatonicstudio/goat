@@ -41,22 +41,28 @@ func _process(_delta):
 		play_default()
 
 
-func register(audio_name: String, transcript: String, time: float = 0) -> void:
+func register(
+	audio_file_name: String, transcript: String, time: float = 0,
+	audio_name = null
+) -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
-	from the `voice` directory (`audio_name` and file name have to match).
-	Currently only supports OGG files. If `time` is not 0, this method will not
-	attempt to read the audio file. Instead, it will register the transcript and
-	the duration is should be "played" (for the purpose of showing
-	the subtitles).
+	from the `voice` directory. By default the name of the registered audio will
+	be the same as the name of the audio file (`audio_file_name`) without the
+	extension. It can also be set manually, by using the `audio_name` argument.
+	If `time` is not 0, this method will not attempt to read the audio file.
+	Instead, it will register the transcript and the duration is should be
+	"played" (for the purpose of showing the subtitles).
 	"""
+	if audio_name == null:
+		audio_name = audio_file_name.get_file().get_basename()
 	assert(not _audio_mapping.has(audio_name))
 	
 	var sound = null
 	
 	if not time:
-		var sound_path := "res://{}/voice/{}.ogg".format(
-			[goat.GAME_RESOURCES_DIRECTORY, audio_name], "{}"
+		var sound_path := "res://{}/voice/{}".format(
+			[goat.GAME_RESOURCES_DIRECTORY, audio_file_name], "{}"
 		)
 		sound = load(sound_path)
 		# Disable loop mode
