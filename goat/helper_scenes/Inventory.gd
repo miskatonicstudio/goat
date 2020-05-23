@@ -8,6 +8,8 @@ onready var ray_cast = $ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
 onready var camera = $ViewportContainer/Viewport/Inventory3D/Camera
 onready var pivot = $ViewportContainer/Viewport/Inventory3D/Pivot
 onready var hidden_pivot = $ViewportContainer/Viewport/Inventory3D/HiddenPivot
+onready var inventory_items = $InventoryItems
+onready var tween = $Tween
 
 var original_mouse_position = null
 
@@ -21,6 +23,10 @@ func _ready():
 	goat_inventory.connect("item_added", self, "_on_item_added")
 	goat_inventory.connect("item_removed", self, "_on_item_removed")
 	goat_inventory.connect("item_replaced", self, "_on_item_replaced")
+	
+	inventory_items.connect(
+		"rotation_reset_requested", self, "_on_rotation_reset_requested"
+	)
 	
 	_on_Inventory_resized()
 
@@ -130,3 +136,12 @@ func _on_Inventory_resized():
 		viewport.size = size
 		viewport_container.rect_size = size
 		viewport_container.rect_position = (rect_size - size) / 2
+
+
+func _on_rotation_reset_requested():
+	var selected_item = pivot.get_child(0)
+	tween.interpolate_property(
+		selected_item, "rotation_degrees", null, Vector3(), 0.5,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	)
+	tween.start()

@@ -45,6 +45,10 @@ Screen interaction icon was created using
 [this image](https://publicdomainvectors.org/en/free-clipart/Zoom-in-sign/44722.html),
 distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 
+Reset rotation icon was created using
+[this image](https://publicdomainvectors.org/en/free-clipart/Refresh-icon-vector-illustration/17405.html),
+distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
 ### Voice
 
 All voice samples were recorded by

@@ -52,5 +52,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 
 [node name="InventoryItems" parent="." instance=ExtResource( 4 )]
 mouse_filter = 2
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="resized" from="." to="." method="_on_Inventory_resized"]
 [connection signal="gui_input" from="ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]

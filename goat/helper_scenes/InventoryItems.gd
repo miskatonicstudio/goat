@@ -1,8 +1,11 @@
 class_name InventoryItems
 extends Control
 
+signal rotation_reset_requested
+
 onready var item_buttons_container = $ItemButtons
 onready var use_button = $Buttons/UseButton
+onready var reset_rotation_button = $Buttons/ResetRotationButton
 onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
 onready var help_text = $HelpText
 
@@ -59,6 +62,7 @@ func _on_items_changed(new_items: Array) -> void:
 	# Handle empty inventory
 	var inventory_empty = new_items.empty()
 	use_button.disabled = inventory_empty
+	reset_rotation_button.disabled = inventory_empty
 	empty_inventory_text.visible = inventory_empty
 	help_text.visible = not inventory_empty
 
@@ -110,3 +114,7 @@ func _on_BackButton_pressed() -> void:
 
 func _get_item_button(button_index: int) -> Button:
 	return get_node("ItemButtons/Button" + str(button_index)) as Button
+
+
+func _on_ResetRotationButton_pressed():
+	emit_signal("rotation_reset_requested")

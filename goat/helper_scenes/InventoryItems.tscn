@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://goat/helper_scenes/InventoryItems.gd" type="Script" id=1]
 [ext_resource path="res://goat/styles/inventory_slot_hover.tres" type="StyleBox" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://goat/fonts/interface_font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://goat/images/cancel_icon.png" type="Texture" id=7]
 [ext_resource path="res://goat/images/item_interaction_icon.png" type="Texture" id=8]
+[ext_resource path="res://goat/images/reset_rotation_icon.png" type="Texture" id=9]
 
 [sub_resource type="ButtonGroup" id=1]
 resource_name = "InventoryButtons"
@@ -185,9 +186,9 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="Buttons"]
-margin_top = 230.0
+margin_top = 194.0
 margin_right = 68.0
-margin_bottom = 298.0
+margin_bottom = 262.0
 rect_min_size = Vector2( 68, 68 )
 hint_tooltip = "Cancel"
 focus_mode = 0
@@ -201,9 +202,9 @@ icon = ExtResource( 7 )
 clip_text = true
 
 [node name="UseButton" type="Button" parent="Buttons"]
-margin_top = 302.0
+margin_top = 266.0
 margin_right = 68.0
-margin_bottom = 370.0
+margin_bottom = 334.0
 rect_min_size = Vector2( 68, 68 )
 hint_tooltip = "Use"
 focus_mode = 0
@@ -216,6 +217,25 @@ custom_fonts/font = ExtResource( 6 )
 disabled = true
 enabled_focus_mode = 0
 icon = ExtResource( 8 )
+clip_text = true
+expand_icon = true
+
+[node name="ResetRotationButton" type="Button" parent="Buttons"]
+margin_top = 338.0
+margin_right = 68.0
+margin_bottom = 406.0
+rect_min_size = Vector2( 68, 68 )
+hint_tooltip = "Reset rotation"
+focus_mode = 0
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+disabled = true
+enabled_focus_mode = 0
+icon = ExtResource( 9 )
 clip_text = true
 expand_icon = true
 
@@ -237,3 +257,4 @@ __meta__ = {
 }
 [connection signal="pressed" from="Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Buttons/UseButton" to="." method="_on_UseButton_pressed"]
+[connection signal="pressed" from="Buttons/ResetRotationButton" to="." method="_on_ResetRotationButton_pressed"]
