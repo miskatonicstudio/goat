@@ -10,8 +10,9 @@ under `MIT license`_.
 Plugins
 -------
 
-GOAT uses an addon called `Random Audio Stream Player Nodes for Godot Engine`_.
-It was created by `Tim Krief`_ and is licensed under `MIT license <https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt>`__.
+GOAT uses an addon called Random Audio Stream Player, which can be downloaded from
+`Godot Asset Library`_. It was created by `Tim Krief`_ and is licensed under
+`MIT license <https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt>`__.
 
 Models
 ------
@@ -70,7 +71,7 @@ The ``Tuffy.ttf`` font was downloaded from `Public Domain Files`_ and is in publ
 .. _Godot Engine: https://github.com/godotengine/godot
 .. _3.2 stable: https://downloads.tuxfamily.org/godotengine/3.2/
 .. _MIT license: https://godotengine.org/license
-.. _Random Audio Stream Player Nodes for Godot Engine: https://gitlab.com/timkrief/godot-random-audio-stream-player
+.. _Godot Asset Library: https://godotengine.org/asset-library/asset/651
 .. _Tim Krief: http://timkrief.com/en/
 .. _Quaternius: quaternius.com
 .. _Ultimate Food Pack: https://drive.google.com/drive/folders/1zMfN7q9VU80M7mLAbBBJyY2OdoXslbl1?usp=sharing
