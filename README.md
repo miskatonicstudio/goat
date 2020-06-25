@@ -20,7 +20,10 @@ distributed under [MIT license](https://godotengine.org/license).
 
 ### Plugins
 
-GOAT uses an addon called [Random Audio Stream Player Nodes for Godot Engine](https://gitlab.com/timkrief/godot-random-audio-stream-player). It was created by [Tim Krief](http://timkrief.com/en/) and is licensed under [MIT license](https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt).
+GOAT uses an addon called Random Audio Stream Player, which can be downloaded from
+[Godot Asset Library](https://godotengine.org/asset-library/asset/651).
+It was created by [Tim Krief](http://timkrief.com/en/) and is licensed under
+[MIT license](https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt)
 
 ### Models
 
