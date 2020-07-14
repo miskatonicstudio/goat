@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://goat/helper_scenes/ContextInventory.gd" type="Script" id=1]
+[ext_resource path="res://goat/helper_scenes/ContextInventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://goat/helper_scenes/Settings.tscn" type="PackedScene" id=3]
+[ext_resource path="res://goat/helper_scenes/Settings.gd" type="Script" id=4]
+[ext_resource path="res://goat/helper_scenes/Subtitles.gd" type="Script" id=5]
+[ext_resource path="res://goat/helper_scenes/InventoryBar.gd" type="Script" id=6]
+[ext_resource path="res://goat/helper_scenes/InventoryBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://goat/helper_scenes/Inventory.gd" type="Script" id=8]
+[ext_resource path="res://goat/main_scenes/GoatPlayer.gd" type="Script" id=9]
+[ext_resource path="res://goat/helper_scenes/Inventory.tscn" type="PackedScene" id=10]
+[ext_resource path="res://goat/helper_scenes/Subtitles.tscn" type="PackedScene" id=11]
+
+[node name="GoatPlayer" type="Spatial"]
+script = ExtResource( 9 )
+
+[node name="Scope" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -2.0
+margin_top = -7.0
+margin_right = 2.0
+margin_bottom = 7.0
+text = "·"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryBar" type="Control" parent="." instance=ExtResource( 7 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+
+[node name="Inventory" type="Control" parent="." instance=ExtResource( 10 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContextInventory" type="Control" parent="." instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Subtitles" type="Control" parent="." instance=ExtResource( 11 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -10.0
+mouse_filter = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="CenterContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="resized" from="Inventory" to="Inventory" method="_on_Inventory_resized"]
