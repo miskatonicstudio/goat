@@ -1,40 +1,41 @@
-keys,en,de,pl
-"Ambient occlusion","Ambient occlusion","Umgebungsverdeckung","Ambient occlusion"
-"Back","Back","Zurück","Wróć"
-"Camera rotation","Camera rotation","Kameradrehung","Obrót kamery"
-"Cancel","Cancel","Absagen","Anuluj"
-"Controls","Controls","Steuerung","Sterowanie"
-"Display","Display","Anzeige","Obraz"
-"Effects","Effects","Effekten","Efekty"
-"English","English","Englisch","Angielski"
-"Esc","Esc","Esc","Esc"
-"Exit","Exit","Verlassen","Wyjdź"
-"Fullscreen","Fullscreen","Vollbildschirm","Pełen ekran"
-"German","German","Deutsch","Niemiecki"
-"Glow","Glow","Glühen","Poświata"
-"LMB","LMB","LMT","LPM"
-"Language","Language","Sprache","Język"
-"Mouse sensitivity (3D)","Mouse sensitivity (3D)","Mausempfindlichkeit (3D)","Czułość myszy (3D)"
-"Mouse","Mouse","Maus","Mysz"
-"Movement","Movement","Bewegung","Ruch"
-"Music","Music","Musik","Muzyka"
-"Open context inventory","Open context inventory","Kontextinventar öffnen","Otwórz ekwipunek kontekstowy"
-"Open inventory","Open inventory","Inventar öffnen","Otwórz ekwipunek"
-"Polish","Polish","Polnisch","Polski"
-"Press RMB to rotate. Drag and drop other items to use them on this one.","Press RMB to rotate. Drag and drop other items to use them on this one.","Drücken Sie RMT, um sich zu drehen. Ziehen Sie andere Gegenstände per Drag und Drop, um sie für dieses zu verwenden.","Naciśnij PPM, aby obrócić. Przeciągnij i upuść inne przedmioty, aby użyć ich na tym."
-"RMB","RMB","RMT","PPM"
-"Reflections","Reflections","Reflexionen","Odbicia"
-"Reset rotation","Reset rotation","Drehung zurücksetzen","Resetuj obrót"
-"Resume","Resume","Fortsetzen","Wznów"
-"Scope","Scope","Sucher","Celownik"
-"Settings","Settings","Einstellung","Ustawienia"
-"Shadows","Shadows","Schatten","Cienie"
-"Show settings screen","Show settings screen","Einstellungsbildschirm anzeigen","Pokaż ekran ustawień"
-"Sound","Sound","Schall","Dźwięk"
-"Subtitles","Subtitles","Untertitel","Napisy"
-"Tab","Tab","Tab","Tab"
-"Take a screenshot","Take a screenshot","Einen Screenshot machen","Wykonaj zrzut ekranu"
-"There are no items in the inventory","There are no items in the inventory","Es gibt keine Gegenstände im Inventar","W ekwipunku nie ma żadnych przedmiotów"
-"Use","Use","Benutz","Użyj"
-"Use/pick up","Use/pick up","Verwenden/abholen","Użyj/podnieś"
-"WSAD,Arrow keys","WSAD\nArrow keys","WSAD\nPfeiltasten","WSAD\nKlawisze strzałek"
+keys,en,de,pl,fr
+Ambient occlusion,Ambient occlusion,Umgebungsverdeckung,Ambient occlusion,Occlusion ambiante
+Back,Back,Zurück,Wróć,Retour
+Camera rotation,Camera rotation,Kameradrehung,Obrót kamery,Rotation de la caméra
+Cancel,Cancel,Absagen,Anuluj,Annuler
+Controls,Controls,Steuerung,Sterowanie,Contrôles
+Display,Display,Anzeige,Obraz,Affichage
+Effects,Effects,Effekten,Efekty,Effets
+English,English,Englisch,Angielski,Anglais
+Esc,Esc,Esc,Esc,Échap.
+Exit,Exit,Verlassen,Wyjdź,Sortir
+French,French,Französisch,Francuski,Français
+Fullscreen,Fullscreen,Vollbildschirm,Pełen ekran,Plein écran
+German,German,Deutsch,Niemiecki,Allemand
+Glow,Glow,Glühen,Poświata,Éclat
+LMB,LMB,LMT,LPM,Clic gauche
+Language,Language,Sprache,Język,Langue
+Mouse sensitivity (3D),Mouse sensitivity (3D),Mausempfindlichkeit (3D),Czułość myszy (3D),Sensibilité de la souris (3D)
+Mouse,Mouse,Maus,Mysz,Souris
+Movement,Movement,Bewegung,Ruch,Mouvement
+Music,Music,Musik,Muzyka,Musique
+Open context inventory,Open context inventory,Kontextinventar öffnen,Otwórz ekwipunek kontekstowy,Ouvrir l’inventaire contextuel
+Open inventory,Open inventory,Inventar öffnen,Otwórz ekwipunek,Ouvrir l’inventaire
+Polish,Polish,Polnisch,Polski,Polonais
+Press RMB to rotate. Drag and drop other items to use them on this one.,Press RMB to rotate. Drag and drop other items to use them on this one.,"Drücken Sie RMT, um sich zu drehen. Ziehen Sie andere Gegenstände per Drag und Drop, um sie für dieses zu verwenden.","Naciśnij PPM, aby obrócić. Przeciągnij i upuść inne przedmioty, aby użyć ich na tym.",Tenez clic droit appuyé pour tourner. Glissez-déposez d’autres objets pour les utiliser sur celui-ci.
+RMB,RMB,RMT,PPM,Clic droit
+Reflections,Reflections,Reflexionen,Odbicia,Réflexions
+Reset rotation,Reset rotation,Drehung zurücksetzen,Resetuj obrót,Réinitialiser la rotation
+Resume,Resume,Fortsetzen,Wznów,Reprendre
+Scope,Scope,Sucher,Celownik,Contexte
+Settings,Settings,Einstellung,Ustawienia,Paramètres
+Shadows,Shadows,Schatten,Cienie,Ombres
+Show settings screen,Show settings screen,Einstellungsbildschirm anzeigen,Pokaż ekran ustawień,Affichager l’écran des paramètres
+Sound,Sound,Schall,Dźwięk,Son
+Subtitles,Subtitles,Untertitel,Napisy,Sous-titres
+Tab,Tab,Tab,Tab,Tabulation
+Take a screenshot,Take a screenshot,Einen Screenshot machen,Wykonaj zrzut ekranu,Prendre une capture d’écran
+There are no items in the inventory,There are no items in the inventory,Es gibt keine Gegenstände im Inventar,W ekwipunku nie ma żadnych przedmiotów,Il n’y a pas d’objets dans l’inventaire
+Use,Use,Benutz,Użyj,Utiliser
+Use/pick up,Use/pick up,Verwenden/abholen,Użyj/podnieś,Utiliser/prendre
+"WSAD,Arrow keys",WSAD\nArrow keys,WSAD\nPfeiltasten,WSAD\nKlawisze strzałek,ZQSD\nTouches directionnelles

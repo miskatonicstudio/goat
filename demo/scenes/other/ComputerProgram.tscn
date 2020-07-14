@@ -115,16 +115,12 @@ valign = 1
 
 [node name="Done" type="Label" parent="Background"]
 visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = -32.5
-margin_right = 76.0
-margin_bottom = 32.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 2 )
 text = "DONE"
+align = 1
+valign = 1
 
 [node name="BlankScreen" type="ColorRect" parent="."]
 anchor_right = 1.0

@@ -5,10 +5,10 @@ type="Translation"
 
 [deps]
 
-files=[ "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation" ]
+files=[ "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation", "res://goat/locale/goat.fr.translation" ]
 
 source_file="res://goat/locale/goat.csv"
-dest_files=[ "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation" ]
+dest_files=[ "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation", "res://goat/locale/goat.fr.translation" ]
 
 [params]
 
