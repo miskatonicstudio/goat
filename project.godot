@@ -168,7 +168,8 @@ goat_screenshot={
 
 [locale]
 
-translations=PoolStringArray( "res://demo/locale/2ma.en.translation", "res://demo/locale/2ma.de.translation", "res://demo/locale/2ma.pl.translation", "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation" )
+translations=PoolStringArray( "res://goat/locale/goat.en.translation", "res://goat/locale/goat.de.translation", "res://goat/locale/goat.pl.translation", "res://goat/locale/goat.fr.translation", "res://demo/locale/2ma.en.translation", "res://demo/locale/2ma.de.translation", "res://demo/locale/2ma.pl.translation", "res://demo/locale/2ma.fr.translation" )
+locale_filter=[ 1, [  ] ]
 
 [rendering]
 

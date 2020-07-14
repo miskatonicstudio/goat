@@ -1,25 +1,26 @@
-keys,en,de,pl
-"""2 minute adventure"" is a demonstration of the Godot Open Adventure Template (GOAT), created by","""2 minute adventure"" is a demonstration of the\nGodot Open Adventure Template (GOAT), created by","""2 Minuten Abenteuer"" ist eine Demonstration der\nGodot Open Adventure Template (GOAT), erstellt von","""2 minutowa przygoda"" jest demonstracją\n Godot Open Adventure Template (GOAT), autorstwa"
-"2 MINUTE ADVENTURE","2 MINUTE ADVENTURE","2 MINUTEN ABENTEUER","2 MINUTOWA PRZYGODA"
-"But why?","But why?","Aber warum?","Ale dlaczego?"
-"CREDITS","CREDITS","CREDITS","TWÓRCY"
-"EXIT","EXIT","VERLASS","WYJDŹ"
-"Finally! This is actually happening! Another world awaits!","Finally! This is actually happening! Another world awaits!","Schließlich! Das passiert tatsächlich! Eine andere Welt erwartet Sie!","Nareszcie! To się dzieje naprawdę! Inny świat czeka!"
-"I should power it up first.","I should power it up first.","Ich sollte es zuerst einschalten.","Powinnam najpierw włączyć zasilanie."
-"I should upload the coordinates first.","I should upload the coordinates first.","Ich sollte zuerst die Koordinaten hochladen.","Powinnam najpierw wgrać współrzędne."
-"It's going to be a long journey, I should eat something first.","It's going to be a long journey, I should eat something first.","Es wird eine lange Reise, ich sollte zuerst etwas essen.","To będzie długa podróż, powinnam najpierw coś zjeść."
-"It's useless without a battery.","It's useless without a battery.","Ohne Batterie ist es nutzlos.","Bez baterii jest bezużyteczny."
-"Just a few steps more and I will open the portal!","Just a few steps more and I will open the portal!","Nur noch ein paar Schritte und ich werde das Portal öffnen!","Jeszcze tylko kilka kroków i otworzę portal!"
-"Mmmm, delicious!","Mmmm, delicious!","Mmmm, lecker!","Mmmm, pyszne!"
-"NO","NO","NEIN","NIE"
-"PLAY","PLAY","SPIEL","GRAJ"
-"SETTINGS","SETTINGS","EINSTELLUNG","USTAWIENIA"
-"Source code and full credits are available on GitHub:","Source code and full credits are available on GitHub:","Quellcode und vollständige Credits sind auf GitHub verfügbar:","Kod źródłowy i informacje o twórcach są dostępne na GitHubie:"
-"The coordinates are uploaded. Now, where is the remote...","The coordinates are uploaded. Now, where is the remote...","Die Koordinaten werden hochgeladen. Wo ist die Fernbedienung…","Współrzędne są wgrane. Gdzie podział się pilot…"
-"The portal is active! Almost there...","The portal is active! Almost there...","Das Portal ist aktiv! Fast dort...","Portal jest aktywny! Już prawie…"
-"There should be a better way of using it...","There should be a better way of using it...","Es sollte eine bessere Möglichkeit geben, es zu verwenden...","Powinien istnieć lepszy sposób korzystania z tego..."
-"This doesn't make sense...","This doesn't make sense...","Das macht keinen Sinn…","To nie ma sensu..."
-"UPLOAD?","UPLOAD?","LADEN?","WGRAĆ?"
-"WHY NOT?","WHY NOT?","WARUM?","CZEMU?"
-"What for?","What for?","Wofür?","W jakim celu?"
-"YES","YES","JA","TAK"
+keys,en,de,pl,fr
+"""2 minute adventure"" is a demonstration of the Godot Open Adventure Template (GOAT), created by","""2 minute adventure"" is a demonstration of the\nGodot Open Adventure Template (GOAT), created by","""2 Minuten Abenteuer"" ist eine Demonstration der\nGodot Open Adventure Template (GOAT), erstellt von","""2 minutowa przygoda"" jest demonstracją\n Godot Open Adventure Template (GOAT), autorstwa","""Aventure de 2 minutes"" est une démonstration du\nGodot Open Adventure Template (GOAT), créé par"
+2 MINUTE ADVENTURE,2 MINUTE ADVENTURE,2 MINUTEN ABENTEUER,2 MINUTOWA PRZYGODA,AVENTURE DE 2 MINUTES
+But why?,But why?,Aber warum?,Ale dlaczego?,Mais pourquoi ?
+CREDITS,CREDITS,CREDITS,TWÓRCY,CRÉDITS
+DONE,DONE,,,TERMINÉ
+EXIT,EXIT,VERLASS,WYJDŹ,SORTIE
+Finally! This is actually happening! Another world awaits!,Finally! This is actually happening! Another world awaits!,Schließlich! Das passiert tatsächlich! Eine andere Welt erwartet Sie!,Nareszcie! To się dzieje naprawdę! Inny świat czeka!,Enfin ! Ça arrive vraiment ! Un autre monde attend !
+I should power it up first.,I should power it up first.,Ich sollte es zuerst einschalten.,Powinnam najpierw włączyć zasilanie.,Je devrais l’allumer d’abord.
+I should upload the coordinates first.,I should upload the coordinates first.,Ich sollte zuerst die Koordinaten hochladen.,Powinnam najpierw wgrać współrzędne.,Je devrais charger les coordonnées d’abord.
+"It's going to be a long journey, I should eat something first.","It's going to be a long journey, I should eat something first.","Es wird eine lange Reise, ich sollte zuerst etwas essen.","To będzie długa podróż, powinnam najpierw coś zjeść.","Ça va être un long voyage, je devrais manger quelque chose d’abord."
+It's useless without a battery.,It's useless without a battery.,Ohne Batterie ist es nutzlos.,Bez baterii jest bezużyteczny.,Ça ne sert à rien sans piles.
+Just a few steps more and I will open the portal!,Just a few steps more and I will open the portal!,Nur noch ein paar Schritte und ich werde das Portal öffnen!,Jeszcze tylko kilka kroków i otworzę portal!,Juste quelques étapes restantes et j’ouvrirai le portail.
+"Mmmm, delicious!","Mmmm, delicious!","Mmmm, lecker!","Mmmm, pyszne!","Mmmm, délicieux !"
+NO,NO,NEIN,NIE,NON
+PLAY,PLAY,SPIEL,GRAJ,JOUER
+SETTINGS,SETTINGS,EINSTELLUNG,USTAWIENIA,PARAMÈTRES
+Source code and full credits are available on GitHub:,Source code and full credits are available on GitHub:,Quellcode und vollständige Credits sind auf GitHub verfügbar:,Kod źródłowy i informacje o twórcach są dostępne na GitHubie:,Le code source et les crédits complets sont disponibles sur GitHub :
+"The coordinates are uploaded. Now, where is the remote…","The coordinates are uploaded. Now, where is the remote…",Die Koordinaten werden hochgeladen. Wo ist die Fernbedienung…,Współrzędne są wgrane. Gdzie podział się pilot…,Les coordonnées sont chargées. Maintenant où est la télécommande…
+The portal is active! Almost there…,The portal is active! Almost there…,Das Portal ist aktiv! Fast dort…,Portal jest aktywny! Już prawie…,Le portail est actif ! On y est presque…
+There should be a better way of using it…,There should be a better way of using it…,"Es sollte eine bessere Möglichkeit geben, es zu verwenden…",Powinien istnieć lepszy sposób korzystania z tego…,Il doit y avoir un meilleur moyen d’utiliser ça…
+This doesn't make sense…,This doesn't make sense…,Das macht keinen Sinn…,To nie ma sensu…,Ça n’a aucun sens…
+UPLOAD?,UPLOAD?,LADEN?,WGRAĆ?,CHARGER ?
+WHY NOT?,WHY NOT?,WARUM?,CZEMU?,POURQUOI PAS ?
+What for?,What for?,Wofür?,W jakim celu?,POURQUOI ?
+YES,YES,JA,TAK,OUI

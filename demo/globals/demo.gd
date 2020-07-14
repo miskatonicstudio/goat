@@ -27,14 +27,14 @@ func _ready():
 		"pizza_eaten": "Mmmm, delicious!",
 		"useless_without_battery": "It's useless without a battery.",
 		"upload_coords_first": "I should upload the coordinates first.",
-		"finally_active": "The portal is active! Almost there...",
-		"coords_uploaded": "The coordinates are uploaded. Now, where is the remote...",
+		"finally_active": "The portal is active! Almost there…",
+		"coords_uploaded": "The coordinates are uploaded. Now, where is the remote…",
 		"eat_something_first": "It's going to be a long journey, I should eat something first.",
 		"another_world_awaits": "Finally! This is actually happening! Another world awaits!",
 		# Defaults
 		"but_why": "But why?",
 		"what_for": "What for?",
-		"this_doesnt_make_sense": "This doesn't make sense...",
+		"this_doesnt_make_sense": "This doesn't make sense…",
 	}
 	
 	for audio_name in audio_to_transcript:
@@ -44,7 +44,7 @@ func _ready():
 	
 	# Voice without audio, with forced duration for subtitles
 	goat_voice.register(
-		"better_way", "There should be a better way of using it...", 5
+		"better_way", "There should be a better way of using it…", 5
 	)
 	
 	# Default voice recordings
