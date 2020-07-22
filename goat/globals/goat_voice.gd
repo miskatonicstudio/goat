@@ -41,6 +41,11 @@ func _process(_delta):
 		play_default()
 
 
+func _input(_event):
+	if is_playing() and Input.is_action_just_pressed("goat_dismiss"):
+		stop()
+
+
 func register(
 	audio_file_name: String, transcript: String, time: float = 0,
 	audio_name = null
@@ -101,10 +106,10 @@ func play(audio_names) -> void:
 
 func stop() -> void:
 	if is_playing():
-		emit_signal("finished", _currently_playing_audio_name)
 		_currently_playing_audio_name = null
 		_audio_player.stop()
 		_audio_timer.stop()
+		emit_signal("finished", _currently_playing_audio_name)
 
 
 func play_default() -> void:
@@ -157,5 +162,5 @@ func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null) -> void:
 func _on_audio_finished() -> void:
 	# Stopped audio player emits a signal, but the timer might still be active
 	if not is_playing():
-		emit_signal("finished", _currently_playing_audio_name)
 		_currently_playing_audio_name = null
+		emit_signal("finished", _currently_playing_audio_name)

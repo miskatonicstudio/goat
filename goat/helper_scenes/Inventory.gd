@@ -23,6 +23,8 @@ func _ready():
 	goat_inventory.connect("item_added", self, "_on_item_added")
 	goat_inventory.connect("item_removed", self, "_on_item_removed")
 	goat_inventory.connect("item_replaced", self, "_on_item_replaced")
+	goat_voice.connect("started", self, "_on_voice_changed")
+	goat_voice.connect("finished", self, "_on_voice_changed")
 	
 	inventory_items.connect(
 		"rotation_reset_requested", self, "_on_rotation_reset_requested"
@@ -32,7 +34,7 @@ func _ready():
 
 
 func _input(event):
-	if goat.game_mode != goat.GameMode.INVENTORY:
+	if goat.game_mode != goat.GameMode.INVENTORY or goat_voice.is_playing():
 		return
 	
 	if Input.is_action_pressed("goat_rotate_inventory"):
@@ -48,15 +50,9 @@ func _input(event):
 			selected_item.rotate_x(angle_vertical)
 	
 	if Input.is_action_just_pressed("goat_rotate_inventory"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		goat_interaction.deselect_object(ray_cast.category)
-		original_mouse_position = event.global_position
-		ray_cast.enabled = false
+		_disable_mouse()
 	elif Input.is_action_just_released("goat_rotate_inventory"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		Input.warp_mouse_position(original_mouse_position)
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		ray_cast.enabled = true
+		_enable_mouse()
 	elif (
 		Input.is_action_just_pressed("goat_toggle_inventory") or
 		Input.is_action_just_pressed("goat_dismiss")
@@ -72,6 +68,20 @@ func _get_item(item_name: String) -> Node:
 func _reparent(node: Node, new_parent: Node) -> void:
 	node.get_parent().remove_child(node)
 	new_parent.add_child(node)
+
+
+func _disable_mouse():
+	original_mouse_position = get_global_mouse_position()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	goat_interaction.deselect_object(ray_cast.category)
+	ray_cast.enabled = false
+
+
+func _enable_mouse():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.warp_mouse_position(original_mouse_position)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	ray_cast.enabled = true
 
 
 func _on_game_mode_changed(new_game_mode):
@@ -116,7 +126,7 @@ func _on_item_replaced(replaced_item_name, replacing_item_name):
 
 
 func _on_ViewportContainer_gui_input(event):
-	if goat.game_mode != goat.GameMode.INVENTORY:
+	if goat.game_mode != goat.GameMode.INVENTORY or goat_voice.is_playing():
 		return
 	
 	# We are currently rotating the item
@@ -145,3 +155,13 @@ func _on_rotation_reset_requested():
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	tween.start()
+
+
+func _on_voice_changed(_audio_name):
+	if goat.game_mode != goat.GameMode.INVENTORY:
+		return
+	
+	if goat_voice.is_playing():
+		_disable_mouse()
+	else:
+		_enable_mouse()

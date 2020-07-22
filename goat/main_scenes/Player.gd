@@ -25,12 +25,14 @@ func _ready():
 	goat_settings.connect(
 		"value_changed_gui_scope", self, "_on_scope_settings_changed"
 	)
+	goat_voice.connect("started", self, "_on_voice_changed")
+	goat_voice.connect("finished", self, "_on_voice_changed")
 	# Make sure that the Player is standing on the ground
 	move_and_collide(Vector3(0, -100, 0))
 
 
 func _input(event):
-	if goat.game_mode != goat.GameMode.EXPLORING:
+	if goat.game_mode != goat.GameMode.EXPLORING or goat_voice.is_playing():
 		return
 	
 	if Input.is_action_just_pressed("goat_toggle_inventory"):
@@ -96,7 +98,8 @@ func update_movement_direction():
 func update_scope_visibility():
 	scope.visible = (
 		goat.game_mode == goat.GameMode.EXPLORING and
-		goat_settings.get_value("gui", "scope")
+		goat_settings.get_value("gui", "scope") and
+		not goat_voice.is_playing()
 	)
 
 
@@ -113,4 +116,8 @@ func _on_game_mode_changed(new_game_mode):
 
 
 func _on_scope_settings_changed():
+	update_scope_visibility()
+
+
+func _on_voice_changed(_audio_name):
 	update_scope_visibility()
