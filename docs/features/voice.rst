@@ -49,13 +49,11 @@ There are 2 signals associated with voice recordings:
 ::
 
    goat_voice.started (audio_name)
-   goat_voice.finished (audio_name, interrupted)
+   goat_voice.finished (audio_name)
 
 If a voice recording is already playing while a new one starts, the old
-one will be stopped first and ``goat_voice.finished`` signal will be
-emitted (with ``interrupted`` set to ``true``). Otherwise the signal
-will be emitted after the recording is played fully (with
-``interrupted`` set to ``false``).
+one will be stopped first and ``goat_voice.finished`` signal will be emitted.
+Otherwise the signal will be emitted after the recording is played fully.
 
 Transcript for any recording can be obtained this way:
 

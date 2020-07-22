@@ -10,7 +10,7 @@ environment sounds or background music.
 """
 
 signal started (audio_name)
-signal finished (audio_name, interrupted)
+signal finished (audio_name)
 
 # Actual audio player
 var _audio_player := AudioStreamPlayer.new()
@@ -19,7 +19,7 @@ var _audio_timer := Timer.new()
 var _default_audio_scheduled := false
 # Sound files and transcripts associated with audio names
 var _audio_mapping := {}
-# Currently playing sound, required for sending a signal if interrupted
+# Currently playing sound, required for sending a signal when finished/skipped
 var _currently_playing_audio_name = null
 # List of audio names to play if a meaningless action is performed
 var _default_audio_names := []
@@ -101,7 +101,7 @@ func play(audio_names) -> void:
 
 func stop() -> void:
 	if is_playing():
-		emit_signal("finished", _currently_playing_audio_name, true)
+		emit_signal("finished", _currently_playing_audio_name)
 		_currently_playing_audio_name = null
 		_audio_player.stop()
 		_audio_timer.stop()
@@ -157,5 +157,5 @@ func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null) -> void:
 func _on_audio_finished() -> void:
 	# Stopped audio player emits a signal, but the timer might still be active
 	if not is_playing():
-		emit_signal("finished", _currently_playing_audio_name, false)
+		emit_signal("finished", _currently_playing_audio_name)
 		_currently_playing_audio_name = null

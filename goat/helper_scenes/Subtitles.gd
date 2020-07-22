@@ -19,11 +19,10 @@ func show_subtitles(audio_name):
 		text_box.show()
 
 
-func hide_subtitles(_audio_name, interrupted):
-	"""Hides subtitles, but only if audio was played fully"""
-	if not interrupted:
-		text.text = ""
-		text_box.hide()
+func hide_subtitles(_audio_name):
+	"""Hide subtitles"""
+	text.text = ""
+	text_box.hide()
 
 
 func _on_subtitles_settings_changed():
