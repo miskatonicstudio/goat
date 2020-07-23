@@ -211,7 +211,7 @@ unique_name = "computer"
 item_type = 0
 inventory_item_name = ""
 collision_shape = SubResource( 5 )
-sound = null
+sounds = [  ]
 
 [node name="Model" type="MeshInstance" parent="Desk/BottomComputer/TopComputer/InteractiveItem"]
 

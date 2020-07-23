@@ -23,6 +23,8 @@ var _audio_mapping := {}
 var _currently_playing_audio_name = null
 # List of audio names to play if a meaningless action is performed
 var _default_audio_names := []
+# Sequence of audio names to play next
+var _current_audio_names_sequence := []
 
 
 func _ready():
@@ -83,11 +85,11 @@ func register(
 
 func play(audio_names) -> void:
 	"""
-	Plays an audio file with the given name. If and array of names is given,
-	chooses one at random. If audio is already playing, interrupts it.
+	Plays an audio file with the given name. If an array of names is given,
+	chooses one at random.
 	"""
+	_current_audio_names_sequence = []
 	prevent_default()
-	stop()
 	var audio_name: String;
 	if audio_names is Array:
 		audio_name = audio_names[randi() % audio_names.size()]
@@ -96,20 +98,22 @@ func play(audio_names) -> void:
 	assert(audio_name in _audio_mapping)
 	_currently_playing_audio_name = audio_name
 	
-	if _audio_mapping[audio_name]["time"]:
-		_audio_timer.start(_audio_mapping[audio_name]["time"])
-	else:
-		_audio_player.stream = _audio_mapping[audio_name]["sound"]
-		_audio_player.play()
-	emit_signal("started", audio_name)
+	_play(audio_name)
 
 
-func stop() -> void:
-	if is_playing():
-		_currently_playing_audio_name = null
-		_audio_player.stop()
-		_audio_timer.stop()
-		emit_signal("finished", _currently_playing_audio_name)
+func play_sequence(audio_names_sequence: Array) -> void:
+	"""
+	Plays a sequence of audio files with given names. The first file on the list
+	is played immediately, each next is played after the previous file is played
+	fully or is interrupted. The sequence sends normal `goat_voice` signals
+	(`started`, `finished`) for each audio name on the list.
+	"""
+	prevent_default()
+	assert(audio_names_sequence)
+	audio_names_sequence = audio_names_sequence.duplicate()
+	var first_audio_name = audio_names_sequence.pop_front()
+	_current_audio_names_sequence = audio_names_sequence
+	_play(first_audio_name)
 
 
 func play_default() -> void:
@@ -117,6 +121,13 @@ func play_default() -> void:
 	if _default_audio_names:
 		play(_default_audio_names)
 	_default_audio_scheduled = false
+
+
+func stop() -> void:
+	if is_playing():
+		_audio_player.stop()
+		_audio_timer.stop()
+		_stop()
 
 
 func prevent_default() -> void:
@@ -162,5 +173,27 @@ func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null) -> void:
 func _on_audio_finished() -> void:
 	# Stopped audio player emits a signal, but the timer might still be active
 	if not is_playing():
-		_currently_playing_audio_name = null
-		emit_signal("finished", _currently_playing_audio_name)
+		_stop()
+
+
+func _play(audio_name: String) -> void:
+	"""Plays a single audio file with the given name"""
+	if _audio_mapping[audio_name]["time"]:
+		_audio_timer.start(_audio_mapping[audio_name]["time"])
+	else:
+		_audio_player.stream = _audio_mapping[audio_name]["sound"]
+		_audio_player.play()
+	emit_signal("started", audio_name)
+
+
+func _stop() -> void:
+	"""
+	Resets currently playing audio name, sends `finished` signal. If there is
+	another audio name in a sequence, plays it.
+	"""
+	var currently_playing_audio_name = _currently_playing_audio_name
+	_currently_playing_audio_name = null
+	emit_signal("finished", currently_playing_audio_name)
+	
+	if _current_audio_names_sequence:
+		_play(_current_audio_names_sequence.pop_front())

@@ -27,7 +27,7 @@ func _input(_event):
 		take_screenshot()
 
 
-func take_screenshot():
+func take_screenshot() -> void:
 	var screenshot_directory_path = "user://" + SCREENSHOT_DIRECTORY
 	Directory.new().make_dir(screenshot_directory_path)
 	var dt = OS.get_datetime()

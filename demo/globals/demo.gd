@@ -44,7 +44,13 @@ func _ready():
 	
 	# Voice without audio, with forced duration for subtitles
 	goat_voice.register(
-		"better_way", "There should be a better way of using it...", 5
+		"better_way", "There should be a better way of using it...", 4
+	)
+	goat_voice.register(
+		"look_around", "I have to look around.", 2
+	)
+	goat_voice.register(
+		"find_something", "Maybe I'll find something.", 3
 	)
 	
 	# Default voice recordings

@@ -37,12 +37,21 @@ You can play a registered voice sample at any time:
    goat_voice.play(audio_names)
 
 ``audio_names`` can be either a single name or an array of correct audio
-names (in which case a random one will be played). To stop the current voice
-recording, call:
+names (in which case a random one will be played). When the audio is playing,
+input is blocked in ``EXPLORING`` and ``INVENTORY`` game modes. Pressing any of
+the ``goat_dismiss`` actions interrupts current audio.
+
+To stop the current voice recording, call:
 
 ::
 
    goat_voice.stop()
+
+You can also play a sequence of sounds:
+
+::
+
+   goat_voice.play_sequence(audio_names)
 
 There are 2 signals associated with voice recordings:
 

@@ -18,7 +18,9 @@ func _on_item_used(item_name, used_on_name):
 		floppy_insert_sound.play()
 		goat_voice.prevent_default()
 	if item_name == "floppy_disk" and used_on_name == "monitor":
-		goat_voice.play("better_way")
+		goat_voice.play_sequence(
+			["better_way", "look_around", "find_something"]
+		)
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
