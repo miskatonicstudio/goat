@@ -2,7 +2,7 @@
 
 [ext_resource path="res://goat/main_scenes/InteractiveItem.gd" type="Script" id=1]
 [ext_resource path="res://goat/images/item_interaction_icon.png" type="Texture" id=2]
-[ext_resource path="res://goat/materials/interaction_icon.tres" type="Material" id=3]
+[ext_resource path="res://goat/materials/item_interaction_icon.tres" type="Material" id=3]
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]

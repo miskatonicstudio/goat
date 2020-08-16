@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://goat/images/item_interaction_icon.png" type="Texture" id=1]
+
+[resource]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_fixed_size = true
+params_billboard_mode = 1
+albedo_texture = ExtResource( 1 )

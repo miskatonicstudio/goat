@@ -2,7 +2,7 @@
 
 [ext_resource path="res://goat/main_scenes/InteractiveScreen.gd" type="Script" id=1]
 [ext_resource path="res://goat/images/screen_interaction_icon.png" type="Texture" id=2]
-[ext_resource path="res://goat/materials/interaction_icon.tres" type="Material" id=3]
+[ext_resource path="res://goat/materials/screen_interaction_icon.tres" type="Material" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 margin = 0.001
