@@ -53,7 +53,8 @@ func _physics_process(_delta):
 	
 	if movement_direction:
 		move_and_slide_with_snap(
-			movement_direction * SPEED, Vector3(0, -100, 0), Vector3(0, 1, 0)
+			movement_direction * goat.PLAYER_SPEED,
+			Vector3(0, -100, 0), Vector3(0, 1, 0)
 		)
 
 

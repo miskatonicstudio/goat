@@ -57,3 +57,5 @@ var GAME_RESOURCES_DIRECTORY = null
 # Screenshot directory: the name of a subdirectory in user's local folder, where
 # the screenshots taken during the game will be stored.
 var SCREENSHOT_DIRECTORY = "Screenshots"
+
+var PLAYER_SPEED = 3.0
