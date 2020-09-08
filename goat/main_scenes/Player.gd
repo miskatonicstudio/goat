@@ -1,8 +1,6 @@
 class_name Player
 extends KinematicBody
 
-export (float) var SPEED = 3.0
-
 var movement_direction = Vector3()
 
 onready var camera = $Camera
