@@ -59,3 +59,5 @@ var GAME_RESOURCES_DIRECTORY = null
 var SCREENSHOT_DIRECTORY = "Screenshots"
 
 var PLAYER_SPEED = 3.0
+
+var GRAVITY_ENABLED = true

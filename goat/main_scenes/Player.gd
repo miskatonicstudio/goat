@@ -25,8 +25,9 @@ func _ready():
 	)
 	goat_voice.connect("started", self, "_on_voice_changed")
 	goat_voice.connect("finished", self, "_on_voice_changed")
-	# Make sure that the Player is standing on the ground
-	move_and_collide(Vector3(0, -100, 0))
+	if goat.GRAVITY_ENABLED:
+		# Make sure that the Player is standing on the ground
+		move_and_collide(Vector3(0, -100, 0))
 
 
 func _input(event):
@@ -50,10 +51,16 @@ func _physics_process(_delta):
 		return
 	
 	if movement_direction:
-		move_and_slide_with_snap(
-			movement_direction * goat.PLAYER_SPEED,
-			Vector3(0, -100, 0), Vector3(0, 1, 0)
-		)
+		if goat.GRAVITY_ENABLED:
+			move_and_slide_with_snap(
+				movement_direction * goat.PLAYER_SPEED,
+				Vector3(0, -100, 0), Vector3(0, 1, 0)
+			)
+		else:
+			move_and_slide(
+				movement_direction * goat.PLAYER_SPEED, Vector3(0, 1, 0)
+			)
+			translation.y = 0
 
 
 func rotate_camera(relative_movement):

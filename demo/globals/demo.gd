@@ -4,6 +4,7 @@ extends Node
 func _ready():
 	goat.GAME_RESOURCES_DIRECTORY = "demo"
 	goat.EXIT_SCENE = "res://demo/scenes/main/MainMenu.tscn"
+	goat.GRAVITY_ENABLED = false
 	
 	# Configure game state
 	goat_state.register_variable("food_eaten", false)
