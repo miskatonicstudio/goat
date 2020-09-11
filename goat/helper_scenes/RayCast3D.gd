@@ -15,7 +15,7 @@ export (bool) var supports_alternative_interaction = true
 
 
 func _input(_event):
-	if not enabled:
+	if not _is_interaction_enabled():
 		return
 	
 	# Force detecting items, in case some of them were deactivated
@@ -30,7 +30,7 @@ func _input(_event):
 
 
 func _process(_delta):
-	if enabled:
+	if _is_interaction_enabled():
 		_detect_interactive_objects()
 
 
@@ -47,3 +47,7 @@ func _detect_interactive_objects():
 	
 	if not collided:
 		goat_interaction.deselect_object(category)
+
+
+func _is_interaction_enabled():
+	return enabled and not goat_voice.is_playing()

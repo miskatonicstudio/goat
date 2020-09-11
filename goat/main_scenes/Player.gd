@@ -31,7 +31,14 @@ func _ready():
 
 
 func _input(event):
-	if goat.game_mode != goat.GameMode.EXPLORING or goat_voice.is_playing():
+	if goat.game_mode != goat.GameMode.EXPLORING:
+		return
+	
+	if event is InputEventMouseMotion and _allow_camera_movement():
+		rotate_camera(event.relative)
+	
+	# Prevent further interaction if the voice is playing
+	if goat_voice.is_playing():
 		return
 	
 	if Input.is_action_just_pressed("goat_toggle_inventory"):
@@ -39,10 +46,7 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("goat_dismiss"):
 		goat.game_mode = goat.GameMode.SETTINGS
-	
-	if event is InputEventMouseMotion:
-		rotate_camera(event.relative)
-	
+
 	update_movement_direction()
 
 
@@ -127,3 +131,10 @@ func _on_scope_settings_changed():
 
 func _on_voice_changed(_audio_name):
 	update_scope_visibility()
+
+
+func _allow_camera_movement():
+	return (
+		goat.ALLOW_CAMERA_MOVEMENT_WHEN_VOICE_IS_PLAYING
+		or not goat_voice.is_playing()
+	)
