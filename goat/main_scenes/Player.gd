@@ -77,7 +77,13 @@ func rotate_camera(relative_movement):
 	var angle = -relative_movement.y * mouse_sensitivity
 	var camera_rot = camera.rotation_degrees
 	camera_rot.x += angle
-	camera_rot.x = clamp(camera_rot.x, -80, 80)
+	camera_rot.x = clamp(
+		camera_rot.x, goat.BOTTOM_CAMERA_ANGLE, goat.TOP_CAMERA_ANGLE
+	)
+	if goat.LEFT_CAMERA_ANGLE and goat.RIGHT_CAMERA_ANGLE:
+		camera_rot.y = clamp(
+			camera_rot.y, goat.LEFT_CAMERA_ANGLE, goat.RIGHT_CAMERA_ANGLE
+		)
 	camera.rotation_degrees = camera_rot
 
 
