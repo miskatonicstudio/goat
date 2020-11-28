@@ -49,7 +49,16 @@ func register_item(item_name: String) -> void:
 
 func get_item_icon(item_name: String):
 	"""Returns an icon (image) associated with the given item"""
-	return load(_config[item_name]["icon"])
+	var icon_path = _config[item_name]["icon"]
+	
+	if File.new().file_exists(icon_path):
+		# If an icon was provided, use it
+		return load(icon_path)
+	else:
+		# Otherwise create an icon using the model
+		var icon_maker = load("res://goat/globals/IconMaker.tscn").instance()
+		get_tree().root.add_child(icon_maker)
+		return icon_maker.make_icon_texture(_config[item_name]["model"])
 
 
 func get_item_model(item_name: String):

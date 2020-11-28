@@ -90,6 +90,7 @@ default_bus_layout="res://goat/default_bus_layout.tres"
 
 [autoload]
 
+_goat_icon_maker="*res://goat/helper_scenes/IconMaker.tscn"
 goat_settings="*res://goat/globals/goat_settings.gd"
 goat_voice="*res://goat/globals/goat_voice.gd"
 goat_interaction="*res://goat/globals/goat_interaction.gd"
