@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://goat/environments/inventory_environment.tres" type="Environment" id=1]
-[ext_resource path="res://goat/globals/IconMaker.gd" type="Script" id=2]
+[ext_resource path="res://goat/helper_scenes/IconMaker.gd" type="Script" id=2]
 
 [node name="IconMaker" type="Spatial"]
 script = ExtResource( 2 )
