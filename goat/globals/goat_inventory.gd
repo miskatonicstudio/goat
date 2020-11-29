@@ -42,14 +42,34 @@ func register_item(item_name: String) -> void:
 	
 	# Do not load models yet, just keep the paths
 	_config[item_name] = {
-		"icon": icon_path,
+		"icon_path": icon_path,
 		"model": model_path,
 	}
 
 
 func get_item_icon(item_name: String):
 	"""Returns an icon (image) associated with the given item"""
-	return load(_config[item_name]["icon"])
+	var icon = _config[item_name].get("icon")
+	
+	# If an icon was created earlier, use it
+	if icon:
+		return icon
+	
+	var icon_path = _config[item_name]["icon_path"]
+	
+	if File.new().file_exists(icon_path):
+		# If an icon file was provided, use it
+		icon = load(icon_path)
+	else:
+		# Otherwise create an icon using the model
+		var icon_maker = load(
+			"res://goat/helper_scenes/IconMaker.tscn"
+		).instance()
+		get_tree().root.add_child(icon_maker)
+		icon = icon_maker.make_icon_texture(_config[item_name]["model"])
+	
+	_config[item_name]["icon"] = icon
+	return icon
 
 
 func get_item_model(item_name: String):

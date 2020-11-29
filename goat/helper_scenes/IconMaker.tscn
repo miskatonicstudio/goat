@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://goat/environments/inventory_environment.tres" type="Environment" id=1]
+[ext_resource path="res://goat/helper_scenes/IconMaker.gd" type="Script" id=2]
+
+[node name="IconMaker" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 64, 64 )
+own_world = true
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Spatial" type="Spatial" parent="Viewport"]
+
+[node name="Camera" type="Camera" parent="Viewport/Spatial"]
+environment = ExtResource( 1 )
+far = 5.0
+
+[node name="Pivot" type="Spatial" parent="Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, -2 )
