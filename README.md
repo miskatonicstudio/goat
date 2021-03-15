@@ -8,7 +8,7 @@ playing voice recordings with subtitles, and changing game settings.
 
 ![GOAT demo game](https://user-images.githubusercontent.com/36821133/73215095-b308a280-4153-11ea-8ff0-c85cbd476147.gif)
 
-Full documentation is available on [readthedocs](https://miskatonicstudio-goat.readthedocs.io).
+Full documentation is available on [readthedocs](https://miskatonicstudio-goat.readthedocs.io). Web demo is available on [gotm.io](https://gotm.io/miskatonicstudio/goat).
 
 ## Credits and licenses
 

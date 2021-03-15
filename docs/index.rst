@@ -5,6 +5,8 @@ GOAT
 games. It supports a simple inventory system, interacting with objects and screens,
 playing voice recordings with subtitles, and changing game settings.
 
+Web demo is available on `gotm.io`_.
+
 |GOAT demo game|
 
 .. |GOAT demo game| image:: https://user-images.githubusercontent.com/36821133/73215095-b308a280-4153-11ea-8ff0-c85cbd476147.gif
@@ -51,3 +53,5 @@ playing voice recordings with subtitles, and changing game settings.
 .. * :ref:`genindex`
 .. * :ref:`modindex`
 .. * :ref:`search`
+
+.. _gotm.io: https://gotm.io/miskatonicstudio/goat
