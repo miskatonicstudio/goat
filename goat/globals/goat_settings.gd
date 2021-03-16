@@ -12,9 +12,9 @@ const SETTINGS_FILE_NAME := "user://settings.cfg"
 var DEFAULT_VALUES := [
 	["graphics", "fullscreen_enabled", true],
 	["graphics", "glow_enabled", true],
-	["graphics", "reflections_enabled", true],
+	["graphics", "reflections_enabled", disable_for_html()],
 	["graphics", "shadows_enabled", true],
-	["graphics", "ao_enabled", true],
+	["graphics", "ao_enabled", disable_for_html()],
 	["sound", "music_volume", 1.0],
 	["sound", "effects_volume", 1.0],
 	["controls", "mouse_sensitivity", 0.3],
@@ -116,6 +116,10 @@ func find_matching_loaded_locale() -> String:
 	
 	# If nothing matches, return first provided translation
 	return loaded_locales[0]
+
+
+func disable_for_html():
+	return OS.get_name() != "HTML5"
 
 
 func _on_fullscreen_settings_changed() -> void:
