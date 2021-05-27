@@ -11,6 +11,7 @@ signal will be passed to content as LMB click.
 export (String) var unique_name
 export (Vector2) var content_size = Vector2(100, 100)
 export (float, 0, 16) var emission_energy = 1.0
+export (bool) var unshaded = false
 
 onready var screen_surface = $ScreenSurface
 onready var viewport = $Viewport
@@ -39,6 +40,7 @@ func _ready():
 	# Duplicate the existing material and set a viewport texture
 	var new_material = screen_surface.material_override.duplicate(true)
 	new_material.albedo_texture = viewport.get_texture()
+	new_material.flags_unshaded = unshaded
 	if emission_energy:
 		new_material.emission_enabled = true
 		new_material.emission_texture = viewport.get_texture()
