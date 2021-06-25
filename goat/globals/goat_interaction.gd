@@ -16,6 +16,8 @@ signal object_selected (object_name, point)
 signal object_deselected (object_name)
 signal object_activated (object_name, point)
 signal object_activated_alternatively (object_name, point)
+signal object_enabled (object_name)
+signal object_disabled (object_name)
 
 # Stores selected objects and corresponding points in each category
 var _selected = {}
