@@ -84,6 +84,14 @@ func alternatively_activate_object(category: String):
 		emit_signal("object_activated_alternatively", current_object, point)
 
 
+func enable_object(object_name):
+	emit_signal("object_enabled", object_name)
+
+
+func disable_object(object_name):
+	emit_signal("object_disabled", object_name)
+
+
 func _get_selected_by_key(category: String, key: String):
 	assert (category != null)
 	if _selected.has(category):
