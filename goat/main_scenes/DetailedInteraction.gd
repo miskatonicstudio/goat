@@ -1,5 +1,12 @@
 extends Spatial
 
+"""
+Used to 'zoom in' to a part of the environment, possibly containing a puzzle.
+It should not be used with inventory items.
+
+NOTE: Currently there can only be one DetailedInteraction per scene.
+"""
+
 onready var interactive_item = $InteractiveItem
 onready var camera = $Camera
 onready var ray_cast = $Camera/RayCast3D
