@@ -6,6 +6,8 @@ func _ready():
 	goat.EXIT_SCENE = "res://demo/scenes/main/MainMenu.tscn"
 	goat.GRAVITY_ENABLED = false
 	
+	Input.set_custom_mouse_cursor(load("res://demo/images/cursor.png"))
+	
 	# Configure game state
 	goat_state.register_variable("food_eaten", false)
 	goat_state.register_variable("power_on", false)

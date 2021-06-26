@@ -145,3 +145,4 @@ func _set_enabled(enabled):
 		collision_layer = 0
 		collision_mask = 0
 		remove_from_group("goat_interactive_objects")
+		interaction_icon.hide()
