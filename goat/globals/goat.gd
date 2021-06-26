@@ -6,6 +6,7 @@ signal game_mode_changed (new_game_mode)
 enum GameMode {
 	NONE,
 	EXPLORING,
+	DETAILED_INTERACTION,
 	INVENTORY,
 	CONTEXT_INVENTORY,
 	SETTINGS,

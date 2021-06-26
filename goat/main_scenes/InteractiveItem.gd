@@ -27,6 +27,8 @@ onready var interaction_icon = $InteractionIcon
 onready var random_audio_player = $RandomAudioPlayer
 onready var collision_shape_node = $CollisionShape
 
+const COLLISION_MASK_LAYER = 2
+
 
 func _ready():
 	# This would make it easier to find the item
@@ -37,6 +39,8 @@ func _ready():
 	goat_interaction.connect("object_selected", self, "_on_object_selected")
 	goat_interaction.connect("object_deselected", self, "_on_object_deselected")
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
+	goat_interaction.connect("object_disabled", self, "_on_object_disabled")
+	goat_interaction.connect("object_enabled", self, "_on_object_enabled")
 	goat_interaction.connect(
 		"object_activated_alternatively", self,
 		"_on_object_activated_alternatively"
@@ -77,7 +81,7 @@ func _on_object_activated(object_name, _point):
 	
 	# Items other than NORMAL can only be used once
 	if item_type != ItemType.NORMAL:
-		remove_from_group("goat_interactive_objects")
+		_set_enabled(false)
 	
 	_play_sound()
 	
@@ -100,6 +104,20 @@ func _on_object_activated_alternatively(object_name, _point):
 		goat.game_mode = goat.GameMode.CONTEXT_INVENTORY
 
 
+func _on_object_enabled(object_name):
+	if object_name != unique_name:
+		return
+	
+	_set_enabled(true)
+
+
+func _on_object_disabled(object_name):
+	if object_name != unique_name:
+		return
+	
+	_set_enabled(false)
+
+
 func _play_sound():
 	if random_audio_player.streams:
 		random_audio_player.play()
@@ -116,3 +134,15 @@ func _remove_if_inventory_item():
 	if item_type == ItemType.INVENTORY:
 		get_parent().remove_child(self)
 		call_deferred("queue_free")
+
+
+func _set_enabled(enabled):
+	if enabled:
+		collision_layer = COLLISION_MASK_LAYER
+		collision_mask = COLLISION_MASK_LAYER
+		add_to_group("goat_interactive_objects")
+	else:
+		collision_layer = 0
+		collision_mask = 0
+		remove_from_group("goat_interactive_objects")
+		interaction_icon.hide()
