@@ -14,7 +14,7 @@ onready var tween = $Tween
 # Backplate is used to stop the ray_cast from reaching environment items
 onready var backplate = $Backplate
 onready var original_camera_transform = camera.global_transform
-
+# This is the camera that is active when the detailed interaction starts
 var player_camera = null
 
 
@@ -53,6 +53,9 @@ func _input(event):
 	if goat.game_mode != goat.GameMode.DETAILED_INTERACTION:
 		return
 	
+	if not camera.current:
+		return
+	
 	if event is InputEventMouseMotion:
 		var ray_vector = camera.project_local_ray_normal(
 			event.position
@@ -80,5 +83,6 @@ func _input(event):
 
 func _on_Tween_tween_all_completed():
 	if player_camera == null:
-		camera.current = false
+		for c in get_tree().get_nodes_in_group("goat_cameras_player"):
+			c.current = true
 		camera.global_transform = original_camera_transform

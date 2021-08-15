@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://demo/materials/walls.material" type="Material" id=1]
 [ext_resource path="res://demo/materials/floor.material" type="Material" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://demo/scenes/other/Shelf1.tscn" type="PackedScene" id=25]
 [ext_resource path="res://demo/scenes/other/WallDevice.tscn" type="PackedScene" id=26]
 [ext_resource path="res://demo/scenes/other/Portal.tscn" type="PackedScene" id=27]
+[ext_resource path="res://goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=28]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Walls"
@@ -669,6 +670,9 @@ size = Vector3( 16, 4, 1 )
 material = SubResource( 41 )
 size = Vector3( 3, 6, 1 )
 
+[sub_resource type="BoxShape" id=44]
+extents = Vector3( 1.331, 0.757, 0.1 )
+
 [node name="Workshop" type="Spatial"]
 
 [node name="Walls" type="MeshInstance" parent="."]
@@ -994,3 +998,22 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.96276, 2.80217, -3.43403 )
 mesh = SubResource( 43 )
 material/0 = null
+
+[node name="DetailedInteractionTools" parent="." instance=ExtResource( 28 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.5, 2.366, 0.812 )
+
+[node name="InteractiveItem" parent="DetailedInteractionTools" index="0"]
+collision_shape = SubResource( 44 )
+
+[node name="Camera" parent="DetailedInteractionTools" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.148 )
+
+[node name="DetailedInteractionNote" parent="." instance=ExtResource( 28 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.694, 1.55, 3.397 )
+
+[node name="Camera" parent="DetailedInteractionNote" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.342 )
+
+[editable path="DetailedInteractionTools"]
+
+[editable path="DetailedInteractionNote"]
