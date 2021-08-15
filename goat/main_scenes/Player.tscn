@@ -22,6 +22,7 @@ shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="." groups=[
 "goat_cameras",
+"goat_cameras_player",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
 environment = ExtResource( 2 )

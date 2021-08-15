@@ -39,11 +39,13 @@ func _ready():
 	
 	# Duplicate the existing material and set a viewport texture
 	var new_material = screen_surface.material_override.duplicate(true)
-	new_material.albedo_texture = viewport.get_texture()
+	var tex = viewport.get_texture()
+	tex.flags = 7
+	new_material.albedo_texture = tex
 	new_material.flags_unshaded = unshaded
 	if emission_energy:
 		new_material.emission_enabled = true
-		new_material.emission_texture = viewport.get_texture()
+		new_material.emission_texture = tex
 		new_material.emission_energy = emission_energy
 	screen_surface.material_override = new_material
 

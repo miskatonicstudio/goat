@@ -16,6 +16,8 @@ signal object_selected (object_name, point)
 signal object_deselected (object_name)
 signal object_activated (object_name, point)
 signal object_activated_alternatively (object_name, point)
+signal object_enabled (object_name)
+signal object_disabled (object_name)
 
 # Stores selected objects and corresponding points in each category
 var _selected = {}
@@ -80,6 +82,14 @@ func alternatively_activate_object(category: String):
 	if current_object:
 		var point = get_selected_point(category)
 		emit_signal("object_activated_alternatively", current_object, point)
+
+
+func enable_object(object_name):
+	emit_signal("object_enabled", object_name)
+
+
+func disable_object(object_name):
+	emit_signal("object_disabled", object_name)
 
 
 func _get_selected_by_key(category: String, key: String):
