@@ -255,6 +255,7 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Buttons/UseButton" to="." method="_on_UseButton_pressed"]
 [connection signal="pressed" from="Buttons/ResetRotationButton" to="." method="_on_ResetRotationButton_pressed"]

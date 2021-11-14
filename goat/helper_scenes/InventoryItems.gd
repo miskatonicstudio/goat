@@ -19,6 +19,7 @@ func _ready():
 	for i in range(goat_inventory.CAPACITY):
 		var item_button = _get_item_button(i)
 		item_button.connect("pressed", self, "_on_item_button_pressed", [i])
+		item_button.connect("gui_input", self, "_on_item_button_gui_input", [i])
 		item_button.connect("button_down", self, "_on_item_button_down", [i])
 		item_button.connect("button_up", self, "_on_item_button_up", [i])
 
@@ -70,6 +71,13 @@ func _on_items_changed(new_items: Array) -> void:
 func _on_item_button_pressed(item_index: int) -> void:
 	var item_name = goat_inventory.get_items()[item_index]
 	goat_inventory.select_item(item_name)
+
+
+func _on_item_button_gui_input(event: InputEvent, item_index: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.doubleclick:
+				var item_name = goat_inventory.get_items()[item_index]
+				goat_inventory.use_item(item_name)
 
 
 func _on_item_button_down(item_index: int) -> void:
