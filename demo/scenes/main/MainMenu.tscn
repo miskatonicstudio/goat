@@ -90,6 +90,7 @@ text = "EXIT"
 
 [node name="Settings" parent="." instance=ExtResource( 5 )]
 visible = false
+
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="MainMenuScreen/VBoxContainer/CenterContainer/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
