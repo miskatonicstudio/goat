@@ -40,7 +40,7 @@ func _ready():
 		add_user_signal("value_changed_{}_{}".format([section, key], "{}"))
 		# If settings file doesn't have the section/key yet,
 		# add it with the default value
-		if _settings_file.get_value(section, key) == null:
+		if not _settings_file.has_section_key(section, key):
 			_settings_file.set_value(section, key, value)
 	
 	_settings_file.save(SETTINGS_FILE_NAME)
@@ -88,8 +88,8 @@ func set_value(section: String, key: String, value) -> void:
 
 func find_matching_loaded_locale() -> String:
 	"""
-	Returns a loaded locale that best matches currently set locale. If there
-	are no translations provided, returns an empty string. Otherwise, attempts
+	Returns a loaded locale that best matches currently set locale. If there are
+	no translations provided, returns the fallback locale. Otherwise, attempts
 	to match the exact locale name, if that fails, checks a partial match
 	(e.g. "en_US" will match "en"). If the matching process fails for the
 	current locale, fallback locale (from Project Settings) is checked.
@@ -99,9 +99,9 @@ func find_matching_loaded_locale() -> String:
 	var loaded_locales = TranslationServer.get_loaded_locales()
 	var fallback_locale = ProjectSettings.get("locale/fallback")
 	
-	# If no translations are provided, return ""
+	# If no translations are provided, return fallback locale
 	if not loaded_locales:
-		return ""
+		return fallback_locale
 	
 	# If the exact locale is loaded, return it
 	if current_locale in loaded_locales:
