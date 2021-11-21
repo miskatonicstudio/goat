@@ -15,11 +15,11 @@ enum GameMode {
 export (GameMode) var game_mode = GameMode.NONE setget set_game_mode
 
 
-func set_game_mode(new_game_model):
+func set_game_mode(new_game_mode):
 	# Usually game mode change is a result of user input (e.g. pressing Tab),
 	# and that input shouldn't cause further game mode changes
 	get_tree().set_input_as_handled()
-	game_mode = new_game_model
+	game_mode = new_game_mode
 	emit_signal("game_mode_changed", game_mode)
 
 
