@@ -56,7 +56,7 @@ func _physics_process(_delta):
 		move_and_slide(
 			movement_direction * goat.PLAYER_SPEED, Vector3(0, 1, 0)
 		)
-		_set_y_with_gravity()
+		_set_y()
 
 
 func rotate_camera(relative_movement):
@@ -140,7 +140,7 @@ func _allow_camera_movement():
 	)
 
 
-func _set_y_with_gravity():
+func _set_y():
 	if goat.GRAVITY_ENABLED:
 		if gravity_ray_cast.is_colliding():
 			var point = gravity_ray_cast.get_collision_point()
@@ -150,4 +150,4 @@ func _set_y_with_gravity():
 
 
 func _on_GravityTimer_timeout():
-	_set_y_with_gravity()
+	_set_y()
