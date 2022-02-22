@@ -145,6 +145,8 @@ func _set_y_with_gravity():
 		if gravity_ray_cast.is_colliding():
 			var point = gravity_ray_cast.get_collision_point()
 			translation.y = point.y
+	else:
+		translation.y = 0
 
 
 func _on_GravityTimer_timeout():
