@@ -9,6 +9,7 @@ onready var inventory = $Inventory
 onready var context_inventory = $ContextInventory
 onready var settings = $Settings
 onready var scope = $Scope
+onready var gravity_ray_cast = $GravityRayCast
 
 
 func _ready():
@@ -25,9 +26,6 @@ func _ready():
 	)
 	goat_voice.connect("started", self, "_on_voice_changed")
 	goat_voice.connect("finished", self, "_on_voice_changed")
-	if goat.GRAVITY_ENABLED:
-		# Make sure that the Player is standing on the ground
-		move_and_collide(Vector3(0, -100, 0))
 
 
 func _input(event):
@@ -55,16 +53,10 @@ func _physics_process(_delta):
 		return
 	
 	if movement_direction:
-		if goat.GRAVITY_ENABLED:
-			move_and_slide_with_snap(
-				movement_direction * goat.PLAYER_SPEED,
-				Vector3(0, -100, 0), Vector3(0, 1, 0)
-			)
-		else:
-			move_and_slide(
-				movement_direction * goat.PLAYER_SPEED, Vector3(0, 1, 0)
-			)
-			translation.y = 0
+		move_and_slide(
+			movement_direction * goat.PLAYER_SPEED, Vector3(0, 1, 0)
+		)
+		_set_y()
 
 
 func rotate_camera(relative_movement):
@@ -146,3 +138,16 @@ func _allow_camera_movement():
 		goat.ALLOW_CAMERA_MOVEMENT_WHEN_VOICE_IS_PLAYING
 		or not goat_voice.is_playing()
 	)
+
+
+func _set_y():
+	if goat.GRAVITY_ENABLED:
+		if gravity_ray_cast.is_colliding():
+			var point = gravity_ray_cast.get_collision_point()
+			translation.y = point.y
+	else:
+		translation.y = 0
+
+
+func _on_GravityTimer_timeout():
+	_set_y()

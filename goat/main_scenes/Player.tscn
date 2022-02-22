@@ -20,10 +20,7 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
 shape = SubResource( 1 )
 
-[node name="Camera" type="Camera" parent="." groups=[
-"goat_cameras",
-"goat_cameras_player",
-]]
+[node name="Camera" type="Camera" parent="." groups=["goat_cameras", "goat_cameras_player"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
 environment = ExtResource( 2 )
 
@@ -54,3 +51,16 @@ valign = 1
 [node name="Subtitles" parent="." instance=ExtResource( 7 )]
 
 [node name="Settings" parent="." instance=ExtResource( 8 )]
+
+[node name="GravityRayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+collision_mask = 4
+
+[node name="GravityTimer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="GravityTimer" to="." method="_on_GravityTimer_timeout"]
