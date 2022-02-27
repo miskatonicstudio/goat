@@ -20,9 +20,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Backplate"]
 shape = SubResource( 1 )
 
-[node name="Camera" type="Camera" parent="." groups=[
-"goat_cameras",
-]]
+[node name="Camera" type="Camera" parent="." groups=["goat_cameras"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
 environment = ExtResource( 4 )
 

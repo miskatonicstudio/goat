@@ -62,7 +62,11 @@ func _input(event):
 		)
 		ray_cast.cast_to = ray_vector * 10
 	
-	if Input.is_action_just_pressed("goat_dismiss"):
+	if (
+		Input.is_action_just_pressed("goat_dismiss") or
+		Input.is_action_just_pressed("goat_toggle_inventory") or
+		Input.is_action_just_pressed("goat_interact_alternatively")
+	):
 		goat.game_mode = goat.GameMode.EXPLORING
 		goat_interaction.enable_object(interactive_item.unique_name)
 		backplate.collision_layer = 0
