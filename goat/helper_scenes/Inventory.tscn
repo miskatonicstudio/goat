@@ -15,10 +15,10 @@ __meta__ = {
 }
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-margin_left = 212.0
-margin_right = 812.0
-margin_bottom = 600.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_min_size = Vector2( 600, 600 )
+stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,9 +33,7 @@ audio_listener_enable_3d = true
 
 [node name="Inventory3D" type="Spatial" parent="ViewportContainer/Viewport"]
 
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D" groups=[
-"goat_cameras",
-]]
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D" groups=["goat_cameras"]]
 environment = ExtResource( 2 )
 current = true
 far = 5.0
@@ -54,5 +52,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 mouse_filter = 2
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="resized" from="." to="." method="_on_Inventory_resized"]
+
 [connection signal="gui_input" from="ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]

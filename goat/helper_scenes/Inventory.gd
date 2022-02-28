@@ -29,8 +29,6 @@ func _ready():
 	inventory_items.connect(
 		"rotation_reset_requested", self, "_on_rotation_reset_requested"
 	)
-	
-	_on_Inventory_resized()
 
 
 func _input(event):
@@ -136,16 +134,6 @@ func _on_ViewportContainer_gui_input(event):
 	if event is InputEventMouseMotion:
 		var ray_vector = camera.project_ray_normal(event.position)
 		ray_cast.cast_to = ray_vector * 4
-
-
-func _on_Inventory_resized():
-	# CenterContainer doesn't work correctly with ViewportContainer
-	if viewport:
-		var s = min(rect_size.x - 2 * SIDE_SCREEN_MARGIN, rect_size.y)
-		var size = Vector2(s, s)
-		viewport.size = size
-		viewport_container.rect_size = size
-		viewport_container.rect_position = (rect_size - size) / 2
 
 
 func _on_rotation_reset_requested():
