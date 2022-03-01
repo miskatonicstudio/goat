@@ -4,11 +4,21 @@ extends Node
 signal changed (variable_name, from_value, to_value)
 
 var _variables := {}
-var _registered_variables := {}
 
 
-func register_variable(variable_name: String, initial_value) -> void:
-	_registered_variables[variable_name] = initial_value
+func load_all():
+	assert (goat.GAME_RESOURCES_DIRECTORY)
+	# TODO: load saved game from file
+	var state_directory = goat.GAME_RESOURCES_DIRECTORY + "/state/"
+	var files = goat_utils.list_directory(state_directory)
+	for file in files:
+		if file.ends_with(".json"):
+			var data = parse_json(goat_utils.load_text_file(state_directory + file))
+			for key in data:
+				_register_variable(key, data[key])
+
+
+func _register_variable(variable_name: String, initial_value) -> void:
 	_variables[variable_name] = initial_value
 
 
@@ -25,4 +35,4 @@ func set_value(variable_name: String, value) -> void:
 
 
 func reset() -> void:
-	_variables = _registered_variables.duplicate(true)
+	_variables = {}

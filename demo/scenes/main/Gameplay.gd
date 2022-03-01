@@ -4,9 +4,6 @@ onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	goat_inventory.reset()
-	goat_state.reset()
-	
 	# Configure Gameplay
 	goat_state.connect("changed", self, "_on_game_state_changed")
 	animation_player.connect("animation_finished", self, "animation_finished")
