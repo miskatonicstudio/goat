@@ -10,6 +10,10 @@ onready var context_inventory = $ContextInventory
 onready var settings = $Settings
 onready var scope = $Scope
 onready var gravity_ray_cast = $GravityRayCast
+onready var tween = $Tween
+onready var collision_shape_standing = $CollisionShapeStanding
+onready var collision_shape_crouched = $CollisionShapeCrouched
+onready var area_standing = $AreaStanding
 
 
 func _ready():
@@ -46,6 +50,16 @@ func _input(event):
 		goat.game_mode = goat.GameMode.SETTINGS
 
 	update_movement_direction()
+	
+	if Input.is_action_just_pressed("goat_crouch"):
+		var new_height = collision_shape_crouched.shape.height - 0.1
+		tween.interpolate_property(
+			camera, "translation", null, Vector3(0, new_height, 0), 0.2,
+			Tween.TRANS_SINE, Tween.EASE_IN_OUT
+		)
+		tween.start()
+		collision_shape_standing.disabled = true
+		collision_shape_crouched.disabled = false
 
 
 func _physics_process(_delta):
@@ -57,6 +71,20 @@ func _physics_process(_delta):
 			movement_direction * goat.PLAYER_SPEED, Vector3(0, 1, 0)
 		)
 		_set_y()
+	
+	if collision_shape_standing.disabled:
+		if not Input.is_action_pressed("goat_crouch"):
+			var overlapping_bodies = area_standing.get_overlapping_bodies()
+			overlapping_bodies.erase(self)
+			if not overlapping_bodies:
+				var new_height = collision_shape_standing.shape.height - 0.1
+				tween.interpolate_property(
+					camera, "translation", null, Vector3(0, new_height, 0), 0.2,
+					Tween.TRANS_SINE, Tween.EASE_IN_OUT
+				)
+				tween.start()
+				collision_shape_standing.disabled = false
+				collision_shape_crouched.disabled = true
 
 
 func rotate_camera(relative_movement):
