@@ -22,7 +22,19 @@ var _selected_item = null
 var _config := {}
 
 
-func register_item(item_name: String) -> void:
+func load_all():
+	assert (goat.GAME_RESOURCES_DIRECTORY)
+	var models_directory = goat.GAME_RESOURCES_DIRECTORY + "/inventory_items/models/"
+	var files = goat_utils.list_directory(models_directory)
+	for file in files:
+		if file.ends_with(".tscn"):
+			var item_name = file.replace(".tscn", "").get_basename()
+			# Convert to snake_case
+			item_name = item_name.capitalize().split(" ").join("_").to_lower()
+			_register_item(item_name)
+
+
+func _register_item(item_name: String) -> void:
 	"""
 	Adds an item to configuration, allowing it to be used in inventory scenes.
 	This method should be called once for every inventory item, and the items
@@ -31,12 +43,12 @@ func register_item(item_name: String) -> void:
 	"""
 	assert(not _config.has(item_name))
 	
-	var icon_path := "res://{}/inventory_items/icons/{}.png".format(
+	var icon_path := "{}/inventory_items/icons/{}.png".format(
 		[goat.GAME_RESOURCES_DIRECTORY, item_name], "{}"
 	)
 	# Comply with Godot scene naming standards
 	var model_name := item_name.capitalize().replace(" ", "")
-	var model_path := "res://{}/inventory_items/models/{}.tscn".format(
+	var model_path := "{}/inventory_items/models/{}.tscn".format(
 		[goat.GAME_RESOURCES_DIRECTORY, model_name], "{}"
 	)
 	
@@ -81,6 +93,7 @@ func reset() -> void:
 	"""Clears inventory items, but keeps the configuration"""
 	_items.clear()
 	_selected_item = null
+	_config = {}
 
 
 func get_items() -> Array:

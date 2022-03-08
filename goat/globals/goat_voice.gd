@@ -36,6 +36,10 @@ func _ready():
 	_audio_player.connect("finished", self, "_on_audio_finished")
 	_audio_timer.one_shot = true
 	_audio_timer.connect("timeout", self, "_on_audio_finished")
+	
+	# TODO: allow for configuring this per game
+	goat_voice.connect_default(goat_inventory, "item_used")
+	goat_voice.connect_default(goat_interaction, "object_activated")
 
 
 func _process(_delta):
@@ -48,7 +52,29 @@ func _input(_event):
 		stop()
 
 
-func register(
+func load_all():
+	assert (goat.GAME_RESOURCES_DIRECTORY)
+	var voice_directory = goat.GAME_RESOURCES_DIRECTORY + "/voice/"
+	var files = goat_utils.list_directory(voice_directory)
+	for file in files:
+		if file.ends_with(".import"):
+			# Godot export workaround
+			if not OS.is_debug_build():
+				var actual_file = file.replace(".import", "")
+				var basename = actual_file.get_basename()
+				_register(actual_file, basename)
+			else:
+				continue
+		var basename = file.get_basename()
+		if file.ends_with(".txt"):
+			var content = goat_utils.load_text_file(voice_directory + file)
+			var seconds = float(content.strip_edges())
+			_register(basename, basename, seconds)
+		else:
+			_register(file, basename)
+
+
+func _register(
 	audio_file_name: String, transcript: String, time: float = 0,
 	audio_name = null
 ) -> void:
@@ -68,7 +94,7 @@ func register(
 	var sound = null
 	
 	if not time:
-		var sound_path := "res://{}/voice/{}".format(
+		var sound_path := "{}/voice/{}".format(
 			[goat.GAME_RESOURCES_DIRECTORY, audio_file_name], "{}"
 		)
 		sound = load(sound_path)
@@ -81,6 +107,16 @@ func register(
 	_audio_mapping[audio_name] = {
 		"transcript": transcript, "time": time, "sound": sound
 	}
+
+
+func reset() -> void:
+	_audio_player.stop()
+	_audio_timer.stop()
+	_default_audio_scheduled = false
+	_audio_mapping = {}
+	_currently_playing_audio_name = null
+	_default_audio_names = []
+	_current_audio_names_sequence = []
 
 
 func play(audio_names) -> void:

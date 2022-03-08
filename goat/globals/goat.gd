@@ -42,6 +42,22 @@ func take_screenshot() -> void:
 	image.save_png(screenshot_path)
 
 
+func load_game(game_directory: String):
+	goat.GAME_RESOURCES_DIRECTORY = game_directory
+	goat_voice.load_all()
+	goat_inventory.load_all()
+	goat_state.load_all()
+	goat_globals.load_all()
+	# TODO: load locale?
+
+
+func clear_game():
+	goat_globals.reset()
+	goat_inventory.reset()
+	goat_state.reset()
+	goat_voice.reset()
+
+
 ##############################################################################
 # SETTINGS
 ##############################################################################
