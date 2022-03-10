@@ -142,15 +142,15 @@ func _on_shadows_settings_changed() -> void:
 
 
 func _on_camera_settings_changed() -> void:
-	for camera in get_tree().get_nodes_in_group("goat_cameras"):
-		_update_single_camera_settings(camera)
+	for environment in get_tree().get_nodes_in_group("goat_environments"):
+		_update_single_environment_settings(environment)
 
 
 func _on_node_added(node: Node) -> void:
 	if node.is_in_group("goat_lamps"):
 		_update_single_lamp_settings(node)
-	if node.is_in_group("goat_cameras"):
-		_update_single_camera_settings(node)
+	if node.is_in_group("goat_environments"):
+		_update_single_environment_settings(node)
 
 
 func _update_single_lamp_settings(lamp: Light) -> void:
@@ -160,13 +160,13 @@ func _update_single_lamp_settings(lamp: Light) -> void:
 	lamp.light_specular = 0.5 if shadows_enabled else 0.0
 
 
-func _update_single_camera_settings(camera: Camera) -> void:
+func _update_single_environment_settings(world_environment: WorldEnvironment) -> void:
 	var reflections_enabled = get_value("graphics", "reflections_enabled")
 	var glow_enabled = get_value("graphics", "glow_enabled")
 	var ao_enabled = get_value("graphics", "ao_enabled")
-	camera.environment.ss_reflections_enabled = reflections_enabled
-	camera.environment.glow_enabled = glow_enabled
-	camera.environment.ssao_enabled = ao_enabled
+	world_environment.environment.ss_reflections_enabled = reflections_enabled
+	world_environment.environment.glow_enabled = glow_enabled
+	world_environment.environment.ssao_enabled = ao_enabled
 
 
 func _on_gui_language_changed() -> void:

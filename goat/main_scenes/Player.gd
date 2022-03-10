@@ -147,7 +147,7 @@ func _on_game_mode_changed(new_game_mode):
 	
 	update_scope_visibility()
 	ray_cast.enabled = exploring_mode
-	camera.environment.dof_blur_far_enabled = inventory_mode and not is_html
+	camera.get_world().environment.dof_blur_far_enabled = inventory_mode and not is_html
 	
 	if exploring_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

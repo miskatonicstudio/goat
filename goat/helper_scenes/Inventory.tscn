@@ -24,7 +24,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 600, 600 )
+size = Vector2( 1024, 600 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
@@ -33,8 +33,7 @@ audio_listener_enable_3d = true
 
 [node name="Inventory3D" type="Spatial" parent="ViewportContainer/Viewport"]
 
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D" groups=["goat_cameras"]]
-environment = ExtResource( 2 )
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Inventory3D"]
 current = true
 far = 5.0
 
@@ -47,6 +46,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 
 [node name="HiddenPivot" type="Spatial" parent="ViewportContainer/Viewport/Inventory3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="ViewportContainer/Viewport/Inventory3D"]
+environment = ExtResource( 2 )
 
 [node name="InventoryItems" parent="." instance=ExtResource( 4 )]
 mouse_filter = 2

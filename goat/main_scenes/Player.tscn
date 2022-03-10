@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://goat/main_scenes/Player.gd" type="Script" id=1]
-[ext_resource path="res://goat/environments/default_environment.tres" type="Environment" id=2]
 [ext_resource path="res://goat/helper_scenes/RayCast3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://goat/helper_scenes/InventoryBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://goat/helper_scenes/Inventory.tscn" type="PackedScene" id=5]
@@ -29,9 +28,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0 )
 shape = SubResource( 2 )
 disabled = true
 
-[node name="Camera" type="Camera" parent="." groups=["goat_cameras", "goat_cameras_player"]]
+[node name="Camera" type="Camera" parent="." groups=["goat_cameras_player"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
-environment = ExtResource( 2 )
 
 [node name="RayCast3D" parent="Camera" instance=ExtResource( 3 )]
 enabled = true

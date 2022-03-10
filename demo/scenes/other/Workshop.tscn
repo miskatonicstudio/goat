@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://demo/materials/walls.material" type="Material" id=1]
 [ext_resource path="res://demo/materials/floor.material" type="Material" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://demo/scenes/other/WallDevice.tscn" type="PackedScene" id=26]
 [ext_resource path="res://demo/scenes/other/Portal.tscn" type="PackedScene" id=27]
 [ext_resource path="res://goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=28]
+[ext_resource path="res://demo/environments/workshop_environment.tres" type="Environment" id=29]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Walls"
@@ -720,18 +721,14 @@ cast_shadow = 0
 mesh = SubResource( 7 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=[
-"goat_lamps",
-]]
+[node name="OmniLight" type="OmniLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=["goat_lamps"]]
 light_color = Color( 0.85098, 0.905882, 1, 1 )
 shadow_enabled = true
 shadow_bias = 0.05
 shadow_contact = 0.05
 omni_range = 7.0
 
-[node name="SpotLight" type="SpotLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=[
-"goat_lamps",
-]]
+[node name="SpotLight" type="SpotLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=["goat_lamps"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 light_color = Color( 0.996078, 0.972549, 0.639216, 1 )
 light_bake_mode = 0
@@ -1014,6 +1011,8 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.694, 
 [node name="Camera" parent="DetailedInteractionNote" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.342 )
 
-[editable path="DetailedInteractionTools"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." groups=["goat_environments"]]
+environment = ExtResource( 29 )
 
+[editable path="DetailedInteractionTools"]
 [editable path="DetailedInteractionNote"]
