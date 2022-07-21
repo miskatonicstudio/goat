@@ -1,6 +1,6 @@
 <img src="./docs/img/logo_goat.png" alt="GOAT logo" width="128">
 
-# GOAT ![Godot v3.2](https://img.shields.io/badge/godot-v3.3.4-%23478cbf)
+# GOAT ![Godot v3.4](https://img.shields.io/badge/godot-v3.4.4-%23478cbf)
 
 **Godot Open Adventure Template (GOAT)** is a tool for making 3D adventure
 games. It supports a simple inventory system, interacting with objects and screens,
@@ -15,7 +15,7 @@ Full documentation is available on [readthedocs](https://miskatonicstudio-goat.r
 ### Game engine
 
 This project uses [Godot Engine](https://github.com/godotengine/godot)
-version [3.2 stable](https://downloads.tuxfamily.org/godotengine/3.2/),
+version [3.4 stable](https://downloads.tuxfamily.org/godotengine/3.4/),
 distributed under [MIT license](https://godotengine.org/license).
 
 ### Plugins
