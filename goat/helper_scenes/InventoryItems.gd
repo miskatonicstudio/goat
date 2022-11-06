@@ -111,6 +111,8 @@ func _on_item_button_up(item_index: int) -> void:
 
 
 func _on_UseButton_pressed() -> void:
+	if goat_voice.is_playing():
+		return
 	var selected_item_name = goat_inventory.get_selected_item()
 	if selected_item_name:
 		goat_inventory.use_item(selected_item_name)
