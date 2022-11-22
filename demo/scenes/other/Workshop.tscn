@@ -29,6 +29,7 @@
 [ext_resource path="res://demo/scenes/other/Portal.tscn" type="PackedScene" id=27]
 [ext_resource path="res://goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=28]
 [ext_resource path="res://demo/environments/workshop_environment.tres" type="Environment" id=29]
+[ext_resource path="res://demo/scenes/other/Door.tscn" type="PackedScene" id=31]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Walls"
@@ -61,11 +62,14 @@ surfaces/1 = {
 material = ExtResource( 3 )
 size = Vector2( 20, 20 )
 
-[sub_resource type="QuadMesh" id=3]
-size = Vector2( 10, 5 )
-
 [sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -5, -2.5, 0, -5, 2.5, 0, 5, 2.5, 0, -5, -2.5, 0, 5, 2.5, 0, 5, -2.5, 0 )
+
+[sub_resource type="QuadMesh" id=45]
+size = Vector2( 10, 5 )
+
+[sub_resource type="QuadMesh" id=3]
+size = Vector2( 10, 5 )
 
 [sub_resource type="ConvexPolygonShape" id=5]
 points = PoolVector3Array( -5, -2.5, 0, -5, 2.5, 0, 5, 2.5, 0, -5, -2.5, 0, 5, 2.5, 0, 5, -2.5, 0 )
@@ -645,17 +649,6 @@ surfaces/0 = {
 "vertex_count": 1740
 }
 
-[sub_resource type="QuadMesh" id=38]
-material = ExtResource( 11 )
-size = Vector2( 1.05, 2 )
-
-[sub_resource type="SphereMesh" id=39]
-material = ExtResource( 19 )
-radius = 0.05
-height = 0.1
-radial_segments = 6
-rings = 6
-
 [sub_resource type="BoxShape" id=40]
 extents = Vector3( 2.23047, 0.2392, 3.97905 )
 
@@ -679,23 +672,31 @@ extents = Vector3( 1.331, 0.757, 0.1 )
 [node name="Walls" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
 mesh = SubResource( 1 )
-material/0 = null
-material/1 = null
 
 [node name="DarknessBelow" type="MeshInstance" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.60228, -0.330682, 1.74621 )
 mesh = SubResource( 2 )
-material/0 = null
 
-[node name="NewWall1" type="MeshInstance" parent="Walls"]
+[node name="NewWall1" type="CSGCombiner" parent="Walls"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.62874, 2.30824, 1.54988 )
-mesh = SubResource( 3 )
-material/0 = ExtResource( 1 )
+material_override = ExtResource( 1 )
+operation = 2
 
 [node name="StaticBody" type="StaticBody" parent="Walls/NewWall1"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Walls/NewWall1/StaticBody"]
 shape = SubResource( 4 )
+
+[node name="Surface" type="CSGMesh" parent="Walls/NewWall1"]
+material_override = ExtResource( 1 )
+mesh = SubResource( 45 )
+
+[node name="Hole" type="CSGBox" parent="Walls/NewWall1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.704, 0 )
+operation = 2
+width = 0.5
+height = 0.5
+depth = 0.5
 
 [node name="NewWall2" type="MeshInstance" parent="Walls"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.55906, 2.30824, 3.42766 )
@@ -710,7 +711,6 @@ shape = SubResource( 5 )
 [node name="Ceiling" type="MeshInstance" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0216, 0 )
 mesh = SubResource( 6 )
-material/0 = null
 
 [node name="CeilingFan" parent="Walls/Ceiling" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00280385, -0.543245, 0.00586325 )
@@ -719,7 +719,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00280385, -0.543245, 0.0058
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.166715, 0 )
 cast_shadow = 0
 mesh = SubResource( 7 )
-material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Walls/Ceiling/CeilingFan/Lamp" groups=["goat_lamps"]]
 light_color = Color( 0.85098, 0.905882, 1, 1 )
@@ -741,37 +740,27 @@ spot_angle = 40.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.109066, 0 )
 cast_shadow = 0
 mesh = SubResource( 8 )
-material/0 = null
 
 [node name="Wire" type="MeshInstance" parent="Walls/Ceiling/CeilingFan/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.661579, 0 )
 cast_shadow = 0
 mesh = SubResource( 9 )
-material/0 = null
 
 [node name="Cable002" type="MeshInstance" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.879961, 0.15513, 2.68011 )
 mesh = SubResource( 10 )
-material/0 = null
 
 [node name="FloorComputer" type="MeshInstance" parent="Walls"]
 transform = Transform( 0.110031, 0, -0.688845, 0, 0.697577, 0, 0.688845, 0, 0.110031, 2.41961, 0.208543, -1.9853 )
 mesh = SubResource( 11 )
-material/0 = null
-material/1 = null
 
 [node name="Extinguisher" type="MeshInstance" parent="Walls"]
 transform = Transform( -0.296161, 0, 1.21118, 0, 6.89358, 0, -1.21118, 0, -0.296161, 3.33709, 0.402763, 1.2595 )
 mesh = SubResource( 12 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
 
 [node name="Box002" type="MeshInstance" parent="Walls"]
 transform = Transform( 0, 0.15438, 0.338177, -7.41374e-09, 0.195065, -0.267642, -0.248764, -7.41374e-09, 0, -2.14799, 0.56218, 2.28029 )
 mesh = SubResource( 13 )
-material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Walls/Box002"]
 
@@ -781,95 +770,70 @@ shape = SubResource( 14 )
 [node name="Sideboard" type="MeshInstance" parent="Walls"]
 transform = Transform( 0.0538198, 0, 0, 0, 0.789838, 0, 0, 0, 1.37389, -2.64622, 2.45207, 0.812647 )
 mesh = SubResource( 15 )
-material/0 = null
 
 [node name="Wrench003" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 1.40048e-06, 13.5199, 0, -1.60104, 5.49108e-08, 0, 0, 0, 0.920423, 0.524155, 0.771424, 0.848957 )
 mesh = SubResource( 16 )
-material/0 = null
 
 [node name="Wrench002" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 1.02562e-06, 9.90111, 0, -1.1725, 4.02132e-08, 0, 0, 0, 0.674059, 0.524155, 0.771424, 0.673207 )
 mesh = SubResource( 17 )
-material/0 = null
 
 [node name="Wrench001" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 1.02562e-06, 9.90111, 0, -1.1725, 4.02132e-08, 0, 0, 0, 0.674059, 0.524155, 0.771424, 0.539005 )
 mesh = SubResource( 18 )
-material/0 = null
 
 [node name="Wrench" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 6.64936e-07, 6.41914, 0, -0.760157, 2.60712e-08, 0, 0, 0, 0.437008, 0.524155, 0.771424, 0.405319 )
 mesh = SubResource( 19 )
-material/0 = null
 
 [node name="Hammer" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 0.595136, 0, 0, 0, 0.0405527, 0, 0, 0, 0.0233134, 1.80899, -0.066849, 0.1891 )
 mesh = SubResource( 20 )
-material/0 = null
-material/1 = null
 
 [node name="Screwdriver" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 6.42262, 0, 0, 0, 0.437639, 0, 0, 0, 0.251595, 0.878853, 0.66263, -0.0921187 )
 mesh = SubResource( 21 )
-material/0 = null
-material/1 = null
 
 [node name="Screwdriver001" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 6.42262, 0, 0, 0, 0.437639, 0, 0, 0, 0.251595, 0.878853, 0.66263, -0.200983 )
 mesh = SubResource( 22 )
-material/0 = null
-material/1 = null
 
 [node name="Screwdriver002" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 4.74602, 0, 0, 0, 0.323395, 0, 0, 0, 0.185917, 0.878853, 0.714197, -0.34403 )
 mesh = SubResource( 23 )
-material/0 = null
-material/1 = null
 
 [node name="Screwdriver003" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 4.74602, 0, 0, 0, 0.323395, 0, 0, 0, 0.185917, 0.878853, 0.714197, -0.417406 )
 mesh = SubResource( 24 )
-material/0 = null
-material/1 = null
 
 [node name="Screwdriver004" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 4.74602, 0, 0, 0, 0.323395, 0, 0, 0, 0.185917, 0.878853, 0.714197, -0.4893 )
 mesh = SubResource( 25 )
-material/0 = null
-material/1 = null
 
 [node name="Paper001" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 7.98145e-07, 4.97702, -1.85408e-08, -0.454941, 4.0428e-08, 0.025396, 0.0196406, -7.26306e-10, 0.194419, 0.504272, -0.317863, -0.588264 )
 mesh = SubResource( 26 )
-material/0 = null
 
 [node name="Paper" type="MeshInstance" parent="Walls/Sideboard"]
 transform = Transform( 0, 3.53193, 0, 0.0243307, 0, -0.239987, -0.185599, 0, -0.0103977, 0.504272, -0.317863, 0.551422 )
 mesh = SubResource( 27 )
-material/0 = null
 
 [node name="AC" type="MeshInstance" parent="Walls"]
 transform = Transform( -0.183371, -2.73596e-08, 0.611092, -0.611092, 4.61362e-08, -0.183371, -3.63261e-08, -0.638012, -3.94652e-08, 2.26479, 3.05803, 3.01051 )
 mesh = SubResource( 28 )
-material/0 = null
-material/1 = null
-material/2 = null
 
 [node name="Plane001" type="MeshInstance" parent="Walls"]
 transform = Transform( -0.0204632, -9.54322e-09, -0.202542, -0.27247, -8.85337e-09, 0.0152114, -1.28381e-08, 0.203112, -8.85339e-09, 1.72012, 1.58374, 3.42366 )
 mesh = SubResource( 29 )
-material/0 = null
 
 [node name="Pipe001" type="MeshInstance" parent="Walls"]
 transform = Transform( 0.399772, 0, 0, 0, 0, -0.399772, 0, 0.399772, 0, -2.58592, 3.69447, 4.3411 )
 mesh = SubResource( 30 )
-material/0 = null
 
 [node name="Box001" type="MeshInstance" parent="Walls"]
 transform = Transform( 0.0496508, 0, -0.430741, 0, 0.327335, 0, 0.323547, 0, 0.0661006, 0.68754, 0.434885, -2.22027 )
 mesh = SubResource( 31 )
-material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Walls/Box001"]
 
@@ -880,59 +844,24 @@ shape = SubResource( 32 )
 [node name="Vent" type="MeshInstance" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38246, 0, -0.0763128 )
 mesh = SubResource( 33 )
-material/0 = null
-material/1 = null
 
 [node name="Vent001" type="MeshInstance" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0763128 )
 mesh = SubResource( 34 )
-material/0 = null
-material/1 = null
 
 [node name="Syphon001" type="MeshInstance" parent="Walls"]
 transform = Transform( 0.567064, 0, 0, 0, 0.100862, 0, 0, 0, 0.567064, 1.48294, 0.896894, 1.75241 )
 mesh = SubResource( 35 )
-material/0 = null
-material/1 = null
 
 [node name="Pipe002" type="MeshInstance" parent="Walls"]
 transform = Transform( 0.0484817, 0, 0, 0, 0.00971357, 0, 0, 0, 3.4754, -2.60116, 3.85713, 0.915735 )
 mesh = SubResource( 36 )
-material/0 = null
 
 [node name="Cable001" type="MeshInstance" parent="Walls/Pipe002"]
 transform = Transform( 20.6263, 0, 0, 0, 102.949, 0, 0, 0, 0.287737, 98.9043, -381.116, 0.507675 )
 mesh = SubResource( 37 )
-material/0 = null
 
-[node name="Door" type="Spatial" parent="Walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.578, 0, 0 )
-
-[node name="Frame" type="CSGCombiner" parent="Walls/Door"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0 )
-operation = 2
-
-[node name="Outside" type="CSGBox" parent="Walls/Door/Frame"]
-width = 0.2
-height = 2.1
-depth = 1.1
-material = ExtResource( 17 )
-
-[node name="Hole" type="CSGBox" parent="Walls/Door/Frame"]
-operation = 2
-width = 1.0
-depth = 1.0
-material = ExtResource( 17 )
-
-[node name="ActualDoor" type="MeshInstance" parent="Walls/Door"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0556245, 1.03267, 0 )
-mesh = SubResource( 38 )
-material/0 = null
-
-[node name="Handle" type="MeshInstance" parent="Walls/Door"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104, 1, 0.359 )
-mesh = SubResource( 39 )
-material/0 = null
+[node name="Door" parent="Walls" instance=ExtResource( 31 )]
 
 [node name="WallsStaticBody" type="StaticBody" parent="Walls"]
 
@@ -979,22 +908,18 @@ transform = Transform( 0.590477, 0, 0.807055, 0, 1, 0, -0.807055, 0, 0.590477, 2
 [node name="SunShade1" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647369, -3.43403 )
 mesh = SubResource( 42 )
-material/0 = null
 
 [node name="SunShade2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0644157, 5.44704, -3.41914 )
 mesh = SubResource( 42 )
-material/0 = null
 
 [node name="SunShade3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14031, 3.26988, -3.43403 )
 mesh = SubResource( 43 )
-material/0 = null
 
 [node name="SunShade4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.96276, 2.80217, -3.43403 )
 mesh = SubResource( 43 )
-material/0 = null
 
 [node name="DetailedInteractionTools" parent="." instance=ExtResource( 28 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.5, 2.366, 0.812 )

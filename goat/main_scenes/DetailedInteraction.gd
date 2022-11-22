@@ -19,8 +19,9 @@ var player_camera = null
 
 
 func _ready():
-	var unique_name = "detailed_interaction_" + str(get_instance_id())
-	interactive_item.unique_name = unique_name
+	if not interactive_item.unique_name:
+		var unique_name = "detailed_interaction_" + str(get_instance_id())
+		interactive_item.unique_name = unique_name
 	goat_interaction.connect("object_activated", self, "_on_object_activated")
 
 

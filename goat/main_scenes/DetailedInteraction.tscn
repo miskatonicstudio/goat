@@ -21,6 +21,7 @@ shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+near = 0.01
 
 [node name="RayCast3D" parent="Camera" instance=ExtResource( 3 )]
 cast_to = Vector3( 0, 0, -2 )
