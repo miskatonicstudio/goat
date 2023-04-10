@@ -6,9 +6,23 @@
 games. It supports a simple inventory system, interacting with objects and screens,
 playing voice recordings with subtitles, and changing game settings.
 
+Full documentation is available on [readthedocs](https://miskatonicstudio-goat.readthedocs.io). 
+
+## Games made with GOAT
+
+### Arboretum
+
+https://user-images.githubusercontent.com/36821133/230896526-019c94b3-1994-4ce4-a570-7c986d02392d.mp4
+
+<br/>
+
+"Arboretum" is a short adventure game about one of the last trees on Earth. It is available on [itch.io](https://miskatonicstudio.itch.io/arboretum) and on Miskatonic Studio's [website](https://miskatonicstudio.com/). Free resources used for the game are listed in [this repository](https://github.com/miskatonicstudio/arboretum-resources).
+
+### 2 minute adventure
+
 ![GOAT demo game](https://user-images.githubusercontent.com/36821133/73215095-b308a280-4153-11ea-8ff0-c85cbd476147.gif)
 
-Full documentation is available on [readthedocs](https://miskatonicstudio-goat.readthedocs.io). Web demo is available on [gotm.io](https://gotm.io/miskatonicstudio/goat).
+"2 minute adventure" is a demo of GOAT, designed to showcase all features of the framework. It is included in this repository (as a Godot Engine project). A web demo is available on [gotm.io](https://gotm.io/miskatonicstudio/goat).
 
 ## Credits and licenses
 
