@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/goat/styles/settings_button_hover.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/goat/fonts/settings_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/goat/styles/settings_button_normal.tres" type="StyleBox" id=3]
+
+[node name="SettingsButton" type="Button"]
+margin_right = 8.0
+margin_bottom = 73.0
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )

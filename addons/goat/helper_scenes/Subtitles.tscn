@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/goat/helper_scenes/Subtitles.gd" type="Script" id=1]
+[ext_resource path="res://addons/goat/fonts/interface_font.tres" type="DynamicFont" id=2]
+
+[node name="Subtitles" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -10.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextBox" type="ColorRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -400.0
+margin_top = -50.0
+margin_right = 400.0
+rect_min_size = Vector2( 800, 50 )
+color = Color( 0, 0, 0, 0.235294 )
+
+[node name="Label" type="Label" parent="TextBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 600, 50 )
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1

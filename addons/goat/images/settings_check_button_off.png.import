@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/settings_check_button_off.png-6b6c9cb27d9ea2f8fd88d6ec9724c514.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://addons/goat/images/settings_check_button_off.png"
+dest_files=[ "res://.import/settings_check_button_off.png-6b6c9cb27d9ea2f8fd88d6ec9724c514.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
