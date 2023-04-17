@@ -3,9 +3,9 @@
 [ext_resource path="res://demo/materials/metal_1.material" type="Material" id=1]
 [ext_resource path="res://demo/materials/wood.material" type="Material" id=2]
 [ext_resource path="res://demo/materials/metal_dark_2.material" type="Material" id=3]
-[ext_resource path="res://goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=4]
 [ext_resource path="res://demo/scenes/other/BehindTheDoor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://goat/images/eye_icon.png" type="Texture" id=6]
+[ext_resource path="res://addons/goat/images/eye_icon.png" type="Texture" id=6]
 [ext_resource path="res://demo/scenes/other/Door.gd" type="Script" id=7]
 [ext_resource path="res://demo/materials/metal_dark_3.material" type="Material" id=8]
 

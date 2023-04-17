@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://demo/scenes/main/Settings.gd" type="Script" id=1]
-[ext_resource path="res://goat/styles/settings_background.tres" type="StyleBox" id=2]
-[ext_resource path="res://goat/settings/Settings.tscn" type="PackedScene" id=3]
-[ext_resource path="res://goat/settings/SettingsButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://goat/fonts/settings_font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://addons/goat/styles/settings_background.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/goat/settings/Settings.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/goat/settings/SettingsButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/goat/fonts/settings_font.tres" type="DynamicFont" id=5]
 
 [node name="Settings" type="CenterContainer"]
 anchor_right = 1.0

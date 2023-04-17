@@ -27,7 +27,7 @@
 [ext_resource path="res://demo/scenes/other/Shelf1.tscn" type="PackedScene" id=25]
 [ext_resource path="res://demo/scenes/other/WallDevice.tscn" type="PackedScene" id=26]
 [ext_resource path="res://demo/scenes/other/Portal.tscn" type="PackedScene" id=27]
-[ext_resource path="res://goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=28]
+[ext_resource path="res://addons/goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=28]
 [ext_resource path="res://demo/environments/workshop_environment.tres" type="Environment" id=29]
 [ext_resource path="res://demo/scenes/other/Door.tscn" type="PackedScene" id=31]
 
