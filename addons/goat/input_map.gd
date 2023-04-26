@@ -1,8 +1,10 @@
 extends Node
 
 
-# TODO: remove input actions
+# TODO: remove input actions on _exit_tree
 func _enter_tree():
+	# These actions have to be added in a singleton, not in the plugin itself
+	# They will also not appear in syntax completion e.g. in `connect` method
 	var input_map_with_keys = [
 		["goat_toggle_inventory", [KEY_TAB]],
 		["goat_crouch", [KEY_CONTROL]],
