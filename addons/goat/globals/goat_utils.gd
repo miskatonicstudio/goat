@@ -22,3 +22,19 @@ func load_text_file(path):
 	var content = file.get_as_text()
 	file.close()
 	return content
+
+
+func add_translations(translation_directory_path):
+	for file in list_directory(translation_directory_path):
+		if file.ends_with(".translation"):
+			var translation = ResourceLoader.load(translation_directory_path + file)
+			TranslationServer.add_translation(translation)
+	print("Translations added, source folder: " + translation_directory_path)
+
+
+func remove_translations(translation_directory_path):
+	for file in list_directory(translation_directory_path):
+		if file.ends_with(".translation"):
+			var translation = ResourceLoader.load(translation_directory_path + file)
+			TranslationServer.remove_translation(translation)
+	print("Translations removed, source folder: " + translation_directory_path)

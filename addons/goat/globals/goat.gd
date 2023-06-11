@@ -59,10 +59,12 @@ func load_game(game_directory: String):
 	goat_inventory.load_all()
 	goat_state.load_all()
 	goat_globals.load_all()
-	# TODO: load locale?
+	goat_utils.add_translations(game_directory + "/locale/")
 
 
 func clear_game():
+	if goat.GAME_RESOURCES_DIRECTORY:
+		goat_utils.remove_translations(goat.GAME_RESOURCES_DIRECTORY + "/locale/")
 	goat.GAME_RESOURCES_DIRECTORY = null
 	game_directory_path = null
 	goat_globals.reset()
