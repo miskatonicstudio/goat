@@ -88,11 +88,17 @@ func get_item_model(item_name: String):
 	return load(_config[item_name]["model"])
 
 
-func reset() -> void:
-	"""Clears inventory items, but keeps the configuration"""
+func clear() -> void:
+	"""Clears inventory items and configuration"""
 	_items.clear()
 	_selected_item = null
 	_config = {}
+
+
+func reset() -> void:
+	"""Resets inventory items, but keeps the configuration"""
+	_items.clear()
+	_selected_item = null
 
 
 func get_items() -> Array:

@@ -1,8 +1,12 @@
-extends CenterContainer
+extends Control
 
 
 func _ready():
 	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
+	var settings_scene = load(
+		goat.GAME_RESOURCES_DIRECTORY + "/goat/scenes/Settings.tscn"
+	).instance()
+	self.add_child(settings_scene)
 
 
 func _on_game_mode_changed(new_game_mode):
@@ -18,16 +22,3 @@ func _input(_event):
 		return
 	if Input.is_action_just_pressed("goat_dismiss"):
 		goat.game_mode = goat.GameMode.EXPLORING
-
-
-func _on_Exit_pressed():
-	goat_voice.stop()
-	if goat.EXIT_SCENE:
-		get_tree().change_scene(goat.EXIT_SCENE)
-		goat.game_mode = goat.GameMode.NONE
-	else:
-		get_tree().quit()
-
-
-func _on_Resume_pressed():
-	goat.game_mode = goat.GameMode.EXPLORING

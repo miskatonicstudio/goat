@@ -51,9 +51,11 @@ func take_screenshot() -> void:
 	image.save_png(screenshot_path)
 
 
-func load_game(game_directory: String):
+func load_game(game_directory: String, parent_exit_scene = null):
+	# TODO: clear previous game?
 	assert(game_directory != null)
 	goat.GAME_RESOURCES_DIRECTORY = game_directory
+	goat._PARENT_EXIT_SCENE = parent_exit_scene
 	_setup_game_directory()
 	goat_voice.load_all()
 	goat_inventory.load_all()
@@ -67,19 +69,24 @@ func clear_game():
 		goat_utils.remove_translations(goat.GAME_RESOURCES_DIRECTORY + "/locale/")
 	goat.GAME_RESOURCES_DIRECTORY = null
 	game_directory_path = null
-	goat_globals.reset()
+	goat_globals.clear()
+	goat_inventory.clear()
+	goat_state.clear()
+	goat_voice.clear()
+	if goat._PARENT_EXIT_SCENE:
+		get_tree().change_scene(goat._PARENT_EXIT_SCENE)
+		goat._PARENT_EXIT_SCENE = null
+	else:
+		get_tree().quit()
+
+
+func reset_game():
 	goat_inventory.reset()
 	goat_state.reset()
-	goat_voice.reset()
-
 
 ##############################################################################
 # SETTINGS
 ##############################################################################
-
-# Exit scene: if null, 'Exit' button in settings ends the program.
-# Otherwise, it will load the specified scene.
-var EXIT_SCENE = null
 
 # Game resources directory: defines a place where all game resources are stored.
 # The directory needs to have a specific structure, e.g. it needs to contain
@@ -103,3 +110,6 @@ var RIGHT_CAMERA_ANGLE = null
 
 var ENABLE_INVENTORY_ICON_ROTATION = true
 var INVENTORY_ICON_ROTATION_PER_SECOND = 2
+
+# The scene where GOAT game will exit to when using goat.clear_game
+var _PARENT_EXIT_SCENE = null

@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="GOAT"
-run/main_scene="res://demo/scenes/main/MainMenu.tscn"
+run/main_scene="res://StartDemoGame.tscn"
 config/icon="res://docs/img/logo_goat.png"
 
 [audio]

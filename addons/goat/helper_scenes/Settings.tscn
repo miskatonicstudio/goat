@@ -1,72 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://addons/goat/helper_scenes/Settings.gd" type="Script" id=1]
-[ext_resource path="res://addons/goat/styles/settings_background.tres" type="StyleBox" id=2]
-[ext_resource path="res://addons/goat/settings/Settings.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/goat/settings/SettingsButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/goat/fonts/settings_font.tres" type="DynamicFont" id=5]
 
-[node name="Settings" type="CenterContainer"]
+[node name="Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = 185.0
-margin_top = 29.0
-margin_right = 839.0
-margin_bottom = 570.0
-mouse_filter = 2
-custom_styles/panel = ExtResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 652.0
-margin_bottom = 539.0
-
-[node name="Header" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
-margin_right = 650.0
-margin_bottom = 21.0
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Header"]
-margin_left = 291.0
-margin_right = 359.0
-margin_bottom = 21.0
-custom_fonts/font = ExtResource( 5 )
-text = "Settings"
-
-[node name="Settings" parent="PanelContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 25.0
-margin_right = 650.0
-margin_bottom = 504.0
-
-[node name="Buttons" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
-margin_top = 508.0
-margin_right = 650.0
-margin_bottom = 537.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Buttons"]
-margin_left = 215.0
-margin_right = 435.0
-margin_bottom = 29.0
-custom_constants/separation = 20
-
-[node name="Exit" parent="PanelContainer/VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 4 )]
-margin_right = 100.0
-margin_bottom = 29.0
-rect_min_size = Vector2( 100, 0 )
-text = "Exit"
-
-[node name="Resume" parent="PanelContainer/VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 4 )]
-margin_left = 120.0
-margin_right = 220.0
-margin_bottom = 29.0
-rect_min_size = Vector2( 100, 0 )
-text = "Resume"
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/HBoxContainer/Exit" to="." method="_on_Exit_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/HBoxContainer/Resume" to="." method="_on_Resume_pressed"]

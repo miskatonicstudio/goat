@@ -108,7 +108,7 @@ func _register(
 	}
 
 
-func reset() -> void:
+func clear() -> void:
 	_audio_player.stop()
 	_audio_timer.stop()
 	_default_audio_scheduled = false

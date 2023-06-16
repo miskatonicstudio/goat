@@ -33,5 +33,11 @@ func set_value(variable_name: String, value) -> void:
 	emit_signal("changed", variable_name, previous_value, value)
 
 
-func reset() -> void:
+func clear() -> void:
 	_variables = {}
+
+
+func reset() -> void:
+	# TODO: store initial values and use them for resetting
+	clear()
+	load_all()

@@ -10,7 +10,7 @@ func load_all():
 	get_tree().root.add_child(script)
 
 
-func reset():
+func clear():
 	for child in get_tree().root.get_children():
 		if child.name == "global_game_script":
 			get_tree().root.remove_child(child)
