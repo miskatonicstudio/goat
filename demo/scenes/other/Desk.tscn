@@ -188,25 +188,18 @@ script = ExtResource( 1 )
 [node name="Desk" type="MeshInstance" parent="."]
 transform = Transform( -0.314794, 0, -1.02573e-07, 0, 0.314794, 0, 1.02573e-07, 0, -0.314794, 0, 0.535757, 0 )
 mesh = SubResource( 1 )
-material/0 = null
 
 [node name="BottomComputer" type="MeshInstance" parent="Desk"]
 transform = Transform( -1.74189, 0, 1.36981, 0, 2.21598, 0, -1.36981, 0, -1.74189, -2.22253, 1.2572, -0.0164576 )
 mesh = SubResource( 2 )
-material/0 = null
-material/1 = null
 
 [node name="TopComputer" type="MeshInstance" parent="Desk/BottomComputer"]
 transform = Transform( 0.36318, 0, -0.931719, 0, 0.999999, 0, 0.931719, 0, 0.36318, -0.10788, 0.355336, 0.324654 )
 mesh = SubResource( 3 )
-material/0 = null
-material/1 = null
 
 [node name="DeskLamp" type="MeshInstance" parent="Desk/BottomComputer/TopComputer"]
 transform = Transform( 0.0258655, 0, 0.143754, 0, 0.0518155, 0, -0.143754, 0, 0.0258655, -0.11491, 0.248597, 0.0387344 )
 mesh = SubResource( 4 )
-material/0 = null
-material/1 = null
 
 [node name="InteractiveItem" parent="Desk/BottomComputer/TopComputer" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.278467, 0, 0.143711 )
@@ -221,13 +214,11 @@ transform = Transform( -1.74846e-08, -0.4, -1.74846e-08, 0, -1.74846e-08, 0.4, -
 [node name="FloppyInsertSound" type="AudioStreamPlayer3D" parent="Desk/BottomComputer"]
 transform = Transform( 0.520631, 0, -1.33565, 0, 1.43353, 0, 1.33565, 0, 0.520631, -0.342912, 0.355336, 0.117394 )
 stream = ExtResource( 9 )
-bus = "Effects"
+bus = "GoatEffects"
 
 [node name="Monitor" type="MeshInstance" parent="Desk"]
 transform = Transform( 3.17184, 0, -0.175247, 0, 3.17668, 0, 0.175247, 0, 3.17184, 1.45524, 1.91783, 0.259408 )
 mesh = SubResource( 6 )
-material/0 = null
-material/1 = null
 
 [node name="InteractiveScreen" parent="Desk/Monitor" instance=ExtResource( 12 )]
 transform = Transform( -0.85, 0, -1.76665e-07, 0, 0.5, 0, 1.28346e-07, 0, -1.17, 0.00427535, 0.0711439, -0.0352828 )
@@ -239,8 +230,6 @@ content_size = Vector2( 340, 200 )
 [node name="Keyboard" type="MeshInstance" parent="Desk"]
 transform = Transform( 3.15138, 0, -0.400152, 0, 3.17668, 0, 0.400152, 0, 3.15138, 1.35457, 1.00175, -1.08156 )
 mesh = SubResource( 7 )
-material/0 = null
-material/1 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/insert_floppy_disk = SubResource( 8 )

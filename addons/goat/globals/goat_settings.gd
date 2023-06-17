@@ -127,12 +127,12 @@ func _on_fullscreen_settings_changed() -> void:
 
 func _on_music_settings_changed() -> void:
 	var volume = get_value("sound", "music_volume")
-	_set_volume_db("Music", volume)
+	_set_volume_db("GoatMusic", volume)
 
 
 func _on_effects_settings_changed() -> void:
 	var volume = get_value("sound", "effects_volume")
-	_set_volume_db("Effects", volume)
+	_set_volume_db("GoatEffects", volume)
 
 
 func _on_shadows_settings_changed() -> void:
@@ -185,4 +185,8 @@ func _set_volume_db(bus_name: String, volume: float) -> void:
 	# Recalculate to <M, 0>, non-linear
 	var volume_db = abs(M) * sqrt(2 * volume - pow(volume, 2)) + M
 	var bus_id = AudioServer.get_bus_index(bus_name)
-	AudioServer.set_bus_volume_db(bus_id, volume_db)
+	if bus_id >= 0:
+		AudioServer.set_bus_volume_db(bus_id, volume_db)
+	else:
+		print("Audio bus not found: ", bus_name)
+		print_stack()

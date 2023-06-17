@@ -31,7 +31,7 @@ func _ready():
 	randomize()
 	add_child(_audio_player)
 	add_child(_audio_timer)
-	_audio_player.bus = "Music"
+	_audio_player.bus = "GoatMusic"
 	_audio_player.connect("finished", self, "_on_audio_finished")
 	_audio_timer.one_shot = true
 	_audio_timer.connect("timeout", self, "_on_audio_finished")

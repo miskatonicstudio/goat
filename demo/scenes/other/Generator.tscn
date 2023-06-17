@@ -87,22 +87,15 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.559469, 0 )
 unique_name = "generator"
 item_type = 1
-inventory_item_name = ""
 collision_shape = SubResource( 1 )
-sound = null
 
 [node name="Model" type="MeshInstance" parent="InteractiveItem"]
 transform = Transform( 1.13722, 0, 0, 0, 1.13722, 0, 0, 0, 1.13722, 0, 0, 0 )
 mesh = SubResource( 2 )
-material/0 = null
-material/1 = null
-material/2 = null
 
 [node name="Screwdriver" type="MeshInstance" parent="InteractiveItem"]
 transform = Transform( -0.0118147, -0.114467, 0.384311, -0.399828, 0.0326817, -0.00255751, -0.0305784, -0.383101, -0.115047, -0.133941, 0.586163, -0.629715 )
 mesh = SubResource( 3 )
-material/0 = null
-material/1 = null
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
@@ -113,4 +106,4 @@ shape = SubResource( 4 )
 [node name="WorkingSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 6 )
 unit_db = -16.0
-bus = "Effects"
+bus = "GoatEffects"
