@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/this_doesnt_make_sense.ogg-219e54f983f4e17b4051509ab1261cac.oggstr"
+
+[deps]
+
+source_file="res://demo/goat/voice/this_doesnt_make_sense.ogg"
+dest_files=[ "res://.import/this_doesnt_make_sense.ogg-219e54f983f4e17b4051509ab1261cac.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

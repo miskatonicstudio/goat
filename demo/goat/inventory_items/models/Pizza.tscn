@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://demo/inventory_items/models/Pizza.gd" type="Script" id=1]
+[ext_resource path="res://demo/goat/inventory_items/models/Pizza.gd" type="Script" id=1]
 [ext_resource path="res://demo/models/PizzaModel.tscn" type="PackedScene" id=2]
 
 [node name="Pizza" type="Spatial"]

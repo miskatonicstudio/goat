@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/power_it_up_first.ogg-6eb949d8e458037d5e1103d92f7038c7.oggstr"
+
+[deps]
+
+source_file="res://demo/goat/voice/power_it_up_first.ogg"
+dest_files=[ "res://.import/power_it_up_first.ogg-6eb949d8e458037d5e1103d92f7038c7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

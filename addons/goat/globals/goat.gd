@@ -54,6 +54,7 @@ func take_screenshot() -> void:
 func load_game(game_directory: String, parent_exit_scene = null):
 	# TODO: clear previous game?
 	assert(game_directory != null)
+	goat_utils.add_translations(game_directory + "/goat/locale/")
 	goat.GAME_RESOURCES_DIRECTORY = game_directory
 	goat._PARENT_EXIT_SCENE = parent_exit_scene
 	_setup_game_directory()
@@ -61,12 +62,11 @@ func load_game(game_directory: String, parent_exit_scene = null):
 	goat_inventory.load_all()
 	goat_state.load_all()
 	goat_globals.load_all()
-	goat_utils.add_translations(game_directory + "/locale/")
 
 
 func clear_game():
 	if goat.GAME_RESOURCES_DIRECTORY:
-		goat_utils.remove_translations(goat.GAME_RESOURCES_DIRECTORY + "/locale/")
+		goat_utils.remove_translations(goat.GAME_RESOURCES_DIRECTORY + "/goat/locale/")
 	goat.GAME_RESOURCES_DIRECTORY = null
 	game_directory_path = null
 	goat_globals.clear()

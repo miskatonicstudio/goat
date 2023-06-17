@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/but_why.ogg-341ac535bac6fb5d405c9773d9e13cc6.oggstr"
+
+[deps]
+
+source_file="res://demo/goat/voice/but_why.ogg"
+dest_files=[ "res://.import/but_why.ogg-341ac535bac6fb5d405c9773d9e13cc6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

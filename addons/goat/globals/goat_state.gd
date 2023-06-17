@@ -8,7 +8,7 @@ var _variables := {}
 func load_all():
 	assert (goat.GAME_RESOURCES_DIRECTORY)
 	# TODO: load saved game from file
-	var state_directory = goat.GAME_RESOURCES_DIRECTORY + "/state/"
+	var state_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/state/"
 	var files = goat_utils.list_directory(state_directory)
 	for file in files:
 		if file.ends_with(".json"):

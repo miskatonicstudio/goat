@@ -53,7 +53,7 @@ func _input(_event):
 
 func load_all():
 	assert (goat.GAME_RESOURCES_DIRECTORY)
-	var voice_directory = goat.GAME_RESOURCES_DIRECTORY + "/voice/"
+	var voice_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/voice/"
 	var files = goat_utils.list_directory(voice_directory)
 	for file in files:
 		if file.ends_with(".import"):
@@ -93,7 +93,7 @@ func _register(
 	var sound = null
 	
 	if not time:
-		var sound_path := "{}/voice/{}".format(
+		var sound_path := "{}/goat/voice/{}".format(
 			[goat.GAME_RESOURCES_DIRECTORY, audio_file_name], "{}"
 		)
 		sound = load(sound_path)

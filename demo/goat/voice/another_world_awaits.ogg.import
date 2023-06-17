@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/another_world_awaits.ogg-1efb1c0b56d0ee2b19b17716dcb859bd.oggstr"
+
+[deps]
+
+source_file="res://demo/goat/voice/another_world_awaits.ogg"
+dest_files=[ "res://.import/another_world_awaits.ogg-1efb1c0b56d0ee2b19b17716dcb859bd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

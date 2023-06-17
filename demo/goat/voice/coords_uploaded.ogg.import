@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/coords_uploaded.ogg-4aa72032b7d8701a0ceb6c1e04e706cd.oggstr"
+
+[deps]
+
+source_file="res://demo/goat/voice/coords_uploaded.ogg"
+dest_files=[ "res://.import/coords_uploaded.ogg-4aa72032b7d8701a0ceb6c1e04e706cd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

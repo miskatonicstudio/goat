@@ -23,7 +23,7 @@ var _config := {}
 
 func load_all():
 	assert (goat.GAME_RESOURCES_DIRECTORY)
-	var models_directory = goat.GAME_RESOURCES_DIRECTORY + "/inventory_items/models/"
+	var models_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/inventory_items/models/"
 	var files = goat_utils.list_directory(models_directory)
 	for file in files:
 		if file.ends_with(".tscn"):
@@ -42,12 +42,12 @@ func _register_item(item_name: String) -> void:
 	"""
 	assert(not _config.has(item_name))
 	
-	var icon_path := "{}/inventory_items/icons/{}.png".format(
+	var icon_path := "{}/goat/inventory_items/icons/{}.png".format(
 		[goat.GAME_RESOURCES_DIRECTORY, item_name], "{}"
 	)
 	# Comply with Godot scene naming standards
 	var model_name := item_name.capitalize().replace(" ", "")
-	var model_path := "{}/inventory_items/models/{}.tscn".format(
+	var model_path := "{}/goat/inventory_items/models/{}.tscn".format(
 		[goat.GAME_RESOURCES_DIRECTORY, model_name], "{}"
 	)
 	

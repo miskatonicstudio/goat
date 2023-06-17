@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://demo/inventory_items/models/Remote.gd" type="Script" id=1]
+[ext_resource path="res://demo/goat/inventory_items/models/Remote.gd" type="Script" id=1]
 [ext_resource path="res://addons/goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/sounds/click02.ogg" type="AudioStream" id=3]
 [ext_resource path="res://demo/materials/remote_button.material" type="Material" id=4]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/just_a_few_steps.ogg-e86db94da29d5bb7471d52dd9d58443d.oggstr"
+
+[deps]
+
+source_file="res://demo/goat/voice/just_a_few_steps.ogg"
+dest_files=[ "res://.import/just_a_few_steps.ogg-e86db94da29d5bb7471d52dd9d58443d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
