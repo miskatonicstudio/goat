@@ -5,9 +5,9 @@ extends EditorPlugin
 func _enter_tree():
 	add_goat_audio_buses()
 	
-	add_autoload_singleton("goat_audio_bus", "res://addons/goat/audio_bus.gd")
-	add_autoload_singleton("goat_input_map", "res://addons/goat/input_map.gd")
-	add_autoload_singleton("goat_locale", "res://addons/goat/locale.gd")
+	add_autoload_singleton("goat_audio_bus", "res://addons/goat/autoload/audio_bus.gd")
+	add_autoload_singleton("goat_input_map", "res://addons/goat/autoload/input_map.gd")
+	add_autoload_singleton("goat_locale", "res://addons/goat/autoload/locale.gd")
 	
 	add_autoload_singleton("goat_utils", "res://addons/goat/globals/goat_utils.gd")
 	add_autoload_singleton("goat", "res://addons/goat/globals/goat.gd")
@@ -38,8 +38,8 @@ func _exit_tree():
 
 func add_goat_audio_buses():
 	# To be available in audio nodes, audio buses have to be added here
-	load("res://addons/goat/audio_bus.gd").new()._enter_tree()
+	load("res://addons/goat/autoload/audio_bus.gd").new()._enter_tree()
 
 
 func remove_goat_audio_buses():
-	load("res://addons/goat/audio_bus.gd").new()._exit_tree()
+	load("res://addons/goat/autoload/audio_bus.gd").new()._exit_tree()

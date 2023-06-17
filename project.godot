@@ -20,9 +20,9 @@ default_bus_layout=""
 
 [autoload]
 
-goat_audio_bus="*res://addons/goat/audio_bus.gd"
-goat_input_map="*res://addons/goat/input_map.gd"
-goat_locale="*res://addons/goat/locale.gd"
+goat_audio_bus="*res://addons/goat/autoload/audio_bus.gd"
+goat_input_map="*res://addons/goat/autoload/input_map.gd"
+goat_locale="*res://addons/goat/autoload/locale.gd"
 goat_utils="*res://addons/goat/globals/goat_utils.gd"
 goat="*res://addons/goat/globals/goat.gd"
 goat_globals="*res://addons/goat/globals/goat_globals.gd"
