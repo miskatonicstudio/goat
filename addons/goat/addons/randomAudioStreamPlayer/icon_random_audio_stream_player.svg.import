@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_random_audio_stream_player_3_d.svg-80090c5d537eba44e71295f1b8e8cd23.stex"
+path="res://.import/icon_random_audio_stream_player.svg-4d3532976fc7df82d348cd1893fbb72d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/randomAudioStreamPlayer/icon_random_audio_stream_player_3_d.svg"
-dest_files=[ "res://.import/icon_random_audio_stream_player_3_d.svg-80090c5d537eba44e71295f1b8e8cd23.stex" ]
+source_file="res://addons/goat/addons/randomAudioStreamPlayer/icon_random_audio_stream_player.svg"
+dest_files=[ "res://.import/icon_random_audio_stream_player.svg-4d3532976fc7df82d348cd1893fbb72d.stex" ]
 
 [params]
 

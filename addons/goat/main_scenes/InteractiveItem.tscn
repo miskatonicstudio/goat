@@ -3,7 +3,7 @@
 [ext_resource path="res://addons/goat/main_scenes/InteractiveItem.gd" type="Script" id=1]
 [ext_resource path="res://addons/goat/images/item_interaction_icon.png" type="Texture" id=2]
 [ext_resource path="res://addons/goat/materials/item_interaction_icon.tres" type="Material" id=3]
-[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=4]
+[ext_resource path="res://addons/goat/addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.1, 0.1, 0.1 )

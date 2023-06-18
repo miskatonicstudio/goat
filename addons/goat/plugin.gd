@@ -3,6 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
+	load_plugins()
+	
 	add_goat_audio_buses()
 	
 	add_autoload_singleton("goat_audio_bus", "res://addons/goat/autoload/audio_bus.gd")
@@ -34,6 +36,8 @@ func _exit_tree():
 	remove_autoload_singleton("goat_audio_bus")
 	
 	remove_goat_audio_buses()
+	
+	clear_plugins()
 
 
 func add_goat_audio_buses():
@@ -43,3 +47,11 @@ func add_goat_audio_buses():
 
 func remove_goat_audio_buses():
 	load("res://addons/goat/autoload/audio_bus.gd").new()._exit_tree()
+
+
+func load_plugins():
+	load("res://addons/goat/addons/randomAudioStreamPlayer/random_audio.gd").new()._enter_tree()
+
+
+func clear_plugins():
+	load("res://addons/goat/addons/randomAudioStreamPlayer/random_audio.gd").new()._exit_tree()

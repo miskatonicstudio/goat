@@ -39,7 +39,7 @@ gdscript/warnings/return_value_discarded=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/goat/plugin.cfg", "res://addons/randomAudioStreamPlayer/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/goat/plugin.cfg" )
 
 [locale]
 
