@@ -2,8 +2,10 @@ extends Node
 
 
 func _enter_tree():
-	goat_utils.add_translations("res://addons/goat/locale/")
+	# To be available in a game, this has to be loaded as an autoload.
+	# To avoid loading order issues, `goat_utils` is loaded directly here.
+	load("res://addons/goat/globals/goat_utils.gd").new().add_translations("res://addons/goat/locale/")
 
 
 func _exit_tree():
-	goat_utils.remove_translations("res://addons/goat/locale/")
+	load("res://addons/goat/globals/goat_utils.gd").new().remove_translations("res://addons/goat/locale/")

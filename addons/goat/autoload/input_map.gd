@@ -1,41 +1,43 @@
 extends Node
 
-
-# TODO: remove input actions on _exit_tree
-func _enter_tree():
-	# These actions have to be added in a singleton, not in the plugin itself
-	# They will also not appear in syntax completion e.g. in `connect` method
-	var input_map_with_keys = [
-		["goat_toggle_inventory", [KEY_TAB]],
-		["goat_crouch", [KEY_CONTROL]],
-		["goat_screenshot", [KEY_P]],
-		["goat_dismiss", [KEY_ESCAPE]],
-		["goat_move_player_forward", [KEY_W, KEY_UP, KEY_Z]],
-		["goat_move_player_backward", [KEY_S, KEY_DOWN]],
-		["goat_move_player_left", [KEY_A, KEY_LEFT, KEY_Q]],
-		["goat_move_player_right", [KEY_D, KEY_RIGHT]],
-	]
+const GOAT_ACTIONS = [
+	["goat_toggle_inventory", {"keys": [KEY_TAB]}],
+	["goat_crouch", {"keys": [KEY_CONTROL]}],
+	["goat_screenshot", {"keys": [KEY_P]}],
+	["goat_dismiss", {"keys": [KEY_ESCAPE]}],
+	["goat_move_player_forward", {"keys": [KEY_W, KEY_UP, KEY_Z]}],
+	["goat_move_player_backward", {"keys": [KEY_S, KEY_DOWN]}],
+	["goat_move_player_left", {"keys": [KEY_A, KEY_LEFT, KEY_Q]}],
+	["goat_move_player_right", {"keys": [KEY_D, KEY_RIGHT]}],
 	
-	for entry in input_map_with_keys:
-		var action_name = entry[0]
-		var scancodes = entry[1]
-		InputMap.add_action(action_name)
-		for scancode in scancodes:
+	["goat_interact", {"mouse_buttons": [BUTTON_LEFT]}],
+	["goat_interact_alternatively", {"mouse_buttons": [BUTTON_RIGHT]}],
+	["goat_rotate_inventory", {"mouse_buttons": [BUTTON_RIGHT]}],
+]
+
+func add_goat_actions():
+	for action in GOAT_ACTIONS:
+		var action_name = action[0]
+		var action_events = action[1]
+		var events = []
+		for scancode in action_events.get("keys", []):
 			var event = InputEventKey.new()
 			event.scancode = scancode
-			InputMap.action_add_event(action_name, event)
-	
-	var input_map_with_mouse = [
-		["goat_interact", [BUTTON_LEFT]],
-		["goat_interact_alternatively", [BUTTON_RIGHT]],
-		["goat_rotate_inventory", [BUTTON_RIGHT]],
-	]
-	
-	for entry in input_map_with_mouse:
-		var action_name = entry[0]
-		var buttons = entry[1]
-		InputMap.add_action(action_name)
-		for button in buttons:
+			events.append(event)
+		for button_index in action_events.get("mouse_buttons", []):
 			var event = InputEventMouseButton.new()
-			event.button_index = button
-			InputMap.action_add_event(action_name, event)
+			event.button_index = button_index
+			events.append(event)
+		ProjectSettings.set_setting("input/" + action_name, {
+			"deadzone": 0.5,
+			"events": events
+		})
+		print("Added GOAT action: ", action_name)
+
+
+func remove_goat_actions():
+	for action in GOAT_ACTIONS:
+		var action_name = action[0]
+		if ProjectSettings.has_setting("input/" + action_name):
+			ProjectSettings.set_setting("input/" + action_name, null)
+			print("Removed GOAT action: ", action_name)

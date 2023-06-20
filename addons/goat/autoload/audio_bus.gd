@@ -3,7 +3,6 @@ extends Node
 
 func _enter_tree():
 	for name in ["GoatEffects", "GoatMusic"]:
-		print("Adding GOAT audio bus: ", name)
 		var idx = AudioServer.bus_count
 		AudioServer.add_bus(idx)
 		AudioServer.set_bus_name(idx, name)
@@ -12,7 +11,7 @@ func _enter_tree():
 		AudioServer.set_bus_bypass_effects(idx, false)
 		AudioServer.set_bus_volume_db(idx, 0.0)
 		AudioServer.set_bus_send(idx, "Master")
-	print("GOAT audio buses added")
+		print("Added GOAT audio bus: ", name, ", index: ", idx)
 
 
 func _exit_tree():
@@ -20,5 +19,4 @@ func _exit_tree():
 		var name = AudioServer.get_bus_name(index)
 		if name.begins_with("Goat"):
 			AudioServer.remove_bus(index)
-			print("Removing GOAT audio bus: ", name)
-	print("GOAT audio buses removed")
+			print("Removed GOAT audio bus: ", name, ", index: ", index)
