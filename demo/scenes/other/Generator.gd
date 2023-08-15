@@ -1,11 +1,11 @@
-extends Spatial
+extends Node3D
 
-onready var screen_surface = $InteractiveItem/Model.mesh.surface_get_material(2)
-onready var working_sound = $WorkingSound
+@onready var screen_surface = $InteractiveItem/Model.get_surface_override_material(2)
+@onready var working_sound = $WorkingSound
 
 
 func _ready():
-	goat_interaction.connect("object_activated", self, "_on_object_activated")
+	goat_interaction.connect("object_activated", self._on_object_activated)
 
 
 func _on_object_activated(object_name, _point):

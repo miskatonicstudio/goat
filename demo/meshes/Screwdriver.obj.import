@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dps6p6qti4bvp"
+path="res://.godot/imported/Screwdriver.obj-3206ebef257e73623d9eb8ed6437cf2e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Screwdriver.obj-3206ebef257e73623d9eb8ed6437cf2e.mesh"]
+
+source_file="res://demo/meshes/Screwdriver.obj"
+dest_files=["res://.godot/imported/Screwdriver.obj-3206ebef257e73623d9eb8ed6437cf2e.mesh", "res://.godot/imported/Screwdriver.obj-3206ebef257e73623d9eb8ed6437cf2e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

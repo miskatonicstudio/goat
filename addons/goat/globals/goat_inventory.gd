@@ -29,7 +29,7 @@ func load_all():
 		if file.ends_with(".tscn"):
 			var item_name = file.replace(".tscn", "").get_basename()
 			# Convert to snake_case
-			item_name = item_name.capitalize().split(" ").join("_").to_lower()
+			item_name = "_".join(item_name.capitalize().split(" ")).to_lower()
 			_register_item(item_name)
 
 
@@ -68,14 +68,14 @@ func get_item_icon(item_name: String):
 	
 	var icon_path = _config[item_name]["icon_path"]
 	
-	if File.new().file_exists(icon_path):
+	if FileAccess.file_exists(icon_path):
 		# If an icon file was provided, use it
 		icon = load(icon_path)
 	else:
 		# Otherwise create an icon using the model
 		var icon_maker = load(
 			"res://addons/goat/helper_scenes/IconMaker.tscn"
-		).instance()
+		).instantiate()
 		get_tree().root.add_child(icon_maker)
 		icon = icon_maker.make_icon_texture(_config[item_name]["model"])
 	
@@ -106,7 +106,7 @@ func get_items() -> Array:
 	return _items.duplicate()
 
 
-func get_selected_item() -> String:
+func get_selected_item():
 	"""Returns currrently selected item (can be null)"""
 	return _selected_item
 
@@ -144,7 +144,7 @@ func remove_item(item_name: String) -> void:
 	# If selected item was removed, we need a new one
 	if item_name == _selected_item:
 		# If there are other items, select one of them
-		if not _items.empty():
+		if not _items.is_empty():
 			if item_index >= len(_items):
 				item_index -= 1
 			select_item(_items[item_index])

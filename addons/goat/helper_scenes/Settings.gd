@@ -2,10 +2,10 @@ extends Control
 
 
 func _ready():
-	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
+	goat.connect("game_mode_changed", self._on_game_mode_changed)
 	var settings_scene = load(
 		goat.GAME_RESOURCES_DIRECTORY + "/goat/scenes/Settings.tscn"
-	).instance()
+	).instantiate()
 	self.add_child(settings_scene)
 
 

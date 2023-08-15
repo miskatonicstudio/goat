@@ -10,7 +10,7 @@ func _ready():
 		["but_why", "what_for", "this_doesnt_make_sense"]
 	)
 	
-	get_tree().change_scene("res://demo/scenes/main/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://demo/scenes/main/MainMenu.tscn")
 
 
 func _exit_tree():

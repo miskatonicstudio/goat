@@ -1,14 +1,14 @@
 extends Control
 
-onready var text_box = $TextBox
-onready var text = $TextBox/Label
+@onready var text_box = $TextBox
+@onready var text = $TextBox/Label
 
 
 func _ready():
-	goat_voice.connect("started", self, "show_subtitles")
-	goat_voice.connect("finished", self, "hide_subtitles")
+	goat_voice.connect("started", self.show_subtitles)
+	goat_voice.connect("finished", self.hide_subtitles)
 	goat_settings.connect(
-		"value_changed_gui_subtitles", self, "_on_subtitles_settings_changed"
+		"value_changed_gui_subtitles", self._on_subtitles_settings_changed
 	)
 
 

@@ -12,7 +12,9 @@ func load_all():
 	var files = goat_utils.list_directory(state_directory)
 	for file in files:
 		if file.ends_with(".json"):
-			var data = parse_json(goat_utils.load_text_file(state_directory + file))
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(goat_utils.load_text_file(state_directory + file))
+			var data = test_json_conv.get_data()
 			for key in data:
 				_register_variable(key, data[key])
 

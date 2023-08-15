@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://2k6kq0hno0p7"]
 
-[ext_resource path="res://demo/styles/custom_button_normal.tres" type="StyleBox" id=1]
-[ext_resource path="res://demo/styles/custom_button_hover.tres" type="StyleBox" id=2]
-[ext_resource path="res://demo/fonts/big_font.tres" type="DynamicFont" id=3]
-
+[ext_resource type="StyleBox" path="res://demo/styles/custom_button_normal.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://dxkp5rfk21fkw" path="res://addons/goat/fonts/Tuffy.ttf" id="1_5r0e0"]
+[ext_resource type="StyleBox" path="res://demo/styles/custom_button_hover.tres" id="2"]
 
 [node name="CustomButton" type="Button"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1012.0
-margin_bottom = -580.0
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
+offset_right = -1012.0
+offset_bottom = -580.0
+theme_override_fonts/font = ExtResource("1_5r0e0")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/focus = ExtResource("1")

@@ -11,7 +11,7 @@ enum GameMode {
 	SETTINGS,
 }
 
-export (GameMode) var game_mode = GameMode.NONE setget set_game_mode
+@export var game_mode : GameMode = GameMode.NONE: set = set_game_mode
 # TODO: make this read-only
 var game_directory_path = null
 
@@ -19,7 +19,7 @@ var game_directory_path = null
 func set_game_mode(new_game_mode):
 	# Usually game mode change is a result of user input (e.g. pressing Tab),
 	# and that input shouldn't cause further game mode changes
-	get_tree().set_input_as_handled()
+	get_viewport().set_input_as_handled()
 	game_mode = new_game_mode
 	emit_signal("game_mode_changed", game_mode)
 
@@ -34,20 +34,19 @@ func _setup_game_directory():
 	path_prefix.compile("^(user|res)://")
 	var game_directory_name = path_prefix.sub(GAME_RESOURCES_DIRECTORY, "")
 	game_directory_path = "user://" + game_directory_name + "/"
-	Directory.new().make_dir(game_directory_path)
+	DirAccess.make_dir_absolute(game_directory_path)
 
 
 func take_screenshot() -> void:
 	var screenshot_directory_path = game_directory_path + SCREENSHOT_DIRECTORY
-	Directory.new().make_dir(screenshot_directory_path)
-	var dt = OS.get_datetime()
+	DirAccess.make_dir_absolute(screenshot_directory_path)
+	var dt = Time.get_datetime_dict_from_system()
 	var screenshot_filename = "Screenshot %04d-%02d-%02d %02d:%02d:%02d.png" % [
 		dt["year"], dt["month"], dt["day"],
 		dt["hour"], dt["minute"], dt["second"]
 	]
 	var screenshot_path = screenshot_directory_path + "/" + screenshot_filename
-	var image = get_viewport().get_texture().get_data()
-	image.flip_y()
+	var image = get_viewport().get_texture().get_image()
 	image.save_png(screenshot_path)
 
 
@@ -74,7 +73,7 @@ func clear_game():
 	goat_state.clear()
 	goat_voice.clear()
 	if goat._PARENT_EXIT_SCENE:
-		get_tree().change_scene(goat._PARENT_EXIT_SCENE)
+		get_tree().change_scene_to_file(goat._PARENT_EXIT_SCENE)
 		goat._PARENT_EXIT_SCENE = null
 	else:
 		get_tree().quit()

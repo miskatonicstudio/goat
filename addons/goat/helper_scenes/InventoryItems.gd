@@ -2,25 +2,25 @@ extends Control
 
 signal rotation_reset_requested
 
-onready var item_buttons_container = $ItemButtons
-onready var use_button = $Buttons/UseButton
-onready var reset_rotation_button = $Buttons/ResetRotationButton
-onready var empty_inventory_text = $CenterContainer/EmptyInventoryText
-onready var help_text = $HelpText
+@onready var item_buttons_container = $MarginContainer/ItemButtons
+@onready var use_button = $MarginContainer/Buttons/UseButton
+@onready var reset_rotation_button = $MarginContainer/Buttons/ResetRotationButton
+@onready var empty_inventory_text = $MarginContainer/CenterContainer/EmptyInventoryText
+@onready var help_text = $MarginContainer/MarginContainer/HelpText
 
 
 func _ready():
-	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
-	goat_inventory.connect("item_selected", self, "_on_item_selected")
-	goat_inventory.connect("items_changed", self, "_on_items_changed")
+	goat.connect("game_mode_changed", self._on_game_mode_changed)
+	goat_inventory.connect("item_selected", self._on_item_selected)
+	goat_inventory.connect("items_changed", self._on_items_changed)
 	
 	# Connect button signals
 	for i in range(goat_inventory.CAPACITY):
 		var item_button = _get_item_button(i)
-		item_button.connect("pressed", self, "_on_item_button_pressed", [i])
-		item_button.connect("gui_input", self, "_on_item_button_gui_input", [i])
-		item_button.connect("button_down", self, "_on_item_button_down", [i])
-		item_button.connect("button_up", self, "_on_item_button_up", [i])
+		item_button.connect("pressed", self._on_item_button_pressed.bind(i))
+		item_button.connect("gui_input", self._on_item_button_gui_input.bind(i))
+		item_button.connect("button_down", self._on_item_button_down.bind(i))
+		item_button.connect("button_up", self._on_item_button_up.bind(i))
 
 
 func _on_game_mode_changed(new_game_mode) -> void:
@@ -28,7 +28,7 @@ func _on_game_mode_changed(new_game_mode) -> void:
 	if (
 		new_game_mode == goat.GameMode.INVENTORY and
 		goat_inventory.get_selected_item() == null and
-		not goat_inventory.get_items().empty()
+		not goat_inventory.get_items().is_empty()
 	):
 		var item_name = goat_inventory.get_items().back()
 		goat_inventory.select_item(item_name)
@@ -41,8 +41,8 @@ func _on_item_selected(item_name) -> void:
 	var item_index = goat_inventory.get_items().find(item_name)
 	var item_button = _get_item_button(item_index)
 	# This should not send "pressed" signal
-	if not item_button.pressed:
-		item_button.pressed = true
+	if not item_button.button_pressed:
+		item_button.button_pressed = true
 
 
 func _on_items_changed(new_items: Array) -> void:
@@ -54,13 +54,13 @@ func _on_items_changed(new_items: Array) -> void:
 			var selected = item_name == goat_inventory.get_selected_item()
 			item_button.icon = goat_inventory.get_item_icon(item_name)
 			item_button.disabled = false
-			item_button.pressed = selected
+			item_button.button_pressed = selected
 		else:
 			item_button.icon = null
 			item_button.disabled = true
 	
 	# Handle empty inventory
-	var inventory_empty = new_items.empty()
+	var inventory_empty = new_items.is_empty()
 	use_button.disabled = inventory_empty
 	reset_rotation_button.disabled = inventory_empty
 	empty_inventory_text.visible = inventory_empty
@@ -74,8 +74,10 @@ func _on_item_button_pressed(item_index: int) -> void:
 
 func _on_item_button_gui_input(event: InputEvent, item_index: int) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.doubleclick:
-				var item_name = goat_inventory.get_items()[item_index]
+		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+			var items = goat_inventory.get_items()
+			if len(items) > 0:
+				var item_name = items[item_index]
 				goat_inventory.use_item(item_name)
 
 
@@ -106,7 +108,7 @@ func _on_item_button_up(item_index: int) -> void:
 	item_button.mouse_default_cursor_shape = Input.CURSOR_ARROW
 	Input.set_custom_mouse_cursor(null, Input.CURSOR_DRAG)
 	# Send mouse motion event to update cursor's shape immediately
-	get_viewport().input(InputEventMouseMotion.new())
+	get_viewport().push_input(InputEventMouseMotion.new())
 
 
 func _on_UseButton_pressed() -> void:
@@ -122,7 +124,7 @@ func _on_BackButton_pressed() -> void:
 
 
 func _get_item_button(button_index: int) -> Button:
-	return get_node("ItemButtons/Button" + str(button_index)) as Button
+	return get_node("MarginContainer/ItemButtons/Button" + str(button_index)) as Button
 
 
 func _on_ResetRotationButton_pressed():

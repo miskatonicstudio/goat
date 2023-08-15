@@ -1,4 +1,4 @@
-extends RayCast
+extends RayCast3D
 
 """
 Handles selecting and activating interactive objects, which includes e.g. light
@@ -8,9 +8,9 @@ switches or touch screens. There are currently 2 categories in use:
 """
 
 # Category associated with the raycast
-export (String) var category
+@export var category = ""
 # If false, alternative interaction will be ignored
-export (bool) var supports_alternative_interaction = true
+@export var supports_alternative_interaction = true
 
 
 func _input(_event):

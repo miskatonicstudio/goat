@@ -4,15 +4,15 @@ const SLIDE_TIME = 0.4
 const MOVEMENT_OFFSET = 70
 const MOVEMENT_RANGE = 80
 
-onready var animation_player = $AnimationPlayer
-onready var items = $Items
+@onready var animation_player = $AnimationPlayer
+@onready var items = $Items
 
 
 func _ready():
-	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
-	goat_inventory.connect("item_added", self, "_on_item_added")
-	goat_inventory.connect("item_replaced", self, "_on_item_replaced")
-	goat_inventory.connect("items_changed", self, "_on_items_changed")
+	goat.connect("game_mode_changed", self._on_game_mode_changed)
+	goat_inventory.connect("item_added", self._on_item_added)
+	goat_inventory.connect("item_replaced", self._on_item_replaced)
+	goat_inventory.connect("items_changed", self._on_items_changed)
 
 
 func _on_game_mode_changed(new_game_mode):
@@ -40,7 +40,7 @@ func _on_item_added(_item_name):
 		show()
 		if animation_player.is_playing():
 			var progress = SLIDE_TIME * (
-				MOVEMENT_OFFSET + items.rect_position.x
+				MOVEMENT_OFFSET + items.position.x
 			) / MOVEMENT_RANGE
 			animation_player.seek(progress, true)
 		else:

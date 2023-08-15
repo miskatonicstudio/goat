@@ -57,10 +57,10 @@ func _ready():
 	}
 	
 	for key in settings_signals_handlers:
-		connect(key, self, settings_signals_handlers[key])
+		connect(key, Callable(self, settings_signals_handlers[key]))
 	
 	# Make sure that settings are applied to new nodes
-	get_tree().connect("node_added", self, "_on_node_added")
+	get_tree().connect("node_added", self._on_node_added)
 	
 	# Make sure that initial values are loaded correctly
 	_on_fullscreen_settings_changed()
@@ -96,10 +96,10 @@ func find_matching_loaded_locale() -> String:
 	"""
 	var current_locale = TranslationServer.get_locale()
 	var loaded_locales = TranslationServer.get_loaded_locales()
-	var fallback_locale = ProjectSettings.get("locale/fallback")
+	var fallback_locale = ProjectSettings.get("internationalization/locale/fallback")
 	
 	# If no translations are provided, return fallback locale
-	if not loaded_locales:
+	if loaded_locales.is_empty():
 		return fallback_locale
 	
 	# If the exact locale is loaded, return it
@@ -122,7 +122,7 @@ func disable_for_html():
 
 
 func _on_fullscreen_settings_changed() -> void:
-	OS.window_fullscreen = get_value("graphics", "fullscreen_enabled")
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (get_value("graphics", "fullscreen_enabled")) else Window.MODE_WINDOWED
 
 
 func _on_music_settings_changed() -> void:
@@ -152,7 +152,7 @@ func _on_node_added(node: Node) -> void:
 		_update_single_environment_settings(node)
 
 
-func _update_single_lamp_settings(lamp: Light) -> void:
+func _update_single_lamp_settings(lamp: Light3D) -> void:
 	var shadows_enabled = get_value("graphics", "shadows_enabled")
 	lamp.shadow_enabled = shadows_enabled
 	# Specular light creates reflections, without shadows they look wrong
@@ -163,7 +163,7 @@ func _update_single_environment_settings(world_environment: WorldEnvironment) ->
 	var reflections_enabled = get_value("graphics", "reflections_enabled")
 	var glow_enabled = get_value("graphics", "glow_enabled")
 	var ao_enabled = get_value("graphics", "ao_enabled")
-	world_environment.environment.ss_reflections_enabled = reflections_enabled
+	world_environment.environment.ssr_enabled = reflections_enabled
 	world_environment.environment.glow_enabled = glow_enabled
 	world_environment.environment.ssao_enabled = ao_enabled
 

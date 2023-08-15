@@ -3,9 +3,9 @@ extends Node
 
 func list_directory(path):
 	var files = []
-	var dir = Directory.new()
-	if dir.open(path) == OK:
-		dir.list_dir_begin()
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
 			if not dir.current_is_dir():
@@ -17,8 +17,7 @@ func list_directory(path):
 
 
 func load_text_file(path):
-	var file = File.new()
-	file.open(path, File.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
 	file.close()
 	return content
@@ -27,14 +26,14 @@ func load_text_file(path):
 func add_translations(translation_directory_path):
 	for file in list_directory(translation_directory_path):
 		if file.ends_with(".translation"):
-			var translation = ResourceLoader.load(translation_directory_path + file)
-			TranslationServer.add_translation(translation)
+			var position = ResourceLoader.load(translation_directory_path + file)
+			TranslationServer.add_translation(position)
 	print("Translations added, source folder: " + translation_directory_path)
 
 
 func remove_translations(translation_directory_path):
 	for file in list_directory(translation_directory_path):
 		if file.ends_with(".translation"):
-			var translation = ResourceLoader.load(translation_directory_path + file)
-			TranslationServer.remove_translation(translation)
+			var position = ResourceLoader.load(translation_directory_path + file)
+			TranslationServer.remove_translation(position)
 	print("Translations removed, source folder: " + translation_directory_path)

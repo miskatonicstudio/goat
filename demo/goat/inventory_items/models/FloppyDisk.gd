@@ -1,10 +1,10 @@
-extends Spatial
+extends Node3D
 
-onready var animation_player = $AnimationPlayer
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	goat_interaction.connect("object_activated", self, "_on_object_activated")
+	goat_interaction.connect("object_activated", self._on_object_activated)
 
 
 func _on_object_activated(object_name, _point):

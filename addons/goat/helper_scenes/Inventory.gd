@@ -2,32 +2,31 @@ extends Control
 
 const SIDE_SCREEN_MARGIN = 80
 
-onready var viewport_container = $ViewportContainer
-onready var viewport = $ViewportContainer/Viewport
-onready var ray_cast = $ViewportContainer/Viewport/Inventory3D/Camera/RayCast3D
-onready var camera = $ViewportContainer/Viewport/Inventory3D/Camera
-onready var pivot = $ViewportContainer/Viewport/Inventory3D/Pivot
-onready var hidden_pivot = $ViewportContainer/Viewport/Inventory3D/HiddenPivot
-onready var inventory_items = $InventoryItems
-onready var tween = $Tween
+@onready var viewport_container = $SubViewportContainer
+@onready var viewport = $SubViewportContainer/SubViewport
+@onready var ray_cast = $SubViewportContainer/SubViewport/Inventory3D/Camera3D/RayCast3D
+@onready var camera = $SubViewportContainer/SubViewport/Inventory3D/Camera3D
+@onready var pivot = $SubViewportContainer/SubViewport/Inventory3D/Pivot
+@onready var hidden_pivot = $SubViewportContainer/SubViewport/Inventory3D/HiddenPivot
+@onready var inventory_items = $InventoryItems
 
 var original_mouse_position = null
 
 
 func _ready():
 	# Setting own_world here, otherwise 3D world will not be shown in Editor
-	viewport.own_world = true
+	viewport.own_world_3d = true
 	
-	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
-	goat_inventory.connect("item_selected", self, "_on_item_selected")
-	goat_inventory.connect("item_added", self, "_on_item_added")
-	goat_inventory.connect("item_removed", self, "_on_item_removed")
-	goat_inventory.connect("item_replaced", self, "_on_item_replaced")
-	goat_voice.connect("started", self, "_on_voice_changed")
-	goat_voice.connect("finished", self, "_on_voice_changed")
+	goat.connect("game_mode_changed", self._on_game_mode_changed)
+	goat_inventory.connect("item_selected", self._on_item_selected)
+	goat_inventory.connect("item_added", self._on_item_added)
+	goat_inventory.connect("item_removed", self._on_item_removed)
+	goat_inventory.connect("item_replaced", self._on_item_replaced)
+	goat_voice.connect("started", self._on_voice_changed)
+	goat_voice.connect("finished", self._on_voice_changed)
 	
 	inventory_items.connect(
-		"rotation_reset_requested", self, "_on_rotation_reset_requested"
+		"rotation_reset_requested", self._on_rotation_reset_requested
 	)
 
 
@@ -42,8 +41,8 @@ func _input(event):
 			var mouse_sensitivity = goat_settings.get_value(
 				"controls", "mouse_sensitivity"
 			)
-			var angle_horizontal = deg2rad(event.relative.x * mouse_sensitivity)
-			var angle_vertical = deg2rad(event.relative.y * mouse_sensitivity)
+			var angle_horizontal = deg_to_rad(event.relative.x * mouse_sensitivity)
+			var angle_vertical = deg_to_rad(event.relative.y * mouse_sensitivity)
 			selected_item.rotate_y(angle_horizontal)
 			selected_item.rotate_x(angle_vertical)
 	
@@ -77,7 +76,7 @@ func _disable_mouse():
 
 func _enable_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	Input.warp_mouse_position(original_mouse_position)
+	Input.warp_mouse(original_mouse_position)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	ray_cast.enabled = true
 
@@ -93,7 +92,7 @@ func _on_game_mode_changed(new_game_mode):
 
 
 func _on_item_added(item_name):
-	var added_item = goat_inventory.get_item_model(item_name).instance()
+	var added_item = goat_inventory.get_item_model(item_name).instantiate()
 	added_item.add_to_group("goat_inventory_items")
 	added_item.add_to_group("goat_inventory_item_" + item_name)
 	added_item.hide()
@@ -133,16 +132,13 @@ func _on_ViewportContainer_gui_input(event):
 	
 	if event is InputEventMouseMotion:
 		var ray_vector = camera.project_ray_normal(event.position)
-		ray_cast.cast_to = ray_vector * 4
+		ray_cast.target_position = ray_vector * 4
 
 
 func _on_rotation_reset_requested():
 	var selected_item = pivot.get_child(0)
-	tween.interpolate_property(
-		selected_item, "rotation_degrees", null, Vector3(), 0.5,
-		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
-	)
-	tween.start()
+	var tween = _create_tween()
+	tween.tween_property(selected_item, "rotation_degrees", Vector3(), 0.5)
 
 
 func _on_voice_changed(_audio_name):
@@ -153,3 +149,7 @@ func _on_voice_changed(_audio_name):
 		_disable_mouse()
 	else:
 		_enable_mouse()
+
+
+func _create_tween():
+	return create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)

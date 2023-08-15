@@ -1,16 +1,16 @@
 extends Control
 
-onready var screen_blank = $BlankScreen
-onready var screen_progress = $Background/ProgressBar
-onready var screen_upload = $Background/Upload
-onready var screen_why_not = $Background/WhyNot
-onready var screen_done = $Background/Done
-onready var timer = $Timer
-onready var animation_player = $AnimationPlayer
+@onready var screen_blank = $BlankScreen
+@onready var screen_progress = $Background/ProgressBar
+@onready var screen_upload = $Background/Upload
+@onready var screen_why_not = $Background/WhyNot
+@onready var screen_done = $Background/Done
+@onready var timer = $Timer
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	goat_state.connect("changed", self, "_on_game_state_changed")
+	goat_state.connect("changed", self._on_game_state_changed)
 	# For testing purpose
 	if owner == null:
 		animation_player.play("upload")

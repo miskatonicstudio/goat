@@ -1,13 +1,13 @@
-extends Spatial
+extends Node3D
 
-onready var led = $Button/Model/LED
-onready var animation_player = $AnimationPlayer
-onready var battery_insert_sound = $BatterySound
+@onready var led = $Button/Model/LED
+@onready var animation_player = $AnimationPlayer
+@onready var battery_insert_sound = $BatterySound
 
 
 func _ready():
-	goat_interaction.connect("object_activated", self, "_on_object_activated")
-	goat_inventory.connect("item_used", self, "_on_item_used")
+	goat_interaction.connect("object_activated", self._on_object_activated)
+	goat_inventory.connect("item_used", self._on_item_used)
 	led.material = led.material.duplicate()
 
 

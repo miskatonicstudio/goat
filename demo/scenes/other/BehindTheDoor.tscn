@@ -1,37 +1,38 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://dq7ldw8baw4f1"]
 
-[ext_resource path="res://demo/fonts/big_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://demo/materials/godot_text.material" type="Material" id=2]
-[ext_resource path="res://demo/scenes/other/BehindTheDoor.gd" type="Script" id=3]
-[ext_resource path="res://demo/materials/walls.material" type="Material" id=4]
+[ext_resource type="Material" uid="uid://c33xyd3yl5ita" path="res://demo/materials/godot_text.material" id="2"]
+[ext_resource type="Script" path="res://demo/scenes/other/BehindTheDoor.gd" id="3"]
+[ext_resource type="FontFile" uid="uid://dxkp5rfk21fkw" path="res://addons/goat/fonts/Tuffy.ttf" id="3_0xjia"]
+[ext_resource type="Material" path="res://demo/materials/walls.material" id="4"]
 
-[sub_resource type="TextMesh" id=1]
-text = "Godot 4"
-font = ExtResource( 1 )
+[sub_resource type="TextMesh" id="1"]
+text = "Godot 5"
+font = ExtResource("3_0xjia")
+font_size = 64
 depth = 0.1
 
-[sub_resource type="QuadMesh" id=2]
-size = Vector2( 5, 5 )
+[sub_resource type="QuadMesh" id="2"]
+size = Vector2(5, 5)
 
-[node name="BehindTheDoor" type="Spatial"]
-script = ExtResource( 3 )
+[node name="BehindTheDoor" type="Node3D"]
+script = ExtResource("3")
 
-[node name="Text" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21847, -0.83798 )
-material_override = ExtResource( 2 )
-mesh = SubResource( 1 )
+[node name="Text" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21847, -0.83798)
+material_override = ExtResource("2")
+mesh = SubResource("1")
 
-[node name="Background" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.999832, 0.0183249, 0, -0.0183249, 0.999832, 0, 0, -2 )
-material_override = ExtResource( 4 )
-mesh = SubResource( 2 )
+[node name="Background" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999832, 0.0183249, 0, -0.0183249, 0.999832, 0, 0, -2)
+material_override = ExtResource("4")
+mesh = SubResource("2")
 
-[node name="Light1" type="SpotLight" parent="."]
-transform = Transform( 0.866025, 0.288152, -0.408618, -0.0847521, 0.890008, 0.447998, 0.492765, -0.353347, 0.795191, -1, 1.69892, 0.995361 )
+[node name="Light1" type="SpotLight3D" parent="."]
+transform = Transform3D(0.866025, 0.288152, -0.408618, -0.0847521, 0.890008, 0.447998, 0.492765, -0.353347, 0.795191, -1, 1.69892, 0.995361)
 light_energy = 2.0
 spot_angle = 15.0
 
-[node name="Light2" type="SpotLight" parent="."]
-transform = Transform( 0.866025, -0.288152, 0.408618, 0.0847521, 0.890008, 0.447998, -0.492765, -0.353347, 0.795191, 1, 1.69892, 0.995361 )
+[node name="Light2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.866025, -0.288152, 0.408618, 0.0847521, 0.890008, 0.447998, -0.492765, -0.353347, 0.795191, 1, 1.69892, 0.995361)
 light_energy = 2.0
 spot_angle = 15.0

@@ -1,22 +1,19 @@
-[gd_resource type="Environment" load_steps=3 format=2]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dvmrow24o73ah"]
 
-[ext_resource path="res://addons/goat/images/intentory_background_light.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://dfxew4hiltrju" path="res://addons/goat/images/intentory_background_light.png" id="1_gs68m"]
 
-[sub_resource type="PanoramaSky" id=1]
-panorama = ExtResource( 1 )
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qyb8h"]
+panorama = ExtResource("1_gs68m")
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("PanoramaSkyMaterial_qyb8h")
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
-background_color = Color( 0.0980392, 0.227451, 0.435294, 1 )
-background_energy = 5.0
+background_color = Color(0.0980392, 0.227451, 0.435294, 1)
+background_energy_multiplier = 3.0
+sky = SubResource("1")
 tonemap_mode = 2
-ss_reflections_enabled = true
 ssao_enabled = true
-dof_blur_far_distance = 0.01
-dof_blur_far_transition = 0.01
-dof_blur_far_amount = 0.3
-dof_blur_far_quality = 2
 glow_enabled = true
 glow_blend_mode = 1
-glow_bicubic_upscale = true

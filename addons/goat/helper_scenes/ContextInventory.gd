@@ -2,17 +2,17 @@ extends Control
 
 const ITEM_BUTTON_PATH = "CenterContainer/Center/Item{index}/Button"
 
-onready var exit_button = $CenterContainer/ExitButton
+@onready var exit_button = $CenterContainer/ExitButton
 
 
 func _ready():
-	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
-	goat_inventory.connect("items_changed", self, "_on_items_changed")
+	goat.connect("game_mode_changed", self._on_game_mode_changed)
+	goat_inventory.connect("items_changed", self._on_items_changed)
 	
 	# Connect button signals
 	for i in range(goat_inventory.CAPACITY):
 		var item_button = get_node(ITEM_BUTTON_PATH.format({"index": i}))
-		item_button.connect("pressed", self, "_on_item_button_pressed", [i])
+		item_button.connect("pressed", self._on_item_button_pressed.bind(i))
 		item_button.disabled = true
 
 

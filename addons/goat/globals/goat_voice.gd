@@ -32,9 +32,9 @@ func _ready():
 	add_child(_audio_player)
 	add_child(_audio_timer)
 	_audio_player.bus = "GoatMusic"
-	_audio_player.connect("finished", self, "_on_audio_finished")
+	_audio_player.connect("finished", self._on_audio_finished)
 	_audio_timer.one_shot = true
-	_audio_timer.connect("timeout", self, "_on_audio_finished")
+	_audio_timer.connect("timeout", self._on_audio_finished)
 	
 	# TODO: allow for configuring this per game
 	goat_voice.connect_default(goat_inventory, "item_used")
@@ -98,9 +98,9 @@ func _register(
 		)
 		sound = load(sound_path)
 		# Disable loop mode
-		if sound is AudioStreamSample:
-			sound.loop_mode = AudioStreamSample.LOOP_DISABLED
-		elif sound is AudioStreamOGGVorbis:
+		if sound is AudioStreamWAV:
+			sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+		elif sound is AudioStreamOggVorbis:
 			sound.loop = false
 	
 	_audio_mapping[audio_name] = {
@@ -189,7 +189,7 @@ func connect_default(signal_object: Object, signal_name: String) -> void:
 	signal_name. This can be called several times to play default audio in
 	different situations.
 	"""
-	signal_object.connect(signal_name, self, "_schedule_default")
+	signal_object.connect(signal_name, self._schedule_default)
 
 
 func is_playing() -> bool:

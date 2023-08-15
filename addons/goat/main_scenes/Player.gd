@@ -1,18 +1,17 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var movement_direction = Vector3()
 
-onready var camera = $Camera
-onready var ray_cast = $Camera/RayCast3D
-onready var inventory = $Inventory
-onready var context_inventory = $ContextInventory
-onready var settings = $Settings
-onready var scope = $Scope
-onready var gravity_ray_cast = $GravityRayCast
-onready var tween = $Tween
-onready var collision_shape_standing = $CollisionShapeStanding
-onready var collision_shape_crouched = $CollisionShapeCrouched
-onready var area_standing = $AreaStanding
+@onready var camera = $Camera3D
+@onready var ray_cast = $Camera3D/RayCast3D
+@onready var inventory = $Inventory
+@onready var context_inventory = $ContextInventory
+@onready var settings = $Settings
+@onready var scope = $Scope
+@onready var gravity_ray_cast = $GravityRayCast
+@onready var collision_shape_standing = $CollisionShapeStanding
+@onready var collision_shape_crouched = $CollisionShapeCrouched
+@onready var area_standing = $AreaStanding
 
 
 func _ready():
@@ -23,12 +22,20 @@ func _ready():
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	goat.connect("game_mode_changed", self, "_on_game_mode_changed")
+	goat.connect("game_mode_changed", self._on_game_mode_changed)
 	goat_settings.connect(
-		"value_changed_gui_scope", self, "_on_scope_settings_changed"
+		"value_changed_gui_scope", self._on_scope_settings_changed
 	)
-	goat_voice.connect("started", self, "_on_voice_changed")
-	goat_voice.connect("finished", self, "_on_voice_changed")
+	goat_voice.connect("started", self._on_voice_changed)
+	goat_voice.connect("finished", self._on_voice_changed)
+	
+	RenderingServer.camera_attributes_set_dof_blur_quality(
+		RenderingServer.DOF_BLUR_QUALITY_HIGH, false
+	)
+	RenderingServer.camera_attributes_set_dof_blur_bokeh_shape(
+		RenderingServer.DOF_BOKEH_CIRCLE
+	)
+	RenderingServer.environment_glow_set_use_bicubic_upscale(true)
 
 
 func _input(event):
@@ -52,11 +59,8 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("goat_crouch"):
 		var new_height = collision_shape_crouched.shape.height - 0.1
-		tween.interpolate_property(
-			camera, "translation", null, Vector3(0, new_height, 0), 0.2,
-			Tween.TRANS_SINE, Tween.EASE_IN_OUT
-		)
-		tween.start()
+		var tween = _create_tween()
+		tween.tween_property(camera, "position:y", new_height, 0.2)
 		collision_shape_standing.disabled = true
 		collision_shape_crouched.disabled = false
 
@@ -66,22 +70,19 @@ func _physics_process(_delta):
 		return
 	
 	if movement_direction:
-		move_and_slide(
-			movement_direction * goat.PLAYER_SPEED, Vector3(0, 1, 0)
-		)
+		velocity = movement_direction * goat.PLAYER_SPEED
+		up_direction = Vector3(0, 1, 0)
+		move_and_slide()
 		_set_y()
 	
 	if collision_shape_standing.disabled:
 		if not Input.is_action_pressed("goat_crouch"):
 			var overlapping_bodies = area_standing.get_overlapping_bodies()
 			overlapping_bodies.erase(self)
-			if not overlapping_bodies:
+			if overlapping_bodies.is_empty():
 				var new_height = collision_shape_standing.shape.height - 0.1
-				tween.interpolate_property(
-					camera, "translation", null, Vector3(0, new_height, 0), 0.2,
-					Tween.TRANS_SINE, Tween.EASE_IN_OUT
-				)
-				tween.start()
+				var tween = _create_tween()
+				tween.tween_property(camera, "position:y", new_height, 0.2)
 				collision_shape_standing.disabled = false
 				collision_shape_crouched.disabled = true
 
@@ -91,7 +92,7 @@ func rotate_camera(relative_movement):
 		"controls", "mouse_sensitivity"
 	)
 	# Rotate horizontally
-	camera.rotate_y(deg2rad(relative_movement.x * mouse_sensitivity * -1))
+	camera.rotate_y(deg_to_rad(relative_movement.x * mouse_sensitivity * -1))
 	# Rotate vertically
 	var angle = -relative_movement.y * mouse_sensitivity
 	var camera_rot = camera.rotation_degrees
@@ -146,7 +147,7 @@ func _on_game_mode_changed(new_game_mode):
 	
 	update_scope_visibility()
 	ray_cast.enabled = exploring_mode
-	camera.get_world().environment.dof_blur_far_enabled = inventory_mode and not is_html
+	camera.attributes.dof_blur_far_enabled = inventory_mode and not is_html
 	
 	if exploring_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -171,10 +172,14 @@ func _set_y():
 	if goat.GRAVITY_ENABLED:
 		if gravity_ray_cast.is_colliding():
 			var point = gravity_ray_cast.get_collision_point()
-			translation.y = point.y
+			position.y = point.y
 	else:
-		translation.y = 0
+		position.y = 0
 
 
 func _on_GravityTimer_timeout():
 	_set_y()
+
+
+func _create_tween():
+	return create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)

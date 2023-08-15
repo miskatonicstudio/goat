@@ -1,6 +1,6 @@
 extends OptionButton
 
-onready var popup = get_popup()
+@onready var popup = get_popup()
 
 
 func _ready():
@@ -19,16 +19,23 @@ func _ready():
 		if locale == goat_settings.get_value("gui", "language"):
 			selected = index
 	
-	popup.set("custom_fonts/font", load("res://addons/goat/fonts/settings_font.tres"))
 	popup.set(
-		"custom_styles/hover",
-		load("res://addons/goat/styles/settings_language_hover.tres")
+		"theme_override_fonts/font",
+		self.get("theme_override_fonts/font")
 	)
 	popup.set(
-		"custom_styles/panel",
+		"theme_override_font_sizes/font_size",
+		self.get("theme_override_font_sizes/font_size")
+	)
+	popup.set(
+		"theme_override_styles/panel",
 		load("res://addons/goat/styles/settings_language_background.tres")
 	)
-	popup.set("custom_constants/vseparation", 12)
+	popup.set(
+		"theme_override_styles/hover",
+		load("res://addons/goat/styles/settings_language_hover.tres")
+	)
+	popup.set("theme_override_constants/v_separation", 12)
 
 
 func _on_SettingsLanguageButton_item_selected(id):
