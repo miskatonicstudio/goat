@@ -6,7 +6,9 @@
 games. It supports a simple inventory system, interacting with objects and screens,
 playing voice recordings with subtitles, and changing game settings.
 
-Full documentation is available on [readthedocs](https://miskatonicstudio-goat.readthedocs.io). 
+Full documentation is available on [readthedocs](https://miskatonicstudio-goat.readthedocs.io).
+
+> :warning: **Attention**: GOAT is going through a lot of changes right now. It just moved to Godot v4.1.1, and it became a plugin. Because of that, the documentation might be a bit outdated.
 
 ## Games made with GOAT
 
