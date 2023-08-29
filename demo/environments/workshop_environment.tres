@@ -1,17 +1,19 @@
-[gd_resource type="Environment" format=2]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://mr87rfxow7wc"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_fjgkm"]
+
+[sub_resource type="Sky" id="Sky_5c0o5"]
+sky_material = SubResource("PhysicalSkyMaterial_fjgkm")
 
 [resource]
-background_color = Color( 0.0980392, 0.227451, 0.435294, 1 )
-ambient_light_color = Color( 0.498039, 0.564706, 0.635294, 1 )
-ambient_light_energy = 0.6
+background_color = Color(0.0980392, 0.227451, 0.435294, 1)
+sky = SubResource("Sky_5c0o5")
+ambient_light_color = Color(0.498039, 0.564706, 0.635294, 1)
 ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.6
+reflected_light_source = 2
 tonemap_mode = 2
-ss_reflections_enabled = true
+ssr_enabled = true
 ssao_enabled = true
-dof_blur_far_distance = 0.01
-dof_blur_far_transition = 0.01
-dof_blur_far_amount = 0.3
-dof_blur_far_quality = 2
 glow_enabled = true
 glow_blend_mode = 1
-glow_bicubic_upscale = true

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ajdnlj7cg2l"]
+
+[ext_resource type="StyleBox" path="res://addons/goat/styles/settings_button_hover.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://dxkp5rfk21fkw" path="res://addons/goat/fonts/Tuffy.ttf" id="1_d0nrx"]
+[ext_resource type="StyleBox" path="res://addons/goat/styles/settings_button_normal.tres" id="3"]
+
+[node name="SettingsButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("1_d0nrx")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3")
+theme_override_styles/hover = ExtResource("1")
+theme_override_styles/pressed = ExtResource("1")
+theme_override_styles/focus = ExtResource("3")

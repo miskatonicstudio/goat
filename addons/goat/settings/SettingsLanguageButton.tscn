@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1gee0o3x4iw0"]
+
+[ext_resource type="StyleBox" path="res://addons/goat/styles/settings_button_hover.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://dxkp5rfk21fkw" path="res://addons/goat/fonts/Tuffy.ttf" id="1_5c5eu"]
+[ext_resource type="StyleBox" path="res://addons/goat/styles/settings_button_normal.tres" id="3"]
+[ext_resource type="Script" path="res://addons/goat/settings/SettingsLanguageButton.gd" id="4"]
+
+[sub_resource type="ImageTexture" id="1"]
+
+[node name="SettingsLanguageButton" type="OptionButton"]
+offset_right = 2.0
+offset_bottom = 8.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_5c5eu")
+theme_override_font_sizes/font_size = 20
+theme_override_icons/arrow = SubResource("1")
+theme_override_styles/normal = ExtResource("3")
+theme_override_styles/hover = ExtResource("1")
+theme_override_styles/pressed = ExtResource("1")
+script = ExtResource("4")
+
+[connection signal="item_selected" from="." to="." method="_on_SettingsLanguageButton_item_selected"]

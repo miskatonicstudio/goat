@@ -1,155 +1,150 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://d3w6yrmkg14h2"]
 
-[ext_resource path="res://demo/materials/metal_1.material" type="Material" id=1]
-[ext_resource path="res://demo/materials/wood.material" type="Material" id=2]
-[ext_resource path="res://demo/materials/metal_dark_2.material" type="Material" id=3]
-[ext_resource path="res://goat/main_scenes/DetailedInteraction.tscn" type="PackedScene" id=4]
-[ext_resource path="res://demo/scenes/other/BehindTheDoor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://goat/images/eye_icon.png" type="Texture" id=6]
-[ext_resource path="res://demo/scenes/other/Door.gd" type="Script" id=7]
-[ext_resource path="res://demo/materials/metal_dark_3.material" type="Material" id=8]
+[ext_resource type="Material" path="res://demo/materials/metal_1.material" id="1"]
+[ext_resource type="Material" path="res://demo/materials/wood.material" id="2"]
+[ext_resource type="Material" path="res://demo/materials/metal_dark_2.material" id="3"]
+[ext_resource type="PackedScene" uid="uid://cu0h1sgvx6e4j" path="res://addons/goat/main_scenes/DetailedInteraction.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dq7ldw8baw4f1" path="res://demo/scenes/other/BehindTheDoor.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://t1djd6j8iomg" path="res://addons/goat/images/eye_icon.png" id="6"]
+[ext_resource type="Script" path="res://demo/scenes/other/Door.gd" id="7"]
+[ext_resource type="Material" path="res://demo/materials/metal_dark_3.material" id="8"]
 
-[sub_resource type="QuadMesh" id=38]
-material = ExtResource( 3 )
-size = Vector2( 1.05, 2 )
+[sub_resource type="QuadMesh" id="38"]
+material = ExtResource("3")
+size = Vector2(1.05, 2)
 
-[sub_resource type="SphereMesh" id=39]
-material = ExtResource( 1 )
+[sub_resource type="SphereMesh" id="39"]
+material = ExtResource("1")
 radius = 0.05
 height = 0.1
 radial_segments = 6
 rings = 6
 
-[sub_resource type="SpatialMaterial" id=40]
-flags_transparent = true
-flags_unshaded = true
-flags_no_depth_test = true
-flags_fixed_size = true
-params_billboard_mode = 1
-albedo_texture = ExtResource( 6 )
+[sub_resource type="StandardMaterial3D" id="40"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = ExtResource("6")
+billboard_mode = 1
 
-[sub_resource type="CylinderMesh" id=41]
+[sub_resource type="CylinderMesh" id="41"]
 top_radius = 0.03
 bottom_radius = 0.035
 height = 0.005
 radial_segments = 8
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id="43"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("ActualDoor/CoverPivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id="42"]
 resource_name = "peek"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("ActualDoor/CoverPivot:rotation_degrees")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( -165, 0, 0 ) ]
+"values": [Vector3(0, 0, 0), Vector3(-165, 0, 0)]
 }
 
-[node name="Door" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.578, 0, 0 )
-script = ExtResource( 7 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f85ew"]
+_data = {
+"RESET": SubResource("43"),
+"peek": SubResource("42")
+}
 
-[node name="Frame" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0 )
+[node name="Door" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.578, 0, 0)
+script = ExtResource("7")
+
+[node name="Frame" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 operation = 2
 
-[node name="Outside" type="CSGBox" parent="Frame"]
-width = 0.2
-height = 2.1
-depth = 1.1
-material = ExtResource( 2 )
+[node name="Outside" type="CSGBox3D" parent="Frame"]
+size = Vector3(0.2, 2.1, 1.1)
+material = ExtResource("2")
 
-[node name="Hole" type="CSGBox" parent="Frame"]
+[node name="Hole" type="CSGBox3D" parent="Frame"]
 operation = 2
-width = 1.0
-depth = 1.0
-material = ExtResource( 2 )
+size = Vector3(1, 2, 1)
+material = ExtResource("2")
 
-[node name="ActualDoorMesh" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0556245, 1.03267, 0 )
+[node name="ActualDoorMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0556245, 1.03267, 0)
 visible = false
-mesh = SubResource( 38 )
+mesh = SubResource("38")
 
-[node name="Handle" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104, 1, 0.359 )
-mesh = SubResource( 39 )
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104, 1, 0.359)
+mesh = SubResource("39")
 
-[node name="ActualDoor" type="CSGCombiner" parent="."]
+[node name="ActualDoor" type="CSGCombiner3D" parent="."]
 
-[node name="Surface" type="CSGBox" parent="ActualDoor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04981, 0 )
-width = 0.04
-height = 2.005
-depth = 1.005
-material = ExtResource( 3 )
+[node name="Surface" type="CSGBox3D" parent="ActualDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04981, 0)
+size = Vector3(0.04, 2.005, 1.005)
+material = ExtResource("3")
 
-[node name="Ring" type="CSGCylinder" parent="ActualDoor"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.008389, 1.64567, 0 )
+[node name="Ring" type="CSGCylinder3D" parent="ActualDoor"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.008389, 1.64567, 0)
 radius = 0.035
 height = 0.07
 smooth_faces = false
-material = ExtResource( 8 )
+material = ExtResource("8")
 
-[node name="Hole" type="CSGCylinder" parent="ActualDoor"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.64567, 0 )
+[node name="Hole" type="CSGCylinder3D" parent="ActualDoor"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.64567, 0)
 operation = 2
 radius = 0.03
 height = 0.5
 smooth_faces = false
-material = ExtResource( 8 )
+material = ExtResource("8")
 
-[node name="DetailedInteraction" parent="ActualDoor" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0354674, 1.64567, 0 )
+[node name="DetailedInteraction" parent="ActualDoor" instance=ExtResource("4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0354674, 1.64567, 0)
 
 [node name="InteractiveItem" parent="ActualDoor/DetailedInteraction" index="0"]
 unique_name = "peek"
 
-[node name="RandomAudioPlayer" parent="ActualDoor/DetailedInteraction/InteractiveItem" index="1"]
-volume_min = 0
-volume_max = 0
-pitch_min = 1
-pitch_max = 1
-
 [node name="InteractionIcon" parent="ActualDoor/DetailedInteraction/InteractiveItem" index="2"]
-material_override = SubResource( 40 )
+material_override = SubResource("40")
 
-[node name="Camera" parent="ActualDoor/DetailedInteraction" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.037 )
+[node name="Camera3D" parent="ActualDoor/DetailedInteraction" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.037)
 
-[node name="CoverPivot" type="Spatial" parent="ActualDoor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0243497, 1.67567, 0 )
+[node name="CoverPivot" type="Node3D" parent="ActualDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0243497, 1.67567, 0)
 
-[node name="Pivot" type="MeshInstance" parent="ActualDoor/CoverPivot"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.00490475, -0.0300308, 0 )
-material_override = ExtResource( 8 )
-mesh = SubResource( 41 )
+[node name="Pivot" type="MeshInstance3D" parent="ActualDoor/CoverPivot"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.00490475, -0.0300308, 0)
+material_override = ExtResource("8")
+mesh = SubResource("41")
 
-[node name="BehindTheDoor" parent="." instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.30597, 1.64567, 8.00471e-14 )
+[node name="BehindTheDoor" parent="." instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.30597, 1.64567, 8.00471e-14)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 43 )
-anims/peek = SubResource( 42 )
+libraries = {
+"": SubResource("AnimationLibrary_f85ew")
+}
 
 [editable path="ActualDoor/DetailedInteraction"]
 [editable path="ActualDoor/DetailedInteraction/InteractiveItem"]

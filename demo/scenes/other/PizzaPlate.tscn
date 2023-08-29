@@ -1,25 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dwxvb72skx0g2"]
 
-[ext_resource path="res://demo/models/PizzaModel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://demo/sounds/pick_up.ogg" type="AudioStream" id=2]
-[ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://demo/models/PlateModel.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" uid="uid://dwccxragrr0vl" path="res://demo/models/PizzaModel.tscn" id="1"]
+[ext_resource type="AudioStream" uid="uid://d3so7gf6154dt" path="res://demo/sounds/pick_up.ogg" id="2"]
+[ext_resource type="PackedScene" uid="uid://bnmg0a564wwjp" path="res://addons/goat/main_scenes/InteractiveItem.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://060uce6xfw5p" path="res://demo/models/PlateModel.tscn" id="4"]
 
-[sub_resource type="CylinderShape" id=1]
-radius = 0.8
+[sub_resource type="CylinderShape3D" id="1"]
 height = 0.2
+radius = 0.8
 
-[node name="PizzaPlate" type="Spatial"]
+[node name="PizzaPlate" type="Node3D"]
 
-[node name="PlateModel" parent="." instance=ExtResource( 4 )]
+[node name="PlateModel" parent="." instance=ExtResource("4")]
 
-[node name="InteractiveItem" parent="PlateModel" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.214922, 0 )
+[node name="InteractiveItem" parent="PlateModel" instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.214922, 0)
 unique_name = "pizza_pickable"
 item_type = 2
 inventory_item_name = "pizza"
-collision_shape = SubResource( 1 )
-sounds = [ ExtResource( 2 ) ]
+collision_shape = SubResource("1")
+sounds = Array[AudioStream]([ExtResource("2")])
 
-[node name="Model" parent="PlateModel/InteractiveItem" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154955, 0.143883 )
+[node name="Model" parent="PlateModel/InteractiveItem" instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154955, 0.143883)

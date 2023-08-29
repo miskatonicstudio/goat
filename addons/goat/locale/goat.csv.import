@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bx3murrimvjkf"
+
+[deps]
+
+files=["res://addons/goat/locale/goat.en.translation", "res://addons/goat/locale/goat.de.translation", "res://addons/goat/locale/goat.pl.translation"]
+
+source_file="res://addons/goat/locale/goat.csv"
+dest_files=["res://addons/goat/locale/goat.en.translation", "res://addons/goat/locale/goat.de.translation", "res://addons/goat/locale/goat.pl.translation"]
+
+[params]
+
+compress=true
+delimiter=0

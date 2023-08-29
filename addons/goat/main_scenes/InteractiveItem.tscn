@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnmg0a564wwjp"]
+
+[ext_resource type="Script" path="res://addons/goat/main_scenes/InteractiveItem.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://2t38vrxwiv4l" path="res://addons/goat/images/item_interaction_icon.png" id="2"]
+[ext_resource type="Material" uid="uid://d20al6okuifpt" path="res://addons/goat/materials/item_interaction_icon.tres" id="3"]
+[ext_resource type="Script" path="res://addons/goat/addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" id="4"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="InteractiveItem" type="StaticBody3D" groups=["goat_interactive_objects"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1")
+collision_shape = SubResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="RandomAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+bus = &"GoatEffects"
+script = ExtResource("4")
+random_strategy = 1
+
+[node name="InteractionIcon" type="Sprite3D" parent="."]
+visible = false
+material_override = ExtResource("3")
+cast_shadow = 0
+pixel_size = 0.0002
+texture = ExtResource("2")
+
+[connection signal="finished" from="RandomAudioPlayer" to="." method="_on_RandomAudioPlayer_finished"]

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d0kxumkneiotn"
+
+[deps]
+
+files=["res://demo/goat/locale/2ma.en.translation", "res://demo/goat/locale/2ma.de.translation", "res://demo/goat/locale/2ma.pl.translation"]
+
+source_file="res://demo/goat/locale/2ma.csv"
+dest_files=["res://demo/goat/locale/2ma.en.translation", "res://demo/goat/locale/2ma.de.translation", "res://demo/goat/locale/2ma.pl.translation"]
+
+[params]
+
+compress=true
+delimiter=0

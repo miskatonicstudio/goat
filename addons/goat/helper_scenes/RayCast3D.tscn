@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhat28de4h0ds"]
+
+[ext_resource type="Script" path="res://addons/goat/helper_scenes/RayCast3D.gd" id="1"]
+
+[node name="RayCast3D" type="RayCast3D"]
+enabled = false
+target_position = Vector3(0, 0, -1)
+collision_mask = 2
+script = ExtResource("1")

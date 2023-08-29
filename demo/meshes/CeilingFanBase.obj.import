@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bducs4cbmw4ui"
+path="res://.godot/imported/CeilingFanBase.obj-a3d1fd96f7eb8e8318d3d4d817e36005.mesh"
+
+[deps]
+
+files=["res://.godot/imported/CeilingFanBase.obj-a3d1fd96f7eb8e8318d3d4d817e36005.mesh"]
+
+source_file="res://demo/meshes/CeilingFanBase.obj"
+dest_files=["res://.godot/imported/CeilingFanBase.obj-a3d1fd96f7eb8e8318d3d4d817e36005.mesh", "res://.godot/imported/CeilingFanBase.obj-a3d1fd96f7eb8e8318d3d4d817e36005.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

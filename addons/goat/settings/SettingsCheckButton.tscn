@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl2uahppnp2if"]
+
+[ext_resource type="FontFile" uid="uid://dxkp5rfk21fkw" path="res://addons/goat/fonts/Tuffy.ttf" id="1_eos8h"]
+[ext_resource type="Texture2D" uid="uid://bx7my5ir0ldon" path="res://addons/goat/images/settings_check_button_off.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cya3c77vxcnsp" path="res://addons/goat/images/settings_check_button_on.png" id="3"]
+[ext_resource type="Script" path="res://addons/goat/settings/SettingsCheckButton.gd" id="4"]
+
+[node name="SettingsCheckButton" type="CheckButton"]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1060.0
+offset_bottom = -598.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_eos8h")
+theme_override_font_sizes/font_size = 20
+theme_override_icons/checked = ExtResource("3")
+theme_override_icons/unchecked = ExtResource("2")
+script = ExtResource("4")
+
+[connection signal="pressed" from="." to="." method="_on_SettingsCheckButton_pressed"]

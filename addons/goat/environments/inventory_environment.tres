@@ -1,0 +1,19 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dvmrow24o73ah"]
+
+[ext_resource type="Texture2D" uid="uid://dfxew4hiltrju" path="res://addons/goat/images/intentory_background_light.png" id="1_gs68m"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qyb8h"]
+panorama = ExtResource("1_gs68m")
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("PanoramaSkyMaterial_qyb8h")
+
+[resource]
+background_mode = 2
+background_color = Color(0.0980392, 0.227451, 0.435294, 1)
+background_energy_multiplier = 3.0
+sky = SubResource("1")
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+glow_blend_mode = 1

@@ -11,4 +11,4 @@ func _input(_event):
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	get_tree().change_scene("res://demo/scenes/main/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://demo/scenes/main/MainMenu.tscn")

@@ -1,14 +1,14 @@
-extends Spatial
+extends Node3D
 
-onready var portal_light_material = $CSGTorus/LED.material
-onready var portal = $CSGTorus/Portal
-onready var the_other_side_sound = $CSGTorus/Portal/TheOtherSideSound
-onready var animation_player = $AnimationPlayer
+@onready var portal_light_material = $CSGTorus3D/LED.material
+@onready var portal = $CSGTorus3D/Portal
+@onready var the_other_side_sound = $CSGTorus3D/Portal/TheOtherSideSound
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	goat_interaction.connect("object_activated", self, "_on_object_activated")
-	goat_state.connect("changed", self, "_on_game_state_changed")
+	goat_interaction.connect("object_activated", self._on_object_activated)
+	goat_state.connect("changed", self._on_game_state_changed)
 
 
 func _on_object_activated(object_name, _point):
@@ -40,7 +40,7 @@ func _on_game_state_changed(variable_name, _from_value, to_value):
 			portal_light_material.emission = Color("21dada")
 			goat_state.set_value("portal_status", "open")
 			# Move the portal up, so it can be interacted with
-			portal.translation = Vector3(0, 0, 0)
+			portal.position = Vector3(0, 0, 0)
 			animation_player.play("portal_light")
 			the_other_side_sound.play()
 			# Exit inventory mode to show that the portal is active

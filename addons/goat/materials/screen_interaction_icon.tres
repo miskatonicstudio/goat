@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://caxu4373mg8oc"]
+
+[ext_resource type="Texture2D" uid="uid://di7l52lqhdn4k" path="res://addons/goat/images/screen_interaction_icon.png" id="1"]
+
+[resource]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = ExtResource("1")
+billboard_mode = 1
+fixed_size = true

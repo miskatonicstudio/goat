@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn6rhy2a7xbx5"]
+
+[ext_resource type="Texture2D" uid="uid://cdxcffk5chq6l" path="res://addons/goat/images/settings_slider_grabber.png" id="1"]
+[ext_resource type="StyleBox" path="res://addons/goat/styles/settings_grabber_area.tres" id="2"]
+[ext_resource type="StyleBox" path="res://addons/goat/styles/settings_slider.tres" id="3"]
+[ext_resource type="Script" path="res://addons/goat/settings/SettingsSlider.gd" id="4"]
+
+[node name="SettingsSlider" type="HSlider"]
+custom_minimum_size = Vector2(0, 16)
+offset_bottom = 16.0
+focus_mode = 0
+theme_override_icons/grabber = ExtResource("1")
+theme_override_icons/grabber_highlight = ExtResource("1")
+theme_override_icons/grabber_disabled = ExtResource("1")
+theme_override_styles/slider = ExtResource("3")
+theme_override_styles/grabber_area = ExtResource("2")
+min_value = -100.0
+step = 0.1
+script = ExtResource("4")
+
+[connection signal="value_changed" from="." to="." method="_on_SettingsSlider_value_changed"]

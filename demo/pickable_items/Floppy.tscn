@@ -1,25 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dpnas8j5wvmym"]
 
-[ext_resource path="res://demo/sounds/pick_up.ogg" type="AudioStream" id=1]
-[ext_resource path="res://demo/materials/floppy_body.material" type="Material" id=2]
-[ext_resource path="res://goat/main_scenes/InteractiveItem.tscn" type="PackedScene" id=3]
+[ext_resource type="AudioStream" uid="uid://d3so7gf6154dt" path="res://demo/sounds/pick_up.ogg" id="1"]
+[ext_resource type="Material" path="res://demo/materials/floppy_body.material" id="2"]
+[ext_resource type="PackedScene" uid="uid://bnmg0a564wwjp" path="res://addons/goat/main_scenes/InteractiveItem.tscn" id="3"]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.075, 0.01, 0.075 )
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.15, 0.02, 0.15)
 
-[sub_resource type="CubeMesh" id=2]
-material = ExtResource( 2 )
-size = Vector3( 0.15, 0.01, 0.15 )
+[sub_resource type="BoxMesh" id="2"]
+material = ExtResource("2")
+size = Vector3(0.15, 0.01, 0.15)
 
-[node name="Floppy" type="Spatial"]
+[node name="Floppy" type="Node3D"]
 
-[node name="InteractiveItem" parent="." instance=ExtResource( 3 )]
+[node name="InteractiveItem" parent="." instance=ExtResource("3")]
 unique_name = "floppy_disk_pickable"
 item_type = 2
 inventory_item_name = "floppy_disk"
-collision_shape = SubResource( 1 )
-sounds = [ ExtResource( 1 ) ]
+collision_shape = SubResource("1")
+sounds = Array[AudioStream]([ExtResource("1")])
 
-[node name="Model" type="MeshInstance" parent="InteractiveItem"]
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Model" type="MeshInstance3D" parent="InteractiveItem"]
+mesh = SubResource("2")
