@@ -53,10 +53,10 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
+[node name="Workshop" parent="." instance=ExtResource("3")]
+
 [node name="Player" parent="." instance=ExtResource("2")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 0)
-
-[node name="Workshop" parent="." instance=ExtResource("3")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
