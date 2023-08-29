@@ -38,6 +38,7 @@ disabled = true
 [node name="Camera3D" type="Camera3D" parent="." groups=["goat_cameras_player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 attributes = SubResource("CameraAttributesPractical_ku2yt")
+current = true
 
 [node name="RayCast3D" parent="Camera3D" instance=ExtResource("3")]
 target_position = Vector3(0, 0, -2)
