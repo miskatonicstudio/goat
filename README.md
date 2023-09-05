@@ -1,6 +1,6 @@
 <img src="./docs/img/logo_goat.png" alt="GOAT logo" width="128">
 
-# GOAT ![Godot v3.4](https://img.shields.io/badge/godot-v3.4.4-%23478cbf)
+# GOAT ![Godot v3.4](https://img.shields.io/badge/godot-v4.1.1-%23478cbf)
 
 **Godot Open Adventure Template (GOAT)** is a tool for making 3D adventure
 games. It supports a simple inventory system, interacting with objects and screens,
