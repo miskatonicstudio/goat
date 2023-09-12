@@ -1,0 +1,9 @@
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.readthedocs.yml   export-ignore
+/LICENSE            export-ignore
+/README.md          export-ignore
+/StartDemoGame.*    export-ignore
+/demo/              export-ignore
+/docs/              export-ignore
+/project.godot      export-ignore
