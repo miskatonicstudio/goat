@@ -4,6 +4,7 @@ var movement_direction = Vector3()
 
 @onready var camera = $Camera3D
 @onready var ray_cast = $Camera3D/RayCast3D
+@onready var hand = $Camera3D/Hand
 @onready var inventory = $Inventory
 @onready var context_inventory = $ContextInventory
 @onready var settings = $Settings
@@ -147,6 +148,7 @@ func _on_game_mode_changed(new_game_mode):
 	
 	update_scope_visibility()
 	ray_cast.enabled = exploring_mode
+	ray_cast.is_holding = _is_holding()
 	camera.attributes.dof_blur_far_enabled = inventory_mode and not is_html
 	
 	if exploring_mode:
@@ -183,3 +185,7 @@ func _on_GravityTimer_timeout():
 
 func _create_tween():
 	return create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+
+
+func _is_holding():
+	return hand.get_child_count() > 0

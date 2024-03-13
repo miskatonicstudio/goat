@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://csweohnkw3p3y"]
+[gd_scene load_steps=28 format=3 uid="uid://csweohnkw3p3y"]
 
 [ext_resource type="Script" path="res://demo/scenes/other/Desk.gd" id="1"]
 [ext_resource type="Material" path="res://demo/materials/desk.material" id="2"]
@@ -15,6 +15,9 @@
 [ext_resource type="Material" path="res://demo/materials/metal_dark_3.material" id="14"]
 [ext_resource type="PackedScene" uid="uid://dwxvb72skx0g2" path="res://demo/scenes/other/PizzaPlate.tscn" id="15"]
 [ext_resource type="ArrayMesh" uid="uid://b7q6g5ubgrqpi" path="res://demo/meshes/DeskFull.obj" id="15_6w55j"]
+[ext_resource type="ArrayMesh" uid="uid://b8x5b0fw54af" path="res://demo/meshes/cup.obj" id="16_0ui08"]
+[ext_resource type="Material" path="res://demo/materials/plastic_3.material" id="16_oxq2a"]
+[ext_resource type="Material" path="res://demo/materials/pizza_topping.material" id="17_kffpy"]
 
 [sub_resource type="Animation" id="8"]
 resource_name = "insert_floppy_disk"
@@ -44,6 +47,22 @@ size = Vector3(0.068, 0.932, 0.068)
 
 [sub_resource type="BoxShape3D" id="5"]
 size = Vector3(0.57, 0.282, 0.668)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dm4do"]
+height = 0.285
+radius = 0.065
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wevwn"]
+margin = 0.0
+size = Vector3(0.285, 0.01, 0.315)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vsirf"]
+margin = 0.0
+size = Vector3(0.285, 0.01, 0.16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5wl7b"]
+margin = 0.0
+size = Vector3(0.345, 0.01, 0.135)
 
 [node name="Desk" type="Node3D"]
 script = ExtResource("1")
@@ -110,5 +129,33 @@ transform = Transform3D(0.267001, 0.0810478, 3.54272e-09, 0, -1.21968e-08, 0.279
 
 [node name="PizzaPlate" parent="Model" instance=ExtResource("15")]
 transform = Transform3D(0.169524, 0, -0.183743, 0, 0.25, 0, 0.183743, 0, 0.169524, 0.840395, 0.81774, 0.346449)
+
+[node name="Cup" parent="Model" instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.126173, 0.822684, 0.398717)
+unique_name = "mug"
+item_type = 3
+collision_shape = SubResource("CylinderShape3D_dm4do")
+
+[node name="CupMesh" type="MeshInstance3D" parent="Model/Cup"]
+transform = Transform3D(0.0840711, 0, -0.0321255, 0, 0.09, 0, 0.0321255, 0, 0.0840711, 0, 0, 0)
+mesh = ExtResource("16_0ui08")
+surface_material_override/0 = ExtResource("17_kffpy")
+surface_material_override/1 = ExtResource("16_oxq2a")
+
+[node name="DeskSurface" type="StaticBody3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149113, 0.817966, 0.371788)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/DeskSurface"]
+shape = SubResource("BoxShape3D_wevwn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/DeskSurface"]
+transform = Transform3D(0.78617, 0, -0.618011, 0, 1, 0, 0.618011, 0, 0.78617, 0.207209, 0, 0.0108422)
+shape = SubResource("BoxShape3D_vsirf")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Model/DeskSurface"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3094, 0, 0.0900305)
+shape = SubResource("BoxShape3D_5wl7b")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

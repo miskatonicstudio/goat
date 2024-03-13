@@ -7,10 +7,19 @@ switches or touch screens. There are currently 2 categories in use:
 	* inventory (for objects in 3D inventory, e.g. a screen of a smartphone)
 """
 
+const COLLISION_MASK_NORMAL = 2
+const COLLISION_MASK_HOLDING = 4
+
 # Category associated with the raycast
 @export var category = ""
 # If false, alternative interaction will be ignored
 @export var supports_alternative_interaction = true
+@export var is_holding = false : set = _set_is_holding
+
+
+func _set_is_holding(value):
+	is_holding = value
+	collision_mask = COLLISION_MASK_HOLDING if is_holding else COLLISION_MASK_NORMAL
 
 
 func _input(_event):
@@ -21,7 +30,10 @@ func _input(_event):
 	_detect_interactive_objects()
 	
 	if Input.is_action_just_pressed("goat_interact"):
-		goat_interaction.activate_object(category)
+		if is_holding:
+			_put_down_hand_item()
+		else:
+			goat_interaction.activate_object(category)
 	
 	if Input.is_action_just_pressed("goat_interact_alternatively"):
 		if supports_alternative_interaction:
@@ -50,3 +62,11 @@ func _detect_interactive_objects():
 
 func _is_interaction_enabled():
 	return enabled and not goat_voice.is_playing()
+
+
+func _put_down_hand_item():
+	var collider = get_collider()
+	if collider:
+		var point = get_collision_point()
+		var hand = get_tree().get_nodes_in_group("goat_player_hand")[0]
+		hand.get_child(0)._put_down(collider, point)

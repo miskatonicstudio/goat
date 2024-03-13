@@ -43,7 +43,7 @@ It was created by [Tim Krief](https://timkrief.com/) and is licensed under
 
 ### Models
 
-Pizza slice and plate models were created by [Quaternius](quaternius.com)
+Pizza slice, plate, and cup models were created by [Quaternius](quaternius.com)
 and are available in the [Ultimate Food Pack](https://drive.google.com/drive/folders/1zMfN7q9VU80M7mLAbBBJyY2OdoXslbl1?usp=sharing)
 distributed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 

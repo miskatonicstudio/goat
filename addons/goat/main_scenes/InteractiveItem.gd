@@ -13,6 +13,7 @@ enum ItemType {
 	NORMAL,
 	SINGLE_USE,
 	INVENTORY,
+	HAND,
 }
 
 @export var unique_name: String
@@ -89,6 +90,9 @@ func _on_object_activated(object_name, _point):
 		goat_inventory.add_item(inventory_item_name)
 		# Hide the item, but keep it until the sound is played
 		hide()
+	elif item_type == ItemType.HAND:
+		goat_voice.prevent_default()
+		_pick_up()
 
 
 func _on_object_activated_alternatively(object_name, _point):
@@ -144,3 +148,69 @@ func _set_enabled(enabled):
 		collision_mask = 0
 		remove_from_group("goat_interactive_objects")
 		interaction_icon.hide()
+
+
+func _pick_up():
+	var hand = get_tree().get_nodes_in_group("goat_player_hand")[0]
+	var orig_transform = global_transform
+	
+	get_parent().remove_child(self)
+	hand.add_child(self)
+	
+	var tween = create_tween()
+	tween.tween_property(self, "global_transform", orig_transform, 0)
+	tween.tween_property(self, "global_transform", hand.global_transform, 0.2)
+	tween.tween_callback(self._put_in_hand)
+	
+	# Force raycast update
+	goat.game_mode = goat.GameMode.EXPLORING
+
+
+func _put_in_hand():
+	"""
+	Player can move while an item is placed in its hand. This method ensures that,
+	at the end of interpolation, the item will end up exacly at the hand's position.
+	"""
+	var hand = get_tree().get_nodes_in_group("goat_player_hand")[0]
+	global_transform = hand.global_transform
+
+
+func _put_down(surface: Node3D, global_point: Vector3):
+	"""
+	Removes this item from Player's hand and places it in the `global_point`,
+	as a child of `surface`.
+	"""
+	var hand = get_tree().get_nodes_in_group("goat_player_hand")[0]
+	assert(self.item_type == self.ItemType.HAND)
+	assert(get_parent() == hand)
+	
+	# Create a temp node, to easily read final position and rotation
+	var temp_node = Node3D.new()
+	surface.add_child(temp_node)
+	temp_node.position = surface.to_local(global_point)
+	temp_node.global_rotation = Vector3(0, hand.global_rotation.y, 0)
+	var dest_position = temp_node.global_position
+	var dest_rotation = temp_node.global_rotation
+	var dest_scale = Vector3(1, 1, 1)
+	temp_node.queue_free()
+	
+	var orig_transform = global_transform
+	hand.remove_child(self)
+	surface.add_child(self)
+	
+	var tween = create_tween()
+	# Item has a new parent, but the interpolation should start from the same global point
+	tween.tween_property(self, "global_transform", orig_transform, 0)
+	# Interpolate rotation and position rather than global_transform, for smooth movement
+	tween.tween_property(self, "global_rotation", dest_rotation, 0)
+	tween.tween_property(self, "global_position", dest_position, 0.2)
+	# Activate the item once it is placed on the surface
+	tween.tween_callback(self._set_enabled.bind(true))
+	
+	# Scale has to be interpolated simultaneously
+	var tween_scale = create_tween()
+	tween_scale.tween_property(self, "scale", hand.scale, 0)
+	tween_scale.tween_property(self, "scale", dest_scale, 0.2)
+	
+	# Force raycast update
+	goat.game_mode = goat.GameMode.EXPLORING

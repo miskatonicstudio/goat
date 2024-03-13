@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d231l5hpiajco"]
+[gd_scene load_steps=10 format=3 uid="uid://d231l5hpiajco"]
 
 [ext_resource type="Material" path="res://demo/materials/plastic_red.material" id="1"]
 [ext_resource type="PackedScene" uid="uid://b5e6fvdkibwsy" path="res://demo/pickable_items/Battery.tscn" id="2"]
@@ -10,6 +10,10 @@
 
 [sub_resource type="BoxShape3D" id="10"]
 size = Vector3(1.632, 2.418, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fr5v0"]
+margin = 0.0
+size = Vector3(1.525, 0.01, 0.712)
 
 [node name="Shelf1" type="Node3D"]
 
@@ -42,3 +46,11 @@ transform = Transform3D(0.636794, 0, -0.771034, 0, 1, 0, 0.771034, 0, 0.636794, 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1911, -0.12659)
 shape = SubResource("10")
+
+[node name="ShelfSurface2" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShelfSurface2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17408, -0.12053)
+shape = SubResource("BoxShape3D_fr5v0")
