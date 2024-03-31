@@ -49,7 +49,7 @@ size = Vector3(0.068, 0.932, 0.068)
 size = Vector3(0.57, 0.282, 0.668)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dm4do"]
-height = 0.285
+height = 0.215
 radius = 0.065
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wevwn"]
@@ -136,6 +136,16 @@ unique_name = "mug"
 item_type = 3
 collision_shape = SubResource("CylinderShape3D_dm4do")
 
+[node name="CollisionShape3D" parent="Model/Cup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.107678, 0)
+shape = SubResource("CylinderShape3D_dm4do")
+
+[node name="RandomAudioPlayer" parent="Model/Cup" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108, 0)
+
+[node name="InteractionIcon" parent="Model/Cup" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108, 0)
+
 [node name="CupMesh" type="MeshInstance3D" parent="Model/Cup"]
 transform = Transform3D(0.0840711, 0, -0.0321255, 0, 0.09, 0, 0.0321255, 0, 0.0840711, 0, 0, 0)
 mesh = ExtResource("16_0ui08")
@@ -159,3 +169,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3094, 0, 0.0900305)
 shape = SubResource("BoxShape3D_5wl7b")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="Model/Cup"]
