@@ -26,8 +26,9 @@ func load_all():
 	var models_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/inventory_items/models/"
 	var files = goat_utils.list_directory(models_directory)
 	for file in files:
-		if file.ends_with(".tscn"):
-			var item_name = file.replace(".tscn", "").get_basename()
+		# Exported PCK file uses ".tscn.remap"
+		if file.ends_with(".tscn") or file.ends_with(".tscn.remap"):
+			var item_name = file.replace(".remap", "").replace(".tscn", "").get_basename()
 			# Convert to snake_case
 			item_name = "_".join(item_name.capitalize().split(" ")).to_lower()
 			_register_item(item_name)
