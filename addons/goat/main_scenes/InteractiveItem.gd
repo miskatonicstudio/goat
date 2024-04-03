@@ -29,6 +29,7 @@ enum ItemType {
 
 const COLLISION_MASK_LAYER = 2
 
+var _orig_cast_shadow_settings = {}
 
 func _ready():
 	# This would make it easier to find the item
@@ -44,6 +45,10 @@ func _ready():
 	goat_interaction.connect(
 		"object_activated_alternatively", self._on_object_activated_alternatively
 	)
+	# Store original `cast_shadow` settings of all geometry instances
+	for child in get_children():
+		if is_instance_of(child, GeometryInstance3D):
+			_orig_cast_shadow_settings[child] = child.cast_shadow
 
 
 func set_collision_shape(new_shape):
@@ -171,6 +176,7 @@ func _put_in_hand():
 	Player can move while an item is placed in its hand. This method ensures that,
 	at the end of interpolation, the item will end up exacly at the hand's position.
 	"""
+	_set_cast_shadow(false)
 	var hand = get_tree().get_nodes_in_group("goat_player_hand")[0]
 	global_transform = hand.global_transform
 
@@ -180,6 +186,7 @@ func _put_down(surface: Node3D, global_point: Vector3):
 	Removes this item from Player's hand and places it in the `global_point`,
 	as a child of `surface`.
 	"""
+	_set_cast_shadow(true)
 	var hand = get_tree().get_nodes_in_group("goat_player_hand")[0]
 	assert(self.item_type == self.ItemType.HAND)
 	assert(get_parent() == hand)
@@ -214,3 +221,12 @@ func _put_down(surface: Node3D, global_point: Vector3):
 	
 	# Force raycast update
 	goat.game_mode = goat.GameMode.EXPLORING
+
+
+func _set_cast_shadow(enabled: bool):
+	for child in _orig_cast_shadow_settings.keys():
+		if enabled:
+			# Restore the original `cast_shadow` value
+			child.cast_shadow = _orig_cast_shadow_settings[child]
+		else:
+			child.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://doqif1otr0lur"]
+[gd_scene load_steps=14 format=3 uid="uid://doqif1otr0lur"]
 
 [ext_resource type="Material" uid="uid://euqiwxxgn8j3" path="res://demo/materials/led_red.material" id="1"]
 [ext_resource type="Script" path="res://demo/scenes/other/Generator.gd" id="2"]
@@ -16,6 +16,9 @@ size = Vector3(0.5, 1.2, 1.6)
 
 [sub_resource type="BoxShape3D" id="4"]
 size = Vector3(0.46114, 1.41039, 1.5932)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqgpo"]
+size = Vector3(0.162, 0.01, 1.49)
 
 [node name="Generator" type="Node3D"]
 script = ExtResource("2")
@@ -49,3 +52,12 @@ stream = ExtResource("6")
 volume_db = -16.0
 unit_size = 1.0
 bus = &"GoatEffects"
+
+[node name="GeneratorSurface" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104206, 1.08372, 0)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GeneratorSurface"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011238, 0, 0)
+shape = SubResource("BoxShape3D_jqgpo")
