@@ -1,7 +1,7 @@
 extends Control
 
-@onready var text_box = $TextBox
-@onready var text = $TextBox/Label
+@onready var text_box = $MarginContainer
+@onready var text = $MarginContainer/Label
 
 
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 func show_subtitles(audio_name):
 	"""Show a bottom bar with subtitles"""
 	text.text = goat_voice.get_transcript(audio_name)
-	if goat_settings.get_value("gui", "subtitles"):
+	if goat_settings.get_value("gui", "subtitles") and text.text:
 		text_box.show()
 
 
