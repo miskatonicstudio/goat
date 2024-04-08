@@ -26,6 +26,7 @@ mesh = SubResource("3")
 [node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true
 canvas_item_default_texture_filter = 2
+render_target_update_mode = 4
 
 [node name="InteractionIcon" type="Sprite3D" parent="."]
 visible = false
