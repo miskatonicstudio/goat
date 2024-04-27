@@ -32,7 +32,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 
 func _on_Yes_pressed():
 	goat_state.set_value("coords_uploaded", true)
-	goat_voice.play("coords_uploaded")
+	goat_voice.start_dialogue("coords_uploaded")
 	screen_upload.hide()
 	screen_done.show()
 

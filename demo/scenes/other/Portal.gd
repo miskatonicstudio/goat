@@ -20,9 +20,9 @@ func _on_object_activated(object_name, _point):
 		
 		if goat_state.get_value("food_eaten"):
 			goat_state.set_value("portal_status", "entered")
-			goat_voice.play("another_world_awaits")
+			goat_voice.start_dialogue("another_world_awaits")
 		else:
-			goat_voice.play("eat_something_first")
+			goat_voice.start_dialogue("eat_something_first")
 
 
 func _on_game_state_changed(variable_name, _from_value, to_value):
@@ -45,4 +45,4 @@ func _on_game_state_changed(variable_name, _from_value, to_value):
 			the_other_side_sound.play()
 			# Exit inventory mode to show that the portal is active
 			goat.game_mode = goat.GameMode.EXPLORING
-			goat_voice.play("finally_active")
+			goat_voice.start_dialogue("finally_active")

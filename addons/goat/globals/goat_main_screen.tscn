@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://06esj32ky2yf"]
+
+[node name="GOATMainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialogues" type="VBoxContainer" parent="TabContainer" groups=["goat_dialogue_manager_container"]]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DialogueManagerCredits" type="HBoxContainer" parent="TabContainer/Dialogues"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Dialogues/DialogueManagerCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "For dialogues, GOAT currently uses an embedded version of the"
+vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="TabContainer/Dialogues/DialogueManagerCredits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Dialogue Manager"
+uri = "https://github.com/nathanhoad/godot_dialogue_manager"

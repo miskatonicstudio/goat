@@ -41,6 +41,8 @@ GOAT uses an addon called Random Audio Stream Player, which can be downloaded fr
 It was created by [Tim Krief](https://timkrief.com/) and is licensed under
 [MIT license](https://gitlab.com/timkrief/godot-random-audio-stream-player/-/blob/master/LICENSE.txt)
 
+For dialogues, GOAT uses an embedded version of [Dialogue Manager](https://github.com/nathanhoad/godot_dialogue_manager) created by [Nathan Hoad](https://nathanhoad.net/) and licensed under the [MIT license](https://github.com/nathanhoad/godot_dialogue_manager/blob/main/LICENSE).
+
 ### Models
 
 Pizza slice, plate, and cup models were created by [Quaternius](quaternius.com)

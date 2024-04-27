@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1ehbq5f80uyy"]
+
+[ext_resource type="Script" path="res://addons/goat/dialogues/goat_voice_dialogue.gd" id="1_gj17r"]
+
+[node name="GoatVoiceDialogue" type="Node"]
+script = ExtResource("1_gj17r")

@@ -1,0 +1,73 @@
+# TODO: add an actual dialogue
+~ assistant
+This is a digital assistant.
+What should I do with it?
+- Hello?
+	Hello!
+	=> END
+- Could you please turn on the generator? [if not goat_state.get_value("power_on")]
+	=> turn_on_power
+- [Take a closer look] => what_for
+- [Leave it alone] => END
+=> END
+
+~ turn_on_power
+No problem!
+do goat_state.set_value("power_on", true)
+=> END
+
+# Original goat_voice "audio"
+
+~ another_world_awaits
+another_world_awaits
+=> END
+
+~ but_why
+but_why
+=> END
+
+~ coords_uploaded
+coords_uploaded
+=> END
+
+~ eat_something_first
+eat_something_first
+=> END
+
+~ finally_active
+finally_active
+=> END
+
+~ just_a_few_steps
+just_a_few_steps
+=> END
+
+~ pizza_eaten
+pizza_eaten
+=> END
+
+~ power_it_up_first
+power_it_up_first
+=> END
+
+~ this_doesnt_make_sense
+this_doesnt_make_sense
+=> END
+
+~ upload_coords_first
+upload_coords_first
+=> END
+
+~ useless_without_battery
+useless_without_battery
+=> END
+
+~ what_for
+what_for
+=> END
+
+~ floppy_on_monitor
+better_way
+look_around
+find_something
+=> END

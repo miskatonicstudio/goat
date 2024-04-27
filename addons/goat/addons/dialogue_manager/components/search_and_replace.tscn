@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://gr8nakpbrhby"]
+
+[ext_resource type="Script" path="res://addons/goat/addons/dialogue_manager/components/search_and_replace.gd" id="1_8oj1f"]
+
+[node name="SearchAndReplace" type="VBoxContainer"]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_8oj1f")
+
+[node name="Search" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="Search"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Text to search for"
+metadata/_edit_use_custom_anchors = true
+
+[node name="MatchCaseCheckBox" type="CheckBox" parent="Search"]
+layout_mode = 2
+text = "Match case"
+
+[node name="VSeparator" type="VSeparator" parent="Search"]
+layout_mode = 2
+
+[node name="PreviousButton" type="Button" parent="Search"]
+layout_mode = 2
+tooltip_text = "Previous"
+flat = true
+
+[node name="ResultLabel" type="Label" parent="Search"]
+layout_mode = 2
+text = "0 of 0"
+
+[node name="NextButton" type="Button" parent="Search"]
+layout_mode = 2
+tooltip_text = "Next"
+flat = true
+
+[node name="VSeparator2" type="VSeparator" parent="Search"]
+layout_mode = 2
+
+[node name="ReplaceCheckButton" type="CheckButton" parent="Search"]
+layout_mode = 2
+text = "Replace"
+
+[node name="Replace" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="ReplaceLabel" type="Label" parent="Replace"]
+layout_mode = 2
+text = "Replace with:"
+
+[node name="Input" type="LineEdit" parent="Replace"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReplaceButton" type="Button" parent="Replace"]
+layout_mode = 2
+disabled = true
+text = "Replace"
+flat = true
+
+[node name="ReplaceAllButton" type="Button" parent="Replace"]
+layout_mode = 2
+disabled = true
+text = "Replace all"
+flat = true
+
+[connection signal="theme_changed" from="." to="." method="_on_search_and_replace_theme_changed"]
+[connection signal="visibility_changed" from="." to="." method="_on_search_and_replace_visibility_changed"]
+[connection signal="focus_entered" from="Search/Input" to="." method="_on_input_focus_entered"]
+[connection signal="gui_input" from="Search/Input" to="." method="_on_input_gui_input"]
+[connection signal="text_changed" from="Search/Input" to="." method="_on_input_text_changed"]
+[connection signal="toggled" from="Search/MatchCaseCheckBox" to="." method="_on_match_case_check_box_toggled"]
+[connection signal="pressed" from="Search/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="Search/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="toggled" from="Search/ReplaceCheckButton" to="." method="_on_replace_check_button_toggled"]
+[connection signal="focus_entered" from="Replace/Input" to="." method="_on_input_focus_entered"]
+[connection signal="gui_input" from="Replace/Input" to="." method="_on_input_gui_input"]
+[connection signal="pressed" from="Replace/ReplaceButton" to="." method="_on_replace_button_pressed"]
+[connection signal="pressed" from="Replace/ReplaceAllButton" to="." method="_on_replace_all_button_pressed"]

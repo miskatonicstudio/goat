@@ -14,6 +14,7 @@ enum ItemType {
 	SINGLE_USE,
 	INVENTORY,
 	HAND,
+	DIALOGUE,
 }
 
 @export var unique_name: String
@@ -81,6 +82,11 @@ func _on_object_deselected(object_name):
 
 func _on_object_activated(object_name, _point):
 	if object_name != unique_name:
+		return
+	
+	if item_type == ItemType.DIALOGUE:
+#		# TODO: use a dedicated field for this
+		goat_voice.start_dialogue(inventory_item_name)
 		return
 	
 	# Items other than NORMAL can only be used once
