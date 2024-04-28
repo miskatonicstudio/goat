@@ -9,7 +9,7 @@ func _ready():
 	animation_player.connect("animation_finished", self.animation_finished)
 	
 	animation_player.play("start_game")
-	goat_voice.play("just_a_few_steps")
+	goat_voice.start_dialogue("just_a_few_steps")
 	goat.game_mode = goat.GameMode.EXPLORING
 
 

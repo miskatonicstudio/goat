@@ -10,35 +10,88 @@ environment sounds or background music.
 
 signal started (audio_name)
 signal finished (audio_name)
+signal responses (responses)
 
-# Actual audio player
-var _audio_player := AudioStreamPlayer.new()
-var _audio_timer := Timer.new()
 # Delays playing the default audio, so it can be replaced by a specific one
 var _default_audio_scheduled := false
 # Sound files and transcripts associated with audio names
 var _audio_mapping := {}
-# Currently playing sound, required for sending a signal when finished/skipped
-var _currently_playing_audio_name = null
 # List of audio names to play if a meaningless action is performed
 var _default_audio_names := []
-# Sequence of audio names to play next
-var _current_audio_names_sequence := []
+
+# TODO: document new variables
+var _waiting_for_response = false
+var _temporary_game_states: Array = []
+var _current_dialogue_resource = null
+var _current_dialogue_line = null
+var _dialogue_timer := Timer.new()
+var _dialogue_audio_player := AudioStreamPlayer.new()
+
+
+func start_dialogue(dialogue_name):
+	prevent_default()
+	assert (goat.GAME_RESOURCES_DIRECTORY)
+	var path = goat.GAME_RESOURCES_DIRECTORY + "/goat/dialogues/goat.dialogue"
+	Engine.get_singleton("DialogueManager").show_dialogue_balloon(
+		load(path), dialogue_name
+	)
+
+
+func start(dialogue_resource, title, extra_game_states = []) -> void:
+	"""This is a hook for Dialogue Manager"""
+	_temporary_game_states =  [self] + extra_game_states
+	_current_dialogue_resource = dialogue_resource
+	_process_dialogue_line(title)
+
+
+func select_response(response):
+	_process_dialogue_line(response.next_id)
+	_waiting_for_response = false
+
+
+func _process_dialogue_line(line_id):
+	if _current_dialogue_line:
+		if _current_dialogue_line.responses and not _waiting_for_response:
+			# Don't finish the dialogue until a response is selected
+			_waiting_for_response = true
+			responses.emit(_current_dialogue_line.responses)
+			return
+		finished.emit(_current_dialogue_line.text)
+	_current_dialogue_line = _current_dialogue_resource.get_next_dialogue_line(
+		line_id, _temporary_game_states
+	)
+	if _current_dialogue_line:
+		var line_text = _current_dialogue_line.text
+		var key = _current_dialogue_line.translation_key
+		var time = max(1.0, len(line_text) * 0.1)
+		if key in _audio_mapping:
+			if _audio_mapping[key]["sound"]:
+				_dialogue_audio_player.stream = _audio_mapping[key]["sound"]
+				_dialogue_audio_player.play()
+			if _audio_mapping[key]["time"]:
+				time = _dialogue_audio_player.stream.get_length()
+		_dialogue_timer.start(time)
+		started.emit(line_text)
+	else:
+		_current_dialogue_resource = null
+
+
+func _on_dialogue_finished():
+	_process_dialogue_line(_current_dialogue_line.next_id)
 
 
 func _ready():
 	# Randomize to get better results when playing random audio
 	randomize()
-	add_child(_audio_player)
-	add_child(_audio_timer)
-	_audio_player.bus = "GoatMusic"
-	_audio_player.connect("finished", self._on_audio_finished)
-	_audio_timer.one_shot = true
-	_audio_timer.connect("timeout", self._on_audio_finished)
+	add_child(_dialogue_timer)
+	add_child(_dialogue_audio_player)
+	_dialogue_audio_player.bus = "GoatMusic"
+	_dialogue_timer.one_shot = true
+	_dialogue_timer.connect("timeout", self._on_dialogue_finished)
 	
 	# TODO: allow for configuring this per game
-	goat_voice.connect_default(goat_inventory, "item_used")
-	goat_voice.connect_default(goat_interaction, "object_activated")
+	goat_voice.connect_default(goat_inventory.item_used)
+	goat_voice.connect_default(goat_interaction.object_activated)
 
 
 func _process(_delta):
@@ -61,22 +114,19 @@ func load_all():
 			if not OS.is_debug_build():
 				var actual_file = file.replace(".import", "")
 				var basename = actual_file.get_basename()
-				_register(actual_file, basename)
+				_register(actual_file)
 			else:
 				continue
 		var basename = file.get_basename()
 		if file.ends_with(".txt"):
 			var content = goat_utils.load_text_file(voice_directory + file)
 			var seconds = float(content.strip_edges())
-			_register(basename, basename, seconds)
+			_register(basename, seconds)
 		else:
-			_register(file, basename)
+			_register(file)
 
 
-func _register(
-	audio_file_name: String, transcript: String, time: float = 0,
-	audio_name = null
-) -> void:
+func _register(audio_file_name: String, time: float = 0) -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
 	from the `voice` directory. By default the name of the registered audio will
@@ -86,8 +136,7 @@ func _register(
 	Instead, it will register the transcript and the duration is should be
 	"played" (for the purpose of showing the subtitles).
 	"""
-	if audio_name == null:
-		audio_name = audio_file_name.get_file().get_basename()
+	var audio_name = audio_file_name.get_file().get_basename()
 	assert(not _audio_mapping.has(audio_name))
 	
 	var sound = null
@@ -102,67 +151,35 @@ func _register(
 			sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
 		elif sound is AudioStreamOggVorbis:
 			sound.loop = false
+		time = sound.get_length()
 	
-	_audio_mapping[audio_name] = {
-		"transcript": transcript, "time": time, "sound": sound
-	}
+	_audio_mapping[audio_name] = {"time": time, "sound": sound}
 
 
 func clear() -> void:
-	_audio_player.stop()
-	_audio_timer.stop()
+	_dialogue_audio_player.stop()
+	_dialogue_timer.stop()
 	_default_audio_scheduled = false
 	_audio_mapping = {}
-	_currently_playing_audio_name = null
 	_default_audio_names = []
-	_current_audio_names_sequence = []
-
-
-func play(audio_names) -> void:
-	"""
-	Plays an audio file with the given name. If an array of names is given,
-	chooses one at random.
-	"""
-	_current_audio_names_sequence = []
-	prevent_default()
-	var audio_name: String;
-	if audio_names is Array:
-		audio_name = audio_names[randi() % audio_names.size()]
-	else:
-		audio_name = audio_names
-	assert(audio_name in _audio_mapping)
-	_currently_playing_audio_name = audio_name
-	
-	_play(audio_name)
-
-
-func play_sequence(audio_names_sequence: Array) -> void:
-	"""
-	Plays a sequence of audio files with given names. The first file on the list
-	is played immediately, each next is played after the previous file is played
-	fully or is interrupted. The sequence sends normal `goat_voice` signals
-	(`started`, `finished`) for each audio name on the list.
-	"""
-	prevent_default()
-	assert(audio_names_sequence)
-	audio_names_sequence = audio_names_sequence.duplicate()
-	var first_audio_name = audio_names_sequence.pop_front()
-	_current_audio_names_sequence = audio_names_sequence
-	_play(first_audio_name)
 
 
 func play_default() -> void:
 	"""Plays one of the default audio files"""
 	if _default_audio_names:
-		play(_default_audio_names)
+		var dialogue_name = _default_audio_names[
+			randi() % _default_audio_names.size()
+		]
+		start_dialogue(dialogue_name)
 	_default_audio_scheduled = false
 
 
 func stop() -> void:
 	if is_playing():
-		_audio_player.stop()
-		_audio_timer.stop()
-		_stop()
+		_dialogue_audio_player.stop()
+		_dialogue_timer.stop()
+	if _current_dialogue_resource and not _waiting_for_response:
+		_process_dialogue_line(_current_dialogue_line.next_id)
 
 
 func prevent_default() -> void:
@@ -178,22 +195,16 @@ func set_default_audio_names(default_audio_names: Array) -> void:
 	_default_audio_names = default_audio_names
 
 
-func get_transcript(audio_name: String) -> String:
-	"""Returns localized transcript associated with the given audio name"""
-	return tr(_audio_mapping[audio_name]["transcript"])
-
-
-func connect_default(signal_object: Object, signal_name: String) -> void:
+func connect_default(trigger_signal: Signal) -> void:
 	"""
-	Configures default audio files to be played when signal_object emits
-	signal_name. This can be called several times to play default audio in
-	different situations.
+	Configures default audio files to be played when trigger_signal is emitted.
+	Can be called several times to play default audio in different situations.
 	"""
-	signal_object.connect(signal_name, self._schedule_default)
+	trigger_signal.connect(self._schedule_default)
 
 
 func is_playing() -> bool:
-	return _audio_player.playing or not _audio_timer.is_stopped()
+	return _current_dialogue_resource != null
 
 
 func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null) -> void:
@@ -203,32 +214,3 @@ func _schedule_default(_arg1=null, _arg2=null, _arg3=null, _arg4=null) -> void:
 	method to handle different signals.
 	"""
 	_default_audio_scheduled = true
-
-
-func _on_audio_finished() -> void:
-	# Stopped audio player emits a signal, but the timer might still be active
-	if not is_playing():
-		_stop()
-
-
-func _play(audio_name: String) -> void:
-	"""Plays a single audio file with the given name"""
-	if _audio_mapping[audio_name]["time"]:
-		_audio_timer.start(_audio_mapping[audio_name]["time"])
-	else:
-		_audio_player.stream = _audio_mapping[audio_name]["sound"]
-		_audio_player.play()
-	emit_signal("started", audio_name)
-
-
-func _stop() -> void:
-	"""
-	Resets currently playing audio name, sends `finished` signal. If there is
-	another audio name in a sequence, plays it.
-	"""
-	var currently_playing_audio_name = _currently_playing_audio_name
-	_currently_playing_audio_name = null
-	emit_signal("finished", currently_playing_audio_name)
-	
-	if _current_audio_names_sequence:
-		_play(_current_audio_names_sequence.pop_front())

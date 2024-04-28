@@ -11,16 +11,14 @@ func _ready():
 func _on_item_used(item_name, used_on_name):
 	if item_name == "floppy_disk" and used_on_name == "computer":
 		if not goat_state.get_value("power_on"):
-			goat_voice.play("power_it_up_first")
+			goat_voice.start_dialogue("power_it_up_first")
 			return
 		goat_inventory.remove_item("floppy_disk")
 		animation_player.play("insert_floppy_disk")
 		floppy_insert_sound.play()
 		goat_voice.prevent_default()
 	if item_name == "floppy_disk" and used_on_name == "monitor":
-		goat_voice.play_sequence(
-			["better_way", "look_around", "find_something"]
-		)
+		goat_voice.start_dialogue("floppy_on_monitor")
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

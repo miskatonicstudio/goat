@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dlu16aettx6hs"
+path="res://.godot/imported/goat.dialogue-737dfa8d36bc636d5824c2011c261d58.tres"
+
+[deps]
+
+source_file="res://demo/goat/dialogues/goat.dialogue"
+dest_files=["res://.godot/imported/goat.dialogue-737dfa8d36bc636d5824c2011c261d58.tres"]
+
+[params]
+
+defaults=true

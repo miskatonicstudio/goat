@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dre8nrrhjj83j"]
+[gd_scene load_steps=14 format=3 uid="uid://dre8nrrhjj83j"]
 
 [ext_resource type="Material" path="res://demo/materials/rubber.material" id="1"]
 [ext_resource type="ArrayMesh" uid="uid://bi8s14eviywg4" path="res://demo/meshes/Shelf2Full.obj" id="1_qjnr3"]
@@ -8,9 +8,25 @@
 [ext_resource type="Material" uid="uid://ckmkmtrh01byl" path="res://demo/materials/wood_shiny.material" id="5"]
 [ext_resource type="Material" path="res://demo/materials/metal_dark_3.material" id="6"]
 [ext_resource type="Material" path="res://demo/materials/metal_3.material" id="7"]
+[ext_resource type="PackedScene" uid="uid://bnmg0a564wwjp" path="res://addons/goat/main_scenes/InteractiveItem.tscn" id="9_f4nto"]
 
 [sub_resource type="BoxShape3D" id="4"]
 size = Vector3(1.662, 2.446, 0.734)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mxdkj"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_41av5"]
+top_radius = 0.11
+bottom_radius = 0.11
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mlfdt"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.02
 
 [node name="Shelf2" type="Node3D"]
 
@@ -32,3 +48,23 @@ transform = Transform3D(0.932454, 0, 0.361289, 0, 1, 0, -0.361289, 0, 0.932454, 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20528, -0.118702)
 shape = SubResource("4")
+
+[node name="Assistant" parent="." instance=ExtResource("9_f4nto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406935, 1.34626, -0.363159)
+unique_name = "assistant"
+item_type = 4
+inventory_item_name = "assistant"
+
+[node name="Case" type="MeshInstance3D" parent="Assistant"]
+material_override = ExtResource("1")
+mesh = SubResource("CylinderMesh_mxdkj")
+
+[node name="Light" type="MeshInstance3D" parent="Assistant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175472, 0)
+material_override = ExtResource("4")
+mesh = SubResource("CylinderMesh_41av5")
+
+[node name="Top" type="MeshInstance3D" parent="Assistant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201912, 0)
+material_override = ExtResource("1")
+mesh = SubResource("CylinderMesh_mlfdt")

@@ -17,11 +17,11 @@ func _on_object_activated(object_name, _point):
 		if goat_state.get_value("battery_inserted"):
 			goat_state.set_value("red_button_pressed", true)
 			if goat_state.get_value("portal_status") == "not_ready":
-				goat_voice.play("upload_coords_first")
+				goat_voice.start_dialogue("upload_coords_first")
 			else:
 				goat_voice.prevent_default()
 		else:
-			goat_voice.play("useless_without_battery")
+			goat_voice.start_dialogue("useless_without_battery")
 
 
 func _on_item_used(item_name, used_on_name):

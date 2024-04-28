@@ -2,9 +2,13 @@
 extends EditorPlugin
 
 
+var main_screen_instance
+# Embedded plugins
+var random_audio_stream_player
+var dialogue_manager
+
+
 func _enter_tree():
-	load_plugins()
-	
 	add_goat_actions()
 	add_goat_audio_buses()
 	
@@ -19,6 +23,11 @@ func _enter_tree():
 	add_autoload_singleton("goat_interaction", "res://addons/goat/globals/goat_interaction.gd")
 	add_autoload_singleton("goat_voice", "res://addons/goat/globals/goat_voice.gd")
 	add_autoload_singleton("goat_settings", "res://addons/goat/globals/goat_settings.gd")
+	
+	main_screen_instance = load("res://addons/goat/globals/goat_main_screen.tscn").instantiate()
+	get_editor_interface().get_editor_main_screen().add_child(main_screen_instance)
+	_make_visible(false)
+	load_plugins()
 
 
 func _exit_tree():
@@ -38,6 +47,22 @@ func _exit_tree():
 	remove_goat_actions()
 	
 	clear_plugins()
+	
+	if main_screen_instance:
+		main_screen_instance.queue_free()
+
+
+func _has_main_screen():
+	return true
+
+
+func _make_visible(visible):
+	if main_screen_instance:
+		main_screen_instance.visible = visible
+
+
+func _get_plugin_name():
+	return "GOAT"
 
 
 func add_goat_audio_buses():
@@ -59,10 +84,18 @@ func remove_goat_actions():
 
 
 func load_plugins():
-	load("res://addons/goat/addons/randomAudioStreamPlayer/random_audio.gd").new()._enter_tree()
+	random_audio_stream_player = load(
+		"res://addons/goat/addons/randomAudioStreamPlayer/random_audio.gd"
+	).new()
+	random_audio_stream_player._enter_tree()
+	dialogue_manager = load(
+		"res://addons/goat/addons/dialogue_manager/plugin.gd"
+	).new()
+	dialogue_manager._enter_tree()
 	print("Additional plugins loaded")
 
 
 func clear_plugins():
-	load("res://addons/goat/addons/randomAudioStreamPlayer/random_audio.gd").new()._exit_tree()
+	dialogue_manager._exit_tree()
+	random_audio_stream_player._exit_tree()
 	print("Additional plugins cleared")
