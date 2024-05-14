@@ -14,6 +14,8 @@ func _ready():
 	goat_inventory.connect("item_selected", self._on_item_selected)
 	goat_inventory.connect("items_changed", self._on_items_changed)
 	
+	_on_items_changed(goat_inventory.get_items())
+	
 	# Connect button signals
 	for i in range(goat_inventory.CAPACITY):
 		var item_button = _get_item_button(i)
