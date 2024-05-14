@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://c71lihh2x14rw"]
+
+[ext_resource type="Script" path="res://demo/scenes/main/showcase.gd" id="1_d35xd"]
+[ext_resource type="PackedScene" uid="uid://c4lmhavj60tqh" path="res://addons/goat/main_scenes/Player.tscn" id="1_vuqcq"]
+[ext_resource type="PackedScene" uid="uid://4p0oak4fouaq" path="res://demo/scenes/other/door_with_handle.tscn" id="2_mngc5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g5jfv"]
+
+[sub_resource type="Sky" id="Sky_5erbx"]
+sky_material = SubResource("ProceduralSkyMaterial_g5jfv")
+
+[sub_resource type="Environment" id="Environment_vle6u"]
+background_mode = 2
+sky = SubResource("Sky_5erbx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kqon3"]
+size = Vector2(20, 20)
+
+[node name="Showcase" type="Node3D"]
+script = ExtResource("1_d35xd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vle6u")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_kqon3")
+
+[node name="Player" parent="." instance=ExtResource("1_vuqcq")]
+
+[node name="DoorWithHandle" parent="." instance=ExtResource("2_mngc5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
+
+[node name="InteractiveItem" parent="DoorWithHandle/Handle" index="0"]
+unique_name = "open_2_minute_adventure"
+
+[editable path="DoorWithHandle"]

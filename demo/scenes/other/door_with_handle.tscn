@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://4p0oak4fouaq"]
+
+[ext_resource type="Material" path="res://demo/materials/wood.material" id="1_hoxei"]
+[ext_resource type="Material" path="res://demo/materials/metal_dark_2.material" id="2_rc2ct"]
+[ext_resource type="Material" path="res://demo/materials/metal_1.material" id="3_n4gla"]
+[ext_resource type="PackedScene" uid="uid://bnmg0a564wwjp" path="res://addons/goat/main_scenes/InteractiveItem.tscn" id="4_5aaj1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bvu7q"]
+size = Vector3(1.1, 2.1, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mslb6"]
+size = Vector3(1.05, 2.05, 0.02)
+
+[sub_resource type="SphereMesh" id="SphereMesh_f7nr1"]
+radius = 0.05
+height = 0.1
+radial_segments = 6
+rings = 6
+
+[node name="DoorWithHandle" type="Node3D"]
+
+[node name="Frame" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+material_override = ExtResource("1_hoxei")
+
+[node name="Outer" type="CSGBox3D" parent="Frame"]
+size = Vector3(1.1, 2.1, 0.2)
+
+[node name="Inner" type="CSGBox3D" parent="Frame"]
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Frame"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/StaticBody3D"]
+shape = SubResource("BoxShape3D_bvu7q")
+
+[node name="Surface" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+material_override = ExtResource("2_rc2ct")
+mesh = SubResource("BoxMesh_mslb6")
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359, 1, 0.0998543)
+material_override = ExtResource("3_n4gla")
+mesh = SubResource("SphereMesh_f7nr1")
+
+[node name="InteractiveItem" parent="Handle" instance=ExtResource("4_5aaj1")]
+unique_name = "door_handle"

@@ -37,6 +37,8 @@ func _ready():
 		RenderingServer.DOF_BOKEH_CIRCLE
 	)
 	RenderingServer.environment_glow_set_use_bicubic_upscale(true)
+	
+	goat.game_mode = goat.GameMode.EXPLORING
 
 
 func _input(event):

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3w6yrmkg14h2"]
+[gd_scene load_steps=17 format=3 uid="uid://d3w6yrmkg14h2"]
 
 [ext_resource type="Material" path="res://demo/materials/metal_1.material" id="1"]
 [ext_resource type="Material" path="res://demo/materials/wood.material" id="2"]
 [ext_resource type="Material" path="res://demo/materials/metal_dark_2.material" id="3"]
 [ext_resource type="PackedScene" uid="uid://cu0h1sgvx6e4j" path="res://addons/goat/main_scenes/DetailedInteraction.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dq7ldw8baw4f1" path="res://demo/scenes/other/BehindTheDoor.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bnmg0a564wwjp" path="res://addons/goat/main_scenes/InteractiveItem.tscn" id="5_0705d"]
 [ext_resource type="Texture2D" uid="uid://t1djd6j8iomg" path="res://addons/goat/images/eye_icon.png" id="6"]
 [ext_resource type="Script" path="res://demo/scenes/other/Door.gd" id="7"]
 [ext_resource type="Material" path="res://demo/materials/metal_dark_3.material" id="8"]
@@ -95,6 +96,9 @@ mesh = SubResource("38")
 [node name="Handle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104, 1, 0.359)
 mesh = SubResource("39")
+
+[node name="InteractiveItem" parent="Handle" instance=ExtResource("5_0705d")]
+unique_name = "open_showcase"
 
 [node name="ActualDoor" type="CSGCombiner3D" parent="."]
 

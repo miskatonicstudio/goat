@@ -33,6 +33,9 @@ const COLLISION_MASK_LAYER = 2
 var _orig_cast_shadow_settings = {}
 
 func _ready():
+	if ("_activated_" + unique_name) in goat_state._variables and item_type == ItemType.INVENTORY:
+		queue_free()
+		return
 	# This would make it easier to find the item
 	add_to_group("goat_interactive_object_" + unique_name)
 	collision_shape_node.shape = collision_shape
@@ -99,6 +102,7 @@ func _on_object_activated(object_name, _point):
 		# INVENTORY items should not play default audio
 		goat_voice.prevent_default()
 		goat_inventory.add_item(inventory_item_name)
+		goat_state._register_variable("_activated_" + unique_name, true)
 		# Hide the item, but keep it until the sound is played
 		hide()
 	elif item_type == ItemType.HAND:

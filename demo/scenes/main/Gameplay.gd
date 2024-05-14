@@ -8,9 +8,10 @@ func _ready():
 	goat_state.connect("changed", self._on_game_state_changed)
 	animation_player.connect("animation_finished", self.animation_finished)
 	
-	animation_player.play("start_game")
-	goat_voice.start_dialogue("just_a_few_steps")
-	goat.game_mode = goat.GameMode.EXPLORING
+	if not goat_state.get_value("intro_played"):
+		animation_player.play("start_game")
+		goat_voice.start_dialogue("just_a_few_steps")
+		goat_state.set_value("intro_played", true)
 
 
 func _on_game_state_changed(variable_name, _from_value, to_value):

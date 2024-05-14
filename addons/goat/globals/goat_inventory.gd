@@ -56,6 +56,7 @@ func _register_item(item_name: String) -> void:
 	_config[item_name] = {
 		"icon_path": icon_path,
 		"model": model_path,
+		"transform": Transform3D(),
 	}
 
 

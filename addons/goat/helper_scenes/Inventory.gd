@@ -28,6 +28,7 @@ func _ready():
 	inventory_items.connect(
 		"rotation_reset_requested", self._on_rotation_reset_requested
 	)
+	_initialize_inventory_items()
 
 
 func _input(event):
@@ -45,6 +46,7 @@ func _input(event):
 			var angle_vertical = deg_to_rad(event.relative.y * mouse_sensitivity)
 			selected_item.rotate_y(angle_horizontal)
 			selected_item.rotate_x(angle_vertical)
+			goat_inventory._config[selected_item_name]["transform"] = selected_item.transform
 	
 	if Input.is_action_just_pressed("goat_rotate_inventory"):
 		_disable_mouse()
@@ -91,12 +93,20 @@ func _on_game_mode_changed(new_game_mode):
 		hide()
 
 
+func _initialize_inventory_items():
+	for item_name in goat_inventory.get_items():
+		_on_item_added(item_name)
+	
+	_on_item_selected(goat_inventory.get_selected_item())
+
+
 func _on_item_added(item_name):
 	var added_item = goat_inventory.get_item_model(item_name).instantiate()
 	added_item.add_to_group("goat_inventory_items")
 	added_item.add_to_group("goat_inventory_item_" + item_name)
 	added_item.hide()
 	hidden_pivot.add_child(added_item)
+	added_item.transform = goat_inventory._config[item_name]["transform"]
 
 
 func _on_item_selected(item_name):
