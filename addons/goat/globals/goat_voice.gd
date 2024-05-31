@@ -50,16 +50,23 @@ func select_response(response):
 
 
 func _process_dialogue_line(line_id):
+	var previous_dialogue_text = null
 	if _current_dialogue_line:
 		if _current_dialogue_line.responses and not _waiting_for_response:
 			# Don't finish the dialogue until a response is selected
 			_waiting_for_response = true
 			responses.emit(_current_dialogue_line.responses)
 			return
-		finished.emit(_current_dialogue_line.text)
+		previous_dialogue_text = _current_dialogue_line.text
 	_current_dialogue_line = _current_dialogue_resource.get_next_dialogue_line(
 		line_id, _temporary_game_states
 	)
+	if not _current_dialogue_line:
+		_current_dialogue_resource = null
+	
+	if previous_dialogue_text:
+		finished.emit(previous_dialogue_text)
+	
 	if _current_dialogue_line:
 		var line_text = _current_dialogue_line.text
 		var key = _current_dialogue_line.translation_key
@@ -69,11 +76,9 @@ func _process_dialogue_line(line_id):
 				_dialogue_audio_player.stream = _audio_mapping[key]["sound"]
 				_dialogue_audio_player.play()
 			if _audio_mapping[key]["time"]:
-				time = _dialogue_audio_player.stream.get_length()
+				time = _audio_mapping[key]["time"]
 		_dialogue_timer.start(time)
 		started.emit(line_text)
-	else:
-		_current_dialogue_resource = null
 
 
 func _on_dialogue_finished():
