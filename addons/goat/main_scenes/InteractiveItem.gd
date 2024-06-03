@@ -36,6 +36,10 @@ func _ready():
 	if ("_activated_" + unique_name) in goat_state._variables and item_type == ItemType.INVENTORY:
 		queue_free()
 		return
+	
+	if ("_put_down_" + unique_name) in goat_state._variables and item_type == ItemType.HAND:
+		global_transform = goat_state.get_value("_put_down_" + unique_name)
+	
 	# This would make it easier to find the item
 	add_to_group("goat_interactive_object_" + unique_name)
 	collision_shape_node.shape = collision_shape
@@ -209,6 +213,8 @@ func _put_down(surface: Node3D, global_point: Vector3):
 	var dest_position = temp_node.global_position
 	var dest_rotation = temp_node.global_rotation
 	var dest_scale = Vector3(1, 1, 1)
+	# Store the location where this item was placed
+	goat_state._register_variable("_put_down_" + unique_name, temp_node.global_transform)
 	temp_node.queue_free()
 	
 	var orig_transform = global_transform
