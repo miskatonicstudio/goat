@@ -5,10 +5,16 @@ signal changed (variable_name, from_value, to_value)
 var _variables := {}
 
 
-func load_all():
-	assert (goat.GAME_RESOURCES_DIRECTORY)
+func _init():
+	_load()
+
+
+func _load():
+	if not goat.get_game_resources_directory():
+		print("No game state loaded from JSON")
+		return
 	# TODO: load saved game from file
-	var state_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/state/"
+	var state_directory = goat.get_game_resources_directory() + "/goat/state/"
 	var files = goat_utils.list_directory(state_directory)
 	for file in files:
 		if file.ends_with(".json"):
@@ -35,11 +41,7 @@ func set_value(variable_name: String, value) -> void:
 	emit_signal("changed", variable_name, previous_value, value)
 
 
-func clear() -> void:
-	_variables = {}
-
-
 func reset() -> void:
 	# TODO: store initial values and use them for resetting
-	clear()
-	load_all()
+	_variables = {}
+	_load()

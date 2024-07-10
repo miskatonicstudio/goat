@@ -30,8 +30,9 @@ var _dialogue_audio_player := AudioStreamPlayer.new()
 
 func start_dialogue(dialogue_name):
 	prevent_default()
-	assert (goat.GAME_RESOURCES_DIRECTORY)
-	var path = goat.GAME_RESOURCES_DIRECTORY + "/goat/dialogues/goat.dialogue"
+	var game_resources_directory = goat.get_game_resources_directory()
+	assert (game_resources_directory, "No game resources directory is configured")
+	var path = game_resources_directory + "/goat/dialogues/goat.dialogue"
 	Engine.get_singleton("DialogueManager").show_dialogue_balloon(
 		load(path), dialogue_name
 	)
@@ -109,9 +110,11 @@ func _input(_event):
 		stop()
 
 
-func load_all():
-	assert (goat.GAME_RESOURCES_DIRECTORY)
-	var voice_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/voice/"
+func _init():
+	if not goat.get_game_resources_directory():
+		print("No voice loaded")
+		return
+	var voice_directory = goat.get_game_resources_directory() + "/goat/voice/"
 	var files = goat_utils.list_directory(voice_directory)
 	for file in files:
 		if file.ends_with(".import"):
@@ -148,7 +151,7 @@ func _register(audio_file_name: String, time: float = 0) -> void:
 	
 	if not time:
 		var sound_path := "{}/goat/voice/{}".format(
-			[goat.GAME_RESOURCES_DIRECTORY, audio_file_name], "{}"
+			[goat.get_game_resources_directory(), audio_file_name], "{}"
 		)
 		sound = load(sound_path)
 		# Disable loop mode
@@ -159,14 +162,6 @@ func _register(audio_file_name: String, time: float = 0) -> void:
 		time = sound.get_length()
 	
 	_audio_mapping[audio_name] = {"time": time, "sound": sound}
-
-
-func clear() -> void:
-	_dialogue_audio_player.stop()
-	_dialogue_timer.stop()
-	_default_audio_scheduled = false
-	_audio_mapping = {}
-	_default_audio_names = []
 
 
 func play_default() -> void:

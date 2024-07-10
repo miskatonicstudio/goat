@@ -21,9 +21,11 @@ var _selected_item = null
 var _config := {}
 
 
-func load_all():
-	assert (goat.GAME_RESOURCES_DIRECTORY)
-	var models_directory = goat.GAME_RESOURCES_DIRECTORY + "/goat/inventory_items/models/"
+func _init():
+	if not goat.get_game_resources_directory():
+		print("No inventory items loaded")
+		return
+	var models_directory = goat.get_game_resources_directory() + "/goat/inventory_items/models/"
 	var files = goat_utils.list_directory(models_directory)
 	for file in files:
 		# Exported PCK file uses ".tscn.remap"
@@ -44,12 +46,12 @@ func _register_item(item_name: String) -> void:
 	assert(not _config.has(item_name))
 	
 	var icon_path := "{}/goat/inventory_items/icons/{}.png".format(
-		[goat.GAME_RESOURCES_DIRECTORY, item_name], "{}"
+		[goat.get_game_resources_directory(), item_name], "{}"
 	)
 	# Comply with Godot scene naming standards
 	var model_name := item_name.capitalize().replace(" ", "")
 	var model_path := "{}/goat/inventory_items/models/{}.tscn".format(
-		[goat.GAME_RESOURCES_DIRECTORY, model_name], "{}"
+		[goat.get_game_resources_directory(), model_name], "{}"
 	)
 	
 	# Do not load models yet, just keep the paths
@@ -88,13 +90,6 @@ func get_item_icon(item_name: String):
 func get_item_model(item_name: String):
 	"""Returns a 3D model (scene) associated with the given item"""
 	return load(_config[item_name]["model"])
-
-
-func clear() -> void:
-	"""Clears inventory items and configuration"""
-	_items.clear()
-	_selected_item = null
-	_config = {}
 
 
 func reset() -> void:

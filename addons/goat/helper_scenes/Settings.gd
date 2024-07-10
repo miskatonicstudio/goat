@@ -3,9 +3,12 @@ extends Control
 
 func _ready():
 	goat.connect("game_mode_changed", self._on_game_mode_changed)
-	var settings_scene = load(
-		goat.GAME_RESOURCES_DIRECTORY + "/goat/scenes/Settings.tscn"
-	).instantiate()
+	
+	var settings_scene_path = "res://addons/goat/default/Settings.tscn"
+	var game_resources_directory = goat.get_game_resources_directory()
+	if game_resources_directory:
+		settings_scene_path = game_resources_directory + "/goat/scenes/Settings.tscn"
+	var settings_scene = load(settings_scene_path).instantiate()
 	self.add_child(settings_scene)
 
 
