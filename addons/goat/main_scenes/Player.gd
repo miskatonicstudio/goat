@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var gravity_enabled = false
 var movement_direction = Vector3()
 
 @onready var camera = $Camera3D
@@ -173,7 +174,7 @@ func _allow_camera_movement():
 
 
 func _set_y():
-	if goat.GRAVITY_ENABLED:
+	if gravity_enabled:
 		if gravity_ray_cast.is_colliding():
 			var point = gravity_ray_cast.get_collision_point()
 			position.y = point.y

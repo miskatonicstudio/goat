@@ -9,6 +9,8 @@ var dialogue_manager
 
 
 func _enter_tree():
+	prepare_goat_project_settings()
+	
 	add_goat_actions()
 	add_goat_audio_buses()
 	
@@ -17,7 +19,6 @@ func _enter_tree():
 	
 	add_autoload_singleton("goat_utils", "res://addons/goat/globals/goat_utils.gd")
 	add_autoload_singleton("goat", "res://addons/goat/globals/goat.gd")
-	add_autoload_singleton("goat_globals", "res://addons/goat/globals/goat_globals.gd")
 	add_autoload_singleton("goat_state", "res://addons/goat/globals/goat_state.gd")
 	add_autoload_singleton("goat_inventory", "res://addons/goat/globals/goat_inventory.gd")
 	add_autoload_singleton("goat_interaction", "res://addons/goat/globals/goat_interaction.gd")
@@ -36,7 +37,6 @@ func _exit_tree():
 	remove_autoload_singleton("goat_interaction")
 	remove_autoload_singleton("goat_inventory")
 	remove_autoload_singleton("goat_state")
-	remove_autoload_singleton("goat_globals")
 	remove_autoload_singleton("goat")
 	remove_autoload_singleton("goat_utils")
 	
@@ -99,3 +99,18 @@ func clear_plugins():
 	dialogue_manager._exit_tree()
 	random_audio_stream_player._exit_tree()
 	print("Additional plugins cleared")
+
+
+func prepare_goat_project_settings():
+	var DEFAULT_GOAT_SETTINGS = {
+		"game_resources_directory": "",
+	}
+	
+	for setting in DEFAULT_GOAT_SETTINGS:
+		var setting_name: String = "goat/general/%s" % setting
+		if not ProjectSettings.has_setting(setting_name):
+			var default_value = DEFAULT_GOAT_SETTINGS[setting]
+			ProjectSettings.set_setting(setting_name, default_value)
+			ProjectSettings.set_initial_value(setting_name, default_value)
+	
+	ProjectSettings.save()
