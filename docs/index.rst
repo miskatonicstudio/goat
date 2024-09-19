@@ -1,11 +1,12 @@
 GOAT
 ====
 
+.. NOTE::
+   Video tutorials should be uploaded soon.
+
 **Godot Open Adventure Template (GOAT)** is a tool for making 3D adventure
 games. It supports a simple inventory system, interacting with objects and screens,
 playing voice recordings with subtitles, and changing game settings.
-
-Web demo is available on `gotm.io`_.
 
 |GOAT demo game|
 
