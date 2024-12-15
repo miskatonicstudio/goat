@@ -3,7 +3,10 @@ extends Node
 
 func list_directory(path):
 	var dir = DirAccess.open(path)
-	return dir.get_files()
+	if dir:
+		return dir.get_files()
+	else:
+		return []
 
 
 func load_text_file(path):
