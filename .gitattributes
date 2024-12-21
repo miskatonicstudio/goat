@@ -6,4 +6,5 @@
 /StartDemoGame.*    export-ignore
 /demo/              export-ignore
 /docs/              export-ignore
+/installation/      export-ignore
 /project.godot      export-ignore
