@@ -221,6 +221,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
 
+[connection signal="draw" from="." to="." method="_on_draw"]
 [connection signal="pressed" from="MarginContainer/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons/UseButton" to="." method="_on_UseButton_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons/ResetRotationButton" to="." method="_on_ResetRotationButton_pressed"]

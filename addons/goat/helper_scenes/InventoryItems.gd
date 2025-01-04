@@ -10,11 +10,10 @@ signal rotation_reset_requested
 
 
 func _ready():
-	goat.connect("game_mode_changed", self._on_game_mode_changed)
 	goat_inventory.connect("item_selected", self._on_item_selected)
-	goat_inventory.connect("items_changed", self._on_items_changed)
+	goat_inventory.connect("items_changed", self._update_inventory_items)
 	
-	_on_items_changed(goat_inventory.get_items())
+	_update_inventory_items(goat_inventory.get_items())
 	
 	# Connect button signals
 	for i in range(goat_inventory.CAPACITY):
@@ -23,17 +22,6 @@ func _ready():
 		item_button.connect("gui_input", self._on_item_button_gui_input.bind(i))
 		item_button.connect("button_down", self._on_item_button_down.bind(i))
 		item_button.connect("button_up", self._on_item_button_up.bind(i))
-
-
-func _on_game_mode_changed(new_game_mode) -> void:
-	# Select the last item if this is the first time the inventory is opened
-	if (
-		new_game_mode == goat.GameMode.INVENTORY and
-		goat_inventory.get_selected_item() == null and
-		not goat_inventory.get_items().is_empty()
-	):
-		var item_name = goat_inventory.get_items().back()
-		goat_inventory.select_item(item_name)
 
 
 func _on_item_selected(item_name) -> void:
@@ -47,12 +35,14 @@ func _on_item_selected(item_name) -> void:
 		item_button.button_pressed = true
 
 
-func _on_items_changed(new_items: Array) -> void:
+func _update_inventory_items(items: Array) -> void:
+	if goat.game_mode != goat.GameMode.INVENTORY:
+		return
 	# Update icons
 	for i in range(goat_inventory.CAPACITY):
 		var item_button = _get_item_button(i)
-		if i < len(new_items):
-			var item_name = new_items[i]
+		if i < len(items):
+			var item_name = items[i]
 			var selected = item_name == goat_inventory.get_selected_item()
 			item_button.icon = goat_inventory.get_item_icon(item_name)
 			item_button.disabled = false
@@ -62,7 +52,7 @@ func _on_items_changed(new_items: Array) -> void:
 			item_button.disabled = true
 	
 	# Handle empty inventory
-	var inventory_empty = new_items.is_empty()
+	var inventory_empty = items.is_empty()
 	use_button.disabled = inventory_empty
 	reset_rotation_button.disabled = inventory_empty
 	empty_inventory_text.visible = inventory_empty
@@ -131,3 +121,7 @@ func _get_item_button(button_index: int) -> Button:
 
 func _on_ResetRotationButton_pressed():
 	emit_signal("rotation_reset_requested")
+
+
+func _on_draw() -> void:
+	_update_inventory_items(goat_inventory.get_items())
