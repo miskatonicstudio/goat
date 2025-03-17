@@ -36,6 +36,13 @@ func _init():
 			_register_item(item_name)
 
 
+func _ready():
+	# Load all icons and models on startup
+	for item_name in _config.keys():
+		_config[item_name]["icon"] = get_item_icon(item_name)
+		_config[item_name]["model"] = get_item_model(item_name)
+
+
 func _register_item(item_name: String) -> void:
 	"""
 	Adds an item to configuration, allowing it to be used in inventory scenes.
@@ -57,8 +64,7 @@ func _register_item(item_name: String) -> void:
 	# Do not load models yet, just keep the paths
 	_config[item_name] = {
 		"icon_path": icon_path,
-		"model": model_path,
-		"transform": Transform3D(),
+		"model_path": model_path,
 	}
 
 
@@ -80,8 +86,8 @@ func get_item_icon(item_name: String):
 		var icon_maker = load(
 			"res://addons/goat/helper_scenes/IconMaker.tscn"
 		).instantiate()
-		get_tree().root.add_child(icon_maker)
-		icon = icon_maker.make_icon_texture(_config[item_name]["model"])
+		get_tree().root.add_child.call_deferred(icon_maker)
+		icon = icon_maker.make_icon_texture(_config[item_name]["model_path"])
 	
 	_config[item_name]["icon"] = icon
 	return icon
@@ -89,7 +95,15 @@ func get_item_icon(item_name: String):
 
 func get_item_model(item_name: String):
 	"""Returns a 3D model (scene) associated with the given item"""
-	return load(_config[item_name]["model"])
+	var model = _config[item_name].get("model")
+	
+	# If a model was created earlier, use it
+	if model:
+		return model
+	
+	model = load(_config[item_name]["model_path"]).instantiate()
+	_config[item_name]["model"] = model
+	return model
 
 
 func reset() -> void:
@@ -104,7 +118,12 @@ func get_items() -> Array:
 
 
 func get_selected_item():
-	"""Returns currrently selected item (can be null)"""
+	"""
+	Returns currently selected item (can be null).
+	If no item was selected yet, and items are available, returns the last item.
+	"""
+	if _selected_item == null and _items:
+		_selected_item = _items.back()
 	return _selected_item
 
 

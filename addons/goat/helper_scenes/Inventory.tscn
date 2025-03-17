@@ -43,9 +43,6 @@ supports_alternative_interaction = false
 [node name="Pivot" type="Node3D" parent="SubViewportContainer/SubViewport/Inventory3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="HiddenPivot" type="Node3D" parent="SubViewportContainer/SubViewport/Inventory3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Inventory3D"]
 environment = ExtResource("2")
 
