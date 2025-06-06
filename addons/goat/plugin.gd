@@ -114,3 +114,15 @@ func prepare_goat_project_settings():
 			ProjectSettings.set_initial_value(setting_name, default_value)
 	
 	ProjectSettings.save()
+
+##############################################################################
+# Forward FileSystem events to Dialogue Manager
+# (for now, GOAT only handles double-click on .dialogue files)
+##############################################################################
+
+func _edit(object: Object) -> void:
+	dialogue_manager._edit(object)
+
+
+func _handles(object) -> bool:
+	return dialogue_manager._handles(object)
