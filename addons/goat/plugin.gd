@@ -29,6 +29,16 @@ func _enter_tree():
 	get_editor_interface().get_editor_main_screen().add_child(main_screen_instance)
 	_make_visible(false)
 	load_plugins()
+	
+	# Add default inventory item list + hint to ProjectSettings
+	if not ProjectSettings.has_setting("goat/inventory/items"):
+		ProjectSettings.set_setting("goat/inventory/items", [])
+	ProjectSettings.add_property_info({
+		"name": "goat/inventory/items",
+		"type": TYPE_PACKED_STRING_ARRAY,
+		"hint": PROPERTY_HINT_ARRAY_TYPE,
+		"hint_string": "%d/%d:*.tscn" % [TYPE_STRING, PROPERTY_HINT_FILE],
+	})
 
 
 func _exit_tree():

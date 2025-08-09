@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ckkmxv8h7ypwv"]
 
-[ext_resource type="Script" path="res://demo/goat/inventory_items/models/FloppyDisk.gd" id="1"]
+[ext_resource type="Script" path="res://demo/inventory_items/floppy_disk.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bw8ufjle0a2um" path="res://demo/models/FloppyDiskModel.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bnmg0a564wwjp" path="res://addons/goat/main_scenes/InteractiveItem.tscn" id="3"]
 [ext_resource type="AudioStream" uid="uid://da24witna0ksy" path="res://demo/sounds/shutter.ogg" id="4"]

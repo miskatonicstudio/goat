@@ -44,6 +44,7 @@ enabled=PackedStringArray("res://addons/goat/plugin.cfg")
 [goat]
 
 general/game_resources_directory="demo"
+inventory/items=["res://demo/inventory_items/battery.tscn", "res://demo/inventory_items/floppy_disk.tscn", "res://demo/inventory_items/pizza.tscn", "res://demo/inventory_items/remote.tscn"]
 
 [input]
 
