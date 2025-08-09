@@ -22,18 +22,14 @@ var _config := {}
 
 
 func _init():
-	if not goat.get_game_resources_directory():
-		print("No inventory items loaded")
-		return
-	var models_directory = goat.get_game_resources_directory() + "/goat/inventory_items/models/"
-	var files = goat_utils.list_directory(models_directory)
-	for file in files:
+	var items = ProjectSettings.get_setting("goat/inventory/items", [])
+	for file_path in items:
+		if file_path == null:
+			continue
 		# Exported PCK file uses ".tscn.remap"
-		if file.ends_with(".tscn") or file.ends_with(".tscn.remap"):
-			var item_name = file.replace(".remap", "").replace(".tscn", "").get_basename()
-			# Convert to snake_case
-			item_name = "_".join(item_name.capitalize().split(" ")).to_lower()
-			_register_item(item_name)
+		if file_path.ends_with(".tscn") or file_path.ends_with(".tscn.remap"):
+			file_path = file_path.replace(".remap", "")
+			_register_item(file_path)
 
 
 func _ready():
@@ -43,28 +39,22 @@ func _ready():
 		_config[item_name]["model"] = get_item_model(item_name)
 
 
-func _register_item(item_name: String) -> void:
+func _register_item(file_path: String) -> void:
 	"""
 	Adds an item to configuration, allowing it to be used in inventory scenes.
 	This method should be called once for every inventory item, and the items
 	should be configured once per game (not once per scene), since inventory
 	is kept between different scenes.
 	"""
+	var item_name = file_path.get_file().get_basename()
 	assert(not _config.has(item_name))
 	
-	var icon_path := "{}/goat/inventory_items/icons/{}.png".format(
-		[goat.get_game_resources_directory(), item_name], "{}"
-	)
-	# Comply with Godot scene naming standards
-	var model_name := item_name.capitalize().replace(" ", "")
-	var model_path := "{}/goat/inventory_items/models/{}.tscn".format(
-		[goat.get_game_resources_directory(), model_name], "{}"
-	)
+	var icon_path := file_path.get_basename() + ".png"
 	
 	# Do not load models yet, just keep the paths
 	_config[item_name] = {
 		"icon_path": icon_path,
-		"model_path": model_path,
+		"model_path": file_path,
 	}
 
 
