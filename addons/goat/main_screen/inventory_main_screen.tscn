@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci6ngr1cckxxd"]
+
+[ext_resource type="Script" path="res://addons/goat/main_screen/inventory_main_screen.gd" id="1_kxrxf"]
+[ext_resource type="Environment" uid="uid://dvmrow24o73ah" path="res://addons/goat/environments/inventory_environment.tres" id="2_butog"]
+
+[node name="InventoryMainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kxrxf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(600, 648)
+render_target_update_mode = 4
+
+[node name="Preview" type="Node3D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/SubViewportContainer/SubViewport/Preview"]
+
+[node name="Pivot" type="Node3D" parent="HBoxContainer/SubViewportContainer/SubViewport/Preview"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="HBoxContainer/SubViewportContainer/SubViewport/Preview"]
+environment = ExtResource("2_butog")
+
+[node name="Docs" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Inventory items can be added in:
+
+[b]Project → Settings → Goat → Inventory → Items[/b]
+
+[i](be sure to enable \"Advanced Settings\")[/i]
+
+Items should be 3D scenes. Each added item will be available during the game by the name of the scene, without the extension (e.g. [b]res://demo/items/abc.tscn[/b] becomes [b]abc[/b]).
+
+Click and drag on the preview to rotate the view."
+
+[connection signal="item_selected" from="HBoxContainer/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="visibility_changed" from="HBoxContainer/ItemList" to="." method="_on_item_list_visibility_changed"]
+[connection signal="gui_input" from="HBoxContainer/SubViewportContainer" to="." method="_on_sub_viewport_container_gui_input"]

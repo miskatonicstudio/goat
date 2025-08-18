@@ -33,6 +33,10 @@ const COLLISION_MASK_LAYER = 2
 var _orig_cast_shadow_settings = {}
 
 func _ready():
+	# GOAT main screen shows a list of inventory items: interactive items are currently inactive there
+	if Engine.is_editor_hint():
+		return
+	
 	if ("_activated_" + unique_name) in goat_state._variables and item_type == ItemType.INVENTORY:
 		queue_free()
 		return
