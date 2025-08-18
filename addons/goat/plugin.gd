@@ -25,7 +25,7 @@ func _enter_tree():
 	add_autoload_singleton("goat_voice", "res://addons/goat/globals/goat_voice.gd")
 	add_autoload_singleton("goat_settings", "res://addons/goat/globals/goat_settings.gd")
 	
-	main_screen_instance = load("res://addons/goat/globals/goat_main_screen.tscn").instantiate()
+	main_screen_instance = load("res://addons/goat/main_screen/goat_main_screen.tscn").instantiate()
 	get_editor_interface().get_editor_main_screen().add_child(main_screen_instance)
 	_make_visible(false)
 	load_plugins()

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://06esj32ky2yf"]
+[gd_scene load_steps=2 format=3 uid="uid://06esj32ky2yf"]
+
+[ext_resource type="PackedScene" uid="uid://ci6ngr1cckxxd" path="res://addons/goat/main_screen/inventory_main_screen.tscn" id="1_6ka4w"]
 
 [node name="GOATMainScreen" type="Control"]
 layout_mode = 3
@@ -17,10 +19,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
 [node name="Dialogues" type="VBoxContainer" parent="TabContainer" groups=["goat_dialogue_manager_container"]]
 unique_name_in_owner = true
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="DialogueManagerCredits" type="HBoxContainer" parent="TabContainer/Dialogues"]
 custom_minimum_size = Vector2(0, 40)
@@ -40,3 +44,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Dialogue Manager"
 uri = "https://github.com/nathanhoad/godot_dialogue_manager"
+
+[node name="Inventory" parent="TabContainer" instance=ExtResource("1_6ka4w")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
