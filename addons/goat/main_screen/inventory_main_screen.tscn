@@ -4,6 +4,7 @@
 [ext_resource type="Environment" uid="uid://dvmrow24o73ah" path="res://addons/goat/environments/inventory_environment.tres" id="2_butog"]
 
 [node name="InventoryMainScreen" type="Control"]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
