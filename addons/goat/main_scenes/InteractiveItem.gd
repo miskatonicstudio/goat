@@ -63,6 +63,16 @@ func _ready():
 			_orig_cast_shadow_settings[child] = child.cast_shadow
 
 
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "inventory_item_name":
+		var item_scenes = ProjectSettings.get_setting("goat/inventory/items", [])
+		var items = []
+		for item_scene in item_scenes:
+			items.append(item_scene.get_file().get_basename())
+		property.hint = PROPERTY_HINT_ENUM_SUGGESTION
+		property.hint_string = ",".join(items)
+
+
 func set_collision_shape(new_shape):
 	collision_shape = new_shape
 	if is_inside_tree():
