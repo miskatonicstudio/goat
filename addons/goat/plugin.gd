@@ -29,16 +29,6 @@ func _enter_tree():
 	get_editor_interface().get_editor_main_screen().add_child(main_screen_instance)
 	_make_visible(false)
 	load_plugins()
-	
-	# Add default inventory item list + hint to ProjectSettings
-	if not ProjectSettings.has_setting("goat/inventory/items"):
-		ProjectSettings.set_setting("goat/inventory/items", [])
-	ProjectSettings.add_property_info({
-		"name": "goat/inventory/items",
-		"type": TYPE_PACKED_STRING_ARRAY,
-		"hint": PROPERTY_HINT_ARRAY_TYPE,
-		"hint_string": "%d/%d:*.tscn" % [TYPE_STRING, PROPERTY_HINT_FILE],
-	})
 
 
 func _exit_tree():
@@ -112,16 +102,49 @@ func clear_plugins():
 
 
 func prepare_goat_project_settings():
-	var DEFAULT_GOAT_SETTINGS = {
-		"game_resources_directory": "",
-	}
-	
-	for setting in DEFAULT_GOAT_SETTINGS:
-		var setting_name: String = "goat/general/%s" % setting
-		if not ProjectSettings.has_setting(setting_name):
-			var default_value = DEFAULT_GOAT_SETTINGS[setting]
-			ProjectSettings.set_setting(setting_name, default_value)
-			ProjectSettings.set_initial_value(setting_name, default_value)
+	if not ProjectSettings.has_setting("goat/inventory/items"):
+		ProjectSettings.set_setting("goat/inventory/items", [])
+		ProjectSettings.set_initial_value("goat/inventory/items", [])
+	ProjectSettings.add_property_info({
+		"name": "goat/inventory/items",
+		"type": TYPE_PACKED_STRING_ARRAY,
+		"hint": PROPERTY_HINT_ARRAY_TYPE,
+		"hint_string": "%d/%d:*.tscn" % [TYPE_STRING, PROPERTY_HINT_FILE],
+	})
+	if not ProjectSettings.has_setting("goat/state/variables"):
+		ProjectSettings.set_setting("goat/state/variables", {})
+		ProjectSettings.set_initial_value("goat/state/variables", {})
+	ProjectSettings.add_property_info({
+		"name": "goat/state/variables",
+		"type": TYPE_DICTIONARY,
+	})
+	if not ProjectSettings.has_setting("goat/dialogues/dialogue_file"):
+		ProjectSettings.set_setting("goat/dialogues/dialogue_file", "")
+		ProjectSettings.set_initial_value("goat/dialogues/dialogue_file", "")
+	ProjectSettings.add_property_info({
+		"name": "goat/dialogues/dialogue_file",
+		"type": TYPE_STRING,
+		"hint": PROPERTY_HINT_FILE,
+		"hint_string": "*.dialogue",
+	})
+	if not ProjectSettings.has_setting("goat/general/custom_settings_scene_path"):
+		ProjectSettings.set_setting("goat/general/custom_settings_scene_path", "")
+		ProjectSettings.set_initial_value("goat/general/custom_settings_scene_path", "")
+	ProjectSettings.add_property_info({
+		"name": "goat/general/custom_settings_scene_path",
+		"type": TYPE_STRING,
+		"hint": PROPERTY_HINT_FILE,
+		"hint_string": "*.tscn",
+	})
+	if not ProjectSettings.has_setting("goat/dialogues/voices"):
+		ProjectSettings.set_setting("goat/dialogues/voices", [])
+		ProjectSettings.set_initial_value("goat/dialogues/voices", [])
+	ProjectSettings.add_property_info({
+		"name": "goat/dialogues/voices",
+		"type": TYPE_PACKED_STRING_ARRAY,
+		"hint": PROPERTY_HINT_ARRAY_TYPE,
+		"hint_string": "%d/%d:*.ogg,*.wav,*.txt" % [TYPE_STRING, PROPERTY_HINT_FILE],
+	})
 	
 	ProjectSettings.save()
 

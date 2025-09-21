@@ -43,8 +43,18 @@ enabled=PackedStringArray("res://addons/goat/plugin.cfg")
 
 [goat]
 
-general/game_resources_directory="demo"
 inventory/items=["res://demo/inventory_items/battery.tscn", "res://demo/inventory_items/floppy_disk.tscn", "res://demo/inventory_items/pizza.tscn", "res://demo/inventory_items/remote.tscn"]
+state/variables={
+"battery_inserted": false,
+"floppy_inserted": false,
+"food_eaten": false,
+"intro_played": false,
+"portal_status": "not_ready",
+"power_on": false
+}
+dialogues/dialogue_file="res://demo/dialogues/goat.dialogue"
+dialogues/voices=["res://demo/voice/another_world_awaits.ogg", "res://demo/voice/better_way.txt", "res://demo/voice/but_why.ogg", "res://demo/voice/coords_uploaded.ogg", "res://demo/voice/eat_something_first.ogg", "res://demo/voice/finally_active.ogg", "res://demo/voice/find_something.txt", "res://demo/voice/just_a_few_steps.ogg", "res://demo/voice/look_around.txt", "res://demo/voice/pizza_eaten.ogg", "res://demo/voice/power_it_up_first.ogg", "res://demo/voice/this_doesnt_make_sense.ogg", "res://demo/voice/upload_coords_first.ogg", "res://demo/voice/useless_without_battery.ogg", "res://demo/voice/what_for.ogg"]
+general/custom_settings_scene_path="res://demo/custom_goat_scenes/Settings.tscn"
 
 [input]
 
@@ -113,7 +123,7 @@ goat_rotate_inventory={
 [internationalization]
 
 locale/translations=PackedStringArray("res://demo/goat/locale/2ma.de.translation", "res://demo/goat/locale/2ma.en.translation", "res://demo/goat/locale/2ma.pl.translation")
-locale/translations_pot_files=PackedStringArray("res://demo/goat/dialogues/goat.dialogue")
+locale/translations_pot_files=PackedStringArray("res://demo/dialogues/goat.dialogue")
 
 [locale]
 

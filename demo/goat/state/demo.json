@@ -1,8 +1,0 @@
-{
-  "intro_played": false,
-  "food_eaten": false,
-  "power_on": false,
-  "battery_inserted": false,
-  "floppy_inserted": false,
-  "portal_status": "not_ready"
-}

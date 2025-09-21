@@ -30,11 +30,10 @@ var _dialogue_audio_player := AudioStreamPlayer.new()
 
 func start_dialogue(dialogue_name):
 	prevent_default()
-	var game_resources_directory = goat.get_game_resources_directory()
-	assert (game_resources_directory, "No game resources directory is configured")
-	var path = game_resources_directory + "/goat/dialogues/goat.dialogue"
+	var dialogue_file_path = ProjectSettings.get_setting("goat/dialogues/dialogue_file")
+	assert(dialogue_file_path, "No dialogue file provided")
 	Engine.get_singleton("DialogueManager").show_dialogue_balloon(
-		load(path), dialogue_name
+		load(dialogue_file_path), dialogue_name
 	)
 
 
@@ -111,30 +110,19 @@ func _input(_event):
 
 
 func _init():
-	if not goat.get_game_resources_directory():
-		print("No voice loaded")
-		return
-	var voice_directory = goat.get_game_resources_directory() + "/goat/voice/"
-	var files = goat_utils.list_directory(voice_directory)
-	for file in files:
-		if file.ends_with(".import"):
-			# Godot export workaround
-			if not OS.is_debug_build():
-				var actual_file = file.replace(".import", "")
-				var basename = actual_file.get_basename()
-				_register(actual_file)
-			else:
-				continue
-		var basename = file.get_basename()
-		if file.ends_with(".txt"):
-			var content = goat_utils.load_text_file(voice_directory + file)
+	var voices = ProjectSettings.get_setting("goat/dialogues/voices", [])
+	for file_path in voices:
+		if file_path == null:
+			continue
+		if file_path.ends_with(".txt"):
+			var content = goat_utils.load_text_file(file_path)
 			var seconds = float(content.strip_edges())
-			_register(basename, seconds)
+			_register(file_path, seconds)
 		else:
-			_register(file)
+			_register(file_path)
 
 
-func _register(audio_file_name: String, time: float = 0) -> void:
+func _register(audio_file_path: String, time: float = 0) -> void:
 	"""
 	Registers an audio file and associates it with a transcript. Reads files
 	from the `voice` directory. By default the name of the registered audio will
@@ -144,16 +132,12 @@ func _register(audio_file_name: String, time: float = 0) -> void:
 	Instead, it will register the transcript and the duration is should be
 	"played" (for the purpose of showing the subtitles).
 	"""
-	var audio_name = audio_file_name.get_file().get_basename()
+	var audio_name = audio_file_path.get_file().get_basename()
 	assert(not _audio_mapping.has(audio_name))
-	
 	var sound = null
 	
 	if not time:
-		var sound_path := "{}/goat/voice/{}".format(
-			[goat.get_game_resources_directory(), audio_file_name], "{}"
-		)
-		sound = load(sound_path)
+		sound = load(audio_file_path)
 		# Disable loop mode
 		if sound is AudioStreamWAV:
 			sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
