@@ -45,9 +45,6 @@ func reset_game():
 	goat_state.reset()
 
 
-func get_game_resources_directory():
-	return ProjectSettings.get_setting("goat/general/game_resources_directory", "")
-
 ##############################################################################
 # SETTINGS
 ##############################################################################
