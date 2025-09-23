@@ -122,7 +122,7 @@ goat_rotate_inventory={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://demo/goat/locale/2ma.de.translation", "res://demo/goat/locale/2ma.en.translation", "res://demo/goat/locale/2ma.pl.translation")
+locale/translations=PackedStringArray("res://demo/locale/2ma.de.translation", "res://demo/locale/2ma.en.translation", "res://demo/locale/2ma.pl.translation")
 locale/translations_pot_files=PackedStringArray("res://demo/dialogues/goat.dialogue")
 
 [locale]
