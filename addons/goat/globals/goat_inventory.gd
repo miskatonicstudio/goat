@@ -26,9 +26,7 @@ func _init():
 	for file_path in items:
 		if file_path == null:
 			continue
-		# Exported PCK file uses ".tscn.remap"
-		if file_path.ends_with(".tscn") or file_path.ends_with(".tscn.remap"):
-			file_path = file_path.replace(".remap", "")
+		if file_path.ends_with(".tscn"):
 			_register_item(file_path)
 
 
