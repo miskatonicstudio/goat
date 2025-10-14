@@ -2,10 +2,11 @@ extends Node3D
 
 
 func _process(_delta):
-	if goat.ENABLE_INVENTORY_ICON_ROTATION:
+	var icon_rotations_per_second = ProjectSettings.get_setting("goat/inventory/icon_rotations_per_second", 2.0)
+	if icon_rotations_per_second:
 		var seconds = Time.get_ticks_msec() * 0.001
 		%Pivot.rotation_degrees.y = (
-			360.0 * seconds / goat.INVENTORY_ICON_ROTATION_PER_SECOND
+			360.0 * seconds / icon_rotations_per_second
 		)
 
 
