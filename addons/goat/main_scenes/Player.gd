@@ -1,6 +1,14 @@
 extends CharacterBody3D
 
 @export var gravity_enabled = false
+@export var speed: float = 3.0
+@export_category("Camera")
+@export var allow_camera_movement_when_voice_is_playing: bool = false
+@export var bottom_camera_angle: float = -80.0
+@export var top_camera_angle: float = 80.0
+@export var right_camera_angle: float = 0.0
+@export var left_camera_angle: float = 0.0
+
 var movement_direction = Vector3()
 
 @onready var camera = $Camera3D
@@ -74,7 +82,7 @@ func _physics_process(_delta):
 		return
 	
 	if movement_direction:
-		velocity = movement_direction * goat.PLAYER_SPEED
+		velocity = movement_direction * speed
 		up_direction = Vector3(0, 1, 0)
 		move_and_slide()
 		_set_y()
@@ -102,11 +110,11 @@ func rotate_camera(relative_movement):
 	var camera_rot = camera.rotation_degrees
 	camera_rot.x += angle
 	camera_rot.x = clamp(
-		camera_rot.x, goat.BOTTOM_CAMERA_ANGLE, goat.TOP_CAMERA_ANGLE
+		camera_rot.x, bottom_camera_angle, top_camera_angle
 	)
-	if goat.LEFT_CAMERA_ANGLE and goat.RIGHT_CAMERA_ANGLE:
+	if left_camera_angle and right_camera_angle:
 		camera_rot.y = clamp(
-			camera_rot.y, goat.LEFT_CAMERA_ANGLE, goat.RIGHT_CAMERA_ANGLE
+			camera_rot.y, left_camera_angle, right_camera_angle
 		)
 	camera.rotation_degrees = camera_rot
 
@@ -168,7 +176,7 @@ func _on_voice_changed(_audio_name):
 
 func _allow_camera_movement():
 	return (
-		goat.ALLOW_CAMERA_MOVEMENT_WHEN_VOICE_IS_PLAYING
+		allow_camera_movement_when_voice_is_playing
 		or not goat_voice.is_playing()
 	)
 

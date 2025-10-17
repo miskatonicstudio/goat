@@ -28,7 +28,9 @@ func _input(_event):
 
 
 func take_screenshot() -> void:
-	var screenshot_directory_path = "user://" + SCREENSHOT_DIRECTORY
+	var screenshot_directory_path = "user://" + ProjectSettings.get_setting(
+		"goat/general/screenshot_directory_name", "Screenshots"
+	)
 	DirAccess.make_dir_absolute(screenshot_directory_path)
 	var dt = Time.get_datetime_dict_from_system()
 	var screenshot_filename = "Screenshot %04d-%02d-%02d %02d:%02d:%02d.png" % [
@@ -43,24 +45,3 @@ func take_screenshot() -> void:
 func reset_game():
 	goat_inventory.reset()
 	goat_state.reset()
-
-
-##############################################################################
-# SETTINGS
-##############################################################################
-
-# Screenshot directory: the name of a subdirectory in user's local folder, where
-# the screenshots taken during the game will be stored.
-var SCREENSHOT_DIRECTORY = "Screenshots"
-
-var PLAYER_SPEED = 3.0
-
-var ALLOW_CAMERA_MOVEMENT_WHEN_VOICE_IS_PLAYING = false
-
-var BOTTOM_CAMERA_ANGLE = -80.0
-var TOP_CAMERA_ANGLE = 80.0
-var LEFT_CAMERA_ANGLE = null
-var RIGHT_CAMERA_ANGLE = null
-
-var ENABLE_INVENTORY_ICON_ROTATION = true
-var INVENTORY_ICON_ROTATION_PER_SECOND = 2
