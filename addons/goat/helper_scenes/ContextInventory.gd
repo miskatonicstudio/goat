@@ -14,6 +14,8 @@ func _ready():
 		var item_button = get_node(ITEM_BUTTON_PATH.format({"index": i}))
 		item_button.connect("pressed", self._on_item_button_pressed.bind(i))
 		item_button.disabled = true
+	
+	_on_items_changed(goat_inventory.get_items())
 
 
 func _input(event):
