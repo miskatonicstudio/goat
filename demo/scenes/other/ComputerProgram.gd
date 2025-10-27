@@ -50,7 +50,7 @@ func _on_Timer_timeout():
 
 
 func _check_state():
-	if goat_state.get_value("portal_status") == "ready":
+	if goat_state.get_value("portal_status") in ["ready", "open"]:
 		screen_upload.hide()
 		screen_done.show()
 	if goat_state.get_value("floppy_inserted"):
