@@ -45,6 +45,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_5u3f8")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Responses" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
